@@ -83,7 +83,44 @@ cd ~/goldengate/qemu-sptm-cl4-native/build && \
   ninja -j2
 ```
 
-## Current state as of hand-off (2026-09-18, end of desktop session)
+## Current state as of hand-off (2026-09-18, T480s session, superseding all below)
+
+**Read `PHASE6_LOG.md` fully — it has the full, most-recent history.** Absolute
+short version: the `-icount` fix worked, the real 14.19GB macOS system volume
+now MOUNTS as root (a 6-instruction md0 32-bit->64-bit kernel patch), the
+missing dyld shared cache from the separate `Cryptex1,SystemOS` IPSW component
+is merged directly onto the volume's base tree, a complete trust cache
+(14,660 cdhashes, covering the ENTIRE real system volume, built with a
+from-scratch fast Mach-O cdhash scanner) is in place, and boot now reaches
+**real macOS userspace**: WindowServer, loginwindow, endpointsecurityd,
+configd, and dozens of other real daemons actually spawn and run — the
+deepest point ever reached on the macOS Golden Gate track. Three separate SPTM
+security-monitor violation checks (`VIOLATION_INVALID_ASID`,
+`VIOLATION_INVALID_FLAG`, `VIOLATION_ASID_IN_USE`) were found and patched
+(NOPped the specific violation-report call, regression-checked safe each
+time) to get this far. **Current live wall**: `TXM [Panic]: [code:
+0x00000068 | 0]`, right after `AMFI: Denying core dump for pid 74
+(opendirectoryd)` — not yet root-caused, that's the next concrete step (same
+method: string-anchor + ADRP+ADD xref in `firmware/txm`).
+
+**Current known-good artifact set** (all in
+`~/goldengate/qemu-sptm-cl4-native/firmware/`): `bootkc.md0size.uidfix`,
+`dtree.dcp8.bigdram2`, `ramdisk_full.tc`, `sptm.asidfix3`, boot against
+`~/goldengate/system_volume/26A428__MacOS/decrypted/043-70867-635.dmg`
+(now merged + grown to 27.07GB) with `-icount shift=auto` always on. Full
+boot command is in PHASE6_LOG.md's "Current known-good artifact set" section.
+
+**User's end-goal clarification (2026-09-18, this session)**: once a real
+graphical desktop is reached, the deliverable needs to go further than
+running inside a QEMU process on the existing host macOS — the user wants a
+**USB drive that can be installed onto and FULL BOOTS the bare T480s hardware
+directly** (EFI-bootable, no host OS underneath). This is follow-up work,
+not yet started, tracked in this session's persistent memory
+(`project_golden_gate_intel.md`) — finish the emulation breakthrough first.
+
+---
+
+## Prior state as of earlier hand-off (2026-09-18, end of desktop session) — superseded, kept for history
 
 Read `PHASE5_LOG.md` in this repo fully — it has the complete, evidence-backed
 history. Short version, most-recent-first:

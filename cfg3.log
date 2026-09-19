@@ -1,0 +1,639 @@
+python determined to be '/mingw64/bin/python3'
+python version: Python 3.14.7
+mkvenv: Creating non-isolated virtual environment at 'pyvenv'
+mkvenv: checking for meson>=1.5.0
+mkvenv: checking for pycotap>=1.1.0
+mkvenv: installing pycotap==1.3.1
+mkvenv: checking for qemu.qmp>=0.0.5
+mkvenv: checking for setuptools>=44.1.1
+mkvenv: checking for wheel>=0.34.2
+mkvenv: checking for pip>=20.3.4
+mkvenv: installing qemu.qmp==0.0.6, setuptools>=44.1.1, wheel>=0.34.2, pip>=20.3.4
+mkvenv: installing C:/GoldenGate/darwin-vm/qemu-sptm/python
+mkvenv: checking for sphinx>=3.4.3
+mkvenv: checking for sphinx_rtd_theme>=0.5
+
+'sphinx==6.2.1' not found:
+ • Python package 'sphinx' was not found nor installed.
+ • mkvenv was configured to operate offline and did not check PyPI.
+
+
+Sphinx not found/usable, disabling docs.
+Initialized empty Git repository in C:/GoldenGate/darwin-vm/qemu-sptm/subprojects/dtc/.git/
+From https://gitlab.com/qemu-project/dtc
+ * branch            b6910bec11614980a21e46fbccc35934b671bd81 -> FETCH_HEAD
+HEAD is now at b6910be Bump version to v1.6.1
+Initialized empty Git repository in C:/GoldenGate/darwin-vm/qemu-sptm/subprojects/keycodemapdb/.git/
+From https://gitlab.com/qemu-project/keycodemapdb
+ * branch            f5772a62ec52591ff6870b7e8ef32482371f22c6 -> FETCH_HEAD
+HEAD is now at f5772a6 Add Qemu qcode support for F13 to F24
+The Meson build system
+Version: 1.12.0
+Source dir: C:/GoldenGate/darwin-vm/qemu-sptm
+Build dir: C:/GoldenGate/darwin-vm/qemu-sptm/build
+Build type: native build
+Project name: qemu
+Project version: 11.1.0
+C compiler for the host machine: cc -m64 (gcc 16.2.0 "cc (Rev3, Built by MSYS2 project) 16.2.0")
+C linker for the host machine: cc -m64 ld.bfd 2.47.20260726
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program scripts/symlink-install-tree.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/symlink-install-tree.py)
+Program sh found: YES (C:\Program Files\Git\usr\bin/sh.exe)
+Program python3 found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe)
+C++ compiler for the host machine: c++ -m64 (gcc 16.2.0 "c++ (Rev3, Built by MSYS2 project) 16.2.0")
+C++ linker for the host machine: c++ -m64 ld.bfd 2.47.20260726
+Compiler for language rust skipped: feature rust disabled
+Program iasl found: NO
+Program bzip2 found: YES (C:\devkitPro\msys2\mingw64\bin/bzip2.exe)
+Checking for size of "void *" : 8 
+Compiler for C supports arguments -fno-link-libatomic: YES 
+Compiler for C supports arguments -fno-pie: YES 
+Compiler for C supports arguments -no-pie: YES 
+Compiler for C supports link arguments -Wl,-z,relro: NO 
+Compiler for C supports link arguments -Wl,-z,now: NO 
+Compiler for C supports link arguments -Wl,--no-seh: YES 
+Compiler for C supports link arguments -Wl,--nxcompat: YES 
+Compiler for C supports link arguments -Wl,--dynamicbase: YES 
+Compiler for C supports link arguments -Wl,--high-entropy-va: YES 
+Checking if "-fzero-call-used-regs=used-gpr" compiles: YES 
+Compiler for C supports arguments -mcx16: YES 
+Compiler for C supports arguments -msse2: YES 
+Compiler for C supports arguments -fno-link-libatomic: YES (cached)
+Compiler for C supports arguments -D_GNU_SOURCE: YES 
+Compiler for C supports arguments -D_FILE_OFFSET_BITS=64: YES 
+Compiler for C supports arguments -D_LARGEFILE_SOURCE: YES 
+Compiler for C supports arguments -fno-strict-aliasing: YES 
+Compiler for C supports arguments -fno-common: YES 
+Compiler for C supports arguments -fwrapv: YES 
+Compiler for C supports arguments -fno-pie: YES (cached)
+Compiler for C supports arguments -no-pie: YES (cached)
+Compiler for C supports arguments -ftrivial-auto-var-init=zero: YES 
+Compiler for C supports arguments -fzero-init-padding-bits=all: YES 
+Compiler for C supports arguments -fzero-call-used-regs=used-gpr: YES 
+Compiler for C supports arguments -fstack-protector-strong: YES 
+Compiler for C supports arguments -Wempty-body: YES 
+Compiler for C supports arguments -Wendif-labels: YES 
+Compiler for C supports arguments -Wexpansion-to-defined: YES 
+Compiler for C supports arguments -Wformat-overflow=2: YES 
+Compiler for C supports arguments -Wformat-security: YES 
+Compiler for C supports arguments -Wformat-y2k: YES 
+Compiler for C supports arguments -Wignored-qualifiers: YES 
+Compiler for C supports arguments -Wimplicit-fallthrough=2: YES 
+Compiler for C supports arguments -Winit-self: YES 
+Compiler for C supports arguments -Wmissing-format-attribute: YES 
+Compiler for C supports arguments -Wmissing-prototypes: YES 
+Compiler for C supports arguments -Wnested-externs: YES 
+Compiler for C supports arguments -Wold-style-declaration: YES 
+Compiler for C supports arguments -Wold-style-definition: YES 
+Compiler for C supports arguments -Wredundant-decls: YES 
+Compiler for C supports arguments -Wshadow=local: YES 
+Compiler for C supports arguments -Wstrict-prototypes: YES 
+Compiler for C supports arguments -Wtype-limits: YES 
+Compiler for C supports arguments -Wundef: YES 
+Compiler for C supports arguments -Wvla: YES 
+Compiler for C supports arguments -Wwrite-strings: YES 
+Compiler for C supports arguments -Wno-gnu-variable-sized-type-not-at-end: NO 
+Compiler for C supports arguments -Wno-initializer-overrides: NO 
+Compiler for C supports arguments -Wno-missing-include-dirs: YES 
+Compiler for C supports arguments -Wno-psabi: YES 
+Compiler for C supports arguments -Wno-shift-negative-value: YES 
+Compiler for C supports arguments -Wno-string-plus-int: NO 
+Compiler for C supports arguments -Wno-tautological-type-limit-compare: NO 
+Compiler for C supports arguments -Wno-typedef-redefinition: NO 
+Compiler for C++ supports arguments -mcx16: YES 
+Compiler for C++ supports arguments -msse2: YES 
+Compiler for C++ supports arguments -fno-link-libatomic: YES 
+Compiler for C++ supports arguments -D_GNU_SOURCE: YES 
+Compiler for C++ supports arguments -D_FILE_OFFSET_BITS=64: YES 
+Compiler for C++ supports arguments -D_LARGEFILE_SOURCE: YES 
+Compiler for C++ supports arguments -fno-strict-aliasing: YES 
+Compiler for C++ supports arguments -fno-common: YES 
+Compiler for C++ supports arguments -fwrapv: YES 
+Compiler for C++ supports arguments -fno-pie: YES 
+Compiler for C++ supports arguments -no-pie: YES 
+Compiler for C++ supports arguments -ftrivial-auto-var-init=zero: YES 
+Compiler for C++ supports arguments -fzero-init-padding-bits=all: YES 
+Compiler for C++ supports arguments -fzero-call-used-regs=used-gpr: YES 
+Compiler for C++ supports arguments -D__STDC_LIMIT_MACROS: YES 
+Compiler for C++ supports arguments -D__STDC_CONSTANT_MACROS: YES 
+Compiler for C++ supports arguments -D__STDC_FORMAT_MACROS: YES 
+Compiler for C++ supports arguments -fstack-protector-strong: YES 
+Compiler for C++ supports arguments -Wempty-body: YES 
+Compiler for C++ supports arguments -Wendif-labels: YES 
+Compiler for C++ supports arguments -Wexpansion-to-defined: YES 
+Compiler for C++ supports arguments -Wformat-overflow=2: YES 
+Compiler for C++ supports arguments -Wformat-security: YES 
+Compiler for C++ supports arguments -Wformat-y2k: YES 
+Compiler for C++ supports arguments -Wignored-qualifiers: YES 
+Compiler for C++ supports arguments -Wimplicit-fallthrough=2: YES 
+Compiler for C++ supports arguments -Winit-self: YES 
+Compiler for C++ supports arguments -Wmissing-format-attribute: YES 
+Compiler for C++ supports arguments -Wmissing-prototypes: NO 
+Compiler for C++ supports arguments -Wnested-externs: NO 
+Compiler for C++ supports arguments -Wold-style-declaration: NO 
+Compiler for C++ supports arguments -Wold-style-definition: NO 
+Compiler for C++ supports arguments -Wredundant-decls: YES 
+Compiler for C++ supports arguments -Wshadow=local: YES 
+Compiler for C++ supports arguments -Wstrict-prototypes: NO 
+Compiler for C++ supports arguments -Wtype-limits: YES 
+Compiler for C++ supports arguments -Wundef: YES 
+Compiler for C++ supports arguments -Wvla: YES 
+Compiler for C++ supports arguments -Wwrite-strings: YES 
+Compiler for C++ supports arguments -Wno-gnu-variable-sized-type-not-at-end: NO 
+Compiler for C++ supports arguments -Wno-initializer-overrides: NO 
+Compiler for C++ supports arguments -Wno-missing-include-dirs: YES 
+Compiler for C++ supports arguments -Wno-psabi: YES 
+Compiler for C++ supports arguments -Wno-shift-negative-value: YES 
+Compiler for C++ supports arguments -Wno-string-plus-int: NO 
+Compiler for C++ supports arguments -Wno-tautological-type-limit-compare: NO 
+Compiler for C++ supports arguments -Wno-typedef-redefinition: NO 
+Program cgcc found: NO
+Library m found: YES
+Run-time dependency threads found: YES
+Library util found: NO
+Program midl found: NO
+Program widl found: YES
+Library pathcch found: YES
+Library synchronization found: YES
+Library ws2_32 found: YES
+Library winmm found: YES
+Windows resource compiler: GNU windres (GNU Binutils) 2.47.20260726
+Has header "winhvplatform.h" : YES 
+Run-time dependency appleframeworks found: NO  (tried framework)
+Found pkg-config: YES (C:\devkitPro\msys2\mingw64\bin/pkg-config.exe) 3.0.7
+Run-time dependency xencontrol found: NO  (tried pkg-config)
+Library xenstore found: NO
+Library xenctrl found: NO
+Library xendevicemodel found: NO
+Library xenforeignmemory found: NO
+Library xengnttab found: NO
+Library xenevtchn found: NO
+Library xentoolcore found: NO
+Run-time dependency glib-2.0 found: YES 2.90.0
+Run-time dependency gmodule-no-export-2.0 found: YES 2.90.0
+Run-time dependency gio-2.0 found: YES 2.90.0
+Program gdbus-codegen found: YES (C:\devkitPro\msys2\mingw64\bin/gdbus-codegen.exe)
+Run-time dependency gio-unix-2.0 found: NO  (tried pkg-config)
+Program scripts/xml-preprocess.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/xml-preprocess.py)
+Run-time dependency pixman-1 found: YES 0.46.4
+Run-time dependency zlib found: YES 1.3.2
+Has header "libaio.h" : NO 
+Run-time dependency liburing found: NO  (tried pkg-config)
+Run-time dependency libnfs found: NO  (tried pkg-config)
+Has header "attr/xattr.h" : NO 
+Run-time dependency appleframeworks found: NO  (tried framework)
+Run-time dependency appleframeworks found: NO  (tried framework)
+Run-time dependency libseccomp found: NO  (tried pkg-config)
+Has header "cap-ng.h" : NO 
+Run-time dependency xkbcommon found: NO  (tried pkg-config)
+Run-time dependency slirp found: NO  (tried pkg-config)
+Has header "libvdeplug.h" : NO 
+Run-time dependency jack found: NO  (tried pkg-config)
+Run-time dependency sndio found: NO  (tried pkg-config)
+Run-time dependency spice-protocol found: NO  (tried pkg-config)
+Run-time dependency spice-server found: NO  (tried pkg-config)
+Run-time dependency libiscsi found: NO  (tried pkg-config)
+Run-time dependency libzstd found: YES 1.5.7
+Run-time dependency qpl found: NO  (tried pkg-config)
+Run-time dependency libwd found: NO  (tried pkg-config)
+Run-time dependency libwd_comp found: NO  (tried pkg-config)
+Run-time dependency qatzip found: NO  (tried pkg-config)
+Run-time dependency virglrenderer found: NO  (tried pkg-config)
+Run-time dependency rutabaga_gfx_ffi found: NO  (tried pkg-config)
+Run-time dependency blkio found: NO  (tried pkg-config)
+Run-time dependency libcurl found: NO  (tried pkg-config)
+Run-time dependency igvm found: NO  (tried pkg-config)
+Run-time dependency ncurses found: NO  (tried pkg-config)
+Run-time dependency ncursesw found: YES 6.6.20251230
+Has header "brlapi.h" : NO 
+sdl2-config found: NO
+Found CMake: C:\devkitPro\msys2\usr\bin/cmake.exe (4.0.2)
+WARNING: CMake Toolchain: Failed to determine CMake compilers state
+Run-time dependency sdl2 found: NO  (tried pkg-config and config-tool)
+Library rados found: NO
+Has header "rbd/librbd.h" : NO 
+Run-time dependency libssh found: NO  (tried pkg-config)
+Has header "bzlib.h" : YES 
+Library bz2 found: YES
+Has header "lzfse.h" : NO 
+Has header "sys/soundcard.h" : NO 
+Has header "dsound.h" : YES 
+Run-time dependency epoxy found: NO  (tried pkg-config)
+Has header "epoxy/egl.h" with dependency epoxy: NO 
+WARNING: CMake Toolchain: Failed to determine CMake compilers state
+Run-time dependency libcbor found: NO  (tried pkg-config)
+Run-time dependency gnutls found: NO  (tried pkg-config)
+libgcrypt-config found: NO need ['>=1.9.4']
+Run-time dependency libgcrypt found: NO  (tried pkg-config and config-tool)
+Run-time dependency nettle found: NO  (tried pkg-config)
+Run-time dependency capstone found: NO  (tried pkg-config)
+Run-time dependency gmp found: YES 6.3.0
+Run-time dependency gtk+-3.0 found: NO  (tried pkg-config)
+Run-time dependency x11 found: NO  (tried pkg-config)
+Run-time dependency libpng found: NO  (tried pkg-config)
+Run-time dependency libjpeg found: NO  (tried pkg-config)
+Has header "sasl/sasl.h" : NO 
+Has header "security/pam_appl.h" : NO 
+Has header "snappy-c.h" : NO 
+Has header "lzo/lzo1x.h" : NO 
+Has header "numa.h" : NO 
+Library fdt found: NO
+
+Executing subproject dtc for machine: host 
+
+dtc| Project name: dtc
+dtc| Project version: 1.6.0
+dtc| C compiler for the host machine: cc -m64 (gcc 16.2.0 "cc (Rev3, Built by MSYS2 project) 16.2.0")
+dtc| C linker for the host machine: cc -m64 ld.bfd 2.47.20260726
+dtc| Compiler for C supports arguments -Wpointer-arith: YES
+dtc| Compiler for C supports arguments -Wcast-qual: YES
+dtc| Compiler for C supports arguments -Wnested-externs: YES (cached)
+dtc| Compiler for C supports arguments -Wstrict-prototypes: YES (cached)
+dtc| Compiler for C supports arguments -Wmissing-prototypes: YES (cached)
+dtc| Compiler for C supports arguments -Wredundant-decls: YES (cached)
+dtc| Compiler for C supports arguments -Wshadow: YES
+dtc| Dependency yaml-0.1 for host machine skipped: feature yaml disabled
+dtc| Run-time dependency valgrind found: NO  (tried pkg-config)
+dtc| Program python found: NO (disabled by: python )
+dtc| Program swig skipped: feature python disabled
+dtc| Found git repository at C:/GoldenGate/darwin-vm/qemu-sptm/subprojects/dtc
+dtc| Compiler for C supports link arguments -Wl,--version-script=C:/GoldenGate/darwin-vm/qemu-sptm/subprojects/dtc/libfdt/version.lds: YES
+dtc| Found pkg-config: YES (C:\devkitPro\msys2\mingw64\bin/pkg-config.exe) 3.0.7
+dtc| Build targets in project: 3
+dtc| Subproject dtc finished.
+
+Has header "rdma/rdma_cma.h" : NO 
+Library ibverbs found: NO
+Run-time dependency libcacard found: NO  (tried pkg-config)
+Run-time dependency u2f-emu found: NO  (tried pkg-config)
+Run-time dependency canokey-qemu found: NO  (tried pkg-config)
+Run-time dependency libusbredirparser-0.5 found: NO  (tried pkg-config)
+Run-time dependency libusb-1.0 found: NO  (tried pkg-config)
+Run-time dependency libpmem found: NO  (tried pkg-config)
+Run-time dependency libdaxctl found: NO  (tried pkg-config)
+Run-time dependency libkeyutils found: NO  (tried pkg-config)
+Checking for function "gettid" : NO 
+Run-time dependency libselinux found: NO  (tried pkg-config)
+Checking for function "malloc_trim" : NO 
+Run-time dependency fuse3 found: NO  (tried pkg-config)
+Run-time dependency libbpf found: NO  (tried pkg-config)
+Run-time dependency libdw found: NO  (tried pkg-config)
+Has header "linux/magic.h" : NO 
+Has header "valgrind/valgrind.h" : NO 
+Has header "linux/btrfs.h" : NO 
+Has header "libdrm/drm.h" : NO 
+Has header "linux/openat2.h" : NO 
+Has header "pty.h" : NO 
+Has header "sys/disk.h" : NO 
+Has header "sys/ioccom.h" : NO 
+Has header "sys/kcov.h" : NO 
+Has header "afunix.h" : YES 
+Checking for function "close_range" : NO 
+Checking for function "accept4" : NO 
+Checking for function "clock_adjtime" : NO 
+Checking for function "dup3" : NO 
+Checking for function "fallocate" : NO 
+Checking for function "posix_fallocate" : NO 
+Checking for function "sched_getcpu" : NO 
+Checking for function "posix_memalign" : NO 
+Checking for function "_aligned_malloc" : YES 
+Checking for function "valloc" : NO 
+Checking for function "memalign" : NO 
+Checking for function "ppoll" : NO 
+Checking for function "preadv" : NO 
+Checking for function "pthread_fchdir_np" : NO 
+Checking for function "sendfile" : NO 
+Checking for function "setns" : NO 
+Checking for function "syncfs" : NO 
+Checking for function "sync_file_range" : NO 
+Checking for function "timerfd_create" : NO 
+Checking for function "getloadavg" : NO 
+Checking for function "htonll" : NO 
+Checking for function "copy_file_range" : NO 
+Checking for function "getifaddrs" : NO 
+Checking for function "openpty" with dependency -lutil: NO 
+Checking for function "strchrnul" : NO 
+Checking for function "system" : YES 
+Header "sys/inotify.h" has symbol "inotify_init1" : NO 
+Header "linux/blkzoned.h" has symbol "BLKOPENZONE" : NO 
+Header "linux/falloc.h" has symbol "FALLOC_FL_PUNCH_HOLE" : NO 
+Header "linux/falloc.h" has symbol "FALLOC_FL_ZERO_RANGE" : NO 
+Has header "linux/fiemap.h" : NO 
+Header "sched.h" has symbol "getcpu" : NO 
+Checking for function "getrandom" : NO 
+Header "sys/prctl.h" has symbol "PR_SET_TIMERSLACK" : NO 
+Header "linux/rtnetlink.h" has symbol "IFLA_PROTO_DOWN" : NO 
+Header "sys/sysmacros.h" has symbol "makedev" : NO 
+Header "getopt.h" has symbol "optreset" : NO 
+Header "netinet/in.h" has symbol "IPPROTO_MPTCP" : NO 
+Header "netinet/tcp.h" has symbol "TCP_KEEPCNT" : NO 
+Checking if "Win32 TCP_KEEPCNT" compiles: YES 
+Header "netinet/tcp.h" has symbol "TCP_KEEPIDLE" : NO 
+Header "netinet/tcp.h" has symbol "TCP_KEEPALIVE" : NO 
+Checking if "Win32 TCP_KEEPIDLE" compiles: YES 
+Header "netinet/tcp.h" has symbol "TCP_KEEPINTVL" : NO 
+Checking if "Win32 TCP_KEEPINTVL" compiles: YES 
+Checking whether type "struct sigevent" has member "sigev_notify_thread_id" : NO 
+Checking whether type "struct stat" has member "st_atim" : NO 
+Checking whether type "struct blk_zone" has member "capacity" : NO 
+Checking for type "struct iovec" : NO 
+Checking for type "struct utmpx" : NO 
+Checking for type "struct mmsghdr" : NO 
+Header "asm/hwprobe.h" has symbol "RISCV_HWPROBE_EXT_ZBA" : NO 
+Header "linux/vm_sockets.h" has symbol "AF_VSOCK" : NO 
+Has header "vscoordint.h" : NO 
+Checking if "_lock_file and _unlock_file" links: YES 
+Checking if "mingw setjmp and longjmp" links: NO 
+Program scripts/minikconf.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/minikconf.py)
+Configuring aarch64-softmmu-config-target.h using configuration
+Configuring aarch64-softmmu-config-devices.mak with command
+Reading depfile: C:/GoldenGate/darwin-vm/qemu-sptm/build/meson-private/aarch64-softmmu-config-devices.mak.d
+Configuring aarch64-softmmu-config-devices.h using configuration
+Program scripts/make-config-poison.sh found: YES (sh C:/GoldenGate/darwin-vm/qemu-sptm/scripts/make-config-poison.sh)
+Configuring config-host.h using configuration
+Configuring run using configuration
+Program scripts/hxtool found: YES (sh C:/GoldenGate/darwin-vm/qemu-sptm/scripts/hxtool)
+Program scripts/shaderinclude.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/shaderinclude.py)
+Program scripts/qapi-gen.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/qapi-gen.py)
+Program scripts/qemu-version.sh found: YES (sh C:/GoldenGate/darwin-vm/qemu-sptm/scripts/qemu-version.sh)
+
+Executing subproject keycodemapdb for machine: host 
+
+keycodemapdb| Project name: keycodemapdb
+keycodemapdb| Project version: undefined
+keycodemapdb| Program tools/keymap-gen found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/subprojects/keycodemapdb/tools/keymap-gen)
+keycodemapdb| Build targets in project: 449
+keycodemapdb| Subproject keycodemapdb finished.
+
+Configuring qemu-plugin.symbols with command
+Configuring qemu_plugin_api.def with command
+Program dlltool found: YES
+Configuring libqemu_plugin_api.a with command
+WARNING: Build target win32_qemu_plugin_api has no sources. This was never supposed to be allowed but did because of a bug, support will be removed in a future release of Meson
+Program ../../scripts/darwin/dumpregs.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/hw/arm/../../scripts/darwin/dumpregs.py)
+Program scripts/decodetree.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/decodetree.py)
+Program ../scripts/feature_to_c.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/gdbstub/../scripts/feature_to_c.py)
+Program ../scripts/modules/module_block.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/block/../scripts/modules/module_block.py)
+Program ../scripts/block-coroutine-wrapper.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/block/../scripts/block-coroutine-wrapper.py)
+Program scripts/modinfo-collect.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/modinfo-collect.py)
+Program scripts/modinfo-generate.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/modinfo-generate.py)
+Program scripts/rust/rust_root_crate.sh found: YES (sh C:/GoldenGate/darwin-vm/qemu-sptm/scripts/rust/rust_root_crate.sh)
+Compiler for C supports link arguments -fstack-protector-all: YES 
+Compiler for C supports link arguments -fstack-protector-strong: YES 
+Compiler for C supports link arguments -Wl,--add-stdcall-alias: YES 
+Compiler for C supports link arguments -Wl,--enable-stdcall-fixup: YES 
+Library ole32 found: YES
+Library oleaut32 found: YES
+Library shlwapi found: YES
+Library uuid found: YES
+Program windmc found: YES
+Program wixl found: NO
+Configuring 50-edk2-i386-secure.json using configuration
+Configuring 50-edk2-x86_64-secure.json using configuration
+Configuring 60-edk2-aarch64.json using configuration
+Configuring 60-edk2-arm.json using configuration
+Configuring 60-edk2-i386.json using configuration
+Configuring 60-edk2-x86_64.json using configuration
+Configuring 60-edk2-loongarch64.json using configuration
+Configuring 60-edk2-riscv64.json using configuration
+Program dtc found: NO
+Program qemu-keymap found: NO
+Program C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/sphinx-build skipped: feature docs disabled
+Program C:/GoldenGate/darwin-vm/qemu-sptm/scripts/decodetree.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/decodetree.py)
+Program diff found: YES (C:\Program Files\Git\usr\bin/diff.exe)
+Program dbus-daemon found: NO
+Run-time dependency gvnc-1.0 found: NO  (tried pkg-config)
+Run-time dependency sysprof-capture-4 found: NO  (tried pkg-config)
+Run-time dependency glib-2.0 found: YES 2.90.0
+Program initrd-stress.sh found: YES (sh C:/GoldenGate/darwin-vm/qemu-sptm/tests/migration-stress/initrd-stress.sh)
+Program scripts/nsis.py found: YES (C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/nsis.py)
+Build targets in project: 724
+
+qemu 11.1.0
+
+  Build environment
+    Build directory                 : C:/GoldenGate/darwin-vm/qemu-sptm/build
+    Source path                     : C:/GoldenGate/darwin-vm/qemu-sptm
+    Download dependencies           : YES
+
+  Directories
+    Install prefix                  : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv
+    BIOS directory                  : share/
+    firmware path                   : share/qemu-firmware
+    binary directory                : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/.
+    library directory               : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/lib
+    module directory                : lib/
+    libexec directory               : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/libexec
+    include directory               : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/include
+    config directory                : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/etc
+    local state directory           : queried at runtime
+    Doc directory                   : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/share/doc
+
+  Host binaries
+    python                          : C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe (version: 3.14)
+    sphinx-build                    : NO
+    gdb                             : 
+    iasl                            : NO
+    genisoimage                     : 
+    wixl                            : NO
+
+  Configurable features
+    Documentation                   : NO
+    system-mode emulation           : YES
+    user-mode emulation             : NO
+    block layer                     : YES
+    Install blobs                   : YES
+    module support                  : NO
+    fuzzing support                 : NO
+    Audio drivers                   : dsound
+    Trace backends                  : log
+    QOM debugging                   : YES
+    Relocatable install             : YES
+    vhost-kernel support            : NO
+    vhost-net support               : NO
+    vhost-user support              : NO
+    vhost-user-crypto support       : NO
+    vhost-user-blk server support   : NO
+    vhost-vdpa support              : NO
+    build guest agent               : YES
+
+  Compilation
+    host CPU                        : x86_64
+    host endianness                 : little
+    C compiler                      : cc -m64
+    Host C compiler                 : cc -m64
+    C++ compiler                    : c++ -m64
+    Objective-C compiler            : NO
+    Rust support                    : NO
+    CFLAGS                          : -g -O2
+    CXXFLAGS                        : -g -O2
+    QEMU_CFLAGS                     : -mcx16 -msse2 -fno-link-libatomic -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fno-strict-aliasing -fno-common -fwrapv -fno-pie -no-pie -ftrivial-auto-var-init=zero -fzero-init-padding-bits=all -fzero-call-used-regs=used-gpr -fstack-protector-strong
+    QEMU_CXXFLAGS                   : -mcx16 -msse2 -fno-link-libatomic -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fno-strict-aliasing -fno-common -fwrapv -fno-pie -no-pie -ftrivial-auto-var-init=zero -fzero-init-padding-bits=all -fzero-call-used-regs=used-gpr -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -fstack-protector-strong
+    QEMU_LDFLAGS                    : -fstack-protector-strong -Wl,--no-seh -Wl,--nxcompat -Wl,--dynamicbase -Wl,--high-entropy-va
+    link-time optimization (LTO)    : NO
+    PIE                             : NO
+    static build                    : NO
+    malloc trim support             : NO
+    membarrier                      : NO
+    debug graph lock                : NO
+    debug stack usage               : NO
+    mutex debugging                 : NO
+    memory allocator                : system
+    avx2 optimization               : YES
+    avx512bw optimization           : YES
+    gcov                            : NO
+    thread sanitizer                : NO
+    CFI support                     : NO
+    strip binaries                  : NO
+    sparse                          : NO
+    mingw32 support                 : YES
+
+  Targets and accelerators
+    KVM support                     : NO
+    Nitro support                   : NO
+    HVF support                     : NO
+    WHPX support                    : NO
+    NVMM support                    : NO
+    MSHV support                    : NO
+    Xen support                     : NO
+    Xen emulation                   : NO
+    TCG support                     : YES
+    TCG backend                     : native (x86_64)
+    TCG plugins                     : YES
+    TCG debug enabled               : NO
+    target list                     : aarch64-softmmu
+    default devices                 : YES
+    out of process emulation        : NO
+    vfio-user server                : NO
+
+  Block layer support
+    coroutine backend               : windows
+    coroutine pool                  : YES
+    Block whitelist (rw)            : 
+    Block whitelist (ro)            : 
+    Use block whitelist in tools    : NO
+    VirtFS (9P) support             : NO
+    replication support             : YES
+    bochs support                   : YES
+    cloop support                   : YES
+    dmg support                     : YES
+    qcow v1 support                 : YES
+    vdi support                     : YES
+    vhdx support                    : YES
+    vmdk support                    : YES
+    vpc support                     : YES
+    vvfat support                   : YES
+    qed support                     : YES
+    parallels support               : YES
+    FUSE exports                    : NO
+    VDUSE block exports             : NO
+
+  Crypto
+    TLS priority                    : NORMAL
+    GNUTLS support                  : NO
+    libgcrypt                       : NO
+    nettle                          : NO
+    SM4 ALG support                 : NO
+    SM3 ALG support                 : NO
+    AF_ALG support                  : NO
+    rng-none                        : NO
+    Linux keyring                   : NO
+    Linux keyutils                  : NO
+
+  User interface
+    D-Bus display                   : YES
+    SDL support                     : NO
+    SDL image support               : NO
+    GTK support                     : NO
+    pixman                          : YES 0.46.4
+    VTE support                     : NO
+    PNG support                     : NO
+    VNC support                     : YES
+    VNC SASL support                : NO
+    VNC JPEG support                : NO
+    VNC D-Bus server (qemu-vnc)     : NO
+    spice protocol support          : NO
+    curses support                  : YES
+    brlapi support                  : NO
+
+  Graphics backends
+    VirGL support                   : NO
+    Rutabaga support                : NO
+
+  Audio backends
+    DirectSound support             : YES
+    PipeWire support                : NO
+    JACK support                    : NO
+
+  Network backends
+    AF_XDP support                  : NO
+    passt support                   : NO
+    slirp support                   : NO
+    vde support                     : NO
+    netmap support                  : NO
+    l2tpv3 support                  : NO
+
+  Dependencies
+    libtasn1                        : NO
+    PAM                             : NO
+    iconv support                   : YES
+    blkio support                   : NO
+    curl support                    : NO
+    Multipath support               : NO
+    Linux AIO support               : NO
+    Linux io_uring support          : NO
+    ATTR/XATTR support              : NO
+    RDMA support                    : NO
+    fdt support                     : internal
+    libcap-ng support               : NO
+    bpf support                     : NO
+    rbd support                     : NO
+    smartcard support               : NO
+    U2F support                     : NO
+    libusb                          : NO
+    usb net redir                   : NO
+    OpenGL support (epoxy)          : NO
+    GBM                             : NO
+    libiscsi support                : NO
+    libnfs support                  : NO
+    QGA VSS support                 : YES
+    seccomp support                 : NO
+    hv-balloon support              : YES
+    TPM support                     : NO
+    IGVM support                    : NO
+    libssh support                  : NO
+    lzo support                     : NO
+    snappy support                  : NO
+    bzip2 support                   : YES
+    lzfse support                   : NO
+    zstd support                    : YES 1.5.7
+    Query Processing Library support: NO
+    UADK Library support            : NO
+    qatzip support                  : NO
+    NUMA host support               : NO
+    capstone                        : NO
+    libpmem support                 : NO
+    libdaxctl support               : NO
+    libcbor support                 : NO
+    libudev                         : NO
+    FUSE lseek                      : NO
+    selinux                         : NO
+    libdw                           : NO
+    valgrind                        : NO
+
+  Subprojects (for host machine)
+    dtc                             : YES
+    keycodemapdb                    : YES
+
+  User defined options
+    Native files                    : config-meson.cross
+                                      C:/GoldenGate/darwin-vm/qemu-sptm/configs/meson/windows.txt
+    b_pie                           : false
+    docs                            : disabled
+    plugins                         : true
+    pvg                             : disabled
+
+Found ninja-1.13.2 at C:/devkitPro/msys2/mingw64/bin/ninja.exe
+Running postconf script 'C:/GoldenGate/darwin-vm/qemu-sptm/build/pyvenv/bin/python.exe C:/GoldenGate/darwin-vm/qemu-sptm/scripts/symlink-install-tree.py'
+EXIT: 0

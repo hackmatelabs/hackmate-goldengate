@@ -1,0 +1,41 @@
+[1/22] Generating qemu-version.h with a custom command (wrapped by meson to capture output)
+fatal: No names found, cannot describe anything.
+
+[2/20] Compiling C object libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj
+FAILED: [code=1] libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj 
+"cc" "-m64" "-Ilibsystem_arm.a.p" "-I." "-I.." "-Itarget/arm" "-I../target/arm" "-Isubprojects/dtc/libfdt" "-I../subprojects/dtc/libfdt" "-Ihw/arm" "-Iqapi" "-Itrace" "-Iui" "-Iui/shader" "-IC:/devkitPro/msys2/mingw64/bin/../include/pixman-1" "-IC:/devkitPro/msys2/mingw64/bin/../include" "-IC:/devkitPro/msys2/mingw64/bin/../include/glib-2.0" "-IC:/devkitPro/msys2/mingw64/bin/../lib/glib-2.0/include" "-IC:/devkitPro/msys2/mingw64/bin/../include/ncursesw" "-fdiagnostics-color=auto" "-Wall" "-Winvalid-pch" "-Werror" "-std=gnu11" "-O2" "-g" "-mcx16" "-msse2" "-fno-link-libatomic" "-D_GNU_SOURCE" "-D_FILE_OFFSET_BITS=64" "-D_LARGEFILE_SOURCE" "-fno-strict-aliasing" "-fno-common" "-fwrapv" "-fno-pie" "-no-pie" "-ftrivial-auto-var-init=zero" "-fzero-init-padding-bits=all" "-fzero-call-used-regs=used-gpr" "-fstack-protector-strong" "-Wempty-body" "-Wendif-labels" "-Wexpansion-to-defined" "-Wformat-overflow=2" "-Wformat-security" "-Wformat-y2k" "-Wignored-qualifiers" "-Wimplicit-fallthrough=2" "-Winit-self" "-Wmissing-format-attribute" "-Wmissing-prototypes" "-Wnested-externs" "-Wold-style-declaration" "-Wold-style-definition" "-Wredundant-decls" "-Wshadow=local" "-Wstrict-prototypes" "-Wtype-limits" "-Wundef" "-Wvla" "-Wwrite-strings" "-Wno-missing-include-dirs" "-Wno-psabi" "-Wno-shift-negative-value" "-iquote" "." "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/include" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/x86_64" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/generic" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/tcg/x86_64" "-DNCURSES_WIDECHAR" "-DNCURSES_WIDECHAR=1" "-DCPU_DEFS_H" "-DCOMPILING_SYSTEM_VS_USER" "-DCONFIG_SOFTMMU" -MD -MQ libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj -MF "libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj.d" -o libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj "-c" ../hw/arm/xnuboot_sptm.c
+../hw/arm/xnuboot_sptm.c:6:10: fatal error: sys/mman.h: No such file or directory
+    6 | #include <sys/mman.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+[3/20] Compiling C object libsystem_arm.a.p/hw_arm_apple_dtree.c.obj
+[4/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_cpu32.c.obj
+[5/20] Compiling C object libsystem_arm.a.p/hw_arm_darwin.c.obj
+[6/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-gxf.c.obj
+[7/20] Compiling C object libsystem_arm.a.p/hw_arm_apple_regs.c.obj
+[8/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_pauth_helper.c.obj
+[9/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_mte_helper.c.obj
+[10/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_gengvec64.c.obj
+[11/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_helper-a64.c.obj
+[12/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-sme.c.obj
+[13/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_sme_helper.c.obj
+[14/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-a64.c.obj
+FAILED: [code=1] libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-a64.c.obj 
+"cc" "-m64" "-Ilibqemu-aarch64-softmmu.a.p" "-I." "-I.." "-Itarget/arm" "-I../target/arm" "-Isubprojects/dtc/libfdt" "-I../subprojects/dtc/libfdt" "-Iqapi" "-Itrace" "-Iui" "-Iui/shader" "-IC:/devkitPro/msys2/mingw64/bin/../include" "-IC:/devkitPro/msys2/mingw64/bin/../include/pixman-1" "-IC:/devkitPro/msys2/mingw64/bin/../include/glib-2.0" "-IC:/devkitPro/msys2/mingw64/bin/../lib/glib-2.0/include" "-IC:/devkitPro/msys2/mingw64/bin/../include/ncursesw" "-fdiagnostics-color=auto" "-Wall" "-Winvalid-pch" "-Werror" "-std=gnu11" "-O2" "-g" "-mcx16" "-msse2" "-fno-link-libatomic" "-D_GNU_SOURCE" "-D_FILE_OFFSET_BITS=64" "-D_LARGEFILE_SOURCE" "-fno-strict-aliasing" "-fno-common" "-fwrapv" "-fno-pie" "-no-pie" "-ftrivial-auto-var-init=zero" "-fzero-init-padding-bits=all" "-fzero-call-used-regs=used-gpr" "-fstack-protector-strong" "-Wempty-body" "-Wendif-labels" "-Wexpansion-to-defined" "-Wformat-overflow=2" "-Wformat-security" "-Wformat-y2k" "-Wignored-qualifiers" "-Wimplicit-fallthrough=2" "-Winit-self" "-Wmissing-format-attribute" "-Wmissing-prototypes" "-Wnested-externs" "-Wold-style-declaration" "-Wold-style-definition" "-Wredundant-decls" "-Wshadow=local" "-Wstrict-prototypes" "-Wtype-limits" "-Wundef" "-Wvla" "-Wwrite-strings" "-Wno-missing-include-dirs" "-Wno-psabi" "-Wno-shift-negative-value" "-iquote" "." "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/include" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/x86_64" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/generic" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/tcg/x86_64" "-DNCURSES_WIDECHAR" "-DNCURSES_WIDECHAR=1" "-DCOMPILING_PER_TARGET" "-DCONFIG_TARGET=\"aarch64-softmmu-config-target.h\"" "-DCONFIG_DEVICES=\"aarch64-softmmu-config-devices.h\"" -MD -MQ libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-a64.c.obj -MF "libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-a64.c.obj.d" -o libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-a64.c.obj "-c" ../target/arm/tcg/translate-a64.c
+In file included from ../target/arm/tcg/translate-a64.c:29:
+../target/arm/tcg/translate-a64.c: In function 'handle_sys':
+../target/arm/tcg/translate-a64.c:2919:34: error: format '%lX' expects argument of type 'long unsigned int', but argument 8 has type 'vaddr' {aka 'long long unsigned int'} [-Werror=format=]
+ 2919 |         qemu_log_mask(LOG_UNIMP, "%s access to unsupported AArch64 "
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2920 |                       "system register S%d_%d_c%d_c%d_%d (pc = 0x%016lX)\n",
+ 2921 |                       isread ? "r" : "w", op0, op1, crn, crm, op2, s->pc_curr);
+      |                                                                    ~~~~~~~~~~
+      |                                                                     |
+      |                                                                     vaddr {aka long long unsigned int}
+C:/GoldenGate/darwin-vm/qemu-sptm/include/qemu/log.h:96:22: note: in definition of macro 'qemu_log_mask'
+   96 |             qemu_log(FMT, ## __VA_ARGS__);              \
+      |                      ^~~
+cc1.exe: all warnings being treated as errors
+[15/20] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_tcg_translate-sve.c.obj
+ninja: build stopped: subcommand failed.
+EXIT: 1

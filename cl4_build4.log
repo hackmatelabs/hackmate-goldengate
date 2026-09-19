@@ -1,0 +1,7 @@
+[1/6] Generating qemu-version.h with a custom command (wrapped by meson to capture output)
+fatal: No names found, cannot describe anything.
+
+[2/4] Compiling C object libsystem_arm.a.p/hw_arm_apple_dcp.c.obj
+[3/4] Compiling C object libsystem_arm.a.p/hw_arm_darwin.c.obj
+[4/4] Linking target qemu-system-aarch64.exe
+EXIT: 0

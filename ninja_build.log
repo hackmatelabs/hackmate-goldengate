@@ -1,0 +1,2151 @@
+[1/2095] Generating trace/trace-root.h with a custom command
+[2/2095] Generating trace/trace-root.c with a custom command
+[3/2095] Generating trace/trace-crypto.h with a custom command
+[4/2095] Generating trace/trace-crypto.c with a custom command
+[5/2095] Generating trace/trace-qapi.c with a custom command
+[6/2095] Generating trace/trace-qapi.h with a custom command
+[7/2095] Generating trace/trace-qom.h with a custom command
+[8/2095] Generating trace/trace-qom.c with a custom command
+[9/2095] Generating trace/trace-monitor.c with a custom command
+[10/2095] Generating trace/trace-monitor.h with a custom command
+[11/2095] Generating trace/trace-util.h with a custom command
+[12/2095] Generating trace/trace-gdbstub.c with a custom command
+[13/2095] Generating trace/trace-gdbstub.h with a custom command
+[14/2095] Generating trace/trace-tools_qemu_vnc.h with a custom command
+[15/2095] Generating trace/trace-util.c with a custom command
+[16/2095] Generating trace/trace-authz.h with a custom command
+[17/2095] Generating trace/trace-tools_qemu_vnc.c with a custom command
+[18/2095] Generating qemu-img-cmds.h with a custom command (wrapped by meson to capture output)
+[19/2095] Generating trace/trace-authz.c with a custom command
+[20/2095] Generating trace/trace-chardev.c with a custom command
+[21/2095] Generating trace/trace-block.h with a custom command
+[22/2095] Generating trace/trace-block.c with a custom command
+[23/2095] Generating trace/trace-chardev.h with a custom command
+[24/2095] Generating trace/trace-io.c with a custom command
+[25/2095] Generating trace/trace-io.h with a custom command
+[26/2095] Generating trace/trace-nbd.c with a custom command
+[27/2095] Generating qemu-version.h with a custom command (wrapped by meson to capture output)
+fatal: No names found, cannot describe anything.
+
+[28/2095] Generating trace/trace-nbd.h with a custom command
+[29/2095] Generating hmp-commands-info.h with a custom command (wrapped by meson to capture output)
+[30/2095] Generating trace/trace-scsi.h with a custom command
+[31/2095] Generating trace/trace-scsi.c with a custom command
+[32/2095] Generating trace/trace-accel_hvf.c with a custom command
+[33/2095] Generating trace/trace-accel_hvf.h with a custom command
+[34/2095] Generating config-poison.h with a custom command (wrapped by meson to capture output)
+[35/2095] Generating trace/trace-accel_kvm.h with a custom command
+[36/2095] Generating trace/trace-accel_nitro.c with a custom command
+[37/2095] Generating hmp-commands.h with a custom command (wrapped by meson to capture output)
+[38/2095] Generating trace/trace-accel_kvm.c with a custom command
+[39/2095] Generating trace/trace-accel_mshv.h with a custom command
+[40/2095] Generating trace/trace-accel_nitro.h with a custom command
+[41/2095] Generating trace/trace-audio.c with a custom command
+[42/2095] Generating trace/trace-backends.c with a custom command
+[43/2095] Generating trace/trace-audio.h with a custom command
+[44/2095] Generating trace/trace-accel_mshv.c with a custom command
+[45/2095] Generating trace/trace-backends_tpm.c with a custom command
+[46/2095] Generating trace/trace-backends_tpm.h with a custom command
+[47/2095] Generating trace/trace-backends.h with a custom command
+[48/2095] Generating trace/trace-ebpf.h with a custom command
+[49/2095] Generating trace/trace-ebpf.c with a custom command
+[50/2095] Generating trace/trace-hw_9pfs.c with a custom command
+[51/2095] Generating trace/trace-hw_9pfs.h with a custom command
+[52/2095] Generating trace/trace-hw_acpi.c with a custom command
+[53/2095] Generating trace/trace-hw_acpi.h with a custom command
+[54/2095] Generating trace/trace-hw_adc.h with a custom command
+[55/2095] Generating trace/trace-hw_adc.c with a custom command
+[56/2095] Generating trace/trace-hw_alpha.h with a custom command
+[57/2095] Generating trace/trace-hw_alpha.c with a custom command
+[58/2095] Generating trace/trace-hw_arm.h with a custom command
+[59/2095] Generating trace/trace-hw_audio.h with a custom command
+[60/2095] Generating trace/trace-hw_audio.c with a custom command
+[61/2095] Generating trace/trace-hw_arm.c with a custom command
+[62/2095] Generating trace/trace-hw_block.c with a custom command
+[63/2095] Generating trace/trace-hw_block.h with a custom command
+[64/2095] Generating trace/trace-hw_char.h with a custom command
+[65/2095] Generating trace/trace-hw_display.h with a custom command
+[66/2095] Generating trace/trace-hw_char.c with a custom command
+[67/2095] Generating trace/trace-hw_display.c with a custom command
+[68/2095] Generating trace/trace-hw_dma.h with a custom command
+[69/2095] Generating trace/trace-hw_fsi.c with a custom command
+[70/2095] Generating trace/trace-hw_dma.c with a custom command
+[71/2095] Generating trace/trace-hw_fsi.h with a custom command
+[72/2095] Generating trace/trace-hw_hyperv.h with a custom command
+[73/2095] Generating trace/trace-hw_hexagon.h with a custom command
+[74/2095] Generating trace/trace-hw_hexagon.c with a custom command
+[75/2095] Generating trace/trace-hw_hyperv.c with a custom command
+[76/2095] Generating trace/trace-hw_i2c.h with a custom command
+[77/2095] Generating trace/trace-hw_i2c.c with a custom command
+[78/2095] Generating trace/trace-hw_i3c.h with a custom command
+[79/2095] Generating trace/trace-hw_i3c.c with a custom command
+[80/2095] Generating trace/trace-hw_i386_xen.c with a custom command
+[81/2095] Generating trace/trace-hw_i386_xen.h with a custom command
+[82/2095] Generating trace/trace-hw_i386.h with a custom command
+[83/2095] Generating trace/trace-hw_i386.c with a custom command
+[84/2095] Generating qemu-options.def with a custom command (wrapped by meson to capture output)
+[85/2095] Generating trace/trace-hw_i386_kvm.c with a custom command
+[86/2095] Generating trace/trace-hw_i386_kvm.h with a custom command
+[87/2095] Generating trace/trace-hw_input.h with a custom command
+[88/2095] Generating trace/trace-hw_ide.h with a custom command
+[89/2095] Generating trace/trace-hw_ide.c with a custom command
+[90/2095] Generating trace/trace-hw_isa.h with a custom command
+[91/2095] Generating trace/trace-hw_input.c with a custom command
+[92/2095] Generating trace/trace-hw_intc.c with a custom command
+[93/2095] Generating trace/trace-hw_isa.c with a custom command
+[94/2095] Generating trace/trace-hw_intc.h with a custom command
+[95/2095] Generating trace/trace-hw_mem.c with a custom command
+[96/2095] Generating trace/trace-hw_mips.h with a custom command
+[97/2095] Generating trace/trace-hw_mem.h with a custom command
+[98/2095] Generating trace/trace-hw_mips.c with a custom command
+[99/2095] Generating trace/trace-hw_misc.h with a custom command
+[100/2095] Generating trace/trace-hw_misc_macio.h with a custom command
+[101/2095] Generating trace/trace-hw_misc.c with a custom command
+[102/2095] Generating trace/trace-hw_misc_macio.c with a custom command
+[103/2095] Generating trace/trace-hw_net_can.c with a custom command
+[104/2095] Generating trace/trace-hw_net_can.h with a custom command
+[105/2095] Generating trace/trace-hw_nubus.h with a custom command
+[106/2095] Generating trace/trace-hw_nitro.c with a custom command
+[107/2095] Generating trace/trace-hw_nitro.h with a custom command
+[108/2095] Generating trace/trace-hw_net.c with a custom command
+[109/2095] Generating trace/trace-hw_nubus.c with a custom command
+[110/2095] Generating trace/trace-hw_nvram.c with a custom command
+[111/2095] Generating trace/trace-hw_nvme.c with a custom command
+[112/2095] Generating trace/trace-hw_pci_host.h with a custom command
+[113/2095] Generating trace/trace-hw_nvram.h with a custom command
+[114/2095] Generating trace/trace-hw_net.h with a custom command
+[115/2095] Generating trace/trace-hw_pci.h with a custom command
+[116/2095] Generating trace/trace-hw_pci.c with a custom command
+[117/2095] Generating trace/trace-hw_pci_host.c with a custom command
+[118/2095] Generating qapi/shared QAPI source files with a custom command
+[119/2095] Generating trace/trace-hw_sd.c with a custom command
+[120/2095] Generating trace/trace-hw_ppc.h with a custom command
+[121/2095] Generating trace/trace-hw_rtc.h with a custom command
+[122/2095] Generating trace/trace-hw_nvme.h with a custom command
+[123/2095] Generating trace/trace-hw_rtc.c with a custom command
+[124/2095] Generating trace/trace-hw_ppc.c with a custom command
+[125/2095] Generating trace/trace-hw_riscv.h with a custom command
+[126/2095] Generating trace/trace-hw_riscv.c with a custom command
+[127/2095] Generating trace/trace-hw_s390x.c with a custom command
+[128/2095] Generating trace/trace-hw_s390x.h with a custom command
+[129/2095] Generating trace/trace-hw_sd.h with a custom command
+[130/2095] Generating trace/trace-hw_scsi.c with a custom command
+[131/2095] Generating trace/trace-hw_scsi.h with a custom command
+[132/2095] Generating trace/trace-hw_sensor.c with a custom command
+[133/2095] Generating trace/trace-hw_sensor.h with a custom command
+[134/2095] Generating trace/trace-hw_sh4.h with a custom command
+[135/2095] Generating trace/trace-hw_sh4.c with a custom command
+[136/2095] Generating trace/trace-hw_sparc.h with a custom command
+[137/2095] Generating trace/trace-hw_sparc.c with a custom command
+[138/2095] Generating trace/trace-hw_sparc64.c with a custom command
+[139/2095] Generating trace/trace-hw_sparc64.h with a custom command
+[140/2095] Generating trace/trace-hw_tpm.h with a custom command
+[141/2095] Generating trace/trace-hw_ssi.h with a custom command
+[142/2095] Generating trace/trace-hw_timer.h with a custom command
+[143/2095] Generating trace/trace-hw_tpm.c with a custom command
+[144/2095] Generating trace/trace-hw_timer.c with a custom command
+[145/2095] Generating trace/trace-hw_ssi.c with a custom command
+[146/2095] Generating trace/trace-hw_uefi.h with a custom command
+[147/2095] Generating trace/trace-hw_uefi.c with a custom command
+[148/2095] Generating trace/trace-hw_ufs.h with a custom command
+[149/2095] Generating trace/trace-hw_ufs.c with a custom command
+[150/2095] Generating trace/trace-hw_usb.c with a custom command
+[151/2095] Generating trace/trace-hw_vfio.c with a custom command
+[152/2095] Generating trace/trace-hw_vfio.h with a custom command
+[153/2095] Generating trace/trace-hw_vfio_user.c with a custom command
+[154/2095] Generating trace/trace-hw_vfio_user.h with a custom command
+[155/2095] Generating trace/trace-hw_watchdog.h with a custom command
+[156/2095] Generating trace/trace-hw_watchdog.c with a custom command
+[157/2095] Generating trace/trace-hw_usb.h with a custom command
+[158/2095] Generating trace/trace-hw_vmapple.h with a custom command
+[159/2095] Generating trace/trace-hw_virtio.c with a custom command
+[160/2095] Generating trace/trace-hw_vmapple.c with a custom command
+[161/2095] Generating trace/trace-hw_xen.c with a custom command
+[162/2095] Generating trace/trace-hw_xen.h with a custom command
+[163/2095] Generating trace/trace-hw_virtio.h with a custom command
+[164/2095] Generating trace/trace-hw_gpio.h with a custom command
+[165/2095] Generating trace/trace-hw_gpio.c with a custom command
+[166/2095] Generating trace/trace-replay.c with a custom command
+[167/2095] Generating trace/trace-net.c with a custom command
+[168/2095] Generating trace/trace-replay.h with a custom command
+[169/2095] Generating trace/trace-migration.c with a custom command
+[170/2095] Generating trace/trace-net.h with a custom command
+[171/2095] Generating trace/trace-system.c with a custom command
+[172/2095] Generating trace/trace-system.h with a custom command
+[173/2095] Generating trace/trace-hw_remote.h with a custom command
+[174/2095] Generating trace/trace-ui.c with a custom command
+[175/2095] Generating trace/trace-accel_tcg.h with a custom command
+[176/2095] Generating trace/trace-migration.h with a custom command
+[177/2095] Generating trace/trace-hw_remote.c with a custom command
+[178/2095] Generating trace/trace-accel_tcg.c with a custom command
+[179/2095] Generating trace/trace-ui.h with a custom command
+[180/2095] Generating trace/trace-hw_core.h with a custom command
+[181/2095] Generating trace/trace-hw_core.c with a custom command
+[182/2095] Generating trace/trace-target_arm.h with a custom command
+[183/2095] Generating trace/trace-target_arm_hvf.c with a custom command
+[184/2095] Generating trace/trace-target_arm_hvf.h with a custom command
+[185/2095] Generating trace/trace-target_arm.c with a custom command
+[186/2095] Generating trace/trace-target_hppa.c with a custom command
+[187/2095] Generating trace/trace-target_arm_tcg.c with a custom command
+[188/2095] Generating trace/trace-target_i386.h with a custom command
+[189/2095] Generating trace/trace-target_i386_kvm.h with a custom command
+[190/2095] Generating trace/trace-target_i386.c with a custom command
+[191/2095] Generating trace/trace-target_arm_tcg.h with a custom command
+[192/2095] Generating trace/trace-target_hppa.h with a custom command
+[193/2095] Generating trace/trace-target_i386_kvm.c with a custom command
+[194/2095] Generating trace/trace-target_i386_whpx.h with a custom command
+[195/2095] Generating trace/trace-target_i386_whpx.c with a custom command
+[196/2095] Generating trace/trace-target_mips_tcg.h with a custom command
+[197/2095] Generating trace/trace-target_loongarch.h with a custom command
+[198/2095] Generating trace/trace-target_mips_tcg.c with a custom command
+[199/2095] Generating trace/trace-target_loongarch.c with a custom command
+[200/2095] Generating trace/trace-target_ppc.h with a custom command
+[201/2095] Generating trace/trace-target_riscv.c with a custom command
+[202/2095] Generating trace/trace-target_riscv.h with a custom command
+[203/2095] Generating trace/trace-target_s390x.c with a custom command
+[204/2095] Generating trace/trace-target_ppc.c with a custom command
+[205/2095] Generating trace/trace-target_s390x.h with a custom command
+[206/2095] Generating trace/trace-target_s390x_kvm.h with a custom command
+[207/2095] Generating trace/trace-target_s390x_kvm.c with a custom command
+[208/2095] Generating trace/trace-target_sparc.h with a custom command
+[209/2095] Generating trace/trace-target_sparc.c with a custom command
+[210/2095] Generating trace/trace-qapi_commands_authz_trace_events.c with a custom command
+[211/2095] Generating trace/trace-qapi_commands_block_trace_events.h with a custom command
+[212/2095] Generating trace/trace-qapi_commands_authz_trace_events.h with a custom command
+[213/2095] Generating trace/trace-qapi_commands_block_export_trace_events.h with a custom command
+[214/2095] Generating trace/trace-qapi_commands_block_trace_events.c with a custom command
+[215/2095] Generating trace/trace-qapi_commands_block_core_trace_events.h with a custom command
+[216/2095] Generating trace/trace-qapi_commands_block_export_trace_events.c with a custom command
+[217/2095] Generating trace/trace-qapi_commands_block_core_trace_events.c with a custom command
+[218/2095] Generating trace/trace-qapi_commands_char_trace_events.c with a custom command
+[219/2095] Generating trace/trace-qapi_commands_char_trace_events.h with a custom command
+[220/2095] Generating trace/trace-qapi_commands_common_trace_events.h with a custom command
+[221/2095] Generating trace/trace-qapi_commands_common_trace_events.c with a custom command
+[222/2095] Generating trace/trace-qapi_commands_compat_trace_events.h with a custom command
+[223/2095] Generating trace/trace-qapi_commands_compat_trace_events.c with a custom command
+[224/2095] Generating trace/trace-qapi_commands_control_trace_events.h with a custom command
+[225/2095] Generating trace/trace-qapi_commands_control_trace_events.c with a custom command
+[226/2095] Generating trace/trace-qapi_commands_crypto_trace_events.c with a custom command
+[227/2095] Generating trace/trace-qapi_commands_cxl_trace_events.h with a custom command
+[228/2095] Generating trace/trace-qapi_commands_cxl_trace_events.c with a custom command
+[229/2095] Generating trace/trace-qapi_commands_crypto_trace_events.h with a custom command
+[230/2095] Generating trace/trace-qapi_commands_ebpf_trace_events.c with a custom command
+[231/2095] Generating trace/trace-qapi_commands_error_trace_events.h with a custom command
+[232/2095] Generating trace/trace-qapi_commands_dump_trace_events.c with a custom command
+[233/2095] Generating trace/trace-qapi_commands_ebpf_trace_events.h with a custom command
+[234/2095] Generating trace/trace-qapi_commands_dump_trace_events.h with a custom command
+[235/2095] Generating trace/trace-qapi_commands_error_trace_events.c with a custom command
+[236/2095] Generating trace/trace-qapi_commands_job_trace_events.c with a custom command
+[237/2095] Generating trace/trace-qapi_commands_introspect_trace_events.h with a custom command
+[238/2095] Generating trace/trace-qapi_commands_machine_common_trace_events.h with a custom command
+[239/2095] Generating trace/trace-qapi_commands_job_trace_events.h with a custom command
+[240/2095] Generating trace/trace-qapi_commands_introspect_trace_events.c with a custom command
+[241/2095] Generating trace/trace-qapi_commands_machine_trace_events.h with a custom command
+[242/2095] Generating trace/trace-qapi_commands_machine_common_trace_events.c with a custom command
+[243/2095] Generating trace/trace-qapi_commands_machine_s390x_trace_events.h with a custom command
+[244/2095] Generating trace/trace-qapi_commands_machine_s390x_trace_events.c with a custom command
+[245/2095] Generating trace/trace-qapi_commands_machine_trace_events.c with a custom command
+[246/2095] Generating trace/trace-qapi_commands_migration_trace_events.h with a custom command
+[247/2095] Generating trace/trace-qapi_commands_misc_trace_events.h with a custom command
+[248/2095] Generating trace/trace-qapi_commands_net_trace_events.c with a custom command
+[249/2095] Generating trace/trace-qapi_commands_migration_trace_events.c with a custom command
+[250/2095] Generating trace/trace-qapi_commands_net_trace_events.h with a custom command
+[251/2095] Generating trace/trace-qapi_commands_misc_trace_events.c with a custom command
+[252/2095] Generating trace/trace-qapi_commands_pragma_trace_events.h with a custom command
+[253/2095] Generating trace/trace-qapi_commands_pragma_trace_events.c with a custom command
+[254/2095] Generating trace/trace-qapi_commands_replay_trace_events.c with a custom command
+[255/2095] Generating trace/trace-qapi_commands_run_state_trace_events.c with a custom command
+[256/2095] Generating trace/trace-qapi_commands_run_state_trace_events.h with a custom command
+[257/2095] Generating trace/trace-qapi_commands_qom_trace_events.h with a custom command
+[258/2095] Generating trace/trace-qapi_commands_sockets_trace_events.c with a custom command
+[259/2095] Generating trace/trace-qapi_commands_qom_trace_events.c with a custom command
+[260/2095] Generating trace/trace-qapi_commands_sockets_trace_events.h with a custom command
+[261/2095] Generating trace/trace-qapi_commands_stats_trace_events.h with a custom command
+[262/2095] Generating trace/trace-qapi_commands_trace_trace_events.h with a custom command
+[263/2095] Generating trace/trace-qapi_commands_stats_trace_events.c with a custom command
+[264/2095] Generating trace/trace-qapi_commands_replay_trace_events.h with a custom command
+[265/2095] Generating trace/trace-qapi_commands_trace_trace_events.c with a custom command
+[266/2095] Generating trace/trace-qapi_commands_transaction_trace_events.h with a custom command
+[267/2095] Generating trace/trace-qapi_commands_vfio_trace_events.h with a custom command
+[268/2095] Generating trace/trace-qapi_commands_transaction_trace_events.c with a custom command
+[269/2095] Generating trace/trace-qapi_commands_vfio_trace_events.c with a custom command
+[270/2095] Generating trace/trace-qapi_commands_virtio_trace_events.h with a custom command
+[271/2095] Generating trace/trace-qapi_commands_virtio_trace_events.c with a custom command
+[272/2095] Generating trace/trace-qapi_commands_yank_trace_events.c with a custom command
+[273/2095] Generating trace/trace-qapi_commands_yank_trace_events.h with a custom command
+[274/2095] Generating trace/trace-qapi_commands_accelerator_trace_events.c with a custom command
+[275/2095] Generating trace/trace-qapi_commands_accelerator_trace_events.h with a custom command
+[276/2095] Generating trace/trace-qapi_commands_acpi_trace_events.h with a custom command
+[277/2095] Generating trace/trace-qapi_commands_audio_trace_events.h with a custom command
+[278/2095] Generating trace/trace-qapi_commands_acpi_hest_trace_events.c with a custom command
+[279/2095] Generating trace/trace-qapi_commands_acpi_hest_trace_events.h with a custom command
+[280/2095] Generating trace/trace-qapi_commands_acpi_trace_events.c with a custom command
+[281/2095] Generating trace/trace-qapi_commands_cryptodev_trace_events.c with a custom command
+[282/2095] Generating trace/trace-qapi_commands_cryptodev_trace_events.h with a custom command
+[283/2095] Generating trace/trace-qapi_commands_pci_trace_events.h with a custom command
+[284/2095] Generating trace/trace-qapi_commands_audio_trace_events.c with a custom command
+[285/2095] Generating trace/trace-qapi_commands_qdev_trace_events.h with a custom command
+[286/2095] Generating trace/trace-qapi_commands_qdev_trace_events.c with a custom command
+[287/2095] Generating trace/trace-qapi_commands_rocker_trace_events.h with a custom command
+[288/2095] Generating trace/trace-qapi_commands_pci_trace_events.c with a custom command
+[289/2095] Generating trace/trace-qapi_commands_rocker_trace_events.c with a custom command
+[290/2095] Generating trace/trace-qapi_commands_misc_arm_trace_events.h with a custom command
+[291/2095] Generating trace/trace-qapi_commands_misc_i386_trace_events.c with a custom command
+[292/2095] Generating trace/trace-qapi_commands_misc_i386_trace_events.h with a custom command
+[293/2095] Generating trace/trace-qapi_commands_tpm_trace_events.c with a custom command
+[294/2095] Generating trace/trace-qapi_commands_misc_arm_trace_events.c with a custom command
+[295/2095] Generating trace/trace-qapi_commands_uefi_trace_events.c with a custom command
+[296/2095] Generating trace/trace-qapi_commands_uefi_trace_events.h with a custom command
+[297/2095] Generating trace/trace-qapi_commands_tpm_trace_events.h with a custom command
+[298/2095] Generating trace/trace-qapi_commands_ui_trace_events.h with a custom command
+[299/2095] Generating trace/trace-qapi_commands_ui_trace_events.c with a custom command
+[300/2095] Generating ui/input-keymap-linux-to-qcode.c.inc with a custom command (wrapped by meson to capture output)
+[301/2095] Generating ui/input-keymap-linux-to-sun.c.inc with a custom command (wrapped by meson to capture output)
+[302/2095] Generating ui/input-keymap-qcode-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[303/2095] Generating ui/input-keymap-qnum-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[304/2095] Generating ui/input-keymap-linux-to-atset3.c.inc with a custom command (wrapped by meson to capture output)
+[305/2095] Generating ui/input-keymap-linux-to-atset2.c.inc with a custom command (wrapped by meson to capture output)
+[306/2095] Generating ui/input-keymap-linux-to-atset1.c.inc with a custom command (wrapped by meson to capture output)
+[307/2095] Generating ui/input-keymap-linux-to-qnum.c.inc with a custom command (wrapped by meson to capture output)
+[308/2095] Generating ui/input-keymap-xorgkbd-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[309/2095] Generating ui/input-keymap-x11-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[310/2095] Generating ui/input-keymap-atset1-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[311/2095] Generating ui/input-keymap-usb-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[312/2095] Generating ui/input-keymap-win32-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[313/2095] Generating ui/dbus-display preprocess with a custom command (wrapped by meson to set env)
+[314/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_check.c.obj
+[315/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_addresses.c.obj
+[316/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_strerror.c.obj
+[317/2095] Generating ui/input-keymap-xorgxquartz-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[318/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_empty_tree.c.obj
+[319/2095] Generating ui/shader/texture-blit-frag.h with a custom command (wrapped by meson to capture output)
+[320/2095] Generating ui/shader/texture-blit-vert.h with a custom command (wrapped by meson to capture output)
+[321/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt.c.obj
+[322/2095] Generating ui/input-keymap-xorgxwin-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[323/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_overlay.c.obj
+[324/2095] Generating block/module_block.h with a custom command
+[325/2095] Generating ui/input-keymap-osx-to-linux.c.inc with a custom command (wrapped by meson to capture output)
+[326/2095] Generating ui/shader/texture-blit-flip-vert.h with a custom command (wrapped by meson to capture output)
+[327/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_rw.c.obj
+[328/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_wip.c.obj
+[329/2095] Generating 'libsystem_arm.a.p/decode-m-nocp.c.inc'
+[330/2095] Generating block/block-gen.c with a custom command
+[331/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_ro.c.obj
+[332/2095] Generating 'libsystem_arm.a.p/decode-neon-shared.c.inc'
+[333/2095] Generating 'libsystem_arm.a.p/decode-mve.c.inc'
+[334/2095] Compiling C object subprojects/dtc/libfdt/libfdt.a.p/fdt_sw.c.obj
+[335/2095] Generating 'libcommon.a.p/decode-insns.c.inc'
+[336/2095] Generating ui/dbus-display gdbus-codegen with a custom command
+[337/2095] Generating 'libsystem_arm.a.p/decode-neon-dp.c.inc'
+[338/2095] Generating hw/arm/apple_regs_autogen.h with a custom command (wrapped by meson to capture output)
+[339/2095] Generating gdbstub/gdbstub-xml.c with a custom command (wrapped by meson to capture output)
+C:/GoldenGate/darwin-vm/qemu-sptm/gdbstub/../scripts/feature_to_c.py:28: SyntaxWarning: "\{" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\{"? A raw string is also an option.
+  sys.stdout.write(f'\{c:03o}')
+
+[340/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-emit-events.c.obj
+[341/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit.c.obj
+[342/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands.c.obj
+[343/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-authz.c.obj
+[344/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-builtin-visit.c.obj
+[345/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-builtin-types.c.obj
+[346/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-authz.c.obj
+[347/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-authz.c.obj
+[348/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types.c.obj
+[349/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events.c.obj
+[350/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-authz.c.obj
+[351/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-init-commands.c.obj
+[352/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-introspect.c.obj
+[353/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-block.c.obj
+[354/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-block.c.obj
+[355/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-block.c.obj
+[356/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-block-export.c.obj
+[357/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-block-export.c.obj
+[358/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-block-core.c.obj
+[359/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-char.c.obj
+[360/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-block-export.c.obj
+[361/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-block-export.c.obj
+[362/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-block-core.c.obj
+[363/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-char.c.obj
+[364/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-block.c.obj
+[365/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-block-core.c.obj
+[366/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-char.c.obj
+[367/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-common.c.obj
+[368/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-common.c.obj
+[369/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-common.c.obj
+[370/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-compat.c.obj
+[371/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-common.c.obj
+[372/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-control.c.obj
+[373/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-compat.c.obj
+[374/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-compat.c.obj
+[375/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-char.c.obj
+[376/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-compat.c.obj
+[377/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-control.c.obj
+[378/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-control.c.obj
+[379/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-control.c.obj
+[380/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-block-core.c.obj
+[381/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-crypto.c.obj
+[382/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-cxl.c.obj
+[383/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-cxl.c.obj
+[384/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-crypto.c.obj
+[385/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-crypto.c.obj
+[386/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-dump.c.obj
+[387/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-cxl.c.obj
+[388/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-dump.c.obj
+[389/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-dump.c.obj
+[390/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-cxl.c.obj
+[391/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-dump.c.obj
+[392/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-crypto.c.obj
+[393/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-ebpf.c.obj
+[394/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-ebpf.c.obj
+[395/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-ebpf.c.obj
+[396/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-error.c.obj
+[397/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-ebpf.c.obj
+[398/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-error.c.obj
+[399/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-error.c.obj
+[400/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-error.c.obj
+[401/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-introspect.c.obj
+[402/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-introspect.c.obj
+[403/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-introspect.c.obj
+[404/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-job.c.obj
+[405/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-job.c.obj
+[406/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-introspect.c.obj
+[407/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-job.c.obj
+[408/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-job.c.obj
+[409/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-machine-common.c.obj
+[410/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-machine-common.c.obj
+[411/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-machine-common.c.obj
+[412/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-machine-common.c.obj
+[413/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-machine-s390x.c.obj
+[414/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-machine.c.obj
+[415/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-machine.c.obj
+[416/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-machine-s390x.c.obj
+[417/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-machine-s390x.c.obj
+[418/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-machine-s390x.c.obj
+[419/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-migration.c.obj
+[420/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-machine.c.obj
+[421/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-machine.c.obj
+[422/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-migration.c.obj
+[423/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-misc.c.obj
+[424/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-misc.c.obj
+[425/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-migration.c.obj
+[426/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-misc.c.obj
+[427/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-net.c.obj
+[428/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-migration.c.obj
+[429/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-net.c.obj
+[430/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-pragma.c.obj
+[431/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-misc.c.obj
+[432/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-net.c.obj
+[433/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-net.c.obj
+[434/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-pragma.c.obj
+[435/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-pragma.c.obj
+[436/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-pragma.c.obj
+[437/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-qom.c.obj
+[438/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-qom.c.obj
+[439/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-replay.c.obj
+[440/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-replay.c.obj
+[441/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-replay.c.obj
+[442/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-qom.c.obj
+[443/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-run-state.c.obj
+[444/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-replay.c.obj
+[445/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-run-state.c.obj
+[446/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-run-state.c.obj
+[447/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-run-state.c.obj
+[448/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-sockets.c.obj
+[449/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-qom.c.obj
+[450/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-sockets.c.obj
+[451/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-sockets.c.obj
+[452/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-sockets.c.obj
+[453/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-stats.c.obj
+[454/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-stats.c.obj
+[455/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-stats.c.obj
+[456/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-trace.c.obj
+[457/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-stats.c.obj
+[458/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-trace.c.obj
+[459/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-trace.c.obj
+[460/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-trace.c.obj
+[461/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-transaction.c.obj
+[462/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-transaction.c.obj
+[463/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-transaction.c.obj
+[464/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-transaction.c.obj
+[465/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-vfio.c.obj
+[466/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-vfio.c.obj
+[467/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-vfio.c.obj
+[468/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-vfio.c.obj
+[469/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-virtio.c.obj
+[470/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-virtio.c.obj
+[471/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-yank.c.obj
+[472/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-virtio.c.obj
+[473/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-virtio.c.obj
+[474/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-yank.c.obj
+[475/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-yank.c.obj
+[476/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-yank.c.obj
+[477/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-accelerator.c.obj
+[478/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-accelerator.c.obj
+[479/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-accelerator.c.obj
+[480/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-accelerator.c.obj
+[481/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-acpi.c.obj
+[482/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-acpi.c.obj
+[483/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-acpi.c.obj
+[484/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-acpi.c.obj
+[485/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-acpi-hest.c.obj
+[486/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-acpi-hest.c.obj
+[487/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-acpi-hest.c.obj
+[488/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-acpi-hest.c.obj
+[489/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-audio.c.obj
+[490/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-audio.c.obj
+[491/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-cryptodev.c.obj
+[492/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-audio.c.obj
+[493/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-audio.c.obj
+[494/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-cryptodev.c.obj
+[495/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-cryptodev.c.obj
+[496/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-cryptodev.c.obj
+[497/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-qdev.c.obj
+[498/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-qdev.c.obj
+[499/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-pci.c.obj
+[500/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-qdev.c.obj
+[501/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-qdev.c.obj
+[502/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-pci.c.obj
+[503/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-pci.c.obj
+[504/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-pci.c.obj
+[505/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-rocker.c.obj
+[506/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-rocker.c.obj
+[507/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-rocker.c.obj
+[508/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-misc-arm.c.obj
+[509/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-rocker.c.obj
+[510/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-misc-arm.c.obj
+[511/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-misc-arm.c.obj
+[512/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-misc-arm.c.obj
+[513/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-misc-i386.c.obj
+[514/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-misc-i386.c.obj
+[515/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-tpm.c.obj
+[516/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-misc-i386.c.obj
+[517/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-tpm.c.obj
+[518/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-misc-i386.c.obj
+[519/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-tpm.c.obj
+[520/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-uefi.c.obj
+[521/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-tpm.c.obj
+[522/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-uefi.c.obj
+[523/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-uefi.c.obj
+[524/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-uefi.c.obj
+[525/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-types-ui.c.obj
+[526/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-events-ui.c.obj
+[527/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-root.c.obj
+[528/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-crypto.c.obj
+[529/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi.c.obj
+[530/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-commands-ui.c.obj
+[531/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qom.c.obj
+[532/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-monitor.c.obj
+[533/2095] Compiling C object libqemuutil.a.p/meson-generated_.._qapi_qapi-visit-ui.c.obj
+[534/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-gdbstub.c.obj
+[535/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-util.c.obj
+[536/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-tools_qemu_vnc.c.obj
+[537/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-block.c.obj
+[538/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-authz.c.obj
+[539/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-chardev.c.obj
+[540/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-io.c.obj
+[541/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-nbd.c.obj
+[542/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-scsi.c.obj
+[543/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-accel_hvf.c.obj
+[544/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-accel_kvm.c.obj
+[545/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-accel_mshv.c.obj
+[546/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-backends.c.obj
+[547/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-backends_tpm.c.obj
+[548/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-accel_nitro.c.obj
+[549/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-audio.c.obj
+[550/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-ebpf.c.obj
+[551/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_9pfs.c.obj
+[552/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_acpi.c.obj
+[553/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_adc.c.obj
+[554/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_alpha.c.obj
+[555/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_arm.c.obj
+[556/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_audio.c.obj
+[557/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_block.c.obj
+[558/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_char.c.obj
+[559/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_display.c.obj
+[560/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_dma.c.obj
+[561/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_hexagon.c.obj
+[562/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_fsi.c.obj
+[563/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_hyperv.c.obj
+[564/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_i2c.c.obj
+[565/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_i386.c.obj
+[566/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_i3c.c.obj
+[567/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_i386_xen.c.obj
+[568/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_i386_kvm.c.obj
+[569/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_ide.c.obj
+[570/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_intc.c.obj
+[571/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_input.c.obj
+[572/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_isa.c.obj
+[573/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_mem.c.obj
+[574/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_mips.c.obj
+[575/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_net_can.c.obj
+[576/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_misc_macio.c.obj
+[577/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_misc.c.obj
+[578/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_net.c.obj
+[579/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_nitro.c.obj
+[580/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_nubus.c.obj
+[581/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_nvme.c.obj
+[582/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_nvram.c.obj
+[583/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_pci.c.obj
+[584/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_pci_host.c.obj
+[585/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_rtc.c.obj
+[586/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_riscv.c.obj
+[587/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_ppc.c.obj
+[588/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_sensor.c.obj
+[589/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_sd.c.obj
+[590/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_sh4.c.obj
+[591/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_s390x.c.obj
+[592/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_scsi.c.obj
+[593/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_sparc.c.obj
+[594/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_sparc64.c.obj
+[595/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_ssi.c.obj
+[596/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_timer.c.obj
+[597/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_uefi.c.obj
+[598/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_ufs.c.obj
+[599/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_tpm.c.obj
+[600/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_usb.c.obj
+[601/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_vfio.c.obj
+[602/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_vfio_user.c.obj
+[603/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_vmapple.c.obj
+[604/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_virtio.c.obj
+[605/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_xen.c.obj
+[606/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_watchdog.c.obj
+[607/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_gpio.c.obj
+[608/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-migration.c.obj
+[609/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-net.c.obj
+[610/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-replay.c.obj
+[611/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-system.c.obj
+[612/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-ui.c.obj
+[613/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_remote.c.obj
+[614/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-accel_tcg.c.obj
+[615/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-hw_core.c.obj
+[616/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_arm.c.obj
+[617/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_arm_tcg.c.obj
+[618/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_arm_hvf.c.obj
+[619/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_hppa.c.obj
+[620/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_i386.c.obj
+[621/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_i386_kvm.c.obj
+[622/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_i386_whpx.c.obj
+[623/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_loongarch.c.obj
+[624/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_mips_tcg.c.obj
+[625/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_ppc.c.obj
+[626/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_riscv.c.obj
+[627/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_s390x.c.obj
+[628/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_s390x_kvm.c.obj
+[629/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_authz_trace_events.c.obj
+[630/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-target_sparc.c.obj
+[631/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_block_export_trace_events.c.obj
+[632/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_block_trace_events.c.obj
+[633/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_block_core_trace_events.c.obj
+[634/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_char_trace_events.c.obj
+[635/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_common_trace_events.c.obj
+[636/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_compat_trace_events.c.obj
+[637/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_control_trace_events.c.obj
+[638/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_cxl_trace_events.c.obj
+[639/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_crypto_trace_events.c.obj
+[640/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_dump_trace_events.c.obj
+[641/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_ebpf_trace_events.c.obj
+[642/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_error_trace_events.c.obj
+[643/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_introspect_trace_events.c.obj
+[644/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_job_trace_events.c.obj
+[645/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_machine_trace_events.c.obj
+[646/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_machine_common_trace_events.c.obj
+[647/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_machine_s390x_trace_events.c.obj
+[648/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_migration_trace_events.c.obj
+[649/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_misc_trace_events.c.obj
+[650/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_net_trace_events.c.obj
+[651/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_pragma_trace_events.c.obj
+[652/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_qom_trace_events.c.obj
+[653/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_run_state_trace_events.c.obj
+[654/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_replay_trace_events.c.obj
+[655/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_sockets_trace_events.c.obj
+[656/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_trace_trace_events.c.obj
+[657/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_stats_trace_events.c.obj
+[658/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_transaction_trace_events.c.obj
+[659/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_virtio_trace_events.c.obj
+[660/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_vfio_trace_events.c.obj
+[661/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_yank_trace_events.c.obj
+[662/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_accelerator_trace_events.c.obj
+[663/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_acpi_trace_events.c.obj
+[664/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_acpi_hest_trace_events.c.obj
+[665/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_audio_trace_events.c.obj
+[666/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_qdev_trace_events.c.obj
+[667/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_cryptodev_trace_events.c.obj
+[668/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_pci_trace_events.c.obj
+[669/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_rocker_trace_events.c.obj
+[670/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_misc_i386_trace_events.c.obj
+[671/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_misc_arm_trace_events.c.obj
+[672/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_tpm_trace_events.c.obj
+[673/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_uefi_trace_events.c.obj
+[674/2095] Compiling C object libqemuutil.a.p/meson-generated_.._trace_trace-qapi_commands_ui_trace_events.c.obj
+[675/2095] Compiling C object libqemuutil.a.p/qapi_opts-visitor.c.obj
+[676/2095] Compiling C object libqemuutil.a.p/qapi_qapi-clone-visitor.c.obj
+[677/2095] Compiling C object libqemuutil.a.p/qapi_qapi-dealloc-visitor.c.obj
+[678/2095] Compiling C object libqemuutil.a.p/qapi_qapi-forward-visitor.c.obj
+[679/2095] Compiling C object libqemuutil.a.p/qapi_qapi-util.c.obj
+[680/2095] Compiling C object libqemuutil.a.p/qapi_string-input-visitor.c.obj
+[681/2095] Compiling C object libqemuutil.a.p/qapi_qapi-visit-core.c.obj
+[682/2095] Compiling C object libqemuutil.a.p/qapi_qapi-type-helpers.c.obj
+[683/2095] Compiling C object libqemuutil.a.p/qapi_qobject-output-visitor.c.obj
+[684/2095] Compiling C object libqemuutil.a.p/qapi_qobject-input-visitor.c.obj
+[685/2095] Compiling C object libqemuutil.a.p/qapi_qmp-event.c.obj
+[686/2095] Compiling C object libqemuutil.a.p/qapi_string-output-visitor.c.obj
+[687/2095] Compiling C object libqemuutil.a.p/qapi_qmp-dispatch.c.obj
+[688/2095] Compiling C object libqemuutil.a.p/qapi_qmp-registry.c.obj
+[689/2095] Compiling C object libqemuutil.a.p/qobject_qnull.c.obj
+[690/2095] Compiling C object libqemuutil.a.p/qobject_qnum.c.obj
+[691/2095] Compiling C object libqemuutil.a.p/qobject_qstring.c.obj
+[692/2095] Compiling C object libqemuutil.a.p/qobject_qdict.c.obj
+[693/2095] Compiling C object libqemuutil.a.p/qobject_qlist.c.obj
+[694/2095] Compiling C object libqemuutil.a.p/qobject_qbool.c.obj
+[695/2095] Compiling C object libqemuutil.a.p/qobject_qobject.c.obj
+[696/2095] Compiling C object libqemuutil.a.p/qobject_qlit.c.obj
+[697/2095] Compiling C object libqemuutil.a.p/qobject_qjson.c.obj
+[698/2095] Compiling C object libqemuutil.a.p/qobject_json-lexer.c.obj
+[699/2095] Compiling C object libqemuutil.a.p/qobject_json-streamer.c.obj
+[700/2095] Compiling C object libqemuutil.a.p/qobject_json-writer.c.obj
+[701/2095] Compiling C object libqemuutil.a.p/util_osdep.c.obj
+[702/2095] Compiling C object libqemuutil.a.p/qobject_json-parser.c.obj
+[703/2095] Compiling C object libqemuutil.a.p/qobject_block-qdict.c.obj
+[704/2095] Compiling C object libqemuutil.a.p/util_unicode.c.obj
+[705/2095] Compiling C object libqemuutil.a.p/util_cutils.c.obj
+[706/2095] Compiling C object libqemuutil.a.p/util_qemu-timer-common.c.obj
+[707/2095] Compiling C object libqemuutil.a.p/util_thread-context.c.obj
+[708/2095] Compiling C object libqemuutil.a.p/util_event_notifier-win32.c.obj
+[709/2095] Compiling C object libqemuutil.a.p/util_defer-call.c.obj
+[710/2095] Compiling C object libqemuutil.a.p/util_envlist.c.obj
+[711/2095] Compiling C object libqemuutil.a.p/util_datadir.c.obj
+[712/2095] Compiling C object libqemuutil.a.p/util_qemu-thread-win32.c.obj
+[713/2095] Compiling C object libqemuutil.a.p/util_aio-win32.c.obj
+[714/2095] Compiling C object libqemuutil.a.p/util_oslib-win32.c.obj
+[715/2095] Compiling C object libqemuutil.a.p/util_module.c.obj
+[716/2095] Compiling C object libqemuutil.a.p/util_path.c.obj
+[717/2095] Compiling C object libqemuutil.a.p/util_event.c.obj
+[718/2095] Compiling C object libqemuutil.a.p/util_hexdump.c.obj
+[719/2095] Compiling C object libqemuutil.a.p/util_host-utils.c.obj
+[720/2095] Compiling C object libqemuutil.a.p/util_bitmap.c.obj
+[721/2095] Compiling C object libqemuutil.a.p/util_bitops.c.obj
+[722/2095] Compiling C object libqemuutil.a.p/util_fifo8.c.obj
+[723/2095] Compiling C object libqemuutil.a.p/util_cacheflush.c.obj
+[724/2095] Compiling C object libqemuutil.a.p/util_id.c.obj
+[725/2095] Compiling C object libqemuutil.a.p/util_qemu-print.c.obj
+[726/2095] Compiling C object libqemuutil.a.p/util_error.c.obj
+[727/2095] Compiling C object libqemuutil.a.p/util_error-report.c.obj
+[728/2095] Compiling C object libqemuutil.a.p/util_qemu-config.c.obj
+[729/2095] Compiling C object libqemuutil.a.p/util_notify.c.obj
+[730/2095] Compiling C object libqemuutil.a.p/util_qemu-progress.c.obj
+[731/2095] Compiling C object libqemuutil.a.p/util_keyval.c.obj
+[732/2095] Compiling C object libqemuutil.a.p/util_crc32.c.obj
+[733/2095] Compiling C object libqemuutil.a.p/util_qemu-option.c.obj
+[734/2095] Compiling C object libqemuutil.a.p/util_crc32c.c.obj
+[735/2095] Compiling C object libqemuutil.a.p/util_getauxval.c.obj
+[736/2095] Compiling C object libqemuutil.a.p/util_uuid.c.obj
+[737/2095] Compiling C object libqemuutil.a.p/util_rcu.c.obj
+[738/2095] Compiling C object libqemuutil.a.p/util_qdist.c.obj
+[739/2095] Compiling C object libqemuutil.a.p/util_log.c.obj
+[740/2095] Compiling C object libqemuutil.a.p/util_range.c.obj
+[741/2095] Compiling C object libqemuutil.a.p/util_systemd.c.obj
+[742/2095] Compiling C object libqemuutil.a.p/util_reserved-region.c.obj
+[743/2095] Compiling C object libqemuutil.a.p/util_qht.c.obj
+[744/2095] Compiling C object libqemuutil.a.p/util_qsp.c.obj
+[745/2095] Compiling C object libqemuutil.a.p/util_transactions.c.obj
+[746/2095] Compiling C object libqemuutil.a.p/util_guest-random.c.obj
+[747/2095] Compiling C object libqemuutil.a.p/util_int128.c.obj
+[748/2095] Compiling C object libqemuutil.a.p/util_memalign.c.obj
+[749/2095] Compiling C object libqemuutil.a.p/util_lockcnt.c.obj
+[750/2095] Compiling C object libqemuutil.a.p/util_interval-tree.c.obj
+[751/2095] Compiling C object libqemuutil.a.p/util_aiocb.c.obj
+[752/2095] Compiling C object libqemuutil.a.p/util_crc-ccitt.c.obj
+[753/2095] Compiling C object libqemuutil.a.p/util_aio-wait.c.obj
+[754/2095] Compiling C object libqemuutil.a.p/util_base64.c.obj
+[755/2095] Compiling C object libqemuutil.a.p/util_dbus.c.obj
+[756/2095] Compiling C object libqemuutil.a.p/util_async.c.obj
+[757/2095] Compiling C object libqemuutil.a.p/util_qemu-coroutine.c.obj
+[758/2095] Compiling C object libqemuutil.a.p/util_qemu-coroutine-lock.c.obj
+[759/2095] Compiling C object libqemuutil.a.p/util_qemu-coroutine-io.c.obj
+[760/2095] Compiling C object libqemuutil.a.p/util_main-loop.c.obj
+[761/2095] Compiling C object libqemuutil.a.p/util_coroutine-windows.c.obj
+[762/2095] Compiling C object libqemuutil.a.p/util_thread-pool.c.obj
+[763/2095] Compiling C object libqemuutil.a.p/util_buffer.c.obj
+[764/2095] Compiling C object libqemuutil.a.p/util_bufferiszero.c.obj
+[765/2095] Compiling C object libqemuutil.a.p/util_iova-tree.c.obj
+[766/2095] Compiling C object libqemuutil.a.p/util_qemu-sockets.c.obj
+[767/2095] Compiling C object libqemuutil.a.p/util_qemu-timer.c.obj
+[768/2095] Compiling C object libqemuutil.a.p/util_nvdimm-utils.c.obj
+[769/2095] Compiling C object libqemuutil.a.p/util_iov.c.obj
+[770/2095] Compiling C object libqemuutil.a.p/util_block-helpers.c.obj
+[771/2095] Compiling C object libqemuutil.a.p/util_hbitmap.c.obj
+[772/2095] Compiling C object libqemuutil.a.p/util_qemu-coroutine-sleep.c.obj
+[773/2095] Compiling C object libqemuutil.a.p/util_qemu-co-shared-resource.c.obj
+[774/2095] Compiling C object libqemuutil.a.p/util_qemu-co-timeout.c.obj
+[775/2095] Compiling C object libqemuutil.a.p/util_readline.c.obj
+[776/2095] Compiling C object libqemuutil.a.p/util_filemonitor-stub.c.obj
+[777/2095] Compiling C object libqemuutil.a.p/util_timed-average.c.obj
+[778/2095] Compiling C object libqemuutil.a.p/util_throttle.c.obj
+[779/2095] Compiling C object libqemuutil.a.p/util_yank.c.obj
+[780/2095] Compiling C object libqemuutil.a.p/util_cpuinfo-i386.c.obj
+[781/2095] Compiling C object libqemuutil.a.p/crypto_sm4.c.obj
+[782/2095] Compiling C object libqemuutil.a.p/crypto_init.c.obj
+[783/2095] Compiling C object libqemuutil.a.p/crypto_clmul.c.obj
+[784/2095] Compiling C object libqemuutil.a.p/crypto_random-platform.c.obj
+[785/2095] Compiling C object libqemuutil.a.p/crypto_aes.c.obj
+[786/2095] Compiling C object libqemuutil.a.p/trace_qmp.c.obj
+[787/2095] Compiling C object libqemuutil.a.p/stubs_cpu-get-clock.c.obj
+[788/2095] Compiling C object libqemuutil.a.p/trace_control.c.obj
+[789/2095] Compiling C object libqemuutil.a.p/stubs_fdset.c.obj
+[790/2095] Compiling C object libqemuutil.a.p/stubs_is-daemonized.c.obj
+[791/2095] Compiling C object libqemuutil.a.p/stubs_iothread-lock.c.obj
+[792/2095] Compiling C object libqemuutil.a.p/stubs_monitor-core.c.obj
+[793/2095] Compiling C object libqemuutil.a.p/stubs_trace-control.c.obj
+[794/2095] Compiling C object libqemuutil.a.p/stubs_blk-commit-all.c.obj
+[795/2095] Compiling C object libqemuutil.a.p/stubs_blk-exp-close-all.c.obj
+[796/2095] Compiling C object libqemuutil.a.p/stubs_bdrv-next-monitor-owned.c.obj
+[797/2095] Compiling C object libqemuutil.a.p/stubs_replay-mode.c.obj
+[798/2095] Compiling C object libqemuutil.a.p/stubs_change-state-handler.c.obj
+[799/2095] Compiling C object libqemuutil.a.p/stubs_get-vm-name.c.obj
+[800/2095] Compiling C object libqemuutil.a.p/stubs_blockdev-close-all-bdrv-states.c.obj
+[801/2095] Compiling C object libqemuutil.a.p/stubs_migr-blocker.c.obj
+[802/2095] Compiling C object libqemuutil.a.p/stubs_iothread-lock-block.c.obj
+[803/2095] Compiling C object libqemuutil.a.p/stubs_runstate-check.c.obj
+[804/2095] Compiling C object libqemuutil.a.p/stubs_ram-block.c.obj
+[805/2095] Compiling C object libqemuutil.a.p/stubs_physmem.c.obj
+[806/2095] Compiling C object libqemuutil.a.p/stubs_uuid.c.obj
+[807/2095] Compiling C object libqemuutil.a.p/stubs_graph-lock.c.obj
+[808/2095] Compiling C object libqemuutil.a.p/stubs_cpus-virtual-clock.c.obj
+[809/2095] Compiling C object libqemuutil.a.p/stubs_qemu-timer-notify-cb.c.obj
+[810/2095] Compiling C object libqemuutil.a.p/stubs_icount.c.obj
+[811/2095] Compiling C object libqemuutil.a.p/stubs_replay-tools.c.obj
+[812/2095] Compiling C object libqemuutil.a.p/stubs_qmp-command-available.c.obj
+[813/2095] Compiling C object libqemuutil.a.p/stubs_monitor-internal.c.obj
+[814/2095] Compiling C object libqemuutil.a.p/stubs_qmp-quit.c.obj
+[815/2095] Compiling C object libqemuutil.a.p/stubs_cpus-queue.c.obj
+[816/2095] Compiling C object libqemuutil.a.p/stubs_async-run-on-cpu.c.obj
+[817/2095] Compiling C object libqemuutil.a.p/stubs_vm-stop.c.obj
+[818/2095] Compiling C object libqemuutil.a.p/stubs_qtest.c.obj
+[819/2095] Compiling C object libqemuutil.a.p/stubs_vmstate.c.obj
+[820/2095] Compiling C object libqemuutil.a.p/stubs_dump.c.obj
+[821/2095] Compiling C object libqemuutil.a.p/stubs_win32-kbd-hook.c.obj
+[822/2095] Compiling C object libqemuutil.a.p/stubs_kvm.c.obj
+[823/2095] Compiling C object libqemuutil.a.p/stubs_cmos.c.obj
+[824/2095] Compiling C object libqemuutil.a.p/stubs_fw_cfg.c.obj
+[825/2095] Compiling C object libqemuutil.a.p/stubs_qmp-i386-rtc.c.obj
+[826/2095] Compiling C object libqemuutil.a.p/stubs_qmp-arm-gic.c.obj
+[827/2095] Compiling C object libqemuutil.a.p/stubs_qmp-i386-sgx.c.obj
+[828/2095] Compiling C object libqemuutil.a.p/stubs_qmp-i386-sev.c.obj
+[829/2095] Compiling C object libqemuutil.a.p/stubs_qmp-i386-xen.c.obj
+[830/2095] Compiling C object libqemuutil.a.p/stubs_xen-hw-stub.c.obj
+[831/2095] Compiling C object libqemuutil.a.p/stubs_qmp-cpu-s390x.c.obj
+[832/2095] Compiling C object libqemuutil.a.p/stubs_qmp-cpu.c.obj
+[833/2095] Compiling C object libqemuutil.a.p/stubs_qmp-cpu-s390x-kvm.c.obj
+[834/2095] Compiling C object libqemuutil.a.p/stubs_hmp-cmd-info_mem.c.obj
+[835/2095] Compiling C object libqemuutil.a.p/stubs_hmp-cmd-info_sev.c.obj
+[836/2095] Compiling C object libqemuutil.a.p/stubs_hmp-cmds-hw-s390x.c.obj
+[837/2095] Compiling C object libqemuutil.a.p/stubs_hmp-cmd-info_tlb.c.obj
+[838/2095] Compiling C object libqemuutil.a.p/stubs_hotplug-stubs.c.obj
+[839/2095] Compiling C object libqemuutil.a.p/stubs_sysbus.c.obj
+[840/2095] Compiling C object libqemuutil.a.p/stubs_replay.c.obj
+[841/2095] Compiling C object libqemuutil.a.p/stubs_hmp-cmds-target-i386.c.obj
+[842/2095] Compiling C object libqemuutil.a.p/semihosting_stubs-all.c.obj
+[843/2095] Compiling C object libqemuutil.a.p/semihosting_arm-compat-semi-stub.c.obj
+[844/2095] Compiling C object libqemuutil.a.p/semihosting_stubs-system.c.obj
+[845/2095] Compiling C object libqemuutil.a.p/accel_stubs_nitro-stub.c.obj
+[846/2095] Compiling C object libqemuutil.a.p/accel_stubs_hvf-stub.c.obj
+[847/2095] Compiling C object libqemuutil.a.p/accel_stubs_kvm-stub.c.obj
+[848/2095] Compiling C object libqemuutil.a.p/accel_stubs_nvmm-stub.c.obj
+[849/2095] Compiling C object libqemuutil.a.p/accel_stubs_mshv-stub.c.obj
+[850/2095] Compiling C object libqemuutil.a.p/accel_stubs_whpx-stub.c.obj
+[851/2095] Compiling C object libqemuutil.a.p/accel_stubs_xen-stub.c.obj
+[852/2095] Compiling C object libqemuutil.a.p/net_vhost-vdpa-stub.c.obj
+[853/2095] Compiling C object libqemuutil.a.p/migration_vfio-stub.c.obj
+[854/2095] Compiling C object libqemuutil.a.p/hw_arm_tegra241-cmdqv-stubs.c.obj
+[855/2095] Compiling C object libqemuutil.a.p/hw_arm_smmuv3-accel-stubs.c.obj
+[856/2095] Compiling C object libqemuutil.a.p/net_vhost-user-stub.c.obj
+[857/2095] Compiling C object libqemuutil.a.p/hw_i386_kvm_xen-stubs.c.obj
+[858/2095] Compiling C object libqemuutil.a.p/hw_i386_sgx-hmp-stub.c.obj
+[859/2095] Compiling C object libqemuutil.a.p/hw_acpi_acpi-cpu-hotplug-stub.c.obj
+[860/2095] Compiling C object libqemuutil.a.p/hw_s390x_s390-pci-vfio-stubs.c.obj
+[861/2095] Compiling C object libqemuutil.a.p/hw_acpi_acpi-mem-hotplug-stub.c.obj
+[862/2095] Compiling C object libqemuutil.a.p/hw_acpi_ghes-stub.c.obj
+[863/2095] Compiling C object libqemuutil.a.p/hw_acpi_acpi-nvdimm-stub.c.obj
+[864/2095] Compiling C object libqemuutil.a.p/hw_acpi_acpi-pci-hotplug-stub.c.obj
+[865/2095] Compiling C object libqemuutil.a.p/hw_acpi_cxl-stub.c.obj
+[866/2095] Compiling C object libqemuutil.a.p/hw_acpi_wdat-ich9-stub.c.obj
+[867/2095] Compiling C object libqemuutil.a.p/hw_acpi_ipmi-stub.c.obj
+[868/2095] Compiling C object libqemuutil.a.p/hw_acpi_acpi-stub.c.obj
+[869/2095] Compiling C object libqemuutil.a.p/hw_acpi_acpi-x86-stub.c.obj
+[870/2095] Compiling C object libqemuutil.a.p/hw_acpi_aml-build-stub.c.obj
+[871/2095] Compiling C object libqemuutil.a.p/hw_acpi_pci-bridge-stub.c.obj
+[872/2095] Compiling C object libqemuutil.a.p/hw_acpi_wdat-gwdt-stub.c.obj
+[873/2095] Compiling C object libqemuutil.a.p/hw_display_ramfb-stubs.c.obj
+[874/2095] Compiling C object libqemuutil.a.p/hw_acpi_ghes_cper_stub.c.obj
+[875/2095] Compiling C object libqemuutil.a.p/hw_cxl_cxl-host-stubs.c.obj
+[876/2095] Compiling C object libqemuutil.a.p/hw_mem_cxl_type3_stubs.c.obj
+[877/2095] Compiling C object libqemuutil.a.p/hw_intc_arm_gicv3_hvf_stub.c.obj
+[878/2095] Compiling C object libqemuutil.a.p/hw_display_acpi-vga-stub.c.obj
+[879/2095] Compiling C object libqemuutil.a.p/hw_mem_memory-device-stubs.c.obj
+[880/2095] Compiling C object libqemuutil.a.p/hw_misc_mos6522-stub.c.obj
+[881/2095] Compiling C object libqemuutil.a.p/hw_net_vhost_net-stub.c.obj
+[882/2095] Compiling C object libqemuutil.a.p/hw_net_rocker_rocker-stubs.c.obj
+[883/2095] Compiling C object libqemuutil.a.p/hw_smbios_smbios_type_38-stub.c.obj
+[884/2095] Compiling C object libqemuutil.a.p/hw_smbios_smbios_legacy_stub.c.obj
+[885/2095] Compiling C object libqemuutil.a.p/hw_pci_pci-stub.c.obj
+[886/2095] Generating 'libsystem_arm.a.p/decode-a32-uncond.c.inc'
+[887/2095] Compiling C object libqemuutil.a.p/hw_smbios_smbios-stub.c.obj
+[888/2095] Generating 'libsystem_arm.a.p/decode-t32.c.inc'
+[889/2095] Generating 'libsystem_arm.a.p/decode-t16.c.inc'
+[890/2095] Generating 'libsystem_arm.a.p/decode-a32.c.inc'
+[891/2095] Generating 'libsystem_arm.a.p/decode-neon-ls.c.inc'
+[892/2095] Generating 'libsystem_arm.a.p/decode-vfp.c.inc'
+[893/2095] Generating 'libsystem_arm.a.p/decode-vfp-uncond.c.inc'
+[894/2095] Compiling C object libqemuutil.a.p/hw_usb_bus-stub.c.obj
+[895/2095] Compiling C object libqemuutil.a.p/hw_vfio_kvm-stubs.c.obj
+[896/2095] Generating 'libqemu-aarch64-softmmu.a.p/decode-sve.c.inc'
+[897/2095] Generating 'libqemu-aarch64-softmmu.a.p/decode-a64.c.inc'
+[898/2095] Compiling C object libqemuutil.a.p/hw_vfio_igd-stubs.c.obj
+[899/2095] Generating 'libqemu-aarch64-softmmu.a.p/decode-sme-fa64.c.inc'
+[900/2095] Compiling C object libqemuutil.a.p/hw_vfio_iommufd-stubs.c.obj
+[901/2095] Generating 'libqemu-aarch64-softmmu.a.p/decode-sme.c.inc'
+[902/2095] Generating 'libqemu-aarch64-softmmu.a.p/decode-apple-gxf.c.inc'
+[903/2095] Compiling C object libqemuutil.a.p/hw_virtio_virtio-stub.c.obj
+[904/2095] Compiling C object libqemuutil.a.p/hw_virtio_vhost-user-stub.c.obj
+[905/2095] Linking static target subprojects/dtc/libfdt/libfdt.a
+[906/2095] Compiling C object libqemuutil.a.p/hw_virtio_vhost-stub.c.obj
+[907/2095] Compiling C object libqemuutil.a.p/hw_virtio_virtio-md-stubs.c.obj
+[908/2095] Compiling Windows resource version.rc
+[909/2095] Compiling C object libstubs_arm.a.p/target_arm_tcg-stubs.c.obj
+[910/2095] Compiling C object libstubs_arm.a.p/target_arm_gicv5-stubs.c.obj
+[911/2095] Compiling C object libstubs_arm.a.p/target_arm_whpx_whpx-stub.c.obj
+[912/2095] Compiling C object libstubs_arm.a.p/target_arm_kvm-stub.c.obj
+[913/2095] Compiling C object libstubs_arm.a.p/target_arm_cpu32-stubs.c.obj
+[914/2095] Compiling C object ui/libqemuui.a.p/vgafont.c.obj
+[915/2095] Compiling C object libstubs_arm.a.p/target_arm_tcg_stubs32.c.obj
+[916/2095] Compiling C object ui/libqemuui.a.p/clipboard.c.obj
+[917/2095] Compiling C object ui/libqemuui.a.p/cursor.c.obj
+[918/2095] Compiling C object ui/libqemuui.a.p/dmabuf.c.obj
+[919/2095] Compiling C object ui/libqemuui.a.p/display-surface.c.obj
+[920/2095] Compiling C object ui/libqemuui.a.p/input-keymap.c.obj
+[921/2095] Compiling C object ui/libqemuui.a.p/kbd-state.c.obj
+[922/2095] Compiling C object ui/libqemuui.a.p/keymaps.c.obj
+[923/2095] Compiling C object ui/libqemuui.a.p/cp437.c.obj
+[924/2095] Compiling C object ui/libqemuui.a.p/spice-module.c.obj
+[925/2095] Compiling C object ui/libqemuui.a.p/console.c.obj
+[926/2095] Compiling C object ui/libqemuui.a.p/qemu-pixman.c.obj
+[927/2095] Compiling C object libqom.a.p/qom_container.c.obj
+[928/2095] Compiling C object ui/libqemuui.a.p/vt100.c.obj
+[929/2095] Linking static target libqemuutil.a
+[930/2095] Compiling C object libqom.a.p/qom_compat-properties.c.obj
+[931/2095] Compiling C object libqom.a.p/qom_qom-qobject.c.obj
+[932/2095] Compiling C object libqom.a.p/qom_object_interfaces.c.obj
+[933/2095] Compiling C object libauthz.a.p/authz_base.c.obj
+[934/2095] Compiling C object libevent-loop-base.a.p/event-loop-base.c.obj
+[935/2095] Compiling C object libauthz.a.p/authz_simple.c.obj
+[936/2095] Compiling C object libauthz.a.p/authz_list.c.obj
+[937/2095] Compiling C object libauthz.a.p/authz_listfile.c.obj
+[938/2095] Compiling C object libcrypto.a.p/crypto_afsplit.c.obj
+[939/2095] Compiling C object libcrypto.a.p/crypto_akcipher.c.obj
+[940/2095] Compiling C object libqom.a.p/qom_object.c.obj
+[941/2095] Compiling C object libcrypto.a.p/crypto_block-qcow.c.obj
+[942/2095] Compiling C object libcrypto.a.p/crypto_block-luks.c.obj
+[943/2095] Compiling C object libcrypto.a.p/crypto_cipher.c.obj
+[944/2095] Compiling C object libcrypto.a.p/crypto_block.c.obj
+[945/2095] Compiling C object libcrypto.a.p/crypto_der.c.obj
+[946/2095] Compiling C object libcrypto.a.p/crypto_hash.c.obj
+[947/2095] Compiling C object libcrypto.a.p/crypto_hmac.c.obj
+[948/2095] Compiling C object libcrypto.a.p/crypto_ivgen-essiv.c.obj
+[949/2095] Compiling C object libcrypto.a.p/crypto_ivgen-plain64.c.obj
+[950/2095] Compiling C object libcrypto.a.p/crypto_ivgen.c.obj
+[951/2095] Compiling C object libcrypto.a.p/crypto_ivgen-plain.c.obj
+[952/2095] Compiling C object libcrypto.a.p/crypto_pbkdf.c.obj
+[953/2095] Compiling C object libcrypto.a.p/crypto_secret.c.obj
+[954/2095] Compiling C object libcrypto.a.p/crypto_secret_common.c.obj
+[955/2095] Compiling C object libcrypto.a.p/crypto_tlscredsanon.c.obj
+[956/2095] Compiling C object libcrypto.a.p/crypto_tlscreds.c.obj
+[957/2095] Compiling C object libcrypto.a.p/crypto_tlscredspsk.c.obj
+[958/2095] Compiling C object libcrypto.a.p/crypto_tlssession.c.obj
+[959/2095] Compiling C object libcrypto.a.p/crypto_hash-glib.c.obj
+[960/2095] Compiling C object libcrypto.a.p/crypto_rsakey.c.obj
+[961/2095] Compiling C object libcrypto.a.p/crypto_tlscredsx509.c.obj
+[962/2095] Compiling C object libcrypto.a.p/crypto_hmac-glib.c.obj
+[963/2095] Compiling C object libcrypto.a.p/crypto_pbkdf-stub.c.obj
+[964/2095] Compiling C object libio.a.p/io_channel-buffer.c.obj
+[965/2095] Compiling C object libio.a.p/io_channel-command.c.obj
+[966/2095] Compiling C object libio.a.p/io_channel-file.c.obj
+[967/2095] Compiling C object libio.a.p/io_channel-null.c.obj
+[968/2095] Compiling C object libio.a.p/io_channel-socket.c.obj
+[969/2095] Compiling C object libio.a.p/io_channel-util.c.obj
+[970/2095] Compiling C object libio.a.p/io_channel-watch.c.obj
+[971/2095] Compiling C object libio.a.p/io_channel-tls.c.obj
+[972/2095] Compiling C object libio.a.p/io_dns-resolver.c.obj
+[973/2095] Compiling C object libio.a.p/io_task.c.obj
+[974/2095] Compiling C object libio.a.p/io_net-listener.c.obj
+[975/2095] Compiling C object libmigration.a.p/migration_migration-stats.c.obj
+[976/2095] Compiling C object libio.a.p/io_channel.c.obj
+[977/2095] Compiling C object libio.a.p/io_channel-websock.c.obj
+[978/2095] Compiling C object libmigration.a.p/migration_page_cache.c.obj
+[979/2095] Compiling C object libmigration.a.p/migration_xbzrle.c.obj
+[980/2095] Compiling C object libmigration.a.p/migration_vmstate-types.c.obj
+[981/2095] Compiling C object libmigration.a.p/migration_yank_functions.c.obj
+[982/2095] Compiling C object libmigration.a.p/migration_vmstate.c.obj
+[983/2095] Compiling C object libmigration.a.p/migration_qemu-file.c.obj
+[984/2095] Compiling C object libblock.a.p/replication.c.obj
+[985/2095] Compiling C object libblock.a.p/blockjob.c.obj
+[986/2095] Compiling C object libblock.a.p/nbd_common.c.obj
+[987/2095] Compiling C object libblock.a.p/nbd_client-connection.c.obj
+[988/2095] Compiling C object libblock.a.p/scsi_utils.c.obj
+[989/2095] Compiling C object libblock.a.p/job.c.obj
+[990/2095] Compiling C object libblock.a.p/nbd_client.c.obj
+[991/2095] Compiling C object libblock.a.p/meson-generated_.._block_block-gen.c.obj
+[992/2095] Compiling C object libblock.a.p/scsi_pr-manager-stub.c.obj
+[993/2095] Compiling C object libblock.a.p/qemu-io-cmds.c.obj
+[994/2095] Compiling C object libblock.a.p/block_accounting.c.obj
+[995/2095] Compiling C object libblock.a.p/block_aio_task.c.obj
+[996/2095] Compiling C object libblock.a.p/block_amend.c.obj
+[997/2095] Compiling C object libblock.a.p/block_backup.c.obj
+[998/2095] Compiling C object libblock.a.p/block_blkverify.c.obj
+[999/2095] Compiling C object libblock.a.p/block_blklogwrites.c.obj
+[1000/2095] Compiling C object libblock.a.p/block_blkdebug.c.obj
+[1001/2095] Compiling C object libblock.a.p/block_commit.c.obj
+[1002/2095] Compiling C object libblock.a.p/block_block-copy.c.obj
+[1003/2095] Compiling C object libblock.a.p/block_copy-before-write.c.obj
+[1004/2095] Compiling C object libblock.a.p/block_copy-on-read.c.obj
+[1005/2095] Compiling C object libblock.a.p/block_create.c.obj
+[1006/2095] Compiling C object libblock.a.p/block.c.obj
+[1007/2095] Compiling C object libblock.a.p/block_crypto.c.obj
+[1008/2095] Compiling C object libblock.a.p/block_dirty-bitmap.c.obj
+[1009/2095] Compiling C object libblock.a.p/block_filter-compress.c.obj
+[1010/2095] Compiling C object libblock.a.p/block_graph-lock.c.obj
+[1011/2095] Compiling C object libblock.a.p/block_block-backend.c.obj
+[1012/2095] Compiling C object libblock.a.p/block_progress_meter.c.obj
+[1013/2095] Compiling C object libblock.a.p/block_preallocate.c.obj
+[1014/2095] Compiling C object libblock.a.p/block_qapi.c.obj
+[1015/2095] Compiling C object libblock.a.p/block_mirror.c.obj
+[1016/2095] Compiling C object libblock.a.p/block_null.c.obj
+[1017/2095] Compiling C object libblock.a.p/block_nbd.c.obj
+[1018/2095] Compiling C object libblock.a.p/block_qcow2-cache.c.obj
+[1019/2095] Compiling C object libblock.a.p/block_qcow2-bitmap.c.obj
+[1020/2095] Compiling C object libblock.a.p/block_qcow2-snapshot.c.obj
+[1021/2095] Compiling C object libblock.a.p/block_qcow2-threads.c.obj
+[1022/2095] Compiling C object libblock.a.p/block_io.c.obj
+[1023/2095] Compiling C object libblock.a.p/block_raw-format.c.obj
+[1024/2095] Compiling C object libblock.a.p/block_reqlist.c.obj
+[1025/2095] Compiling C object libblock.a.p/block_qcow2-cluster.c.obj
+[1026/2095] Compiling C object libblock.a.p/block_quorum.c.obj
+[1027/2095] Compiling C object libblock.a.p/block_snapshot-access.c.obj
+[1028/2095] Compiling C object libblock.a.p/block_qcow2-refcount.c.obj
+[1029/2095] Compiling C object libblock.a.p/block_qcow2.c.obj
+[1030/2095] Compiling C object libblock.a.p/block_snapshot.c.obj
+[1031/2095] Compiling C object libblock.a.p/block_throttle.c.obj
+[1032/2095] Compiling C object libblock.a.p/block_write-threshold.c.obj
+[1033/2095] Compiling C object libblock.a.p/block_throttle-groups.c.obj
+[1034/2095] Compiling C object libblock.a.p/block_vhdx-endian.c.obj
+[1035/2095] Compiling C object libblock.a.p/block_vdi.c.obj
+[1036/2095] Compiling C object libblock.a.p/block_qcow.c.obj
+[1037/2095] Compiling C object libblock.a.p/block_cloop.c.obj
+[1038/2095] Compiling C object libblock.a.p/block_vhdx-log.c.obj
+[1039/2095] Compiling C object libblock.a.p/block_bochs.c.obj
+[1040/2095] Compiling C object libblock.a.p/block_vhdx.c.obj
+[1041/2095] Compiling C object libblock.a.p/block_vpc.c.obj
+[1042/2095] Compiling C object libblock.a.p/block_qed-check.c.obj
+[1043/2095] Compiling C object libblock.a.p/block_qed-cluster.c.obj
+[1044/2095] Compiling C object libblock.a.p/block_dmg.c.obj
+[1045/2095] Compiling C object libblock.a.p/block_qed-l2-cache.c.obj
+[1046/2095] Compiling C object libblock.a.p/block_vmdk.c.obj
+[1047/2095] Compiling C object libblock.a.p/block_qed-table.c.obj
+[1048/2095] Compiling C object libblock.a.p/block_qed.c.obj
+[1049/2095] Compiling C object libblock.a.p/block_parallels-ext.c.obj
+[1050/2095] Compiling C object libblock.a.p/block_parallels.c.obj
+[1051/2095] Compiling C object libblock.a.p/block_win32-aio.c.obj
+[1052/2095] Compiling C object libblock.a.p/block_file-win32.c.obj
+[1053/2095] Compiling C object libblock.a.p/block_stream.c.obj
+[1054/2095] Compiling C object libblock.a.p/block_monitor_bitmap-qmp-cmds.c.obj
+[1055/2095] Compiling C object libblock.a.p/block_dmg-bz2.c.obj
+[1056/2095] Compiling C object libblock.a.p/block_vvfat.c.obj
+[1057/2095] Compiling C object libblock.a.p/block_replication.c.obj
+[1058/2095] Compiling C object libblockdev.a.p/block_export_export.c.obj
+[1059/2095] Compiling C object libblockdev.a.p/blockdev-nbd.c.obj
+[1060/2095] Compiling C object libblockdev.a.p/job-qmp.c.obj
+[1061/2095] Compiling C object libblockdev.a.p/iothread.c.obj
+[1062/2095] Compiling C object libqmp.a.p/qom_qom-qmp-cmds.c.obj
+[1063/2095] Compiling C object libchardev.a.p/chardev_char-io.c.obj
+[1064/2095] Compiling C object libqmp.a.p/monitor_qmp-cmds-control.c.obj
+[1065/2095] Compiling C object libchardev.a.p/chardev_char-file.c.obj
+[1066/2095] Compiling C object libblockdev.a.p/nbd_server.c.obj
+[1067/2095] Compiling C object libblockdev.a.p/blockdev.c.obj
+[1068/2095] Compiling C object libqmp.a.p/monitor_monitor.c.obj
+[1069/2095] Compiling C object libqmp.a.p/monitor_qmp.c.obj
+[1070/2095] Compiling C object libchardev.a.p/chardev_char-mux.c.obj
+[1071/2095] Compiling C object libchardev.a.p/chardev_char-hub.c.obj
+[1072/2095] Compiling C object libchardev.a.p/chardev_char-fe.c.obj
+[1073/2095] Compiling C object libchardev.a.p/chardev_char-null.c.obj
+[1074/2095] Compiling C object libchardev.a.p/chardev_char-pipe.c.obj
+[1075/2095] Compiling C object libchardev.a.p/chardev_char-ringbuf.c.obj
+[1076/2095] Compiling C object libchardev.a.p/chardev_char-serial.c.obj
+[1077/2095] Compiling C object libchardev.a.p/chardev_char-stdio.c.obj
+[1078/2095] Compiling C object libchardev.a.p/chardev_char-console.c.obj
+[1079/2095] Compiling C object libchardev.a.p/chardev_char-win-stdio.c.obj
+[1080/2095] Compiling C object libchardev.a.p/chardev_char-udp.c.obj
+[1081/2095] Compiling C object libchardev.a.p/chardev_char-win.c.obj
+[1082/2095] Compiling C object libhwcore.a.p/hw_core_bus.c.obj
+[1083/2095] Compiling C object libhwcore.a.p/hw_core_gpio.c.obj
+[1084/2095] Compiling C object libchardev.a.p/chardev_char-socket.c.obj
+[1085/2095] Compiling C object libhwcore.a.p/hw_core_qdev-properties.c.obj
+[1086/2095] Compiling C object libchardev.a.p/chardev_char.c.obj
+[1087/2095] Compiling C object libhwcore.a.p/hw_core_qdev.c.obj
+[1088/2095] Compiling C object libhwcore.a.p/hw_core_resetcontainer.c.obj
+[1089/2095] Compiling C object libhwcore.a.p/hw_core_vmstate-if.c.obj
+[1090/2095] Compiling C object libhwcore.a.p/hw_core_resettable.c.obj
+[1091/2095] Compiling C object libhwcore.a.p/hw_core_irq.c.obj
+[1092/2095] Compiling C object libhwcore.a.p/hw_core_clock.c.obj
+[1093/2095] Compiling C object libhwcore.a.p/hw_core_qdev-clock.c.obj
+[1094/2095] Compiling C object libqemuaudio.a.p/audio_audio.c.obj
+[1095/2095] Compiling C object libqemuaudio.a.p/audio_audio-be.c.obj
+[1096/2095] Compiling C object libqemuaudio.a.p/audio_noaudio.c.obj
+[1097/2095] Compiling C object libqemuaudio.a.p/audio_wavaudio.c.obj
+[1098/2095] Compiling C object libqemuaudio.a.p/audio_mixeng.c.obj
+[1099/2095] Compiling C object libsystem.a.p/trace_control-target.c.obj
+[1100/2095] Compiling C object libqemuaudio.a.p/audio_audio_win_int.c.obj
+[1101/2095] Compiling C object libsystem.a.p/trace_trace-hmp-cmds.c.obj
+[1102/2095] Compiling C object libqemuaudio.a.p/audio_dbusaudio.c.obj
+[1103/2095] Compiling C object libqemuaudio.a.p/audio_dsoundaudio.c.obj
+[1104/2095] Compiling C object libsystem.a.p/qom_qom-hmp-cmds.c.obj
+[1105/2095] Compiling C object libsystem.a.p/ui_input-barrier.c.obj
+[1106/2095] Compiling C object libqemuaudio.a.p/audio_audio-mixeng-be.c.obj
+[1107/2095] Compiling C object libsystem.a.p/ui_ui-hmp-cmds.c.obj
+[1108/2095] Compiling C object libsystem.a.p/ui_ui-qmp-cmds.c.obj
+[1109/2095] Compiling C object libsystem.a.p/ui_input.c.obj
+[1110/2095] Compiling C object libsystem.a.p/ui_dbus-module.c.obj
+[1111/2095] Compiling C object libsystem.a.p/ui_console-vc.c.obj
+[1112/2095] Compiling C object libsystem.a.p/ui_util.c.obj
+[1113/2095] Compiling C object libsystem.a.p/ui_vnc-palette.c.obj
+[1114/2095] Compiling C object libsystem.a.p/ui_vnc-enc-zlib.c.obj
+[1115/2095] Compiling C object libsystem.a.p/ui_vnc-enc-hextile.c.obj
+[1116/2095] Compiling C object libsystem.a.p/ui_vnc-auth-vencrypt.c.obj
+[1117/2095] Compiling C object libsystem.a.p/ui_vnc-enc-tight.c.obj
+[1118/2095] Compiling C object libsystem.a.p/ui_vnc-ws.c.obj
+[1119/2095] Compiling C object libsystem.a.p/semihosting_config.c.obj
+[1120/2095] Compiling C object libsystem.a.p/semihosting_console.c.obj
+[1121/2095] Compiling C object libsystem.a.p/ui_vnc-system.c.obj
+[1122/2095] Compiling C object libsystem.a.p/ui_vnc-jobs.c.obj
+[1123/2095] Compiling C object libsystem.a.p/semihosting_guestfd.c.obj
+[1124/2095] Compiling C object libsystem.a.p/ui_vnc-clipboard.c.obj
+[1125/2095] Compiling C object libsystem.a.p/semihosting_uaccess.c.obj
+[1126/2095] Compiling C object libsystem.a.p/ui_vnc.c.obj
+[1127/2095] Compiling C object libsystem.a.p/semihosting_syscalls.c.obj
+[1128/2095] Compiling C object libsystem.a.p/ui_vnc-enc-zrle.c.obj
+[1129/2095] Compiling C object libsystem.a.p/meson-generated_.._ui_dbus-display1.c.obj
+[1130/2095] Compiling C object libsystem.a.p/semihosting_arm-compat-semi.c.obj
+[1131/2095] Compiling C object libsystem.a.p/chardev_char-hmp-cmds.c.obj
+[1132/2095] Compiling C object libsystem.a.p/audio_audio-hmp-cmds.c.obj
+[1133/2095] Compiling C object libsystem.a.p/chardev_msmouse.c.obj
+[1134/2095] Compiling C object libsystem.a.p/chardev_testdev.c.obj
+[1135/2095] Compiling C object libsystem.a.p/chardev_wctablet.c.obj
+[1136/2095] Compiling C object libsystem.a.p/audio_wavcapture.c.obj
+[1137/2095] Compiling C object libsystem.a.p/dump_dump-hmp-cmds.c.obj
+[1138/2095] Compiling C object libsystem.a.p/dump_win_dump-stubs.c.obj
+[1139/2095] Compiling C object libsystem.a.p/accel_accel-system.c.obj
+[1140/2095] Compiling C object libsystem.a.p/accel_accel-blocker.c.obj
+[1141/2095] Compiling C object libsystem.a.p/dump_dump.c.obj
+[1142/2095] Compiling C object libsystem.a.p/accel_accel-qmp.c.obj
+[1143/2095] Compiling C object libsystem.a.p/accel_accel-irq.c.obj
+[1144/2095] Compiling C object libsystem.a.p/accel_tcg_cpu-exec-common.c.obj
+[1145/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-runtime.c.obj
+[1146/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-stats.c.obj
+[1147/2095] Compiling C object libsystem.a.p/accel_tcg_cpu-exec.c.obj
+[1148/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-all.c.obj
+[1149/2095] Compiling C object libsystem.a.p/accel_tcg_translate-all.c.obj
+[1150/2095] Compiling C object libsystem.a.p/accel_tcg_tb-maint.c.obj
+[1151/2095] Compiling C object libsystem.a.p/accel_tcg_translator.c.obj
+[1152/2095] Compiling C object libsystem.a.p/accel_tcg_plugin-gen.c.obj
+[1153/2095] Compiling C object libsystem.a.p/accel_tcg_monitor.c.obj
+[1154/2095] Compiling C object libsystem.a.p/accel_tcg_icount-common.c.obj
+[1155/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-accel-ops.c.obj
+[1156/2095] Compiling C object libsystem.a.p/accel_dummy-cpus.c.obj
+[1157/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-accel-ops-icount.c.obj
+[1158/2095] Compiling C object libsystem.a.p/backends_cryptodev-hmp-cmds.c.obj
+[1159/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-accel-ops-mttcg.c.obj
+[1160/2095] Compiling C object libsystem.a.p/backends_cryptodev-builtin.c.obj
+[1161/2095] Compiling C object libsystem.a.p/accel_tcg_watchpoint.c.obj
+[1162/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-accel-ops-rr.c.obj
+[1163/2095] Compiling C object libsystem.a.p/backends_hostmem-ram.c.obj
+[1164/2095] Compiling C object libsystem.a.p/backends_cryptodev.c.obj
+[1165/2095] Compiling C object libsystem.a.p/backends_hostmem.c.obj
+[1166/2095] Compiling C object libsystem.a.p/accel_tcg_tcg-runtime-gvec.c.obj
+[1167/2095] Compiling C object libsystem.a.p/backends_rng-egd.c.obj
+[1168/2095] Compiling C object libsystem.a.p/backends_confidential-guest-support.c.obj
+[1169/2095] Compiling C object libsystem.a.p/backends_rng.c.obj
+[1170/2095] Compiling C object libsystem.a.p/backends_rng-builtin.c.obj
+[1171/2095] Compiling C object libsystem.a.p/backends_cryptodev-vhost.c.obj
+[1172/2095] Compiling C object libsystem.a.p/backends_spdm-socket.c.obj
+[1173/2095] Compiling C object libsystem.a.p/disas_disas-mon.c.obj
+[1174/2095] Compiling C object libsystem.a.p/backends_dbus-vmstate.c.obj
+[1175/2095] Compiling C object libsystem.a.p/migration_block-active.c.obj
+[1176/2095] Compiling C object libsystem.a.p/migration_channel.c.obj
+[1177/2095] Compiling C object libsystem.a.p/migration_block-dirty-bitmap.c.obj
+[1178/2095] Compiling C object libsystem.a.p/accel_tcg_cputlb.c.obj
+[1179/2095] Compiling C object libsystem.a.p/migration_channel-block.c.obj
+[1180/2095] Compiling C object libsystem.a.p/migration_cpr-transfer.c.obj
+[1181/2095] Compiling C object libsystem.a.p/migration_cpr-exec.c.obj
+[1182/2095] Compiling C object libsystem.a.p/migration_cpr.c.obj
+[1183/2095] Compiling C object libsystem.a.p/migration_cpu-throttle.c.obj
+[1184/2095] Compiling C object libsystem.a.p/migration_exec.c.obj
+[1185/2095] Compiling C object libsystem.a.p/migration_file.c.obj
+[1186/2095] Compiling C object libsystem.a.p/migration_fd.c.obj
+[1187/2095] Compiling C object libsystem.a.p/migration_dirtyrate.c.obj
+[1188/2095] Compiling C object libsystem.a.p/migration_global_state.c.obj
+[1189/2095] Compiling C object libsystem.a.p/migration_multifd-device-state.c.obj
+[1190/2095] Compiling C object libsystem.a.p/migration_multifd-nocomp.c.obj
+[1191/2095] Compiling C object libsystem.a.p/migration_multifd-zlib.c.obj
+[1192/2095] Compiling C object libsystem.a.p/migration_multifd-zero-page.c.obj
+[1193/2095] Compiling C object libsystem.a.p/migration_multifd.c.obj
+[1194/2095] Compiling C object libsystem.a.p/migration_postcopy-ram.c.obj
+[1195/2095] Compiling C object libsystem.a.p/migration_tls.c.obj
+[1196/2095] Compiling C object libsystem.a.p/migration_options.c.obj
+[1197/2095] Compiling C object libsystem.a.p/migration_socket.c.obj
+[1198/2095] Compiling C object libsystem.a.p/migration_migration.c.obj
+[1199/2095] Compiling C object libsystem.a.p/migration_colo-failover.c.obj
+[1200/2095] Compiling C object libsystem.a.p/migration_migration-hmp-cmds.c.obj
+[1201/2095] Compiling C object libsystem.a.p/migration_multifd-colo.c.obj
+[1202/2095] Compiling C object libsystem.a.p/migration_colo.c.obj
+[1203/2095] Compiling C object libsystem.a.p/monitor_fds.c.obj
+[1204/2095] Compiling C object libsystem.a.p/migration_multifd-zstd.c.obj
+[1205/2095] Compiling C object libsystem.a.p/migration_ram.c.obj
+[1206/2095] Compiling C object libsystem.a.p/migration_savevm.c.obj
+[1207/2095] Compiling C object libsystem.a.p/monitor_hmp-cmds.c.obj
+[1208/2095] Compiling C object libsystem.a.p/net_announce.c.obj
+[1209/2095] Compiling C object libsystem.a.p/net_checksum.c.obj
+[1210/2095] Compiling C object libsystem.a.p/monitor_qemu-config-qmp.c.obj
+[1211/2095] Compiling C object libsystem.a.p/monitor_qmp-cmds.c.obj
+[1212/2095] Compiling C object libsystem.a.p/monitor_hmp.c.obj
+[1213/2095] Compiling C object libsystem.a.p/net_dgram.c.obj
+[1214/2095] Compiling C object libsystem.a.p/net_dump.c.obj
+[1215/2095] Compiling C object libsystem.a.p/net_filter-buffer.c.obj
+[1216/2095] Compiling C object libsystem.a.p/net_eth.c.obj
+[1217/2095] Compiling C object libsystem.a.p/net_filter-mirror.c.obj
+[1218/2095] Compiling C object libsystem.a.p/net_filter.c.obj
+[1219/2095] Compiling C object libsystem.a.p/net_queue.c.obj
+[1220/2095] Compiling C object libsystem.a.p/net_net-hmp-cmds.c.obj
+[1221/2095] Compiling C object libsystem.a.p/net_hub.c.obj
+[1222/2095] Compiling C object libsystem.a.p/net_stream_data.c.obj
+[1223/2095] Compiling C object libsystem.a.p/net_stream.c.obj
+[1224/2095] Compiling C object libsystem.a.p/net_socket.c.obj
+[1225/2095] Compiling C object libsystem.a.p/net_net.c.obj
+[1226/2095] Compiling C object libsystem.a.p/net_colo.c.obj
+[1227/2095] Compiling C object libsystem.a.p/net_util.c.obj
+[1228/2095] Compiling C object libsystem.a.p/net_filter-rewriter.c.obj
+[1229/2095] Compiling C object libsystem.a.p/net_colo-compare.c.obj
+[1230/2095] Compiling C object libsystem.a.p/net_filter-replay.c.obj
+[1231/2095] Compiling C object libsystem.a.p/net_tap-win32.c.obj
+[1232/2095] Compiling C object libsystem.a.p/net_can_can_core.c.obj
+[1233/2095] Compiling C object libsystem.a.p/net_can_can_host.c.obj
+[1234/2095] Compiling C object libsystem.a.p/replay_replay-internal.c.obj
+[1235/2095] Compiling C object libsystem.a.p/replay_replay.c.obj
+[1236/2095] Compiling C object libsystem.a.p/replay_replay-events.c.obj
+[1237/2095] Compiling C object libsystem.a.p/replay_replay-time.c.obj
+[1238/2095] Compiling C object libsystem.a.p/replay_replay-input.c.obj
+[1239/2095] Compiling C object libsystem.a.p/replay_replay-char.c.obj
+[1240/2095] Compiling C object libsystem.a.p/replay_replay-net.c.obj
+[1241/2095] Compiling C object libsystem.a.p/replay_replay-snapshot.c.obj
+[1242/2095] Compiling C object libsystem.a.p/replay_replay-audio.c.obj
+[1243/2095] Compiling C object libsystem.a.p/stats_stats-qmp-cmds.c.obj
+[1244/2095] Compiling C object libsystem.a.p/replay_replay-random.c.obj
+[1245/2095] Compiling C object libsystem.a.p/stats_stats-hmp-cmds.c.obj
+[1246/2095] Compiling C object libsystem.a.p/replay_replay-debugging.c.obj
+[1247/2095] Compiling C object libsystem.a.p/tcg_tcg-common.c.obj
+[1248/2095] Compiling C object libsystem.a.p/tcg_region.c.obj
+[1249/2095] Compiling C object libsystem.a.p/plugins_api-system.c.obj
+[1250/2095] Compiling C object libsystem.a.p/ebpf_ebpf_rss-stub.c.obj
+[1251/2095] Compiling C object libsystem.a.p/plugins_system.c.obj
+[1252/2095] Compiling C object libsystem.a.p/plugins_api.c.obj
+[1253/2095] Compiling C object libsystem.a.p/tcg_tcg-op-vec.c.obj
+[1254/2095] Compiling C object libsystem.a.p/tcg_optimize.c.obj
+[1255/2095] Compiling C object libsystem.a.p/plugins_core.c.obj
+[1256/2095] Compiling C object libsystem.a.p/tcg_tcg-op-ldst.c.obj
+[1257/2095] Compiling C object libsystem.a.p/hw_acpi_bios-linker-loader.c.obj
+[1258/2095] Compiling C object libsystem.a.p/hw_acpi_core.c.obj
+[1259/2095] Compiling C object libsystem.a.p/tcg_tcg-op.c.obj
+[1260/2095] Compiling C object libsystem.a.p/hw_acpi_utils.c.obj
+[1261/2095] Compiling C object libsystem.a.p/hw_acpi_pci.c.obj
+[1262/2095] Compiling C object libsystem.a.p/hw_acpi_nvdimm.c.obj
+[1263/2095] Compiling C object libsystem.a.p/hw_acpi_cxl.c.obj
+[1264/2095] Compiling C object libsystem.a.p/hw_acpi_memory_hotplug.c.obj
+[1265/2095] Compiling C object libsystem.a.p/tcg_tcg-op-gvec.c.obj
+[1266/2095] Compiling C object libsystem.a.p/hw_acpi_aml-build.c.obj
+[1267/2095] Compiling C object libsystem.a.p/hw_acpi_hmat.c.obj
+[1268/2095] Compiling C object libsystem.a.p/hw_acpi_ghes.c.obj
+[1269/2095] Compiling C object libsystem.a.p/hw_acpi_generic_event_device.c.obj
+[1270/2095] Compiling C object libsystem.a.p/hw_acpi_pci-bridge.c.obj
+[1271/2095] Compiling C object libsystem.a.p/hw_acpi_viot.c.obj
+[1272/2095] Compiling C object libsystem.a.p/hw_acpi_ghes_cper.c.obj
+[1273/2095] Compiling C object libsystem.a.p/hw_acpi_acpi-qmp-cmds.c.obj
+[1274/2095] Compiling C object libsystem.a.p/hw_acpi_pcihp.c.obj
+[1275/2095] Compiling C object libsystem.a.p/hw_acpi_acpi_interface.c.obj
+[1276/2095] Compiling C object libsystem.a.p/hw_adc_stm32f2xx_adc.c.obj
+[1277/2095] Compiling C object libsystem.a.p/hw_acpi_wdat-gwdt.c.obj
+[1278/2095] Compiling C object libsystem.a.p/tcg_tcg.c.obj
+[1279/2095] Compiling C object libsystem.a.p/hw_acpi_erst.c.obj
+[1280/2095] Compiling C object libsystem.a.p/hw_adc_npcm7xx_adc.c.obj
+[1281/2095] Compiling C object libsystem.a.p/hw_adc_aspeed_adc.c.obj
+[1282/2095] Compiling C object libsystem.a.p/hw_audio_model.c.obj
+[1283/2095] Compiling C object libsystem.a.p/hw_adc_zynq-xadc.c.obj
+[1284/2095] Compiling C object libsystem.a.p/hw_audio_ac97.c.obj
+[1285/2095] Compiling C object libsystem.a.p/hw_block_block.c.obj
+[1286/2095] Compiling C object libsystem.a.p/hw_block_cdrom.c.obj
+[1287/2095] Compiling C object libsystem.a.p/hw_audio_lm4549.c.obj
+[1288/2095] Compiling C object libsystem.a.p/hw_audio_marvell_88w8618.c.obj
+[1289/2095] Compiling C object libsystem.a.p/hw_block_hd-geometry.c.obj
+[1290/2095] Compiling C object libsystem.a.p/hw_audio_es1370.c.obj
+[1291/2095] Compiling C object libsystem.a.p/hw_audio_intel-hda.c.obj
+[1292/2095] Compiling C object libsystem.a.p/hw_audio_pl041.c.obj
+[1293/2095] Compiling C object libsystem.a.p/hw_audio_wm8750.c.obj
+[1294/2095] Compiling C object libsystem.a.p/hw_audio_virtio-snd-pci.c.obj
+[1295/2095] Compiling C object libsystem.a.p/hw_audio_hda-codec.c.obj
+[1296/2095] Compiling C object libsystem.a.p/hw_block_pflash_cfi01.c.obj
+[1297/2095] Compiling C object libsystem.a.p/hw_audio_virtio-snd.c.obj
+[1298/2095] Compiling C object libsystem.a.p/hw_block_m25p80_sfdp.c.obj
+[1299/2095] Compiling C object libsystem.a.p/hw_block_virtio-blk-common.c.obj
+[1300/2095] Compiling C object libsystem.a.p/hw_char_imx_serial.c.obj
+[1301/2095] Compiling C object libsystem.a.p/hw_char_cadence_uart.c.obj
+[1302/2095] Compiling C object libsystem.a.p/hw_char_cmsdk-apb-uart.c.obj
+[1303/2095] Compiling C object libsystem.a.p/hw_char_ipoctal232.c.obj
+[1304/2095] Compiling C object libsystem.a.p/hw_block_pflash_cfi02.c.obj
+[1305/2095] Compiling C object libsystem.a.p/hw_char_nrf51_uart.c.obj
+[1306/2095] Compiling C object libsystem.a.p/hw_char_pl011.c.obj
+[1307/2095] Compiling C object libsystem.a.p/hw_char_serial-mm.c.obj
+[1308/2095] Compiling C object libsystem.a.p/hw_block_m25p80.c.obj
+[1309/2095] Compiling C object libsystem.a.p/hw_char_serial.c.obj
+[1310/2095] Compiling C object libsystem.a.p/hw_char_serial-pci.c.obj
+[1311/2095] Compiling C object libsystem.a.p/hw_block_virtio-blk.c.obj
+[1312/2095] Compiling C object libsystem.a.p/hw_char_serial-pci-multi.c.obj
+[1313/2095] Compiling C object libsystem.a.p/hw_char_digic-uart.c.obj
+[1314/2095] Compiling C object libsystem.a.p/hw_char_max78000_uart.c.obj
+[1315/2095] Compiling C object libsystem.a.p/hw_char_virtio-console.c.obj
+[1316/2095] Compiling C object libsystem.a.p/hw_char_xilinx_uartlite.c.obj
+[1317/2095] Compiling C object libsystem.a.p/hw_char_omap_uart.c.obj
+[1318/2095] Compiling C object libsystem.a.p/hw_char_stm32f2xx_usart.c.obj
+[1319/2095] Compiling C object libsystem.a.p/hw_char_bcm2835_aux.c.obj
+[1320/2095] Compiling C object libsystem.a.p/hw_char_exynos4210_uart.c.obj
+[1321/2095] Compiling C object libsystem.a.p/hw_char_stm32l4x5_usart.c.obj
+[1322/2095] Compiling C object libsystem.a.p/hw_char_virtio-serial-bus.c.obj
+[1323/2095] Compiling C object libsystem.a.p/hw_core_generic-loader.c.obj
+[1324/2095] Compiling C object libsystem.a.p/hw_core_or-irq.c.obj
+[1325/2095] Compiling C object libsystem.a.p/hw_core_guest-loader.c.obj
+[1326/2095] Compiling C object libsystem.a.p/hw_core_platform-bus.c.obj
+[1327/2095] Compiling C object libsystem.a.p/hw_core_split-irq.c.obj
+[1328/2095] Compiling C object libsystem.a.p/hw_core_stream.c.obj
+[1329/2095] Compiling C object libsystem.a.p/hw_core_fw-path-provider.c.obj
+[1330/2095] Compiling C object libsystem.a.p/hw_core_register.c.obj
+[1331/2095] Compiling C object libsystem.a.p/hw_core_ptimer.c.obj
+[1332/2095] Compiling C object libsystem.a.p/hw_core_hotplug.c.obj
+[1333/2095] Compiling C object libsystem.a.p/hw_core_sysbus-fdt.c.obj
+[1334/2095] Compiling C object libsystem.a.p/hw_core_cpu-system.c.obj
+[1335/2095] Compiling C object libsystem.a.p/hw_core_machine-hmp-cmds.c.obj
+[1336/2095] Compiling C object libsystem.a.p/hw_core_machine-qmp-cmds.c.obj
+[1337/2095] Compiling C object libsystem.a.p/hw_core_nmi.c.obj
+[1338/2095] Compiling C object libsystem.a.p/hw_core_null-machine.c.obj
+[1339/2095] Compiling C object libsystem.a.p/hw_core_qdev-fw.c.obj
+[1340/2095] Compiling C object libsystem.a.p/hw_core_reset.c.obj
+[1341/2095] Compiling C object libsystem.a.p/hw_core_clock-vmstate.c.obj
+[1342/2095] Compiling C object libsystem.a.p/hw_core_vm-change-state-handler.c.obj
+[1343/2095] Compiling C object libsystem.a.p/hw_core_loader.c.obj
+[1344/2095] Compiling C object libsystem.a.p/hw_core_numa.c.obj
+[1345/2095] Compiling C object libsystem.a.p/hw_core_qdev-hotplug.c.obj
+[1346/2095] Compiling C object libsystem.a.p/hw_core_machine.c.obj
+[1347/2095] Compiling C object libsystem.a.p/hw_core_sysbus.c.obj
+[1348/2095] Compiling C object libsystem.a.p/hw_cpu_core.c.obj
+[1349/2095] Compiling C object libsystem.a.p/hw_core_qdev-properties-system.c.obj
+[1350/2095] Compiling C object libsystem.a.p/hw_cpu_cluster.c.obj
+[1351/2095] Compiling C object libsystem.a.p/hw_cpu_arm11mpcore.c.obj
+[1352/2095] Compiling C object libsystem.a.p/hw_cpu_realview_mpcore.c.obj
+[1353/2095] Compiling C object libsystem.a.p/hw_cpu_a9mpcore.c.obj
+[1354/2095] Compiling C object libsystem.a.p/hw_cpu_a15mpcore.c.obj
+[1355/2095] Compiling C object libsystem.a.p/hw_cxl_cxl-cdat.c.obj
+[1356/2095] Compiling C object libsystem.a.p/hw_cxl_switch-mailbox-cci.c.obj
+[1357/2095] Compiling C object libsystem.a.p/hw_cxl_cxl-events.c.obj
+[1358/2095] Compiling C object libsystem.a.p/hw_cxl_cxl-component-utils.c.obj
+[1359/2095] Compiling C object libsystem.a.p/hw_cxl_cxl-device-utils.c.obj
+[1360/2095] Compiling C object libsystem.a.p/hw_display_i2c-ddc.c.obj
+[1361/2095] Compiling C object libsystem.a.p/hw_cxl_cxl-host.c.obj
+[1362/2095] Compiling C object libsystem.a.p/hw_display_edid-region.c.obj
+[1363/2095] Compiling C object libsystem.a.p/hw_display_edid-generate.c.obj
+[1364/2095] Compiling C object libsystem.a.p/hw_display_ramfb.c.obj
+[1365/2095] Compiling C object libsystem.a.p/hw_display_ramfb-standalone.c.obj
+[1366/2095] Compiling C object libsystem.a.p/hw_cxl_cxl-mailbox-utils.c.obj
+[1367/2095] Compiling C object libsystem.a.p/hw_display_sii9022.c.obj
+[1368/2095] Compiling C object libsystem.a.p/hw_display_imx6ul_lcdif.c.obj
+[1369/2095] Compiling C object libsystem.a.p/hw_display_ssd0303.c.obj
+[1370/2095] Compiling C object libsystem.a.p/hw_display_ssd0323.c.obj
+[1371/2095] Compiling C object libsystem.a.p/hw_display_pl110.c.obj
+[1372/2095] Compiling C object libsystem.a.p/hw_display_vga-pci.c.obj
+[1373/2095] Compiling C object libsystem.a.p/hw_display_framebuffer.c.obj
+[1374/2095] Compiling C object libsystem.a.p/hw_display_bochs-display.c.obj
+[1375/2095] Compiling C object libsystem.a.p/hw_display_bcm2835_fb.c.obj
+[1376/2095] Compiling C object libsystem.a.p/hw_display_exynos4210_fimd.c.obj
+[1377/2095] Compiling C object libsystem.a.p/hw_display_virtio-dmabuf.c.obj
+[1378/2095] Compiling C object libsystem.a.p/hw_display_dm163.c.obj
+[1379/2095] Compiling C object libsystem.a.p/hw_display_dpcd.c.obj
+[1380/2095] Compiling C object libsystem.a.p/hw_display_acpi-vga.c.obj
+[1381/2095] Compiling C object libsystem.a.p/hw_display_vga.c.obj
+[1382/2095] Compiling C object libsystem.a.p/hw_display_ati_dbg.c.obj
+[1383/2095] Compiling C object libsystem.a.p/hw_display_ati_2d.c.obj
+[1384/2095] Compiling C object libsystem.a.p/hw_display_omap_lcdc.c.obj
+[1385/2095] Compiling C object libsystem.a.p/hw_dma_pl080.c.obj
+[1386/2095] Compiling C object libsystem.a.p/hw_display_ati.c.obj
+[1387/2095] Compiling C object libsystem.a.p/hw_display_xlnx_dp.c.obj
+[1388/2095] Compiling C object libsystem.a.p/hw_dma_xlnx-zynq-devcfg.c.obj
+[1389/2095] Compiling C object libsystem.a.p/hw_dma_xilinx_axidma.c.obj
+[1390/2095] Compiling C object libsystem.a.p/hw_dma_pl330.c.obj
+[1391/2095] Compiling C object libsystem.a.p/hw_dma_xlnx-zdma.c.obj
+[1392/2095] Compiling C object libsystem.a.p/hw_dma_xlnx_dpdma.c.obj
+[1393/2095] Compiling C object libsystem.a.p/hw_dma_omap_dma.c.obj
+[1394/2095] Compiling C object libsystem.a.p/hw_dma_soc_dma.c.obj
+[1395/2095] Compiling C object libsystem.a.p/hw_gpio_gpio_key.c.obj
+[1396/2095] Compiling C object libsystem.a.p/hw_dma_bcm2835_dma.c.obj
+[1397/2095] Compiling C object libsystem.a.p/hw_gpio_gpio_pwr.c.obj
+[1398/2095] Compiling C object libsystem.a.p/hw_dma_xlnx_csu_dma.c.obj
+[1399/2095] Compiling C object libsystem.a.p/hw_gpio_pca9552.c.obj
+[1400/2095] Compiling C object libsystem.a.p/hw_gpio_pca9554.c.obj
+[1401/2095] Compiling C object libsystem.a.p/hw_gpio_zaurus.c.obj
+[1402/2095] Compiling C object libsystem.a.p/hw_gpio_imx_gpio.c.obj
+[1403/2095] Compiling C object libsystem.a.p/hw_gpio_pl061.c.obj
+[1404/2095] Compiling C object libsystem.a.p/hw_gpio_omap_gpio.c.obj
+[1405/2095] Compiling C object libsystem.a.p/hw_gpio_bcm2835_gpio.c.obj
+[1406/2095] Compiling C object libsystem.a.p/hw_gpio_nrf51_gpio.c.obj
+[1407/2095] Compiling C object libsystem.a.p/hw_gpio_npcm7xx_gpio.c.obj
+[1408/2095] Compiling C object libsystem.a.p/hw_gpio_bcm2838_gpio.c.obj
+[1409/2095] Compiling C object libsystem.a.p/hw_hyperv_hv-balloon-stub.c.obj
+[1410/2095] Compiling C object libsystem.a.p/hw_gpio_stm32l4x5_gpio.c.obj
+[1411/2095] Compiling C object libsystem.a.p/hw_gpio_aspeed_sgpio.c.obj
+[1412/2095] Compiling C object libsystem.a.p/hw_gpio_aspeed_gpio.c.obj
+[1413/2095] Compiling C object libsystem.a.p/hw_i2c_core.c.obj
+[1414/2095] Compiling C object libsystem.a.p/hw_i2c_smbus_slave.c.obj
+[1415/2095] Compiling C object libsystem.a.p/hw_i2c_smbus_master.c.obj
+[1416/2095] Compiling C object libsystem.a.p/hw_i2c_bitbang_i2c.c.obj
+[1417/2095] Compiling C object libsystem.a.p/hw_i2c_exynos4210_i2c.c.obj
+[1418/2095] Compiling C object libsystem.a.p/hw_i2c_allwinner-i2c.c.obj
+[1419/2095] Compiling C object libsystem.a.p/hw_i2c_microbit_i2c.c.obj
+[1420/2095] Compiling C object libsystem.a.p/hw_i2c_imx_i2c.c.obj
+[1421/2095] Compiling C object libsystem.a.p/hw_i2c_arm_sbcon_i2c.c.obj
+[1422/2095] Compiling C object libsystem.a.p/hw_i2c_aspeed_i2c.c.obj
+[1423/2095] Compiling C object libsystem.a.p/hw_i2c_smbus_eeprom.c.obj
+[1424/2095] Compiling C object libsystem.a.p/hw_i2c_npcm7xx_smbus.c.obj
+[1425/2095] Compiling C object libsystem.a.p/hw_i2c_i2c_mux_pca954x.c.obj
+[1426/2095] Compiling C object libsystem.a.p/hw_i2c_omap_i2c.c.obj
+[1427/2095] Compiling C object libsystem.a.p/hw_i2c_bcm2835_i2c.c.obj
+[1428/2095] Compiling C object libsystem.a.p/hw_i3c_aspeed_i3c.c.obj
+[1429/2095] Compiling C object libsystem.a.p/hw_i2c_pmbus_device.c.obj
+[1430/2095] Compiling C object libsystem.a.p/hw_i3c_mock-i3c-target.c.obj
+[1431/2095] Compiling C object libsystem.a.p/hw_i3c_core.c.obj
+[1432/2095] Compiling C object libsystem.a.p/hw_ide_ahci-sysbus.c.obj
+[1433/2095] Compiling C object libsystem.a.p/hw_ide_ich.c.obj
+[1434/2095] Compiling C object libsystem.a.p/hw_ide_ahci-allwinner.c.obj
+[1435/2095] Compiling C object libsystem.a.p/hw_ide_ide-bus.c.obj
+[1436/2095] Compiling C object libsystem.a.p/hw_ide_cf.c.obj
+[1437/2095] Compiling C object libsystem.a.p/hw_i3c_dw-i3c.c.obj
+[1438/2095] Compiling C object libsystem.a.p/hw_ide_ahci.c.obj
+[1439/2095] Compiling C object libsystem.a.p/hw_ide_atapi.c.obj
+[1440/2095] Compiling C object libsystem.a.p/hw_ide_ide-dev.c.obj
+[1441/2095] Compiling C object libsystem.a.p/hw_input_hid.c.obj
+[1442/2095] Compiling C object libsystem.a.p/hw_input_pl050.c.obj
+[1443/2095] Compiling C object libsystem.a.p/hw_intc_intc.c.obj
+[1444/2095] Compiling C object libsystem.a.p/hw_input_stellaris_gamepad.c.obj
+[1445/2095] Compiling C object libsystem.a.p/hw_input_virtio-input.c.obj
+[1446/2095] Compiling C object libsystem.a.p/hw_ide_core.c.obj
+[1447/2095] Compiling C object libsystem.a.p/hw_input_ps2.c.obj
+[1448/2095] Compiling C object libsystem.a.p/hw_intc_arm_gic_common.c.obj
+[1449/2095] Compiling C object libsystem.a.p/hw_input_virtio-input-hid.c.obj
+[1450/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv2m.c.obj
+[1451/2095] Compiling C object libsystem.a.p/hw_display_cirrus_vga.c.obj
+[1452/2095] Compiling C object libsystem.a.p/hw_intc_arm_gic.c.obj
+[1453/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv3_its_common.c.obj
+[1454/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv3_common.c.obj
+[1455/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv3.c.obj
+[1456/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv5_common.c.obj
+[1457/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv3_dist.c.obj
+[1458/2095] Compiling C object libsystem.a.p/hw_intc_allwinner-a10-pic.c.obj
+[1459/2095] Compiling C object libsystem.a.p/hw_intc_aspeed_vic.c.obj
+[1460/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv3_redist.c.obj
+[1461/2095] Compiling C object libsystem.a.p/hw_intc_exynos4210_combiner.c.obj
+[1462/2095] Compiling C object libsystem.a.p/hw_intc_exynos4210_gic.c.obj
+[1463/2095] Compiling C object libsystem.a.p/hw_intc_aspeed_intc.c.obj
+[1464/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv3_its.c.obj
+[1465/2095] Compiling C object libsystem.a.p/hw_intc_arm_gicv5.c.obj
+[1466/2095] Compiling C object libsystem.a.p/hw_intc_ioapic-stub.c.obj
+[1467/2095] Compiling C object libsystem.a.p/hw_intc_imx_gpcv2.c.obj
+[1468/2095] Compiling C object libsystem.a.p/hw_intc_imx_avic.c.obj
+[1469/2095] Compiling C object libsystem.a.p/hw_intc_omap_intc.c.obj
+[1470/2095] Compiling C object libsystem.a.p/hw_intc_pl190.c.obj
+[1471/2095] Compiling C object libsystem.a.p/hw_intc_bcm2835_ic.c.obj
+[1472/2095] Compiling C object libsystem.a.p/hw_intc_bcm2836_control.c.obj
+[1473/2095] Compiling C object libsystem.a.p/hw_intc_realview_gic.c.obj
+[1474/2095] Compiling C object libsystem.a.p/hw_intc_xilinx_intc.c.obj
+[1475/2095] Compiling C object libsystem.a.p/hw_ipack_ipack.c.obj
+[1476/2095] Compiling C object libsystem.a.p/hw_intc_xlnx-zynqmp-ipi.c.obj
+[1477/2095] Compiling C object libsystem.a.p/hw_ipack_tpci200.c.obj
+[1478/2095] Compiling C object libsystem.a.p/hw_mem_npcm7xx_mc.c.obj
+[1479/2095] Compiling C object libsystem.a.p/hw_mem_memory-device.c.obj
+[1480/2095] Compiling C object libsystem.a.p/hw_mem_pc-dimm.c.obj
+[1481/2095] Compiling C object libsystem.a.p/hw_mem_nvdimm.c.obj
+[1482/2095] Compiling C object libsystem.a.p/hw_misc_edu.c.obj
+[1483/2095] Compiling C object libsystem.a.p/hw_misc_vmcoreinfo.c.obj
+[1484/2095] Compiling C object libsystem.a.p/hw_misc_unimp.c.obj
+[1485/2095] Compiling C object libsystem.a.p/hw_misc_pci-testdev.c.obj
+[1486/2095] Compiling C object libsystem.a.p/hw_misc_led.c.obj
+[1487/2095] Compiling C object libsystem.a.p/hw_misc_iommu-testdev.c.obj
+[1488/2095] Compiling C object libsystem.a.p/hw_misc_pvpanic.c.obj
+[1489/2095] Compiling C object libsystem.a.p/hw_misc_arm_l2x0.c.obj
+[1490/2095] Compiling C object libsystem.a.p/hw_mem_cxl_type3.c.obj
+[1491/2095] Compiling C object libsystem.a.p/hw_misc_arm_integrator_debug.c.obj
+[1492/2095] Compiling C object libsystem.a.p/hw_misc_arm11scu.c.obj
+[1493/2095] Compiling C object libsystem.a.p/hw_misc_a9scu.c.obj
+[1494/2095] Compiling C object libsystem.a.p/hw_misc_armv7m_ras.c.obj
+[1495/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-sramc.c.obj
+[1496/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-a10-ccm.c.obj
+[1497/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-a10-dramc.c.obj
+[1498/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-h3-ccu.c.obj
+[1499/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-cpucfg.c.obj
+[1500/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-h3-dramc.c.obj
+[1501/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-h3-sysctrl.c.obj
+[1502/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-sid.c.obj
+[1503/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-r40-ccu.c.obj
+[1504/2095] Compiling C object libsystem.a.p/hw_misc_axp2xx.c.obj
+[1505/2095] Compiling C object libsystem.a.p/hw_misc_allwinner-r40-dramc.c.obj
+[1506/2095] Compiling C object libsystem.a.p/hw_misc_exynos4210_pmu.c.obj
+[1507/2095] Compiling C object libsystem.a.p/hw_misc_arm_sysctl.c.obj
+[1508/2095] Compiling C object libsystem.a.p/hw_misc_exynos4210_clk.c.obj
+[1509/2095] Compiling C object libsystem.a.p/hw_misc_exynos4210_rng.c.obj
+[1510/2095] Compiling C object libsystem.a.p/hw_misc_imx8mp_analog.c.obj
+[1511/2095] Compiling C object libsystem.a.p/hw_misc_imx8mp_ccm.c.obj
+[1512/2095] Compiling C object libsystem.a.p/hw_misc_imx25_ccm.c.obj
+[1513/2095] Compiling C object libsystem.a.p/hw_misc_imx31_ccm.c.obj
+[1514/2095] Compiling C object libsystem.a.p/hw_misc_imx6_ccm.c.obj
+[1515/2095] Compiling C object libsystem.a.p/hw_misc_imx7_ccm.c.obj
+[1516/2095] Compiling C object libsystem.a.p/hw_misc_imx6_src.c.obj
+[1517/2095] Compiling C object libsystem.a.p/hw_misc_imx7_gpr.c.obj
+[1518/2095] Compiling C object libsystem.a.p/hw_misc_imx6ul_ccm.c.obj
+[1519/2095] Compiling C object libsystem.a.p/hw_misc_imx7_snvs.c.obj
+[1520/2095] Compiling C object libsystem.a.p/hw_misc_imx_rngc.c.obj
+[1521/2095] Compiling C object libsystem.a.p/hw_misc_imx_ccm.c.obj
+[1522/2095] Compiling C object libsystem.a.p/hw_misc_imx7_src.c.obj
+[1523/2095] Compiling C object libsystem.a.p/hw_misc_max78000_aes.c.obj
+[1524/2095] Compiling C object libsystem.a.p/hw_misc_max78000_gcr.c.obj
+[1525/2095] Compiling C object libsystem.a.p/hw_misc_max78000_icc.c.obj
+[1526/2095] Compiling C object libsystem.a.p/hw_misc_max78000_trng.c.obj
+[1527/2095] Compiling C object libsystem.a.p/hw_misc_npcm_gcr.c.obj
+[1528/2095] Compiling C object libsystem.a.p/hw_misc_npcm_clk.c.obj
+[1529/2095] Compiling C object libsystem.a.p/hw_misc_npcm7xx_pwm.c.obj
+[1530/2095] Compiling C object libsystem.a.p/hw_misc_npcm7xx_rng.c.obj
+[1531/2095] Compiling C object libsystem.a.p/hw_misc_omap_clk.c.obj
+[1532/2095] Compiling C object libsystem.a.p/hw_misc_npcm7xx_mft.c.obj
+[1533/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_rng.c.obj
+[1534/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_mbox.c.obj
+[1535/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_mphi.c.obj
+[1536/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_thermal.c.obj
+[1537/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_property.c.obj
+[1538/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_powermgt.c.obj
+[1539/2095] Compiling C object libsystem.a.p/hw_misc_zynq_slcr.c.obj
+[1540/2095] Compiling C object libsystem.a.p/hw_misc_bcm2835_cprman.c.obj
+[1541/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-zynq-ddrc.c.obj
+[1542/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-zynqmp-crf.c.obj
+[1543/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-cfi-if.c.obj
+[1544/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-versal-xramc.c.obj
+[1545/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-zynqmp-apu-ctrl.c.obj
+[1546/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-versal-pmc-iou-slcr.c.obj
+[1547/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-versal-crl.c.obj
+[1548/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-versal-cfu.c.obj
+[1549/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-versal-cframe-reg.c.obj
+[1550/2095] Compiling C object libsystem.a.p/hw_misc_xlnx-versal-trng.c.obj
+[1551/2095] Compiling C object libsystem.a.p/hw_misc_stm32_rcc.c.obj
+[1552/2095] Compiling C object libsystem.a.p/hw_misc_stm32f2xx_syscfg.c.obj
+[1553/2095] Compiling C object libsystem.a.p/hw_misc_stm32f4xx_exti.c.obj
+[1554/2095] Compiling C object libsystem.a.p/hw_misc_stm32f4xx_syscfg.c.obj
+[1555/2095] Compiling C object libsystem.a.p/hw_misc_stm32l4x5_exti.c.obj
+[1556/2095] Compiling C object libsystem.a.p/hw_misc_stm32l4x5_syscfg.c.obj
+[1557/2095] Compiling C object libsystem.a.p/hw_misc_mps2-fpgaio.c.obj
+[1558/2095] Compiling C object libsystem.a.p/hw_misc_mps2-scc.c.obj
+[1559/2095] Compiling C object libsystem.a.p/hw_misc_tz-msc.c.obj
+[1560/2095] Compiling C object libsystem.a.p/hw_misc_tz-ppc.c.obj
+[1561/2095] Compiling C object libsystem.a.p/hw_misc_tz-mpc.c.obj
+[1562/2095] Compiling C object libsystem.a.p/hw_misc_iotkit-sysctl.c.obj
+[1563/2095] Compiling C object libsystem.a.p/hw_misc_stm32l4x5_rcc.c.obj
+[1564/2095] Compiling C object libsystem.a.p/hw_misc_iotkit-sysinfo.c.obj
+[1565/2095] Compiling C object libsystem.a.p/hw_misc_iotkit-secctl.c.obj
+[1566/2095] Compiling C object libsystem.a.p/hw_misc_armsse-cpu-pwrctrl.c.obj
+[1567/2095] Compiling C object libsystem.a.p/hw_misc_armsse-cpuid.c.obj
+[1568/2095] Compiling C object libsystem.a.p/hw_misc_armsse-mhu.c.obj
+[1569/2095] Compiling C object libsystem.a.p/hw_misc_pvpanic-pci.c.obj
+[1570/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_lpc.c.obj
+[1571/2095] Compiling C object libsystem.a.p/hw_misc_auxbus.c.obj
+[1572/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_ltpi.c.obj
+[1573/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_pwm.c.obj
+[1574/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_hace.c.obj
+[1575/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_sdmc.c.obj
+[1576/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_peci.c.obj
+[1577/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_sbc.c.obj
+[1578/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_scu.c.obj
+[1579/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_xdma.c.obj
+[1580/2095] Compiling C object libsystem.a.p/hw_misc_aspeed_sli.c.obj
+[1581/2095] Compiling C object libsystem.a.p/hw_misc_i2c-echo.c.obj
+[1582/2095] Compiling C object libsystem.a.p/hw_misc_nrf51_rng.c.obj
+[1583/2095] Compiling C object libsystem.a.p/hw_misc_msf2-sysreg.c.obj
+[1584/2095] Compiling C object libsystem.a.p/hw_misc_sbsa_ec.c.obj
+[1585/2095] Compiling C object libsystem.a.p/hw_net_ne2000-pci.c.obj
+[1586/2095] Compiling C object libsystem.a.p/hw_net_ne2000.c.obj
+[1587/2095] Compiling C object libsystem.a.p/hw_net_pcnet-pci.c.obj
+[1588/2095] Compiling C object libsystem.a.p/hw_net_eepro100.c.obj
+[1589/2095] Compiling C object libsystem.a.p/hw_net_e1000x_common.c.obj
+[1590/2095] Compiling C object libsystem.a.p/hw_net_net_tx_pkt.c.obj
+[1591/2095] Compiling C object libsystem.a.p/hw_net_net_rx_pkt.c.obj
+[1592/2095] Compiling C object libsystem.a.p/hw_net_pcnet.c.obj
+[1593/2095] Compiling C object libsystem.a.p/hw_net_e1000.c.obj
+[1594/2095] Compiling C object libsystem.a.p/hw_net_e1000e.c.obj
+[1595/2095] Compiling C object libsystem.a.p/hw_net_igbvf.c.obj
+[1596/2095] Compiling C object libsystem.a.p/hw_net_igb.c.obj
+[1597/2095] Compiling C object libsystem.a.p/hw_net_tulip.c.obj
+[1598/2095] Compiling C object libsystem.a.p/hw_net_rtl8139.c.obj
+[1599/2095] Compiling C object libsystem.a.p/hw_net_lan9118_phy.c.obj
+[1600/2095] Compiling C object libsystem.a.p/hw_net_lan9118.c.obj
+[1601/2095] Compiling C object libsystem.a.p/hw_net_smc91c111.c.obj
+[1602/2095] Compiling C object libsystem.a.p/hw_net_xilinx_axienet.c.obj
+[1603/2095] Compiling C object libsystem.a.p/hw_net_allwinner_emac.c.obj
+[1604/2095] Compiling C object libsystem.a.p/hw_net_vmxnet3.c.obj
+[1605/2095] Compiling C object libsystem.a.p/hw_net_e1000e_core.c.obj
+[1606/2095] Compiling C object libsystem.a.p/hw_net_allwinner-sun8i-emac.c.obj
+[1607/2095] Compiling C object libsystem.a.p/hw_net_mv88w8618_eth.c.obj
+[1608/2095] Compiling C object libsystem.a.p/hw_net_msf2-emac.c.obj
+[1609/2095] Compiling C object libsystem.a.p/hw_net_igb_core.c.obj
+[1610/2095] Compiling C object libsystem.a.p/hw_net_imx_fec.c.obj
+[1611/2095] Compiling C object libsystem.a.p/hw_net_stellaris_enet.c.obj
+[1612/2095] Compiling C object libsystem.a.p/hw_net_npcm_pcs.c.obj
+[1613/2095] Compiling C object libsystem.a.p/hw_net_cadence_gem.c.obj
+[1614/2095] Compiling C object libsystem.a.p/hw_net_ftgmac100.c.obj
+[1615/2095] Compiling C object libsystem.a.p/hw_net_npcm7xx_emc.c.obj
+[1616/2095] Compiling C object libsystem.a.p/hw_net_npcm_gmac.c.obj
+[1617/2095] Compiling C object libsystem.a.p/hw_net_rocker_rocker_world.c.obj
+[1618/2095] Compiling C object libsystem.a.p/hw_net_rocker_rocker_desc.c.obj
+[1619/2095] Compiling C object libsystem.a.p/hw_net_rocker_rocker-hmp-cmds.c.obj
+[1620/2095] Compiling C object libsystem.a.p/hw_net_rocker_rocker_fp.c.obj
+[1621/2095] Compiling C object libsystem.a.p/hw_net_rocker_rocker.c.obj
+[1622/2095] Compiling C object libsystem.a.p/hw_net_rocker_rocker_of_dpa.c.obj
+[1623/2095] Compiling C object libsystem.a.p/hw_net_can_can_sja1000.c.obj
+[1624/2095] Compiling C object libsystem.a.p/hw_net_can_can_kvaser_pci.c.obj
+[1625/2095] Compiling C object libsystem.a.p/hw_net_can_can_pcm3680_pci.c.obj
+[1626/2095] Compiling C object libsystem.a.p/hw_net_can_can_mioe3680_pci.c.obj
+[1627/2095] Compiling C object libsystem.a.p/hw_net_can_ctucan_core.c.obj
+[1628/2095] Compiling C object libsystem.a.p/hw_net_virtio-net.c.obj
+[1629/2095] Compiling C object libsystem.a.p/hw_net_can_ctucan_pci.c.obj
+[1630/2095] Compiling C object libsystem.a.p/hw_net_can_xlnx-zynqmp-can.c.obj
+[1631/2095] Compiling C object libsystem.a.p/hw_net_can_xlnx-versal-canfd.c.obj
+[1632/2095] Compiling C object libsystem.a.p/hw_nvme_dif.c.obj
+[1633/2095] Compiling C object libsystem.a.p/hw_net_can_flexcan.c.obj
+[1634/2095] Compiling C object libsystem.a.p/hw_nvme_subsys.c.obj
+[1635/2095] Compiling C object libsystem.a.p/hw_nvme_nguid.c.obj
+[1636/2095] Compiling C object libsystem.a.p/hw_nvram_fw_cfg-interface.c.obj
+[1637/2095] Compiling C object libsystem.a.p/hw_nvme_ns.c.obj
+[1638/2095] Compiling C object libsystem.a.p/hw_nvram_bcm2835_otp.c.obj
+[1639/2095] Compiling C object libsystem.a.p/hw_nvram_eeprom93xx.c.obj
+[1640/2095] Compiling C object libsystem.a.p/hw_nvram_fw_cfg.c.obj
+[1641/2095] Compiling C object libsystem.a.p/hw_nvram_eeprom_at24c.c.obj
+[1642/2095] Compiling C object libsystem.a.p/hw_nvram_npcm7xx_otp.c.obj
+[1643/2095] Compiling C object libsystem.a.p/hw_nvram_nrf51_nvm.c.obj
+[1644/2095] Compiling C object libsystem.a.p/hw_nvram_xlnx-efuse-crc.c.obj
+[1645/2095] Compiling C object libsystem.a.p/hw_nvram_xlnx-versal-efuse-cache.c.obj
+[1646/2095] Compiling C object libsystem.a.p/hw_nvram_xlnx-efuse.c.obj
+[1647/2095] Compiling C object libsystem.a.p/hw_nvram_fw_cfg-acpi.c.obj
+[1648/2095] Compiling C object libsystem.a.p/hw_nvram_xlnx-versal-efuse-ctrl.c.obj
+[1649/2095] Compiling C object libsystem.a.p/hw_nvram_xlnx-zynqmp-efuse.c.obj
+[1650/2095] Compiling C object libsystem.a.p/hw_nvram_xlnx-bbram.c.obj
+[1651/2095] Compiling C object libsystem.a.p/hw_nvram_aspeed_otp.c.obj
+[1652/2095] Compiling C object libsystem.a.p/hw_pci_pcie_port.c.obj
+[1653/2095] Compiling C object libsystem.a.p/hw_pci_pcie_host.c.obj
+[1654/2095] Compiling C object libsystem.a.p/hw_pci_msi.c.obj
+[1655/2095] Compiling C object libsystem.a.p/hw_pci_msix.c.obj
+[1656/2095] Compiling C object libsystem.a.p/hw_pci_pci_bridge.c.obj
+[1657/2095] Compiling C object libsystem.a.p/hw_pci_pci-hmp-cmds.c.obj
+[1658/2095] Compiling C object libsystem.a.p/hw_pci_pci_host.c.obj
+[1659/2095] Compiling C object libsystem.a.p/hw_pci_pci-qmp-cmds.c.obj
+[1660/2095] Compiling C object libsystem.a.p/hw_pci_slotid_cap.c.obj
+[1661/2095] Compiling C object libsystem.a.p/hw_pci_pcie_sriov.c.obj
+[1662/2095] Compiling C object libsystem.a.p/hw_pci_shpc.c.obj
+[1663/2095] Compiling C object libsystem.a.p/hw_pci_pcie_aer.c.obj
+[1664/2095] Compiling C object libsystem.a.p/hw_pci_pcie_doe.c.obj
+[1665/2095] Compiling C object libsystem.a.p/hw_pci-bridge_pci_bridge_dev.c.obj
+[1666/2095] Compiling C object libsystem.a.p/hw_pci_pci.c.obj
+[1667/2095] Compiling C object libsystem.a.p/hw_pci_pcie.c.obj
+[1668/2095] Compiling C object libsystem.a.p/hw_pci-bridge_i82801b11.c.obj
+[1669/2095] Compiling C object libsystem.a.p/hw_nvme_ctrl.c.obj
+[1670/2095] Compiling C object libsystem.a.p/hw_pci-bridge_ioh3420.c.obj
+[1671/2095] Compiling C object libsystem.a.p/hw_pci-bridge_pcie_root_port.c.obj
+[1672/2095] Compiling C object libsystem.a.p/hw_pci-bridge_gen_pcie_root_port.c.obj
+[1673/2095] Compiling C object libsystem.a.p/hw_pci-bridge_pcie_pci_bridge.c.obj
+[1674/2095] Compiling C object libsystem.a.p/hw_pci-bridge_xio3130_upstream.c.obj
+[1675/2095] Compiling C object libsystem.a.p/hw_pci-bridge_pci_expander_bridge.c.obj
+[1676/2095] Compiling C object libsystem.a.p/hw_pci-bridge_xio3130_downstream.c.obj
+[1677/2095] Compiling C object libsystem.a.p/hw_pci-bridge_cxl_root_port.c.obj
+[1678/2095] Compiling C object libsystem.a.p/hw_pci-bridge_cxl_upstream.c.obj
+[1679/2095] Compiling C object libsystem.a.p/hw_pci-bridge_cxl_downstream.c.obj
+[1680/2095] Compiling C object libsystem.a.p/hw_pci-host_gpex.c.obj
+[1681/2095] Compiling C object libsystem.a.p/hw_pci-host_fsl_imx8m_phy.c.obj
+[1682/2095] Compiling C object libsystem.a.p/hw_pci-host_designware.c.obj
+[1683/2095] Compiling C object libsystem.a.p/hw_pci-host_aspeed_pcie.c.obj
+[1684/2095] Compiling C object libsystem.a.p/hw_rtc_ds1338.c.obj
+[1685/2095] Compiling C object libsystem.a.p/hw_pci-host_gpex-acpi.c.obj
+[1686/2095] Compiling C object libsystem.a.p/hw_pci-host_versatile.c.obj
+[1687/2095] Compiling C object libsystem.a.p/hw_rtc_m41t80.c.obj
+[1688/2095] Compiling C object libsystem.a.p/hw_rtc_pl031.c.obj
+[1689/2095] Compiling C object libsystem.a.p/hw_rtc_xlnx-zynqmp-rtc.c.obj
+[1690/2095] Compiling C object libsystem.a.p/hw_rtc_exynos4210_rtc.c.obj
+[1691/2095] Compiling C object libsystem.a.p/hw_rtc_aspeed_rtc.c.obj
+[1692/2095] Compiling C object libsystem.a.p/hw_rtc_allwinner-rtc.c.obj
+[1693/2095] Compiling C object libsystem.a.p/hw_scsi_emulation.c.obj
+[1694/2095] Compiling C object libsystem.a.p/hw_rtc_rs5c372.c.obj
+[1695/2095] Compiling C object libsystem.a.p/hw_scsi_scsi-generic.c.obj
+[1696/2095] Compiling C object libsystem.a.p/hw_scsi_esp-pci.c.obj
+[1697/2095] Compiling C object libsystem.a.p/hw_scsi_esp.c.obj
+[1698/2095] Compiling C object libsystem.a.p/hw_scsi_scsi-bus.c.obj
+[1699/2095] Compiling C object libsystem.a.p/hw_scsi_mptconfig.c.obj
+[1700/2095] Compiling C object libsystem.a.p/hw_scsi_scsi-disk.c.obj
+[1701/2095] Compiling C object libsystem.a.p/hw_scsi_mptendian.c.obj
+[1702/2095] Compiling C object libsystem.a.p/hw_scsi_mptsas.c.obj
+[1703/2095] Compiling C object libsystem.a.p/hw_scsi_lsi53c895a.c.obj
+[1704/2095] Compiling C object libsystem.a.p/hw_scsi_megasas.c.obj
+[1705/2095] Compiling C object libsystem.a.p/hw_scsi_virtio-scsi-dataplane.c.obj
+[1706/2095] Compiling C object libsystem.a.p/hw_sd_pl181.c.obj
+[1707/2095] Compiling C object libsystem.a.p/hw_scsi_vmw_pvscsi.c.obj
+[1708/2095] Compiling C object libsystem.a.p/hw_scsi_virtio-scsi.c.obj
+[1709/2095] Compiling C object libsystem.a.p/hw_sd_core.c.obj
+[1710/2095] Compiling C object libsystem.a.p/hw_sd_sdhci-pci.c.obj
+[1711/2095] Compiling C object libsystem.a.p/hw_sd_ssi-sd.c.obj
+[1712/2095] Compiling C object libsystem.a.p/hw_sd_omap_mmc.c.obj
+[1713/2095] Compiling C object libsystem.a.p/hw_sd_sd.c.obj
+[1714/2095] Compiling C object libsystem.a.p/hw_sd_aspeed_sdhci.c.obj
+[1715/2095] Compiling C object libsystem.a.p/hw_sd_bcm2835_sdhost.c.obj
+[1716/2095] Compiling C object libsystem.a.p/hw_sensor_tmp105.c.obj
+[1717/2095] Compiling C object libsystem.a.p/hw_sd_npcm7xx_sdhci.c.obj
+[1718/2095] Compiling C object libsystem.a.p/hw_sensor_tmp421.c.obj
+[1719/2095] Compiling C object libsystem.a.p/hw_sd_allwinner-sdhost.c.obj
+[1720/2095] Compiling C object libsystem.a.p/hw_sd_sdhci.c.obj
+[1721/2095] Compiling C object libsystem.a.p/hw_sensor_dps310.c.obj
+[1722/2095] Compiling C object libsystem.a.p/hw_sensor_emc141x.c.obj
+[1723/2095] Compiling C object libsystem.a.p/hw_sensor_adm1266.c.obj
+[1724/2095] Compiling C object libsystem.a.p/hw_sensor_max34451.c.obj
+[1725/2095] Compiling C object libsystem.a.p/hw_sensor_adm1272.c.obj
+[1726/2095] Compiling C object libsystem.a.p/hw_sensor_max31785.c.obj
+[1727/2095] Compiling C object libsystem.a.p/hw_sensor_lsm303dlhc_mag.c.obj
+[1728/2095] Compiling C object libsystem.a.p/hw_sensor_isl_pmbus_vr.c.obj
+[1729/2095] Compiling C object libsystem.a.p/hw_ssi_allwinner-a10-spi.c.obj
+[1730/2095] Compiling C object libsystem.a.p/hw_ssi_npcm_pspi.c.obj
+[1731/2095] Compiling C object libsystem.a.p/hw_ssi_mss-spi.c.obj
+[1732/2095] Compiling C object libsystem.a.p/hw_ssi_npcm7xx_fiu.c.obj
+[1733/2095] Compiling C object libsystem.a.p/hw_ssi_pl022.c.obj
+[1734/2095] Compiling C object libsystem.a.p/hw_ssi_ssi.c.obj
+[1735/2095] Compiling C object libsystem.a.p/hw_ssi_stm32f2xx_spi.c.obj
+[1736/2095] Compiling C object libsystem.a.p/hw_ssi_aspeed_smc.c.obj
+[1737/2095] Compiling C object libsystem.a.p/hw_smbios_smbios.c.obj
+[1738/2095] Compiling C object libsystem.a.p/hw_ssi_xilinx_spi.c.obj
+[1739/2095] Compiling C object libsystem.a.p/hw_ssi_imx_spi.c.obj
+[1740/2095] Compiling C object libsystem.a.p/hw_ssi_bcm2835_spi.c.obj
+[1741/2095] Compiling C object libsystem.a.p/hw_ssi_xilinx_spips.c.obj
+[1742/2095] Compiling C object libsystem.a.p/hw_ssi_xlnx-versal-ospi.c.obj
+[1743/2095] Compiling C object libsystem.a.p/hw_timer_arm_mptimer.c.obj
+[1744/2095] Compiling C object libsystem.a.p/hw_timer_allwinner-a10-pit.c.obj
+[1745/2095] Compiling C object libsystem.a.p/hw_timer_a9gtimer.c.obj
+[1746/2095] Compiling C object libsystem.a.p/hw_timer_arm_timer.c.obj
+[1747/2095] Compiling C object libsystem.a.p/hw_timer_armv7m_systick.c.obj
+[1748/2095] Compiling C object libsystem.a.p/hw_timer_cadence_ttc.c.obj
+[1749/2095] Compiling C object libsystem.a.p/hw_timer_cmsdk-apb-dualtimer.c.obj
+[1750/2095] Compiling C object libsystem.a.p/hw_timer_cmsdk-apb-timer.c.obj
+[1751/2095] Compiling C object libsystem.a.p/hw_timer_aspeed_timer.c.obj
+[1752/2095] Compiling C object libsystem.a.p/hw_timer_digic-timer.c.obj
+[1753/2095] Compiling C object libsystem.a.p/hw_timer_exynos4210_pwm.c.obj
+[1754/2095] Compiling C object libsystem.a.p/hw_timer_imx_epit.c.obj
+[1755/2095] Compiling C object libsystem.a.p/hw_timer_exynos4210_mct.c.obj
+[1756/2095] Compiling C object libsystem.a.p/hw_timer_mss-timer.c.obj
+[1757/2095] Compiling C object libsystem.a.p/hw_timer_imx_gpt.c.obj
+[1758/2095] Compiling C object libsystem.a.p/hw_timer_nrf51_timer.c.obj
+[1759/2095] Compiling C object libsystem.a.p/hw_timer_npcm7xx_timer.c.obj
+[1760/2095] Compiling C object libsystem.a.p/hw_timer_bcm2835_systmr.c.obj
+[1761/2095] Compiling C object libsystem.a.p/hw_timer_pxa2xx_timer.c.obj
+[1762/2095] Compiling C object libsystem.a.p/hw_timer_sse-timer.c.obj
+[1763/2095] Compiling C object libsystem.a.p/hw_timer_sse-counter.c.obj
+[1764/2095] Compiling C object libsystem.a.p/hw_timer_stellaris-gptm.c.obj
+[1765/2095] Compiling C object libsystem.a.p/hw_timer_stm32f2xx_timer.c.obj
+[1766/2095] Compiling C object libsystem.a.p/hw_timer_xilinx_timer.c.obj
+[1767/2095] Compiling C object libsystem.a.p/hw_uefi_hardware-info.c.obj
+[1768/2095] Compiling C object libsystem.a.p/hw_usb_combined-packet.c.obj
+[1769/2095] Compiling C object libsystem.a.p/hw_ufs_lu.c.obj
+[1770/2095] Compiling C object libsystem.a.p/hw_uefi_ovmf-log.c.obj
+[1771/2095] Compiling C object libsystem.a.p/hw_usb_desc-msos.c.obj
+[1772/2095] Compiling C object libsystem.a.p/hw_usb_core.c.obj
+[1773/2095] Compiling C object libsystem.a.p/hw_usb_bus.c.obj
+[1774/2095] Compiling C object libsystem.a.p/hw_usb_desc.c.obj
+[1775/2095] Compiling C object libsystem.a.p/hw_usb_pcap.c.obj
+[1776/2095] Compiling C object libsystem.a.p/hw_usb_libhw.c.obj
+[1777/2095] Compiling C object libsystem.a.p/hw_usb_hcd-ohci-pci.c.obj
+[1778/2095] Compiling C object libsystem.a.p/hw_ufs_ufs.c.obj
+[1779/2095] Compiling C object libsystem.a.p/hw_usb_hcd-uhci.c.obj
+[1780/2095] Compiling C object libsystem.a.p/hw_usb_hcd-ohci-sysbus.c.obj
+[1781/2095] Compiling C object libsystem.a.p/hw_usb_hcd-ohci.c.obj
+[1782/2095] Compiling C object libsystem.a.p/hw_usb_hcd-ehci-pci.c.obj
+[1783/2095] Compiling C object libsystem.a.p/hw_usb_hcd-ehci-sysbus.c.obj
+[1784/2095] Compiling C object libsystem.a.p/hw_usb_hcd-xhci-sysbus.c.obj
+[1785/2095] Compiling C object libsystem.a.p/hw_usb_hcd-xhci-pci.c.obj
+[1786/2095] Compiling C object libsystem.a.p/hw_usb_hcd-xhci-nec.c.obj
+[1787/2095] Compiling C object libsystem.a.p/hw_usb_hcd-dwc3.c.obj
+[1788/2095] Compiling C object libsystem.a.p/hw_usb_chipidea.c.obj
+[1789/2095] Compiling C object libsystem.a.p/hw_usb_imx-usb-phy.c.obj
+[1790/2095] Compiling C object libsystem.a.p/hw_usb_hcd-dwc2.c.obj
+[1791/2095] Compiling C object libsystem.a.p/hw_usb_xlnx-versal-usb2-ctrl-regs.c.obj
+[1792/2095] Compiling C object libsystem.a.p/hw_usb_xlnx-usb-subsystem.c.obj
+[1793/2095] Compiling C object libsystem.a.p/hw_usb_hcd-xhci.c.obj
+[1794/2095] Compiling C object libsystem.a.p/hw_usb_dev-hub.c.obj
+[1795/2095] Compiling C object libsystem.a.p/hw_usb_hcd-ehci.c.obj
+[1796/2095] Compiling C object libsystem.a.p/hw_usb_dev-wacom.c.obj
+[1797/2095] Compiling C object libsystem.a.p/hw_usb_dev-hid.c.obj
+[1798/2095] Compiling C object libsystem.a.p/hw_usb_dev-storage-bot.c.obj
+[1799/2095] Compiling C object libsystem.a.p/hw_usb_dev-storage-classic.c.obj
+[1800/2095] Compiling C object libsystem.a.p/hw_usb_dev-storage.c.obj
+[1801/2095] Compiling C object libsystem.a.p/hw_usb_dev-uas.c.obj
+[1802/2095] Compiling C object libsystem.a.p/hw_usb_dev-serial.c.obj
+[1803/2095] Compiling C object libsystem.a.p/hw_usb_dev-audio.c.obj
+[1804/2095] Compiling C object libsystem.a.p/hw_usb_dev-network.c.obj
+[1805/2095] Compiling C object libsystem.a.p/hw_usb_u2f.c.obj
+[1806/2095] Compiling C object libsystem.a.p/hw_virtio_iothread-vq-mapping.c.obj
+[1807/2095] Compiling C object libsystem.a.p/hw_usb_dev-smartcard-reader.c.obj
+[1808/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-bus.c.obj
+[1809/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-config-io.c.obj
+[1810/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-mmio.c.obj
+[1811/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-crypto.c.obj
+[1812/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-rng.c.obj
+[1813/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-rtc.c.obj
+[1814/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-iommu.c.obj
+[1815/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-qmp.c.obj
+[1816/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-crypto-pci.c.obj
+[1817/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-pci.c.obj
+[1818/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-rng-pci.c.obj
+[1819/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-rtc-pci.c.obj
+[1820/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-input-pci.c.obj
+[1821/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-balloon.c.obj
+[1822/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-balloon-pci.c.obj
+[1823/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-scsi-pci.c.obj
+[1824/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-blk-pci.c.obj
+[1825/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-serial-pci.c.obj
+[1826/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-net-pci.c.obj
+[1827/2095] Compiling C object libsystem.a.p/hw_watchdog_watchdog.c.obj
+[1828/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-acpi.c.obj
+[1829/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-iommu-pci.c.obj
+[1830/2095] Compiling C object libsystem.a.p/hw_virtio_virtio-hmp-cmds.c.obj
+[1831/2095] Compiling C object libsystem.a.p/hw_virtio_virtio.c.obj
+[1832/2095] Compiling C object libsystem.a.p/hw_watchdog_allwinner-wdt.c.obj
+[1833/2095] Compiling C object libsystem.a.p/hw_watchdog_cmsdk-apb-watchdog.c.obj
+[1834/2095] Compiling C object libsystem.a.p/hw_watchdog_wdt_aspeed.c.obj
+[1835/2095] Compiling C object libsystem.a.p/hw_watchdog_wdt_i6300esb.c.obj
+[1836/2095] Compiling C object libsystem.a.p/hw_watchdog_wdt_imx2.c.obj
+[1837/2095] Compiling C object libsystem.a.p/hw_xen_xen_stubs.c.obj
+[1838/2095] Compiling C object libsystem.a.p/hw_watchdog_sbsa_gwdt.c.obj
+[1839/2095] Compiling C object libsystem.a.p/hw_fsi_lbus.c.obj
+[1840/2095] Compiling C object libsystem.a.p/hw_fsi_fsi.c.obj
+[1841/2095] Compiling C object libsystem.a.p/hw_fsi_cfam.c.obj
+[1842/2095] Compiling C object libsystem.a.p/hw_fsi_fsi-master.c.obj
+[1843/2095] Compiling C object libsystem.a.p/gdbstub_syscalls.c.obj
+[1844/2095] Compiling C object libsystem.a.p/hw_fsi_aspeed_apb2opb.c.obj
+[1845/2095] Compiling C object libsystem.a.p/block_block-ram-registrar.c.obj
+[1846/2095] Compiling C object libsystem.a.p/block_qapi-system.c.obj
+[1847/2095] Compiling C object libsystem.a.p/block_blkreplay.c.obj
+[1848/2095] Compiling C object libsystem.a.p/gdbstub_system.c.obj
+[1849/2095] Compiling C object libsystem.a.p/os-win32.c.obj
+[1850/2095] Compiling C object libsystem.a.p/block_monitor_block-hmp-cmds.c.obj
+[1851/2095] Compiling C object libsystem.a.p/gdbstub_gdbstub.c.obj
+[1852/2095] Compiling C object libsystem.a.p/cpu-target.c.obj
+[1853/2095] Compiling C object libsystem.a.p/system_arch_init.c.obj
+[1854/2095] Compiling C object libsystem.a.p/system_balloon.c.obj
+[1855/2095] Compiling C object libsystem.a.p/system_bootdevice.c.obj
+[1856/2095] Compiling C object libsystem.a.p/system_exit-with-parent.c.obj
+[1857/2095] Compiling C object libsystem.a.p/system_cpu-timers.c.obj
+[1858/2095] Compiling C object libsystem.a.p/system_globals.c.obj
+[1859/2095] Compiling C object libsystem.a.p/system_dma-helpers.c.obj
+[1860/2095] Compiling C object libsystem.a.p/system_cpus.c.obj
+[1861/2095] Compiling C object libsystem.a.p/system_dirtylimit.c.obj
+[1862/2095] Compiling C object libsystem.a.p/system_ioport.c.obj
+[1863/2095] Compiling C object libsystem.a.p/system_ram-block-attributes.c.obj
+[1864/2095] Compiling C object libsystem.a.p/system_ram-discard-manager.c.obj
+[1865/2095] Compiling C object libsystem.a.p/system_memory_mapping.c.obj
+[1866/2095] Compiling C object libsystem.a.p/system_vl.c.obj
+[1867/2095] Compiling C object libsystem.a.p/system_runstate-action.c.obj
+[1868/2095] Compiling C object libsystem.a.p/system_tpm-hmp-cmds.c.obj
+[1869/2095] Compiling C object libsystem.a.p/system_qdev-monitor.c.obj
+[1870/2095] Compiling C object libsystem.a.p/system_rtc.c.obj
+[1871/2095] Compiling C object libsystem.a.p/system_watchpoint.c.obj
+[1872/2095] Compiling C object libsystem.a.p/system_runstate-hmp-cmds.c.obj
+[1873/2095] Compiling C object libsystem.a.p/page-vary-system.c.obj
+[1874/2095] Compiling C object libsystem.a.p/system_qtest.c.obj
+[1875/2095] Compiling C object libsystem.a.p/system_device_tree.c.obj
+[1876/2095] Compiling C object libsystem.a.p/target-info-qom.c.obj
+[1877/2095] Compiling C object libsystem.a.p/system_runstate.c.obj
+[1878/2095] Compiling C object libsystem.a.p/system_memory.c.obj
+[1879/2095] Compiling C object libsystem.a.p/ui_curses.c.obj
+[1880/2095] Compiling C object libsystem.a.p/system_physmem.c.obj
+[1881/2095] Compiling C object libsystem.a.p/accel_qtest_qtest.c.obj
+[1882/2095] Compiling C object libsystem.a.p/ui_dbus-chardev.c.obj
+[1883/2095] Compiling C object libsystem.a.p/hw_display_virtio-gpu-base.c.obj
+[1884/2095] Compiling C object libsystem.a.p/ui_dbus-console.c.obj
+[1885/2095] Compiling C object libsystem.a.p/ui_dbus-error.c.obj
+[1886/2095] Compiling C object libsystem.a.p/ui_dbus-clipboard.c.obj
+[1887/2095] Compiling C object libsystem.a.p/hw_display_virtio-gpu-udmabuf-stubs.c.obj
+[1888/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-core.c.obj
+[1889/2095] Compiling C object libsystem.a.p/ui_dbus.c.obj
+[1890/2095] Compiling C object libsystem.a.p/hw_display_virtio-gpu-pci.c.obj
+[1891/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-pcap.c.obj
+[1892/2095] Compiling C object libsystem.a.p/ui_dbus-listener.c.obj
+[1893/2095] Compiling C object libsystem.a.p/hw_display_virtio-gpu.c.obj
+[1894/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-json.c.obj
+[1895/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-vars.c.obj
+[1896/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-auth.c.obj
+[1897/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-guid.c.obj
+[1898/2095] Compiling C object libcommon.a.p/meson-generated_.._gdbstub_gdbstub-xml.c.obj
+[1899/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-sysbus.c.obj
+[1900/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-policy.c.obj
+[1901/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-utils.c.obj
+[1902/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-pkcs7-stub.c.obj
+[1903/2095] Compiling C object libsystem.a.p/hw_uefi_var-service-siglist.c.obj
+[1904/2095] Compiling C object libcommon.a.p/accel_accel-common.c.obj
+[1905/2095] Compiling C object libcommon.a.p/disas_disas-host.c.obj
+[1906/2095] Compiling C object libcommon.a.p/disas_disas-target.c.obj
+[1907/2095] Compiling C object libcommon.a.p/disas_objdump.c.obj
+[1908/2095] Compiling C object libcommon.a.p/disas_disas-common.c.obj
+[1909/2095] Compiling C object libcommon.a.p/page-vary-common.c.obj
+[1910/2095] Compiling C object libcommon.a.p/plugins_loader.c.obj
+[1911/2095] Compiling C object libcommon.a.p/target-info.c.obj
+[1912/2095] Compiling C object libcommon.a.p/hw_core_machine-smp.c.obj
+[1913/2095] Compiling C object libcommon.a.p/hw_core_cpu-common.c.obj
+[1914/2095] Compiling C object libcommon.a.p/cpu-common.c.obj
+[1915/2095] Compiling C object libcommon_arm.a.p/target_arm_mmuidx.c.obj
+[1916/2095] Compiling C object libcommon_arm.a.p/target_arm_tcg_idau.c.obj
+[1917/2095] Compiling C object libcommon_arm.a.p/target_arm_tcg_arith_helper.c.obj
+[1918/2095] Compiling C object libcommon_arm.a.p/target_arm_tcg_crypto_helper.c.obj
+[1919/2095] Compiling C object libsystem_arm.a.p/target_arm_arm-qmp-cmds.c.obj
+[1920/2095] Compiling C object libsystem_arm.a.p/target_arm_gdbstub.c.obj
+[1921/2095] Compiling C object libsystem_arm.a.p/target_arm_common-semi-target.c.obj
+[1922/2095] Compiling C object libsystem_arm.a.p/target_arm_cortex-regs.c.obj
+[1923/2095] Compiling C object libsystem_arm.a.p/target_arm_cpregs-omap.c.obj
+[1924/2095] Compiling C object libsystem_arm.a.p/target_arm_arch_dump.c.obj
+[1925/2095] Compiling C object libsystem_arm.a.p/target_arm_arm-powerctl.c.obj
+[1926/2095] Compiling C object libsystem_arm.a.p/target_arm_cpu-irq.c.obj
+[1927/2095] Compiling C object libsystem_arm.a.p/target_arm_machine.c.obj
+[1928/2095] Compiling C object libsystem_arm.a.p/target_arm_cpu.c.obj
+[1929/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_cpu-v7m.c.obj
+[1930/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_cpregs-at.c.obj
+[1931/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_gicv5-cpuif.c.obj
+[1932/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_psci.c.obj
+[1933/2095] Compiling C object libsystem_arm.a.p/target_arm_cpregs-gcs.c.obj
+[1934/2095] Compiling C object libsystem_arm.a.p/target_arm_cpu-max.c.obj
+[1935/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_tlb_helper.c.obj
+[1936/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_tlb-insns.c.obj
+[1937/2095] Compiling C object libsystem_arm.a.p/target_arm_debug_helper.c.obj
+[1938/2095] Compiling C object libsystem_arm.a.p/target_arm_cpregs-pmu.c.obj
+[1939/2095] Compiling C object libsystem_arm.a.p/target_arm_ptw.c.obj
+[1940/2095] Compiling C object libsystem_arm.a.p/target_arm_vfp_fpscr.c.obj
+[1941/2095] Compiling C object libsystem_arm.a.p/target_arm_gdbstub64.c.obj
+[1942/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_debug.c.obj
+[1943/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_hflags.c.obj
+[1944/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_gengvec.c.obj
+[1945/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_translate-m-nocp.c.obj
+[1946/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_op_helper.c.obj
+[1947/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_m_helper.c.obj
+[1948/2095] Compiling C object libsystem_arm.a.p/target_arm_helper.c.obj
+[1949/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_neon_helper.c.obj
+[1950/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_translate-vfp.c.obj
+[1951/2095] Compiling C object libsystem_arm.a.p/hw_arm_digic_boards.c.obj
+[1952/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_cpu64.c.obj
+[1953/2095] Compiling C object libsystem_arm.a.p/hw_arm_virt-acpi-build.c.obj
+[1954/2095] Compiling C object libsystem_arm.a.p/hw_arm_msf2-som.c.obj
+[1955/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_vfp_helper.c.obj
+[1956/2095] Compiling C object libsystem_arm.a.p/hw_arm_integratorcp.c.obj
+[1957/2095] Compiling C object libcommon.a.p/fpu_softfloat.c.obj
+[1958/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_translate-neon.c.obj
+[1959/2095] Compiling C object libsystem_arm.a.p/hw_arm_microbit.c.obj
+[1960/2095] Compiling C object libsystem_arm.a.p/hw_arm_virt.c.obj
+[1961/2095] Compiling C object libsystem_arm.a.p/hw_arm_mps3r.c.obj
+[1962/2095] Compiling C object libsystem_arm.a.p/hw_arm_netduinoplus2.c.obj
+[1963/2095] Compiling C object libsystem_arm.a.p/hw_arm_olimex-stm32-h405.c.obj
+[1964/2095] Compiling C object libsystem_arm.a.p/hw_arm_musicpal.c.obj
+[1965/2095] Compiling C object libsystem_arm.a.p/hw_arm_npcm7xx.c.obj
+[1966/2095] Compiling C object libsystem_arm.a.p/hw_arm_npcm7xx_boards.c.obj
+[1967/2095] Compiling C object libsystem_arm.a.p/hw_arm_npcm8xx.c.obj
+[1968/2095] Compiling C object libsystem_arm.a.p/hw_arm_npcm8xx_boards.c.obj
+[1969/2095] Compiling C object libsystem_arm.a.p/hw_arm_realview.c.obj
+[1970/2095] Compiling C object libsystem_arm.a.p/hw_arm_stm32vldiscovery.c.obj
+[1971/2095] Compiling C object libsystem_arm.a.p/hw_arm_sbsa-ref.c.obj
+[1972/2095] Compiling C object libsystem_arm.a.p/hw_arm_sabrelite.c.obj
+[1973/2095] Compiling C object libsystem_arm.a.p/hw_arm_stellaris.c.obj
+[1974/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_translate.c.obj
+[1975/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_translate-mve.c.obj
+[1976/2095] Compiling C object libsystem_arm.a.p/hw_arm_xilinx_zynq.c.obj
+[1977/2095] Compiling C object libsystem_arm.a.p/hw_arm_armv7m.c.obj
+[1978/2095] Compiling C object libsystem_arm.a.p/hw_arm_digic.c.obj
+[1979/2095] Compiling C object libsystem_arm.a.p/hw_arm_exynos4210.c.obj
+[1980/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_mve_helper.c.obj
+[1981/2095] Compiling C object libsystem_arm.a.p/hw_arm_allwinner-a10.c.obj
+[1982/2095] Compiling C object libsystem_arm.a.p/hw_arm_cubieboard.c.obj
+[1983/2095] Compiling C object libsystem_arm.a.p/hw_arm_orangepi.c.obj
+[1984/2095] Compiling C object libsystem_arm.a.p/hw_arm_allwinner-h3.c.obj
+[1985/2095] Compiling C object libsystem_arm.a.p/hw_arm_max78000_soc.c.obj
+[1986/2095] Compiling C object libsystem_arm.a.p/hw_arm_bananapi_m2u.c.obj
+[1987/2095] Compiling C object libsystem_arm.a.p/hw_arm_allwinner-r40.c.obj
+[1988/2095] Compiling C object libsystem_arm.a.p/hw_arm_bcm2836.c.obj
+[1989/2095] Compiling C object libsystem_arm.a.p/hw_arm_bcm2838.c.obj
+[1990/2095] Compiling C object libsystem_arm.a.p/hw_arm_omap1.c.obj
+[1991/2095] Compiling C object libsystem_arm.a.p/hw_arm_stm32f100_soc.c.obj
+[1992/2095] Compiling C object libsystem_arm.a.p/hw_arm_raspi4b.c.obj
+[1993/2095] Compiling C object libsystem_arm.a.p/hw_arm_raspi.c.obj
+[1994/2095] Compiling C object libsystem_arm.a.p/hw_arm_stm32f205_soc.c.obj
+[1995/2095] Compiling C object libsystem_arm.a.p/hw_arm_stm32f405_soc.c.obj
+[1996/2095] Compiling C object libsystem_arm.a.p/hw_arm_b-l475e-iot01a.c.obj
+[1997/2095] Compiling C object libsystem_arm.a.p/target_arm_tcg_vec_helper.c.obj
+[1998/2095] Compiling C object libsystem_arm.a.p/hw_arm_stm32l4x5_soc.c.obj
+[1999/2095] Compiling C object libsystem_arm.a.p/hw_arm_xlnx-versal-virt.c.obj
+[2000/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx31.c.obj
+[2001/2095] Compiling C object libsystem_arm.a.p/hw_arm_xlnx-zcu102.c.obj
+[2002/2095] Compiling C object libsystem_arm.a.p/hw_arm_imx25_pdk.c.obj
+[2003/2095] Compiling C object libsystem_arm.a.p/hw_arm_kzm.c.obj
+[2004/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx25.c.obj
+[2005/2095] Compiling C object libsystem_arm.a.p/hw_arm_xlnx-zynqmp.c.obj
+[2006/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx6.c.obj
+[2007/2095] Compiling C object libsystem_arm.a.p/hw_arm_xlnx-versal.c.obj
+[2008/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed.c.obj
+[2009/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_soc_common.c.obj
+[2010/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2400.c.obj
+[2011/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2400_palmetto.c.obj
+[2012/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2400_quanta-q71l.c.obj
+[2013/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2400_supermicrox11.c.obj
+[2014/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_evb.c.obj
+[2015/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_romulus.c.obj
+[2016/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_g220a.c.obj
+[2017/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_tiogapass.c.obj
+[2018/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_supermicro-x11spi.c.obj
+[2019/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_witherspoon.c.obj
+[2020/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2500_yosemitev2.c.obj
+[2021/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600.c.obj
+[2022/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_anacapa.c.obj
+[2023/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_bletchley.c.obj
+[2024/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_catalina.c.obj
+[2025/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_evb.c.obj
+[2026/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_fby35.c.obj
+[2027/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_fuji.c.obj
+[2028/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast10x0_evb.c.obj
+[2029/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_gb200nvl.c.obj
+[2030/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast2600_rainier.c.obj
+[2031/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast1700.c.obj
+[2032/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast1040.c.obj
+[2033/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast10x0.c.obj
+[2034/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast1040_evb.c.obj
+[2035/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast27x0_evb.c.obj
+[2036/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast27x0.c.obj
+[2037/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast27x0-fc.c.obj
+[2038/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast27x0-ssp.c.obj
+[2039/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_ast27x0-tsp.c.obj
+[2040/2095] Compiling C object libsystem_arm.a.p/hw_arm_aspeed_coprocessor_common.c.obj
+[2041/2095] Compiling C object libsystem_arm.a.p/hw_arm_mps2.c.obj
+[2042/2095] Compiling C object libsystem_arm.a.p/hw_arm_msf2-soc.c.obj
+[2043/2095] Compiling C object libsystem_arm.a.p/hw_arm_musca.c.obj
+[2044/2095] Compiling C object libsystem_arm.a.p/hw_arm_mcimx7d-sabre.c.obj
+[2045/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx7.c.obj
+[2046/2095] Compiling C object libsystem_arm.a.p/hw_arm_armsse.c.obj
+[2047/2095] Compiling C object libsystem_arm.a.p/hw_arm_mps2-tz.c.obj
+[2048/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx8mp.c.obj
+[2049/2095] Compiling C object libsystem_arm.a.p/hw_arm_imx8mp-evk.c.obj
+[2050/2095] Compiling C object libsystem_arm.a.p/hw_arm_imx8mm-evk.c.obj
+[2051/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx8mm.c.obj
+[2052/2095] Compiling C object libsystem_arm.a.p/hw_arm_mcimx6ul-evk.c.obj
+[2053/2095] Compiling C object libsystem_arm.a.p/hw_arm_nrf51_soc.c.obj
+[2054/2095] Compiling C object libsystem_arm.a.p/hw_arm_fsl-imx6ul.c.obj
+[2055/2095] Compiling C object libsystem_arm.a.p/hw_arm_collie.c.obj
+[2056/2095] Compiling C object libsystem_arm.a.p/hw_arm_exynos4_boards.c.obj
+[2057/2095] Compiling C object libsystem_arm.a.p/hw_arm_max78000fthr.c.obj
+[2058/2095] Compiling C object libsystem_arm.a.p/hw_arm_smmu-common.c.obj
+[2059/2095] Compiling C object libsystem_arm.a.p/hw_arm_netduino2.c.obj
+[2060/2095] Compiling C object libsystem_arm.a.p/hw_arm_bcm2838_peripherals.c.obj
+[2061/2095] Compiling C object libsystem_arm.a.p/hw_arm_smmuv3.c.obj
+[2062/2095] Compiling C object libsystem_arm.a.p/hw_arm_bcm2835_peripherals.c.obj
+[2063/2095] Compiling C object libsystem_arm.a.p/hw_arm_omap_sx1.c.obj
+[2064/2095] Compiling C object libsystem_arm.a.p/hw_arm_versatilepb.c.obj
+[2065/2095] Compiling C object libsystem_arm.a.p/hw_arm_strongarm.c.obj
+[2066/2095] Linking static target libstubs_arm.a
+[2067/2095] Compiling C object libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj
+FAILED: [code=1] libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj 
+"cc" "-m64" "-Ilibsystem_arm.a.p" "-I." "-I.." "-Itarget/arm" "-I../target/arm" "-Isubprojects/dtc/libfdt" "-I../subprojects/dtc/libfdt" "-Ihw/arm" "-Iqapi" "-Itrace" "-Iui" "-Iui/shader" "-IC:/devkitPro/msys2/mingw64/bin/../include/pixman-1" "-IC:/devkitPro/msys2/mingw64/bin/../include" "-IC:/devkitPro/msys2/mingw64/bin/../include/glib-2.0" "-IC:/devkitPro/msys2/mingw64/bin/../lib/glib-2.0/include" "-IC:/devkitPro/msys2/mingw64/bin/../include/ncursesw" "-fdiagnostics-color=auto" "-Wall" "-Winvalid-pch" "-Werror" "-std=gnu11" "-O2" "-g" "-mcx16" "-msse2" "-fno-link-libatomic" "-D_GNU_SOURCE" "-D_FILE_OFFSET_BITS=64" "-D_LARGEFILE_SOURCE" "-fno-strict-aliasing" "-fno-common" "-fwrapv" "-fno-pie" "-no-pie" "-ftrivial-auto-var-init=zero" "-fzero-init-padding-bits=all" "-fzero-call-used-regs=used-gpr" "-fstack-protector-strong" "-Wempty-body" "-Wendif-labels" "-Wexpansion-to-defined" "-Wformat-overflow=2" "-Wformat-security" "-Wformat-y2k" "-Wignored-qualifiers" "-Wimplicit-fallthrough=2" "-Winit-self" "-Wmissing-format-attribute" "-Wmissing-prototypes" "-Wnested-externs" "-Wold-style-declaration" "-Wold-style-definition" "-Wredundant-decls" "-Wshadow=local" "-Wstrict-prototypes" "-Wtype-limits" "-Wundef" "-Wvla" "-Wwrite-strings" "-Wno-missing-include-dirs" "-Wno-psabi" "-Wno-shift-negative-value" "-iquote" "." "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/include" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/x86_64" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/generic" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/tcg/x86_64" "-DNCURSES_WIDECHAR" "-DNCURSES_WIDECHAR=1" "-DCPU_DEFS_H" "-DCOMPILING_SYSTEM_VS_USER" "-DCONFIG_SOFTMMU" -MD -MQ libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj -MF "libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj.d" -o libsystem_arm.a.p/hw_arm_xnuboot_sptm.c.obj "-c" ../hw/arm/xnuboot_sptm.c
+../hw/arm/xnuboot_sptm.c:6:10: fatal error: sys/mman.h: No such file or directory
+    6 | #include <sys/mman.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+[2068/2095] Compiling C object libsystem_arm.a.p/hw_arm_vexpress.c.obj
+[2069/2095] Compiling C object libsystem_arm.a.p/hw_arm_darwin.c.obj
+FAILED: [code=1] libsystem_arm.a.p/hw_arm_darwin.c.obj 
+"cc" "-m64" "-Ilibsystem_arm.a.p" "-I." "-I.." "-Itarget/arm" "-I../target/arm" "-Isubprojects/dtc/libfdt" "-I../subprojects/dtc/libfdt" "-Ihw/arm" "-Iqapi" "-Itrace" "-Iui" "-Iui/shader" "-IC:/devkitPro/msys2/mingw64/bin/../include/pixman-1" "-IC:/devkitPro/msys2/mingw64/bin/../include" "-IC:/devkitPro/msys2/mingw64/bin/../include/glib-2.0" "-IC:/devkitPro/msys2/mingw64/bin/../lib/glib-2.0/include" "-IC:/devkitPro/msys2/mingw64/bin/../include/ncursesw" "-fdiagnostics-color=auto" "-Wall" "-Winvalid-pch" "-Werror" "-std=gnu11" "-O2" "-g" "-mcx16" "-msse2" "-fno-link-libatomic" "-D_GNU_SOURCE" "-D_FILE_OFFSET_BITS=64" "-D_LARGEFILE_SOURCE" "-fno-strict-aliasing" "-fno-common" "-fwrapv" "-fno-pie" "-no-pie" "-ftrivial-auto-var-init=zero" "-fzero-init-padding-bits=all" "-fzero-call-used-regs=used-gpr" "-fstack-protector-strong" "-Wempty-body" "-Wendif-labels" "-Wexpansion-to-defined" "-Wformat-overflow=2" "-Wformat-security" "-Wformat-y2k" "-Wignored-qualifiers" "-Wimplicit-fallthrough=2" "-Winit-self" "-Wmissing-format-attribute" "-Wmissing-prototypes" "-Wnested-externs" "-Wold-style-declaration" "-Wold-style-definition" "-Wredundant-decls" "-Wshadow=local" "-Wstrict-prototypes" "-Wtype-limits" "-Wundef" "-Wvla" "-Wwrite-strings" "-Wno-missing-include-dirs" "-Wno-psabi" "-Wno-shift-negative-value" "-iquote" "." "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/include" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/x86_64" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/generic" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/tcg/x86_64" "-DNCURSES_WIDECHAR" "-DNCURSES_WIDECHAR=1" "-DCPU_DEFS_H" "-DCOMPILING_SYSTEM_VS_USER" "-DCONFIG_SOFTMMU" -MD -MQ libsystem_arm.a.p/hw_arm_darwin.c.obj -MF "libsystem_arm.a.p/hw_arm_darwin.c.obj.d" -o libsystem_arm.a.p/hw_arm_darwin.c.obj "-c" ../hw/arm/darwin.c
+../hw/arm/darwin.c: In function 'check_and_open':
+../hw/arm/darwin.c:96:15: error: implicit declaration of function 'mmap' [-Wimplicit-function-declaration]
+   96 |     mapping = mmap(NULL, stats.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+      |               ^~~~
+../hw/arm/darwin.c:96:15: error: nested extern declaration of 'mmap' [-Werror=nested-externs]
+../hw/arm/darwin.c:96:41: error: 'PROT_READ' undeclared (first use in this function); did you mean 'OF_READ'?
+   96 |     mapping = mmap(NULL, stats.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+      |                                         ^~~~~~~~~
+      |                                         OF_READ
+../hw/arm/darwin.c:96:41: note: each undeclared identifier is reported only once for each function it appears in
+../hw/arm/darwin.c:96:53: error: 'PROT_WRITE' undeclared (first use in this function); did you mean 'OF_WRITE'?
+   96 |     mapping = mmap(NULL, stats.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+      |                                                     ^~~~~~~~~~
+      |                                                     OF_WRITE
+../hw/arm/darwin.c:96:65: error: 'MAP_PRIVATE' undeclared (first use in this function); did you mean 'MEM_PRIVATE'?
+   96 |     mapping = mmap(NULL, stats.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+      |                                                                 ^~~~~~~~~~~
+      |                                                                 MEM_PRIVATE
+../hw/arm/darwin.c:97:9: error: 'MAP_FAILED' undeclared (first use in this function); did you mean 'WAIT_FAILED'?
+   97 |     if (MAP_FAILED == mapping) goto fail;
+      |         ^~~~~~~~~~
+      |         WAIT_FAILED
+../hw/arm/darwin.c: In function 'darwin_init':
+../hw/arm/darwin.c:289:5: error: implicit declaration of function 'munmap' [-Wimplicit-function-declaration]
+  289 |     munmap(info->bootkc_f.buf, info->bootkc_f.len);
+      |     ^~~~~~
+../hw/arm/darwin.c:289:5: error: nested extern declaration of 'munmap' [-Werror=nested-externs]
+cc1.exe: all warnings being treated as errors
+[2070/2095] Compiling C object libsystem_arm.a.p/hw_arm_apple_dtree.c.obj
+FAILED: [code=1] libsystem_arm.a.p/hw_arm_apple_dtree.c.obj 
+"cc" "-m64" "-Ilibsystem_arm.a.p" "-I." "-I.." "-Itarget/arm" "-I../target/arm" "-Isubprojects/dtc/libfdt" "-I../subprojects/dtc/libfdt" "-Ihw/arm" "-Iqapi" "-Itrace" "-Iui" "-Iui/shader" "-IC:/devkitPro/msys2/mingw64/bin/../include/pixman-1" "-IC:/devkitPro/msys2/mingw64/bin/../include" "-IC:/devkitPro/msys2/mingw64/bin/../include/glib-2.0" "-IC:/devkitPro/msys2/mingw64/bin/../lib/glib-2.0/include" "-IC:/devkitPro/msys2/mingw64/bin/../include/ncursesw" "-fdiagnostics-color=auto" "-Wall" "-Winvalid-pch" "-Werror" "-std=gnu11" "-O2" "-g" "-mcx16" "-msse2" "-fno-link-libatomic" "-D_GNU_SOURCE" "-D_FILE_OFFSET_BITS=64" "-D_LARGEFILE_SOURCE" "-fno-strict-aliasing" "-fno-common" "-fwrapv" "-fno-pie" "-no-pie" "-ftrivial-auto-var-init=zero" "-fzero-init-padding-bits=all" "-fzero-call-used-regs=used-gpr" "-fstack-protector-strong" "-Wempty-body" "-Wendif-labels" "-Wexpansion-to-defined" "-Wformat-overflow=2" "-Wformat-security" "-Wformat-y2k" "-Wignored-qualifiers" "-Wimplicit-fallthrough=2" "-Winit-self" "-Wmissing-format-attribute" "-Wmissing-prototypes" "-Wnested-externs" "-Wold-style-declaration" "-Wold-style-definition" "-Wredundant-decls" "-Wshadow=local" "-Wstrict-prototypes" "-Wtype-limits" "-Wundef" "-Wvla" "-Wwrite-strings" "-Wno-missing-include-dirs" "-Wno-psabi" "-Wno-shift-negative-value" "-iquote" "." "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/include" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/x86_64" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/generic" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/tcg/x86_64" "-DNCURSES_WIDECHAR" "-DNCURSES_WIDECHAR=1" "-DCPU_DEFS_H" "-DCOMPILING_SYSTEM_VS_USER" "-DCONFIG_SOFTMMU" -MD -MQ libsystem_arm.a.p/hw_arm_apple_dtree.c.obj -MF "libsystem_arm.a.p/hw_arm_apple_dtree.c.obj.d" -o libsystem_arm.a.p/hw_arm_apple_dtree.c.obj "-c" ../hw/arm/apple_dtree.c
+../hw/arm/apple_dtree.c: In function 'adt_find_node':
+../hw/arm/apple_dtree.c:78:29: error: implicit declaration of function 'strsep'; did you mean 'strset'? [-Wimplicit-function-declaration]
+   78 |     while (NULL != (token = strsep(&string, kDTPathNameSeparator))) {
+      |                             ^~~~~~
+      |                             strset
+../hw/arm/apple_dtree.c:78:29: error: nested extern declaration of 'strsep' [-Werror=nested-externs]
+../hw/arm/apple_dtree.c:78:27: error: assignment to 'char *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+   78 |     while (NULL != (token = strsep(&string, kDTPathNameSeparator))) {
+      |                           ^
+cc1.exe: all warnings being treated as errors
+[2071/2095] Compiling C object libsystem_arm.a.p/hw_arm_xnu_patch.c.obj
+[2072/2095] Compiling C object libsystem_arm.a.p/hw_arm_boot.c.obj
+[2073/2095] Compiling C object libsystem_arm.a.p/hw_arm_apple_amcc.c.obj
+[2074/2095] Compiling C object libsystem_arm.a.p/hw_intc_arm_gicv3_cpuif_common.c.obj
+[2075/2095] Compiling C object libsystem_arm.a.p/hw_arm_macho.c.obj
+[2076/2095] Compiling C object libsystem_arm.a.p/hw_arm_apple_regs.c.obj
+FAILED: [code=1] libsystem_arm.a.p/hw_arm_apple_regs.c.obj 
+"cc" "-m64" "-Ilibsystem_arm.a.p" "-I." "-I.." "-Itarget/arm" "-I../target/arm" "-Isubprojects/dtc/libfdt" "-I../subprojects/dtc/libfdt" "-Ihw/arm" "-Iqapi" "-Itrace" "-Iui" "-Iui/shader" "-IC:/devkitPro/msys2/mingw64/bin/../include/pixman-1" "-IC:/devkitPro/msys2/mingw64/bin/../include" "-IC:/devkitPro/msys2/mingw64/bin/../include/glib-2.0" "-IC:/devkitPro/msys2/mingw64/bin/../lib/glib-2.0/include" "-IC:/devkitPro/msys2/mingw64/bin/../include/ncursesw" "-fdiagnostics-color=auto" "-Wall" "-Winvalid-pch" "-Werror" "-std=gnu11" "-O2" "-g" "-mcx16" "-msse2" "-fno-link-libatomic" "-D_GNU_SOURCE" "-D_FILE_OFFSET_BITS=64" "-D_LARGEFILE_SOURCE" "-fno-strict-aliasing" "-fno-common" "-fwrapv" "-fno-pie" "-no-pie" "-ftrivial-auto-var-init=zero" "-fzero-init-padding-bits=all" "-fzero-call-used-regs=used-gpr" "-fstack-protector-strong" "-Wempty-body" "-Wendif-labels" "-Wexpansion-to-defined" "-Wformat-overflow=2" "-Wformat-security" "-Wformat-y2k" "-Wignored-qualifiers" "-Wimplicit-fallthrough=2" "-Winit-self" "-Wmissing-format-attribute" "-Wmissing-prototypes" "-Wnested-externs" "-Wold-style-declaration" "-Wold-style-definition" "-Wredundant-decls" "-Wshadow=local" "-Wstrict-prototypes" "-Wtype-limits" "-Wundef" "-Wvla" "-Wwrite-strings" "-Wno-missing-include-dirs" "-Wno-psabi" "-Wno-shift-negative-value" "-iquote" "." "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/include" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/x86_64" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/host/include/generic" "-iquote" "C:/GoldenGate/darwin-vm/qemu-sptm/tcg/x86_64" "-DNCURSES_WIDECHAR" "-DNCURSES_WIDECHAR=1" "-DCPU_DEFS_H" "-DCOMPILING_SYSTEM_VS_USER" "-DCONFIG_SOFTMMU" -MD -MQ libsystem_arm.a.p/hw_arm_apple_regs.c.obj -MF "libsystem_arm.a.p/hw_arm_apple_regs.c.obj.d" -o libsystem_arm.a.p/hw_arm_apple_regs.c.obj "-c" ../hw/arm/apple_regs.c
+In file included from C:/GoldenGate/darwin-vm/qemu-sptm/include/hw/core/registerfields.h:14,
+                 from ../target/arm/cpregs.h:24,
+                 from ../hw/arm/apple_regs.c:10:
+../hw/arm/apple_regs.c: In function 'apple_regs_init':
+C:/GoldenGate/darwin-vm/qemu-sptm/include/qemu/bitops.h:24:38: error: left shift count >= width of type [-Werror=shift-count-overflow]
+   24 | #define BIT(nr)                 (1UL << (nr))
+      |                                      ^~
+../hw/arm/apple_regs.c:26:40: note: in expansion of macro 'BIT'
+   26 | #define TAG_OFFSET_EL2_LOCK            BIT(63)
+      |                                        ^~~
+../hw/arm/apple_regs.c:148:40: note: in expansion of macro 'TAG_OFFSET_EL2_LOCK'
+  148 |     APPLE_STATE(env)->tag_offset_el2 = TAG_OFFSET_EL2_LOCK |
+      |                                        ^~~~~~~~~~~~~~~~~~~
+cc1.exe: all warnings being treated as errors
+[2077/2095] Compiling C object libqemu-aarch64-softmmu.a.p/configs_targets_aarch64-softmmu.c.obj
+[2078/2095] Compiling C object libsystem_arm.a.p/hw_intc_arm_gicv3_cpuif.c.obj
+[2079/2095] Compiling C object libsystem_arm.a.p/hw_intc_armv7m_nvic.c.obj
+[2080/2095] Compiling C object libqemu-aarch64-softmmu.a.p/target_arm_cpu64.c.obj
+ninja: build stopped: subcommand failed.
+EXIT: 1

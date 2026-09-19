@@ -1,0 +1,20 @@
+# Full upstream QEMU source clones - redundant with the authoritative working
+# copy on the T480s (~/goldengate/qemu-sptm-cl4-native); way too large to push.
+qemu-sptm-patchtest/
+darwin-vm/qemu-sptm/
+
+# Large firmware/IPSW binary caches and decrypted Apple firmware - copyrighted
+# Apple binaries, shouldn't be redistributed, and too large for git anyway.
+darwin-vm/firmware/
+darwin-vm/ipsw_db/
+darwin-vm/ios_sysroot.tar.gz
+darwin-vm-m2/firmware/
+darwin-vm-m2/ipsw_db/
+darwin-vm-m2/nvram.bin
+darwin-vm-m2/__pycache__/
+
+# Local machine artifacts
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db

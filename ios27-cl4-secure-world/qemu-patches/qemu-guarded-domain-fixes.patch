@@ -1,0 +1,123 @@
+diff --git a/target/arm/helper.c b/target/arm/helper.c
+index dc9f79a..11166f4 100644
+--- a/target/arm/helper.c
++++ b/target/arm/helper.c
+@@ -10100,6 +10100,18 @@ int fp_exception_el(CPUARMState *env, int cur_el)
+ #ifndef CONFIG_USER_ONLY
+     uint64_t hcr_el2;
+ 
++    /*
++     * Apple GXF: the guarded execution domain (SPTM/TXM and the SK / exclave
++     * kernel "CL4") is handed an FP-enabled context by hardware. This model
++     * does not bank CPACR_EL1 across GXF and the SK genters before XNU has
++     * programmed CPACR, so honouring CPACR here would spuriously trap the
++     * guarded kernel's first Advanced-SIMD instruction (ESR EC 0x07). While a
++     * guarded domain is active, FP/SIMD is always accessible.
++     */
++    if (env->currentg) {
++        return 0;
++    }
++
+     /*
+      * CPACR and the CPTR registers don't exist before v6, so FP is
+      * always accessible
+diff --git a/target/arm/ptw.c b/target/arm/ptw.c
+index 699da26..8f023d1 100644
+--- a/target/arm/ptw.c
++++ b/target/arm/ptw.c
+@@ -3733,7 +3733,16 @@ static bool get_phys_addr_disabled(CPUARMState *env,
+         /* Fill in cacheattr a-la AArch64.TranslateAddressS1Off. */
+         if (r_el == 1) {
+             uint64_t hcr = arm_hcr_el2_eff_secstate(env, ptw->in_space);
+-            if (hcr & HCR_DC) {
++            /*
++             * Apple GXF: the guarded domain (SK / exclave kernel "CL4") runs
++             * its early boot with the MMU disabled but expects Normal memory
++             * semantics (its startup memcpy/memset use unaligned Advanced-SIMD
++             * accesses that are illegal against Device-nGnRnE memory). Real HW
++             * provides this via HCR_EL2.DC-style default-cacheable behaviour
++             * for the secure world; mirror it by treating MMU-off guarded data
++             * accesses as Normal Write-Back.
++             */
++            if ((hcr & HCR_DC) || env->currentg) {
+                 if (hcr & HCR_DCT) {
+                     memattr = 0xf0;  /* Tagged, Normal, WB, RWA */
+                 } else {
+diff --git a/target/arm/tcg/helper-a64.c b/target/arm/tcg/helper-a64.c
+index d8a5f2f..3aa8300 100644
+--- a/target/arm/tcg/helper-a64.c
++++ b/target/arm/tcg/helper-a64.c
+@@ -18,6 +18,12 @@
+  */
+ 
+ #include "qemu/osdep.h"
++
++extern uint64_t g_cl4_entry_pc;
++extern uint64_t g_cl4_x1_inject;
++extern uint64_t g_cl4_tramp_pc;
++extern int g_cl4_ctors_done;
++extern uint64_t g_cl4_tpidr;
+ #include "qemu/units.h"
+ #include "cpu.h"
+ #include "gdbstub/helpers.h"
+@@ -753,6 +759,37 @@ void HELPER(exception_return)(CPUARMState *env, uint64_t new_pc)
+         }
+         env->pc = new_pc;
+ 
++        /*
++         * EXPERIMENTAL PROBE (see hw/arm/xnuboot_sptm.c): SPTM ERETs into the
++         * SK/CL4 entrypoint with x1=0 in our synthesized boot, so CL4's boot-info
++         * tag3 (pointer to a domain descriptor) is null and it faults. Inject
++         * x1 -> &synthesized_descriptor at exactly this ERET so we can observe the
++         * next boot stage. Only fires for the guarded CL4 entry with x1 still 0.
++         */
++        if (g_cl4_entry_pc && new_pc == g_cl4_entry_pc &&
++            env->currentg && env->xregs[1] == 0) {
++            env->xregs[1] = g_cl4_x1_inject;
++            qemu_log_mask(CPU_LOG_INT,
++                          "[cl4] probe: injected x1=0x%" PRIx64 " at CL4 entry\n",
++                          env->xregs[1]);
++        }
++        /*
++         * Divert the FIRST guarded return into CL4's entry to the ctor-runner
++         * trampoline, which calls the 11 __mod_init_func constructors and then
++         * branches to the real entry (its Lentry == g_cl4_entry_pc) itself.
++         */
++        if (g_cl4_tramp_pc && !g_cl4_ctors_done &&
++            new_pc == g_cl4_entry_pc && env->currentg) {
++            g_cl4_ctors_done = 1;
++            if (g_cl4_tpidr) {
++                env->cp15.tpidr_el[0] = g_cl4_tpidr;
++            }
++            env->pc = g_cl4_tramp_pc;
++            qemu_log_mask(CPU_LOG_INT,
++                          "[cl4] ctor-runner: divert entry -> trampoline 0x%" PRIx64 "\n",
++                          g_cl4_tramp_pc);
++        }
++
+         qemu_log_mask(CPU_LOG_INT, "Exception return from AArch64 EL%d to "
+                       "AArch64 EL%d PC 0x%" PRIx64 "\n",
+                       cur_el, new_el, env->pc);
+diff --git a/target/arm/tcg/hflags.c b/target/arm/tcg/hflags.c
+index 0716ca9..6eeb910 100644
+--- a/target/arm/tcg/hflags.c
++++ b/target/arm/tcg/hflags.c
+@@ -39,6 +39,18 @@ static bool aprofile_require_alignment(CPUARMState *env, int el, uint64_t sctlr)
+         return true;
+     }
+ 
++    /*
++     * Apple GXF: the guarded domain (SK / exclave kernel "CL4") runs early
++     * boot with the MMU off but is given Normal (not Device) memory by the
++     * secure world, so its unaligned Advanced-SIMD startup code is legal.
++     * get_phys_addr_disabled() already returns Normal WB for guarded MMU-off
++     * accesses; match that here so the translator does not bake in an
++     * alignment requirement (unless the guarded kernel itself sets SCTLR.A).
++     */
++    if (env->currentg) {
++        return false;
++    }
++
+     /*
+      * With PMSA, when the MPU is disabled, all memory types in the
+      * default map are Normal, so don't need aligment enforcing.

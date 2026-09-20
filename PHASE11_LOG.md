@@ -57,18 +57,53 @@ right moment, or change the wrapper to redirect to `/dev/ttys0`
 (serial) instead of `/dev/console` for a boot config that doesn't need the
 graphical console.
 
-## Immediate next step
+## Follow-up: WindowServer still didn't spawn
 
-Watching the same run for `WindowServer` to get a PID. If opendirectoryd
-staying alive was the actual blocker (very plausible -- loginwindow needs
-working directory services to authenticate/look up the console user before
-it can proceed to connect to WindowServer), this could be the run that
-finally gets a WindowServer PID for the first time. If it doesn't happen
-within a few more minutes, the next thing to check is exactly what
-loginwindow is waiting on post-`running` (same technique as before: full
-backtrace + kext-name list from any crash, not the generic caller field;
-or just keep reading the live log for what loginwindow tries to connect to
-next).
+Let the run continue for 15+ minutes: `opendirectoryd` and `loginwindow`
+both stayed alive and stable the entire time (huge win, see above), but
+`WindowServer` never printed a "Successfully spawned" line. The run
+eventually hit the same pre-existing, unrelated `TXM [Panic]: code
+0x00000063` crash noted in PHASE10 (not a regression -- known, separate
+wall).
+
+**Why WindowServer doesn't launch, confirmed via the boot log**: right at
+boot, repeated `Couldn't alloc class "AFKResource"` failures (lines
+235/253/295/1264 in `/tmp/cl4_odwrap_serial.log`). This is exactly the
+wall Codex already flagged in `CODEX_HANDOFF3.md`'s "Important graphics
+reality check" section: with the `dcp` node defanged (necessary to avoid
+`VIOLATION_DOUBLE_NEST`, see PHASE10), there is no real
+IOFramebuffer-conforming display service in this boot at all --
+`AFKFirmwareService`'s personality exists in the kernelcache but the
+actual `AFKResource` class/support isn't available, so nothing can
+allocate it. WindowServer's core requirement (at least one working
+display service to attach to) is never satisfied, so it never proceeds to
+actually launch, regardless of how healthy opendirectoryd/loginwindow are.
+
+**This is not a new problem and not caused by anything in Phase 10/11** --
+it's the trade-off of disabling DCP to survive the SPTM crash, and it was
+explicitly anticipated. Fixing opendirectoryd got us all the way to this
+wall for the first time; the graphics/AFK pipeline is now THE remaining
+blocker for real Aqua.
+
+## Next step for whoever picks this up
+
+Investigate the actual display pipeline path now that everything below it
+is stable:
+1. Understand what `AFKResource`/`AFKFirmwareService` actually needs --
+   is the class genuinely missing from this kernelcache build (would need
+   a different bootkc image with fuller AFK/DCP kext support), or is it
+   present but failing to instantiate because the `dcp` node it wants to
+   bind to was intentionally defanged?
+2. Consider whether a MIDDLE GROUND exists: keep the `dcp` node's
+   `compatible` string defanged (to avoid the RTBuddy secure-route crash)
+   but see if a different/simpler IOFramebuffer-conforming service could
+   be registered separately (not going through the DCP mailbox at all) --
+   possibly extending QEMU's own `DARWIN_FB=1` boot-framebuffer mechanism
+   into something IOKit-visible as a real framebuffer service, rather than
+   just a console text renderer.
+3. This is squarely "the DCP/AFK display-pipeline wall" flagged as likely
+   back in PHASE5_LOG, now finally reachable and worth real investigation
+   time.
 
 ## Housekeeping note
 

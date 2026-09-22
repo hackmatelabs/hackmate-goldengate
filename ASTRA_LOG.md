@@ -1211,6 +1211,54 @@ a name: a virtual method on an RTBuddy-family peer/state object, called
 with a null `this`, at a point in RTBuddy's flow reached specifically
 during the real-base-system daemon storm.
 
+### Follow-up: live-breakpointed the exact crash site - panic is non-deterministic, and a bigger finding underneath
+
+Set a live breakpoint at the crashing function's confirmed runtime entry
+(`0xfffffe002b66f1d4` = static + `0x20000000`, both independently
+verified above) on a fresh paused (`-s -S`) boot, then `continue`d. First
+attempt got orphaned by an SSH-side timeout (the remote `lldb` process
+kept running server-side with its stdout going nowhere - killed it and
+relaunched properly with `nohup ... > file 2>&1 &` this time, a
+methodology note for future live-debug sessions: **always nohup+redirect
+live lldb sessions**, an SSH client-side timeout does not kill the
+remote process, it just orphans your view of it).
+
+The breakpoint never fired even after ~20 minutes of boot time - notably
+longer than every earlier capture of this same panic (which hit within
+5-8 minutes). In that time, watched **WindowServer crash and respawn
+repeatedly** (PIDs 96, 128, 133, 136, 141, ... - a real, ongoing
+crash-loop, not a one-time failure), each cycle hitting the exact same
+`Couldn't alloc class "AFKResource"` line and the same
+`AppleFileSystemDriver: using apfs-preboot-uuid` / `Invalid UUID string
+''` sequence, with **zero kernel panics** the whole time (`grep -c panic`
+on the live log: 0 matches).
+
+**This means the RTBuddy null-`this` panic is not deterministic per
+WindowServer crash-cycle** - it happened reliably in earlier captures but
+didn't happen at all in 20+ minutes and 5+ respawns here, plausibly
+because live-debugger overhead perturbs timing enough to avoid whatever
+race triggers the null object (a real, plausible explanation for a
+null-`this` bug - the object is likely being read before some other
+thread finishes constructing/assigning it, and slower execution under a
+debugger gives that other thread more time to finish first).
+
+**The bigger, now much clearer point**: whether or not the kernel
+panics, **WindowServer itself never successfully starts** - it just dies
+and gets relaunched by `launchd` over and over, forever, hitting the same
+`AFKResource` failure every single cycle. The kernel panic (when it does
+happen) is a downstream *consequence* of enough failed cycles (matches
+the already-fixed TXM slot-exhaustion mechanism exactly), not the actual
+thing standing between this project and a real desktop. **The real
+blocker remains what PHASE12 already exhaustively proved**: WindowServer'
+s DCP-adjacent bring-up genuinely needs a class
+(`AFKFirmwareService`) that doesn't exist anywhere in this build, real
+hardware included, and needs a real AuxKC (blocked on a KDK Apple hasn't
+published for this build) to fix properly. Nothing this session's
+address-forensics work changes that conclusion - it only sharpens exactly
+how the eventual kernel panic happens as a side effect, which was always
+a secondary problem next to WindowServer's actual inability to ever
+complete startup.
+
 ### Honest assessment
 
 This is the deepest, most precise characterization of this specific crash

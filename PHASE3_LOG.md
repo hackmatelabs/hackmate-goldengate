@@ -35,6 +35,40 @@ No change is being claimed yet: the directionality and the actual Golden Gate
 guest traffic must be captured first. This mismatch is a concrete item to test
 once the guest answers RTKit HELLO.
 
+## 2026-09-20 — installer-track handoff and device-tree experiment
+
+Read `C:\GoldenGate\forcodexfromopencode1.txt` in full. It changes the active
+target from the restore shell to a macOS installer image and reports a separate
+working track: `WindowServer` starts repeatedly for 75–150 seconds, then the
+run ends in TXM panic code `0x63`. The installer launch command, patched
+firmware names, serial log `/tmp/gg_diag_serial.log`, and monitor socket
+`/tmp/gg_diag.sock` are now the authoritative continuation points for that
+track. The handoff explicitly says to keep `netboot10`, `sptm.asidfix4`,
+`txm.slotfix4`, and the `dtree.dcp8.bigdram2.dcpbyte.nubx.bsroot.nopda.bootuuid`
+variant; it also records that `cpus=1`, `asidfix5`, and netboot3/4/5/6/8 are
+known-bad.
+
+Before switching to the installer run, I completed one bounded check on the
+older restore image. The untouched Mac14,3 DeviceTree IM4P was available in the
+local IPSW cache. I extracted it, ran a deterministic copy of `dt_fixup.py`,
+and confirmed its output hash exactly matches the existing known-good `firmware/dtree`.
+I then generated and transferred an experimental `firmware/dtree.dcp` that
+preserved `compatible` only for `arm-io/dcp` and its `iop-dcp-nub`. That boot
+still reached the restore shell and still produced three `Couldn't alloc class
+"AFKResource"` messages, with no RTBuddy or DCP mailbox traffic.
+
+A second variant, `dtree.dcp8`, preserved `disp0`, `dcp`, `dcp/iop-dcp-nub`,
+`dcp0-expert`, `dart-dcp`, and `dart-disp0` and was run with `DARWIN_DISP=all
+DARWIN_DART=1`. QEMU mapped all requested stubs, but the guest produced no
+serial output for 50 seconds and sat sleeping at 0% host CPU, so that variant
+was terminated. No success is claimed. Both variants are experimental files;
+the known-good `firmware/dtree` was not modified.
+
+The installer track is now the next concrete test because it reaches
+WindowServer and has a much more complete user-space display path. Its reported
+wall is graphics-service attachment/AuxKC and then TXM 0x63, rather than the
+restore image's absent display stack.
+
 ## 2026-09-16, later — Codex's device-tree fix and its usage-limit handoff
 
 Codex (working from `CODEX_HANDOFF.md` after Claude hit its own usage limit)
@@ -399,3 +433,178 @@ binary that includes the (real, working, but not sufficient alone) DART IRQ
 wiring fix. `hw/arm/darwin.c` on the T480s now has `create_dart()` accepting
 and pulsing a real IRQ line — safe, additive, doesn't affect the default
 (no-DART) boot path at all.
+
+## 2026-09-20 whole-codebase resync (Codex)
+
+Re-read the current handoff set, phase logs, local artifacts, and the live T480s
+state. The active target is the installer track described by
+`forcodexfromopencode1.txt`, not the older restore/full-system command in
+PHASE6. The verified current asset set is:
+
+* `bootkc.md0size.uidfix.netboot10`
+* `dtree.dcp8.bigdram2.dcpbyte.nubx.bsroot.nopda.bootuuid`
+* `sptm.asidfix4`
+* `txm.slotfix4`
+* installer trust cache `022-20292-673.raw.tc`
+* `imageboot-wrapper-022.dmg`
+
+The T480s was clean at audit time (no QEMU process). The latest saved installer
+serial is 357 KiB at `/tmp/gg_diag_serial.log`; its verified behavior is full
+bootstrap, `opendirectoryd` serving, WindowServer spawning and running for about
+75 seconds per attempt, five SIGABRT respawns, repeated `Couldn't alloc class
+\"AFKResource\"`, and final TXM panic code `0x63`. This is evidence of a
+substantial boot milestone, but not a graphical desktop: no Aqua pixels or
+InstallerProgress UI were verified in that run.
+
+The DCP/DART investigation remains a separate known wall. The safe DCP tree
+reaches `bash-3.2#`; exposing the DART compatible node causes a pre-XNU WFI
+hang even with a real wired/pulsed AIC IRQ. The current highest-value installer
+work is therefore WindowServer abort diagnosis and TXM `0x63` analysis, while
+preserving the known-good netboot10 configuration.
+
+### Clean installer reruns and pixel check (2026-09-20)
+
+The exact handoff command was run twice after this audit. The first no-`-icount`
+run reproduced `VIOLATION_DOUBLE_NEST` at `sptm_set_shared_region` before the
+WindowServer milestone. The second run added the previously tested
+`-icount shift=auto` timing mode and progressed further: InstallerProgress
+spawned and WindowServer reached `running` (pid 102). The serial evidence is
+archived locally as `gg_diag_serial.icount_windowserver.log`.
+
+At that point QEMU monitor `screendump` produced `gg_current.png` (SHA256
+`63378847C5CA2BC9FF520E2346086F09D2556AD51555F908952505062B95FEE2`). Visual
+inspection shows only the emulated serial/log text renderer on the 640x1136
+surface; there is no Apple logo, InstallerProgress window, or Aqua UI. The
+run was stopped after the serial stream stopped advancing while QEMU remained
+alive. This is a verified negative pixel result, not a desktop claim.
+
+The next implementation target is the missing IOKit-visible
+framebuffer/AFKResource path needed for WindowServer to bind a display. Further
+timing permutations are lower value until that service boundary is addressed.
+
+### Installer image inspection (2026-09-20)
+
+Mounted `imageboot-wrapper-022.dmg` and its nested `BaseSystem.dmg` read-only on
+the T480s. The BaseSystem contains SkyLight's WindowServer executable but no
+standalone IOFramebuffer, AGX, or Apple GPU driver payload; the only matching
+graphics artifact at shallow depth is `AGXCompilerCore` metadata. This matches
+the live `Couldn't alloc class \"AFKResource\"` messages and strengthens the
+AuxKC/personality diagnosis: the boot framebuffer carve-out is present, but the
+IOKit display service class that WindowServer expects is not supplied by the
+installer image.
+
+The merged full-system image does contain the missing display-family payloads as
+standalone kexts, including `AFKACIPCKext.kext`, `AFKRemoteCPMS.kext`,
+`AppleFirmwareKit.kext`, `AppleDCP.kext`, `IOMobileGraphicsFamily-DCP.kext`,
+`AppleMobileDispH17P-DCP.kext`, `IOGPUFamily.kext`, and the DCP proxy kexts.
+This is a concrete Hackintosh-style injection opportunity. On-host `kmutil`
+was tested against the exact 26A428 bootkc and the full-system Extensions tree,
+with `--allow-missing-kdk` and the installed 26.5 SDK; it still refuses to
+build because the host has no SDK/KDK matching build 26A428. No AuxKC was
+created, so no unverified kext injection was attempted.
+
+Follow-up collection tests confirmed the BootKC is a valid arm64e fileset
+(`kmutil inspect -a arm64e` succeeds). `kextcache` translated the intended
+injection into a `kmutil create -n boot` command, but collection creation still
+requires a real SDK/KDK matching 26A428; explicit arm64e, `--build 26A428`,
+`--allow-missing-kdk`, and a synthetic SDK SystemVersion plist did not bypass
+that validation. This leaves the exact next engineering options as obtaining
+the matching KDK/SDK or implementing an equivalent fileset/AuxKC merger in the
+existing IPSW tooling.
+
+### Hackintosh/OpenCore cross-check (2026-09-20)
+
+Reviewed current OpenCore Legacy Patcher kernel-cache guidance and the
+`kmutil` manual. Modern Apple Silicon kexts are only usable after being linked
+into an AuxKC/BootKC; copying `.kext` bundles beside the system is insufficient.
+The community pattern is `kmutil create --new aux --boot-path ...
+--system-path ... --allow-missing-kdk`, with KDK contents merged into the target
+volume first. The exact OpenCore-style invocation was tested here with explicit
+arm64e, BootKC/SystemKC paths, an AuxKC output path, target volume root, and the
+AFK/DCP kexts. It still fails at the host tool's strict SDK/KDK build check for
+26A428. Community guidance confirms that a nearby KDK is not a valid substitute;
+the remaining path is a custom fileset merger or Apple's exact kit.
+
+### AFK personality experiments (2026-09-20)
+
+Inspection of the BootKC `__PRELINK_INFO` showed the `AppleFirmwareKit` entry
+advertises an `AFKResource` personality, while the embedded AppleFirmwareKit
+executable contains related AFK classes but no `AFKResource` or
+`AFKResourceUserClient` implementation. Two reversible prelink experiments
+confirmed causality:
+
+* Remapping `AFKResource` to the existing `AFKSharedMemoryResource` and its
+  user client removed all four `Couldn't alloc class "AFKResource"` messages,
+  but stalled the installer during data-volume setup.
+* Remapping it to base `IOService` and removing the nonexistent user-client
+  property also removed the allocation errors, but stalled even earlier at
+  `init-with-data-volume`.
+
+Neither variant produced WindowServer or pixels, and both were stopped before
+further memory use. The untouched `netboot10` BootKC remains the baseline. The
+result proves the failure is a real missing class/API implementation, not just
+an absent personality string; a usable substitute must implement the AFK
+resource user-client contract rather than merely satisfy IOKit matching.
+
+A binary-level alias experiment then renamed the embedded
+`AFKSharedMemoryResource`/`AFKSharedMemoryUserClient` class strings to the
+advertised `AFKResource`/`AFKResourceUserClient` names while leaving the
+original personality intact. This also removed the four allocation errors, but
+the boot stalled before normal bootstrap progressed and never reached
+WindowServer. The alias is therefore not a safe substitute; the AFK API's
+semantics, not only its class registration, are required.
+
+An additional byte-preserving patch changed only the exact prelink XML value
+`<string>AFKResource</string>` to `IOService`, leaving all other BootKC bytes
+unchanged. The run still removed the allocation messages but stalled in
+`rc.prelogindata` before WindowServer. This rules out plist reserialization as
+the sole cause, and confirms that replacing the AFK class with a generic
+service cannot satisfy the installer boot contract.
+
+### Netboot10 rerun after OpenCode handoff (2026-09-20)
+
+The current `netboot10` installer configuration was launched on the T480s with
+`sptm.asidfix4`, `txm.slotfix4`, the installer trust cache and imageboot
+ramdisk, Cocoa display, `-icount shift=auto`, and a 4 GB guest cap. The host
+stayed responsive, but this exact timing/artifact combination regressed before
+userspace: the serial log reached repeated
+`[SPTM] VIOLATION_DOUBLE_NEST: sptm_set_shared_region` panics and a nested
+panic reset. No WindowServer or installer pixels were produced in this run.
+The prior no-`icount` netboot10 run remains the valid WindowServer milestone,
+so the next test uses that timing mode rather than treating this regression as
+a new graphics wall.
+
+The subsequent no-`icount` Cocoa rerun reached `Installer Progress[57]` in
+the running state and registered WindowServer with launchd, but the monitor
+`screendump` was a 640x1136 all-black image. The QEMU log confirms the boot
+framebuffer was carved and exposed at `0x11ffd38000`; no AFK transport messages
+were emitted. A follow-up run with `DARWIN_DISP=1` mapped all available
+`disp0`/`dcp` register ranges, but retained the same missing
+`Couldn't alloc class "AFKResource"` messages and did not produce pixels.
+These are verified display-side negative results, not an Aqua claim.
+
+The `DARWIN_DISP=1` run was terminated after collecting its serial evidence;
+the host QEMU process is no longer running. It mapped the complete `disp0`,
+`dcp`, and DART register ranges, yet still emitted no AFK handshake and no
+WindowServer pixels. This keeps the display stub as a diagnostic aid only; it
+does not constitute a working IOMFB implementation.
+
+### Full-system Installer.app launch experiment (2026-09-20)
+
+The merged 27 GB system image contains Apple's `Installer.app`, so I used the
+existing trusted launch-daemon diagnostic hook to schedule its native binary
+after boot. The hook was made persistent with `KeepAlive=true` and the full
+system image was booted using the dcp-defanged device tree and `sptm.asidfix4`.
+The run did reach WindowServer/loginwindow registration, but the hook remained
+pending in launchd's on-demand domain and never logged its launch marker. The
+guest then reproduced `VIOLATION_DOUBLE_NEST` and was stopped. No Installer.app
+window or pixels were observed; this experiment did not change the baseline
+artifacts and the launch hook is retained for a later boot-mode fix.
+
+Adding `KeepAlive`, `StartInterval`, and a direct Installer invocation did not
+change that behavior: launchd still held the repurposed service in the
+on-demand domain, so no launch marker or Installer process appeared. A second
+attempt repurposed `com.apple.syslogd` (with a saved original plist) to force an
+unconditional launch; it was also held pending and was reverted immediately.
+The system-image launch-daemon files are restored to their pre-experiment
+state. No graphical result was claimed.

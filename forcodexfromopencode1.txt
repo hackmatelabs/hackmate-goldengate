@@ -1,0 +1,119 @@
+# HANDOFF: Golden Gate installer track — from OpenCode to Codex
+Date: 2026-09-20/21. Author: OpenCode session (Windows side) driving the T480s over SSH.
+
+## 1. Goal
+Boot the macOS 27 Golden Gate INSTALLER to the visible graphical Aqua installer UI
+in QEMU Cocoa on the T480s (raahimsyed@192.168.1.24, hackintosh Tahoe 26.5.2).
+QEMU window must stay visible (`-display cocoa`) for all tests.
+
+## 2. Current state (what works RIGHT NOW)
+- QEMU boots the installer image to full system bootstrap: launchd runs all
+  boot tasks, configd + opendirectoryd run and serve queries, WindowServer
+  SPAWNS (pid 100, runs ~75-150s, then SIGABRTs itself, respawns x5), then a
+  `TXM [Panic]: code 0x63` ends the run. Serial log proves all of this.
+- Latest serial: pull /tmp/gg_diag_serial.log from the T480s after any run.
+- QEMU is probably still running on the T480s (`ps aux | grep qemu-system`).
+  Monitor socket: /tmp/gg_diag.sock. Serial: /tmp/gg_diag_serial.log.
+
+## 3. Exact current boot (launcher: ~/launch_netboot2.sh on the T480s)
+```
+cd ~/goldengate/qemu-sptm-cl4-native
+DARWIN_FB=1 DARWIN_RTKIT=1 build/qemu-system-aarch64 \
+  -M darwin \
+  -bootkc firmware/bootkc.md0size.uidfix.netboot10 \
+  -dtree firmware/dtree.dcp8.bigdram2.dcpbyte.nubx.bsroot.nopda.bootuuid \
+  -tc ~/goldengate/installer_work_26A428/tc_extracted/022-20292-673.raw.tc \
+  -ramdisk ~/goldengate/installer_work_26A428/decrypted/imageboot-wrapper-022.dmg \
+  -sptm firmware/sptm.asidfix4 \
+  -txm firmware/txm.slotfix4 \
+  -args 'rd=md0 serial=3 -v -noprogress wdt=-1 wlan-olyhal-abort -rootdmg-ramdisk auth-root-dmg=file:///BaseSystem.dmg allow-root-hash-mismatch=1 acm_fastsim=1 trm_base_system=0 rtb_syslog_verbosity=7' \
+  -serial file:/tmp/gg_diag_serial.log -display cocoa \
+  -monitor unix:/tmp/gg_diag.sock,server,nowait -m 8G
+```
+NOTE: no `-icount` (tested with and without; hang reproduces both ways, and
+without icount it boots fine to the same point, so icount is NOT load-bearing
+on this track). NOTE: no `cpus=1` (see #5).
+
+## 4. Firmware artifacts (all in ~/goldengate/qemu-sptm-cl4-native/firmware/)
+- bootkc.md0size.uidfix.netboot1 = current base (md0size+uidfix+netboot patches baked in).
+- netboot2 = netboot1 + retry-loop exit patch (9c0's 97c `b 94c` -> `b 98c`). Inert, superseded.
+- netboot3 = netboot2 + 9c0-entry `ret`. Caused RTBuddy-path abort (x20=0). DO NOT USE.
+- netboot4 = netboot1 + dispatch blraa->NOP. Caused early panic (callbacks load-bearing). DO NOT USE.
+- netboot5/6 = ...9140-entry success stubs. Caused early double-wait panic. DO NOT USE.
+- netboot7 = netboot1 + 9c0 928->98c jump. Still hung (storm moved). Superseded.
+- netboot8 = netboot1 + 9c0-954 + ...8048-811c success stubs. Early double-wait panic. DO NOT USE.
+- netboot9 = netboot1 + clean-unwind storm breaks. Still hung. Superseded.
+- netboot10 = netboot1 + BootPolicy IOKitPersonality IOResourceMatch IOBSD->ZZZZZ
+  (PRELINK_INFO plist, same-length byte swap). THIS IS THE CURRENT GOOD ONE.
+  Effect: no "BootPolicy" IOService publishes -> libbootpolicy fails fast with
+  `SEP communication (2)` instead of hanging -> bs-early-tasks completes.
+- dtree in use: dtree.dcp8.bigdram2.dcpbyte.nubx.bsroot.nopda.bootuuid
+  (sepfw-load-at-boot=0, protected-data-access=0, boot-uuid set).
+- sptm.asidfix4 + txm.slotfix4 (asidfix5 TESTED and REVERTED: it NOPs a call with
+  essential side effects -> FTE type-confusion panic. asidfix3 tested: same
+  DOUBLE_NEST as 4. Stay on 4.)
+
+## 5. Key findings this session (with evidence)
+a) bs-early-tasks hang = kernel spin in timer/CPU async-work retry loops
+   (...821c scan + ...9140 test + 9c0 driver + ...8048 driver, timestamp via
+   ACNTVCT_EL0 S3_4_C15_C10_6). Root cause: BootPolicy operation waiting on
+   absent SEP. FIXED by removing the BootPolicy service (netboot10) -> fast
+   error `SEP communication (2)` -> boot proceeds. (Proving the hang needed
+   no SEP emulation.)
+b) trm_base_system=0 boot-arg WORKS: TRM decision matrix shows BS=Y and log
+   prints "TRM disabled, TRM won't start in BS." (trm_enabled=0 alone was
+   insufficient.) Kept in args but hang persisted past it, so TRM was not
+   the hang.
+c) DOUBLE_NEST panic at InstallerProgress spawn is caused by XNU seeing 8 CPUs
+   (dtree cpu0-7, P+E clusters) while topology capped to 1 via cpus=1 (SPTM
+   reads dtree directly, mismatch -> ASID/region confusion). REMOVING cpus=1
+   fixed it (boot sails past spawn). Counter-intuitive but reproduced.
+d) SPTM firmware (sptm.asidfix4) contains VIOLATION_DOUBLE_NEST, full
+   report-dispatch machinery (reporter at file 0xFAA94, panic-printf nearby),
+   violation-name table at file 0x1AA80 (u32 offset + u32 flags entries;
+   DOUBLE_NEST name at file 0xC19B = table index 6). asidfix5 NOPs the
+   w0=0x3F report call (DO NOT USE - breaks return-value chain).
+e) WindowServer SPAWNS (pid 100) and runs 75-150s, then SIGABRTs ITSELF
+   (5x: pids 100,111,132,136,138). No AFKResource at boot (AuxKC missing,
+   same wall as PHASE12). No loginwindow, no InstallerProgress UI yet.
+   opendirectoryd WORKS (serves OD queries, UID 205).
+f) Run ends in TXM [Panic] code 0x63 (pre-existing, noted in PHASE10/11 as
+   unstudied next wall).
+g) KASLR slide VARIES per boot (0x20000000 and 0x20004000 both observed;
+   panic logs print it as "Kernel text exec slide"). Always read current
+   boot's slide (QEMU stdout or panic header) before converting addresses.
+   File-pattern patching is slide-independent and verified live via monitor
+   x/ + lldb memory write (gdbstub via HMP `gdbserver`, lldb batch scripts).
+h) Monitor `info registers` PC can appear stuck at one insn (stale IO-sync
+   point); verify with lldb single-stepping before concluding a spin.
+i) QEMU host `sample <pid>` works without auth (lldb -p needs interactive
+   auth; use `sample` for host backtraces).
+
+## 6. Suggested next directions (ranked)
+1. WindowServer SIGABRT reason: it self-aborts after ~75s with no display
+   (AFK missing). Find its abort message (os_log invisible on serial; AMFI
+   denies core dumps). Either satisfy it (fake IOFramebuffer service à la
+   PHASE11 option-2: extend DARWIN_FB into an IOKit-visible framebuffer so WS
+   attaches without AFK/DCP) or determine the exact assert (strings in WS
+   binary for abort/assert messages + timing correlation).
+2. TXM panic 0x63: same methodology as SPTM work (strings in txm.slotfix4,
+   find code 0x63 site). It's the run-killer once WS is fixed.
+3. AuxKC: the real fix for graphics (kmutil create aux needs Apple KDK for
+   26A428, unreleased). Alternative: headless install via startosinstall
+   from a shell (no shell access yet) so the REAL installer generates AuxKC.
+4. DO NOT retry: asidfix5, netboot3/4/5/6/8 (all cause early panics);
+   cpus=1 (causes DOUBLE_NEST here); -icount (irrelevant on this track).
+
+## 7. Access / misc
+- SSH: ssh -i ~/.ssh/hackmate_t480s raahimsyed@192.168.1.24 (key only, BatchMode).
+  T480s is on LAN 192.168.1.x (was .24); NOT on Tailscale. If unreachable, it's
+  offline; ask user to bring it online.
+- Helper scripts from this session (repo root C:\goldengate + ~ on T480s):
+  launch_*.sh, mknetboot*.py, dbg*.sh, bp*.py, kc*.py, symlookup.py — mostly
+  one-off debug scaffolding, keep or delete freely. NOT committed to git.
+- This repo (C:\goldengate) is at origin/main b3d484c + local helper files.
+  T480s ~/hackmate-goldengate is clean at same commit. Live build lives only
+  on T480s (~/goldengate/...); this checkout is docs-only.
+- Known-good pre-change baselines: CODEX_HANDOFF5 (SEP bypass state),
+  PHASE12 (AuxKC wall proof). Current best serial: /tmp/gg_diag_serial.log
+  on T480s (netboot10 run: 365KB, WS running, ends TXM 0x63).

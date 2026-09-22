@@ -1,0 +1,149 @@
+(lldb) command source -s 0 '/tmp/gdb3.cmds'
+Executing commands in '/tmp/gdb3.cmds'.
+(lldb) gdb-remote 127.0.0.1:1234
+Kernel UUID: 95D4D299-EB6D-3F85-8B6D-B9F00605F492
+Load Address: 0xfffffe002700c000
+WARNING: Unable to locate kernel binary on the debugger system.
+Process 1 stopped
+* thread #1, stop reason = signal SIGTRAP
+    frame #0: 0xfffffe002bc2d6c8 
+->  0xfffffe002bc2d6c8: ldr    x10, [x20, #0x1c0]
+    0xfffffe002bc2d6cc: ldr    x10, [x10, #0x58]
+    0xfffffe002bc2d6d0: cmp    x10, x8
+    0xfffffe002bc2d6d4: b.ne   0xfffffe002bc2d6c0
+Target 0: (No executable module.) stopped.
+(lldb) register read x19 x20 x21
+     x19 = 0xfffffe002c9d6028
+     x20 = 0xfffffe197c043780
+     x21 = 0x000000003d47cc4c
+(lldb) disassemble -s 0xfffffe002bc29140 -c 45
+    0xfffffe002bc29140: pacibsp 
+    0xfffffe002bc29144: sub    sp, sp, #0x90
+    0xfffffe002bc29148: stp    x26, x25, [sp, #0x40]
+    0xfffffe002bc2914c: stp    x24, x23, [sp, #0x50]
+    0xfffffe002bc29150: stp    x22, x21, [sp, #0x60]
+    0xfffffe002bc29154: stp    x20, x19, [sp, #0x70]
+    0xfffffe002bc29158: stp    x29, x30, [sp, #0x80]
+    0xfffffe002bc2915c: add    x29, sp, #0x80
+    0xfffffe002bc29160: mrs    x26, TPIDR_EL1
+    0xfffffe002bc29164: ldr    w8, [x26, #0x1c8]
+    0xfffffe002bc29168: cbnz   w8, 0xfffffe002bc29630
+    0xfffffe002bc2916c: mov    x24, x2
+    0xfffffe002bc29170: mov    x20, x1
+    0xfffffe002bc29174: mov    x19, x0
+    0xfffffe002bc29178: ldp    x21, x25, [x0, #0xe0]
+    0xfffffe002bc2917c: add    x0, sp, #0x28
+    0xfffffe002bc29180: bl     0xfffffe002bc18524
+    0xfffffe002bc29184: ldr    x22, [sp, #0x28]
+    0xfffffe002bc29188: ldr    x8, [x26, #0x1b8]
+    0xfffffe002bc2918c: adrp   x23, 3501
+    0xfffffe002bc29190: add    x23, x23, #0x28
+    0xfffffe002bc29194: add    x8, x23, x8, asr #16
+    0xfffffe002bc29198: ldr    x8, [x8, #0x70]
+    0xfffffe002bc2919c: cmp    x8, x22
+    0xfffffe002bc291a0: b.hi   0xfffffe002bc29708
+    0xfffffe002bc291a4: mov    x0, x22
+    0xfffffe002bc291a8: bl     0xfffffe002bd8a194
+    0xfffffe002bc291ac: ldr    x8, [x20, #0x268]
+    0xfffffe002bc291b0: cmp    x22, x8
+    0xfffffe002bc291b4: b.lo   0xfffffe002bc29728
+    0xfffffe002bc291b8: ldrb   w8, [x20, #0x1f0]
+    0xfffffe002bc291bc: tbnz   w8, #0x7, 0xfffffe002bc291dc
+    0xfffffe002bc291c0: tbz    w24, #0x3, 0xfffffe002bc291d0
+    0xfffffe002bc291c4: ldr    w8, [x19, #0x1f4]
+    0xfffffe002bc291c8: cmp    w8, #0x1
+    0xfffffe002bc291cc: b.eq   0xfffffe002bc291dc
+    0xfffffe002bc291d0: mov    x0, x22
+    0xfffffe002bc291d4: mov    w1, #0x1                  ; =1 
+    0xfffffe002bc291d8: bl     0xfffffe002bc297e4
+    0xfffffe002bc291dc: mov    w0, #0x4                  ; =4 
+    0xfffffe002bc291e0: movk   w0, #0xc01, lsl #16
+    0xfffffe002bc291e4: bl     0xfffffe002c15dda4
+    0xfffffe002bc291e8: cbz    w0, 0xfffffe002bc291fc
+    0xfffffe002bc291ec: adrp   x8, 3643
+    0xfffffe002bc291f0: ldr    w8, [x8, #0x1c0]
+(lldb) disassemble -s 0xfffffe002bc2821c -c 45
+    0xfffffe002bc2821c: pacibsp 
+    0xfffffe002bc28220: sub    sp, sp, #0xe0
+    0xfffffe002bc28224: stp    x28, x27, [sp, #0x80]
+    0xfffffe002bc28228: stp    x26, x25, [sp, #0x90]
+    0xfffffe002bc2822c: stp    x24, x23, [sp, #0xa0]
+    0xfffffe002bc28230: stp    x22, x21, [sp, #0xb0]
+    0xfffffe002bc28234: stp    x20, x19, [sp, #0xc0]
+    0xfffffe002bc28238: stp    x29, x30, [sp, #0xd0]
+    0xfffffe002bc2823c: add    x29, sp, #0xd0
+    0xfffffe002bc28240: str    x2, [sp, #0x50]
+    0xfffffe002bc28244: mov    x20, x1
+    0xfffffe002bc28248: mov    x26, x0
+    0xfffffe002bc2824c: ldr    x19, [x1, #0x20]
+    0xfffffe002bc28250: ldr    w21, [x1, #0x64]
+    0xfffffe002bc28254: adrp   x8, 3644
+    0xfffffe002bc28258: ldr    w8, [x8, #0x1c0]
+    0xfffffe002bc2825c: tst    w8, #0xfffffff7
+    0xfffffe002bc28260: b.ne   0xfffffe002bc28f8c
+    0xfffffe002bc28264: add    x0, x26, #0xa8
+    0xfffffe002bc28268: bl     0xfffffe002bc0b2e0
+    0xfffffe002bc2826c: adrp   x8, 3517
+    0xfffffe002bc28270: ldr    w8, [x8, #0x96c]
+    0xfffffe002bc28274: ldr    w9, [x26, #0x2d8]
+    0xfffffe002bc28278: cmp    w8, w9
+    0xfffffe002bc2827c: b.eq   0xfffffe002bc28288
+    0xfffffe002bc28280: mov    x0, x26
+    0xfffffe002bc28284: bl     0xfffffe002bc15770
+    0xfffffe002bc28288: add    x0, x19, #0x100
+    0xfffffe002bc2828c: bl     0xfffffe002bc0a28c
+    0xfffffe002bc28290: mov    x0, x20
+    0xfffffe002bc28294: mov    x1, x26
+    0xfffffe002bc28298: mov    w2, #0x1                  ; =1 
+    0xfffffe002bc2829c: mov    w3, #0x0                  ; =0 
+    0xfffffe002bc282a0: bl     0xfffffe002bc16a10
+    0xfffffe002bc282a4: ldr    w8, [x26, #0x1f0]
+    0xfffffe002bc282a8: mov    w9, #0x97                 ; =151 
+    0xfffffe002bc282ac: ldr    x10, [sp, #0x50]
+    0xfffffe002bc282b0: ldr    w2, [x10]
+    0xfffffe002bc282b4: ldr    x10, [x26, #0x360]
+    0xfffffe002bc282b8: cbz    x10, 0xfffffe002bc282cc
+    0xfffffe002bc282bc: ldr    x10, [x10, #0x38]
+    0xfffffe002bc282c0: cmp    x10, x19
+    0xfffffe002bc282c4: cset   w22, ne
+    0xfffffe002bc282c8: b      0xfffffe002bc282d0
+    0xfffffe002bc282cc: mov    w22, #0x0                 ; =0 
+(lldb) disassemble -s 0xfffffe002bc297e4 -c 35
+    0xfffffe002bc297e4: pacibsp 
+    0xfffffe002bc297e8: sub    sp, sp, #0x30
+    0xfffffe002bc297ec: stp    x20, x19, [sp, #0x10]
+    0xfffffe002bc297f0: stp    x29, x30, [sp, #0x20]
+    0xfffffe002bc297f4: add    x29, sp, #0x20
+    0xfffffe002bc297f8: mov    x19, x0
+    0xfffffe002bc297fc: adrp   x8, 3649
+    0xfffffe002bc29800: ldr    x8, [x8, #0x9c0]
+    0xfffffe002bc29804: cmp    x0, x8
+    0xfffffe002bc29808: b.hs   0xfffffe002bc29838
+    0xfffffe002bc2980c: mov    x0, x19
+    0xfffffe002bc29810: bl     0xfffffe002bc366d4
+    0xfffffe002bc29814: adrp   x8, 3649
+    0xfffffe002bc29818: ldr    x0, [x8, #0x9d0]
+    0xfffffe002bc2981c: sub    x8, x0, #0x1
+    0xfffffe002bc29820: cmp    x8, x19
+    0xfffffe002bc29824: b.lo   0xfffffe002bc298b0
+    0xfffffe002bc29828: ldp    x29, x30, [sp, #0x20]
+    0xfffffe002bc2982c: ldp    x20, x19, [sp, #0x10]
+    0xfffffe002bc29830: add    sp, sp, #0x30
+    0xfffffe002bc29834: retab  
+    0xfffffe002bc29838: mrs    x9, TPIDR_EL1
+    0xfffffe002bc2983c: adrp   x10, 3507
+    0xfffffe002bc29840: ldr    x10, [x10, #0xd98]
+    0xfffffe002bc29844: cmp    x10, x9
+    0xfffffe002bc29848: b.eq   0xfffffe002bc29828
+    0xfffffe002bc2984c: dmb    ish
+    0xfffffe002bc29850: adrp   x9, 3516
+    0xfffffe002bc29854: ldr    w9, [x9, #0x970]
+    0xfffffe002bc29858: add    x9, x19, x9
+    0xfffffe002bc2985c: adrp   x10, 3649
+    0xfffffe002bc29860: add    x10, x10, #0x9c0
+    0xfffffe002bc29864: mov    x11, x8
+    0xfffffe002bc29868: casal  x11, x9, [x10]
+    0xfffffe002bc2986c: cmp    x11, x8
+(lldb) detach
+Process 1 detached
+(lldb) quit

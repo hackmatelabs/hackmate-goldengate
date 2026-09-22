@@ -83,7 +83,120 @@ cd ~/goldengate/qemu-sptm-cl4-native/build && \
   ninja -j2
 ```
 
-## Current state as of hand-off (2026-09-18, T480s session, superseding all below)
+## Current state as of hand-off (2026-09-21, desktop-Claude session, supersedes everything below)
+
+**Read `ASTRA_LOG.md` and `PHASE9_LOG.md`/`PHASE12_LOG.md` fully before
+doing anything else.** Absolute short version:
+
+- **Real breakthrough this session**: Apple's own `IOBootFramebuffer`
+  class (from `IOGraphicsFamily`, the early-boot/pre-GPU-driver fallback
+  display path — literally what shows the Apple logo/spinner on a real
+  Mac before any real GPU driver is up) now **successfully matches and
+  instantiates** in the live IORegistry (`IOMatchedAtBoot = Yes`,
+  confirmed via `ioreg -c IOBootFramebuffer` over an interactive serial
+  session). This is the first real Apple graphics driver to ever
+  successfully match in this whole project. Artifacts:
+  `firmware/bootkc.netboot10.bootfb-probe` (PRELINK_INFO plist patched
+  with a synthetic `GoldenGateBootFramebuffer` personality,
+  `IONameMatch: vram`) + `firmware/dtree.netboot10.bootfb-probe`
+  (adds an empty `AAPL,boot-display` property to `/vram`, derived from the
+  known-safe `dtree.dcp8.bigdram2.dcpbyte.nubx.bsroot.nopda.bootuuid`
+  baseline). Scripts: `make_bootfb_probe_fixed.py` on the desktop
+  (`C:\GoldenGate\`) — the original `make_bootfb_probe_remote.py` Astra/
+  Codex wrote had a too-strict assertion (required the whole PRELINK_INFO
+  padding tail to be zero; it's actually zero except one harmless
+  trailing `\n` right after `</plist>`) — fixed version preserves that
+  byte correctly.
+- **Why this matters**: PHASE12 root-caused the *previous* graphics wall
+  (no `WindowServer`/DCP output at all) to a hard, external dependency —
+  `AFKFirmwareService`'s real implementation lives in an Auxiliary Kernel
+  Collection that can only be built with a KDK matching this exact build
+  (26A428), which doesn't exist publicly. `IOBootFramebuffer` is a
+  **structurally different path that doesn't need AFK/DCP/IOMFB at all**,
+  so it isn't blocked by that wall. Registering successfully is proven;
+  producing actual visible pixels through it (needs real userspace,
+  e.g. WindowServer, to actually call its enable/draw methods — a
+  headless shell boot doesn't exercise it, confirmed via a black
+  `screendump`) is the next thing to verify once boot reaches far enough.
+- **Separate, still-open wall**: `VIOLATION_DOUBLE_NEST` (an SPTM
+  security-monitor panic, `sptm_set_shared_region(sptm.c:3105) -
+  expected_shared_region(0)`), extensively documented in `PHASE9_LOG.md`
+  as a genuine, not-yet-root-caused QEMU/SPTM architectural-state
+  emulation gap tied to real userspace reaching a certain depth (not
+  DCP-specific — PHASE9 confirmed this via three unrelated methods of
+  getting userspace further along, all hitting the identical panic).
+  This session found the real call site via `ipsw macho disass` on
+  `firmware/sptm.asidfix5` (search for the `"expected_shared_region"` +
+  `"sptm_set_shared_region"` + `"sptm.c"` string xrefs together, at
+  static VA `~0xfffffff0270fab34`), but its `bl` to the shared
+  violate-report function is a bare `nop` where every sibling
+  violation-check in the same function has a real `bl` — an unresolved
+  contradiction (verified via gdbstub breakpoint at the violate function
+  address, which never fired despite the process reaching the panic).
+  **Root cause of the stuck investigation**: needed the real per-boot
+  SPTM runtime load address (computed dynamically in `xnuboot_sptm.c`,
+  not a fixed slide like bootkc's `+0x20000000`) to set a correctly-slid
+  breakpoint, and the `printf("SPTM base: 0x%016llX\n", sptm_load)` that
+  prints it was sitting un-flushed in QEMU's own stdio buffer for the
+  life of the process. **Already fixed**: added `fflush(stdout);` right
+  after that printf in `hw/arm/xnuboot_sptm.c` and rebuilt clean — the
+  next attempt to chase `DOUBLE_NEST` will actually see this value
+  immediately in the boot log/stdout capture. Once you have the real
+  slid address, retry the gdbstub breakpoint at `0xfffffff0270fea94 +
+  slide` (or wherever it resolves to) and read `x0`/`lr` on each hit to
+  find the real trigger, then apply the same "NOP the specific
+  violation-report call" pattern already used successfully 3 times.
+- Also observed: the identical `bootkc.netboot10.bootfb-probe` +
+  real-system-volume boot config hit a **different** panic on a repeat
+  run (`cpu_root_table_tsd: INVALID_FRAME_TYPE`, not `DOUBLE_NEST`) —
+  this confirms boot-to-boot non-determinism in this deep userspace path
+  (KASLR slide differs each run — confirmed via the panic dump's own
+  `Kernel text exec slide:` line varying between runs), consistent with
+  PHASE9's framing of this as architectural rather than a fixed bug at
+  one address. Don't be surprised if the exact panic varies run to run;
+  document whichever one you hit and keep the underlying investigation
+  (find the real slid SPTM base, breakpoint the violate function)
+  the same regardless.
+- **Housekeeping correction this session**: a prior line of work (by
+  Codex/"astra" in this same session, see `ASTRA_LOG.md`) had briefly left
+  a `DARWIN_FB_PPM` **host-screenshot overlay** (a real Apple Installer
+  window captured from the *host* Mac and composited into QEMU's display,
+  explicitly logged as "display-control proof only, not guest output")
+  actually running on the physical screen, which the user correctly
+  objected to as misleading. It's been removed from `hw/arm/darwin.c`,
+  and `hw/arm/apple_dcp.c`'s serial-console-to-framebuffer renderer is now
+  gated behind an explicit `DARWIN_DCP_CONSOLE=1` env var (off by default)
+  so the framebuffer is guest-owned unless you deliberately ask for the
+  diagnostic overlay. **Never leave any host-sourced or synthetic overlay
+  running as if it were guest output** — this project's whole point is
+  the real thing.
+- Everything from this session is being pushed to the private GitHub repo
+  `riftaway7-code/hackmate-goldengate` (`main` branch) — check there first
+  if this file looks stale relative to a fresher desktop-side session.
+
+### Immediate next steps, in order
+
+1. Relaunch the real-system-volume boot (`bootkc.netboot10.bootfb-probe`
+   + `dtree.netboot10.bootfb-probe`, the installer_work_26A428 artifacts,
+   `sptm.asidfix5`/`txm.slotfix4`, **always with `-icount shift=auto`**)
+   and actually read the now-flushed `SPTM base: 0x...` line from stdout.
+2. Compute the runtime address of the violate function
+   (`0xfffffff0270fea94` static) using that base, breakpoint it via
+   gdbstub (`-s -S` + `lldb -b -s <script>`), and read `x0` (violation
+   code) + `lr` (real caller address) on every hit until the panic.
+3. Cross-reference the real caller address against the
+   `sptm_set_shared_region` disassembly already mapped in `ASTRA_LOG.md`
+   to find the actual, correct instruction to neutralize.
+4. Apply the same "NOP the violation-report `bl`, regression-check by
+   rebooting the same config and confirming the specific panic is gone
+   with no new one substituting for it" pattern used 3 times already.
+5. Once past `DOUBLE_NEST` (or whichever panic surfaces), check whether
+   `IOBootFramebuffer` ever gets a real draw call by screendumping
+   periodically through the rest of boot — this is the direct path to
+   real pixels that doesn't depend on the AFKFirmwareService/AuxKC/KDK
+   wall at all.
+
+## Prior state as of hand-off (2026-09-18, T480s session, superseded by the above)
 
 **Read `PHASE6_LOG.md` fully — it has the full, most-recent history.** Absolute
 short version: the `-icount` fix worked, the real 14.19GB macOS system volume

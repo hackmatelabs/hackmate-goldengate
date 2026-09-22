@@ -18,3 +18,14 @@ darwin-vm-m2/__pycache__/
 __pycache__/
 .DS_Store
 Thumbs.db
+
+# Raw screendump PPMs - large, uncompressed; the converted .png next to each
+# one is the actual useful evidence artifact, keep those.
+*.ppm
+
+# Full local copies of the 125MB BootKC binary pulled down for offline
+# analysis - redundant with the authoritative copy on the T480s, too large
+# to push. Small extracted/patched .c source dumps stay (apple_dcp_live.c,
+# darwin_live.c, etc. - those are genuinely useful reference snapshots).
+bootkc*.bin
+bootkc.audit*

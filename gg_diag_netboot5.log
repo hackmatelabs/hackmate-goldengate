@@ -1,0 +1,256 @@
+Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:16 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8112
+pmap_startup() init/release time: 2178668 microsec
+vm_page_bootstrap: 2450306 free pages, 170892 wired pages
+VM bootstrap: 73 maps, 256 entries and 64 nodes available
+ptr-packing max: compressor:0x<ptr> page:0x<ptr> vmn:0xfffffeffffffff00 vme:0x<ptr>
+zone_map_range: min:0x<ptr> max:0x0, vm-size:0x5cc000000 ro-size:0x29e000000, vm_min:0x<ptr> ro_min:0x<ptr>
+vm: "vm_compressor_mode" is 4
+VM bootstrap done: 71 maps, 224 entries and 59 nodes left
+standard timeslicing quantum is 10000 us
+standard background quantum is 2500 us
+OSLog stream configured: stream: 8192 bytes, cache: 2112 bytes
+Long logs support configured: size: 16384
+Firehose configured: 16 chunks, 8 io pages
+Log queues configured: slot count: 9, per-slot size: 32768, total size: 294912
+[trap_telemetry] trap_telemetry_init
+mig_table_max_displ = 91 mach_kobj_count = 390
+debug_log_init: Error!! gPanicBase is still not initialized
+libTXM_KernelVersion: 12
+libTXM_Image4Version: 1
+TXM [Log]: setup logging: 32768 bytes (256 | 128)
+TXM [Log]: system supports DIT feature
+TXM [Log]: setup device tree range
+TXM [Log]: unable to find esdm-fuses property in /chosen
+TXM [Log]: resolved system platform identity: 0
+TXM [Log]: Code Signing Monitor Image4 Module Version 7.0.0: Sat Aug  8 12:39:48 PDT 2026; root:AppleImage4_txm-374~7020/libima
+TXM [Log]: libimage4: magazine[pdmg]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[cptx]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[dvdi]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1bt]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1ab]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1gn]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1sm]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[d1ma]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1ge]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1er]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1ai]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1al]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: failed to read from boot manifest: p = love, name = love: 2
+TXM [Log]: libimage4: failed to read from boot manifest: p = vnum, name = love: 2
+TXM [Log]: libimage4: failed to query property: volume group uuid: 84
+TXM [Log]: libimage4: no boot uuid set
+TXM [Log]: Image4: darwin pseudo-expert: invalid VolumeUuid [Length]
+TXM [Log]: system is configured to not start the SEP at system boot
+TXM [Log]: unable to find sepfw-never-boot property in /chosen
+TXM [Log]: secure channel not supported on this platform
+TXM [Log]: unable to find research-enabled property in /chosen
+TXM [Log]: unable to find research ERM property in /chosen
+TXM [Log]: unable to find iboot-build-variant property in /chosen/iBoot
+TXM [Log]: loaded external trust cache modules: 1/1
+TXM [Log]: unable to find amfi-only-platform-code property in /chosen
+TXM [Log]: platform code only policy: 0
+TXM [Log]: restricted execution mode support: 0
+TXM [Log]: successfully queried the UniqueDeviceIDv2 from the device tree
+TXM [Log]: developer mode enabled due to system policy configuration
+TXM [Log]: build variant: txm.macosx.release.TrustedExecutionMonitor_Guarded-217.0.2
+TXM [Log]: fusing: 0x00000000
+TXM [Log]: virtualized: 1
+TXM [Log]: build type: 0
+TXM [Log]: device type: 0
+TXM [Log]: research configuration: 0
+TXM [Log]: extended research configuration: 0
+debug_log_init: Error!! gPanicBase is still not initialized
+Serial requested, consistent debug disabled or debug boot arg not present, configuring debugging over serial
+iBoot Stage 1 version: qemu-sptm
+iBoot version: qemu-sptm
+vm: creating swapout thread
+vm: creating swapfile creation thread
+vm: creating swapfile GC thread
+lockdown_mode: lockdown mode in nvram is off
+Darwin Image4 Extension Version 7.0.0: Tue Aug 11 20:39:39 PDT 2026; root:AppleImage4-374~13959/AppleImage4/RELEASE_ARM64E
+calling mpo_policy_init for AppleImage4
+Security policy loaded: AppleImage4 hooks (AppleImage4)
+AppleImage4: legacy nonce blob length insufficient: actual = 96, expected >= 368
+AppleImage4: magazine[pdmg]: failed to read nonce slot data: 2
+AppleImage4: magazine[cptx]: failed to read nonce slot data: 2
+AppleImage4: magazine[dvdi]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1bt]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1ab]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1gn]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1sm]: failed to read nonce slot data: 2
+AppleImage4: magazine[d1ma]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1ge]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1er]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1ai]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1al]: failed to read nonce slot data: 2
+AppleImage4: failed to query property: volume group uuid: 84
+AppleImage4: root power domain not yet available: 19
+Image4: darwin pseudo-expert: invalid VolumeUuid [Length]
+AMFI: UDID support enabled: 2
+AMFI: queried model name from device tree: Mac14,3
+calling mpo_policy_init for AMFI
+Security policy loaded: Apple Mobile File Integrity (AMFI)
+AMFI: Booted in a VM
+calling mpo_policy_init for Sandbox
+Security policy loaded: Seatbelt sandbox policy (Sandbox)
+calling mpo_policy_init for Quarantine
+Security policy loaded: Quarantine policy (Quarantine)
+ASP: initializing bastion sandbox callback
+calling mpo_policy_init for EndpointSecurity
+Security policy loaded: Endpoint Security Kernel Extension (EndpointSecurity)
+initialized XNU provisioning profile data
+panic(cpu 0 caller 0xfffffe002bc69bb8): thread already waiting on 0xfffffec1100338f8 @waitq.c:1535
+Nested panic detected - entry count: 2 panic_caller: 0xfffffe002c52d8d0
+Kernel text exec slide: 0x0000000024b94000
+Kernel text exec base: 0xfffffe002bb98000
+Kernel UUID: 95D4D299-EB6D-3F85-8B6D-B9F00605F492
+Panicked thread: 0xfffffe230ffcd180, backtrace: 0xfffffec11004ab90, tid: 101
+		  lr: 0xfffffe002bbebc74  fp: 0xfffffec11004ac10
+		  lr: 0xfffffe002bbeb5fc  fp: 0xfffffec11004ade0
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec11004ae00
+		  lr: 0xfffffe002c52d8d0  fp: 0xfffffec11004af80
+		  lr: 0xfffffe002bd79734  fp: 0xfffffec11004b030
+		  lr: 0xfffffe002bd779c0  fp: 0xfffffec11004b0f0
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004b100
+		  lr: 0xfffffe002bd815f4  fp: 0xfffffec11004b5b0
+		  lr: 0xfffffe002bbec218  fp: 0xfffffec11004b650
+		  lr: 0xfffffe002bd798f0  fp: 0xfffffec11004b6c0
+		  lr: 0xfffffe002bd77714  fp: 0xfffffec11004b780
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004b790
+		  lr: 0xfffffe002bbec53c  fp: 0xfffffec11004bcb0
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec11004bcd0
+		  lr: 0xfffffe002bc69bb8  fp: 0xfffffec11004bd50
+		  lr: 0xfffffe002bc6bc94  fp: 0xfffffec11004bdb0
+		  lr: 0xfffffe002bc0bc80  fp: 0xfffffec11004be00
+		  lr: 0xfffffe002bd7d2c4  fp: 0xfffffec11004be40
+		  lr: 0xfffffe002bd3a4b8  fp: 0xfffffec11004bea0
+		  lr: 0xfffffe002bc396f4  fp: 0xfffffec11004bf20
+		  lr: 0xfffffe002bb9be6c  fp: 0x0000000000000000
+Nested panic string:
+Kernel data abort. at pc 0xfffffe002bd815f4, lr 0xfffffe002bbec218 (saved state: 0xfffffec11004b110)
+	  x0:  0xfffffe002706c32a x1:  0x0000000000000002  x2:  0x0000000000000000  x3:  0x0000000000000000
+	  x4:  0x0000000000000010 x5:  0x0000000000000001  x6:  0x0000000000000001  x7:  0xfffffe002bc69bb8
+	  x8:  0x0000000000000000 x9:  0xaa1fbb6606c000c0  x10: 0xfffffe0027e346f0  x11: 0x0000000000000000
+	  x12: 0x000000000000003b x13: 0x0000000000000000  x14: 0x0000000000000001  x15: 0xfffffe002704e5f7
+	  x16: 0xfffffe002c4d8ec8 x17: 0x000000000000d507  x18: 0x0000000000000000  x19: 0xfffffe002ca64228
+	  x20: 0x0000000000000000 x21: 0xfffffe002ca68000  x22: 0x0000000000000000  x23: 0xfffffe002c9db000
+	  x24: 0xfffffe002706c32a x25: 0xfffffe230ffcd180  x26: 0xfffffe002ca64000  x27: 0x0000000000000000
+	  x28: 0xfffffe002c99c0d8 fp:  0xfffffec11004b5b0  lr:  0xfffffe002bbec218  sp:  0xfffffec11004b460
+	  pc:  0xfffffe002bd815f4 cpsr: 0x204033c8         esr: 0x0000000096000045  far: 0x00000000000000b1
+
+<end nested panic string>
+panic(cpu 0 caller 0xfffffe002bc69bb8): thread already waiting on 0xfffffec1100338f8 @waitq.c:1535
+Nested panic detected - entry count: 3 panic_caller: 0xfffffe002c52d8d0
+Kernel text exec slide: 0x0000000024b94000
+Kernel text exec base: 0xfffffe002bb98000
+Kernel UUID: 95D4D299-EB6D-3F85-8B6D-B9F00605F492
+Panicked thread: 0xfffffe230ffcd180, backtrace: 0xfffffec110049cc0, tid: 101
+		  lr: 0xfffffe002bbebc74  fp: 0xfffffec110049d40
+		  lr: 0xfffffe002bbeb5fc  fp: 0xfffffec110049f10
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec110049f30
+		  lr: 0xfffffe002c52d8d0  fp: 0xfffffec11004a0b0
+		  lr: 0xfffffe002bd79734  fp: 0xfffffec11004a160
+		  lr: 0xfffffe002bd779c0  fp: 0xfffffec11004a220
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004a230
+		  lr: 0xfffffe002bd815f4  fp: 0xfffffec11004a6e0
+		  lr: 0xfffffe002bbec218  fp: 0xfffffec11004a780
+		  lr: 0xfffffe002bd798f0  fp: 0xfffffec11004a7f0
+		  lr: 0xfffffe002bd77714  fp: 0xfffffec11004a8b0
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004a8c0
+		  lr: 0xfffffe002bbec53c  fp: 0xfffffec11004ade0
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec11004ae00
+		  lr: 0xfffffe002c52d8d0  fp: 0xfffffec11004af80
+		  lr: 0xfffffe002bd79734  fp: 0xfffffec11004b030
+		  lr: 0xfffffe002bd779c0  fp: 0xfffffec11004b0f0
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004b100
+		  lr: 0xfffffe002bd815f4  fp: 0xfffffec11004b5b0
+		  lr: 0xfffffe002bbec218  fp: 0xfffffec11004b650
+		  lr: 0xfffffe002bd798f0  fp: 0xfffffec11004b6c0
+		  lr: 0xfffffe002bd77714  fp: 0xfffffec11004b780
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004b790
+		  lr: 0xfffffe002bbec53c  fp: 0xfffffec11004bcb0
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec11004bcd0
+		  lr: 0xfffffe002bc69bb8  fp: 0xfffffec11004bd50
+		  lr: 0xfffffe002bc6bc94  fp: 0xfffffec11004bdb0
+		  lr: 0xfffffe002bc0bc80  fp: 0xfffffec11004be00
+		  lr: 0xfffffe002bd7d2c4  fp: 0xfffffec11004be40
+		  lr: 0xfffffe002bd3a4b8  fp: 0xfffffec11004bea0
+		  lr: 0xfffffe002bc396f4  fp: 0xfffffec11004bf20
+		  lr: 0xfffffe002bb9be6c  fp: 0x0000000000000000
+Nested panic string:
+Kernel data abort. at pc 0xfffffe002bd815f4, lr 0xfffffe002bbec218 (saved state: 0xfffffec11004a240)
+	  x0:  0xfffffe002706c32a x1:  0x0000000000000002  x2:  0x0000000000000000  x3:  0x0000000000000000
+	  x4:  0x0000000000000010 x5:  0x0000000000000001  x6:  0x0000000000000001  x7:  0xfffffe002c52d8d0
+	  x8:  0x0000000000000000 x9:  0xaa1fbb6606c000c0  x10: 0xfffffe0027e346f0  x11: 0x0000000000000000
+	  x12: 0x000000000000003b x13: 0x0000000000000000  x14: 0x0000000000000001  x15: 0xfffffe002704e5f7
+	  x16: 0xfffffe002c4d8ec8 x17: 0x000000000000d507  x18: 0x0000000000000000  x19: 0xfffffe002ca64228
+	  x20: 0x0000000000000000 x21: 0xfffffe002ca68000  x22: 0x0000000000000000  x23: 0xfffffe002c9db000
+	  x24: 0xfffffe002706c32a x25: 0xfffffe230ffcd180  x26: 0xfffffe002ca64000  x27: 0x0000000000000003
+	  x28: 0xfffffe002c99c0d8 fp:  0xfffffec11004a6e0  lr:  0xfffffe002bbec218  sp:  0xfffffec11004a590
+	  pc:  0xfffffe002bd815f4 cpsr: 0x204033c8         esr: 0x0000000096000045  far: 0x00000000000000b1
+
+<end nested panic string>
+panic(cpu 0 caller 0xfffffe002bc69bb8): thread already waiting on 0xfffffec1100338f8 @waitq.c:1535
+Nested panic detected - entry count: 4 panic_caller: 0xfffffe002c52d8d0
+Kernel text exec slide: 0x0000000024b94000
+Kernel text exec base: 0xfffffe002bb98000
+Kernel UUID: 95D4D299-EB6D-3F85-8B6D-B9F00605F492
+Panicked thread: 0xfffffe230ffcd180, backtrace: 0xfffffec110048df0, tid: 101
+		  lr: 0xfffffe002bbebc74  fp: 0xfffffec110048e70
+		  lr: 0xfffffe002bbeb5fc  fp: 0xfffffec110049040
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec110049060
+		  lr: 0xfffffe002c52d8d0  fp: 0xfffffec1100491e0
+		  lr: 0xfffffe002bd79734  fp: 0xfffffec110049290
+		  lr: 0xfffffe002bd779c0  fp: 0xfffffec110049350
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec110049360
+		  lr: 0xfffffe002bd815f4  fp: 0xfffffec110049810
+		  lr: 0xfffffe002bbec218  fp: 0xfffffec1100498b0
+		  lr: 0xfffffe002bd798f0  fp: 0xfffffec110049920
+		  lr: 0xfffffe002bd77714  fp: 0xfffffec1100499e0
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec1100499f0
+		  lr: 0xfffffe002bbec53c  fp: 0xfffffec110049f10
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec110049f30
+		  lr: 0xfffffe002c52d8d0  fp: 0xfffffec11004a0b0
+		  lr: 0xfffffe002bd79734  fp: 0xfffffec11004a160
+		  lr: 0xfffffe002bd779c0  fp: 0xfffffec11004a220
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004a230
+		  lr: 0xfffffe002bd815f4  fp: 0xfffffec11004a6e0
+		  lr: 0xfffffe002bbec218  fp: 0xfffffec11004a780
+		  lr: 0xfffffe002bd798f0  fp: 0xfffffec11004a7f0
+		  lr: 0xfffffe002bd77714  fp: 0xfffffec11004a8b0
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004a8c0
+		  lr: 0xfffffe002bbec53c  fp: 0xfffffec11004ade0
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec11004ae00
+		  lr: 0xfffffe002c52d8d0  fp: 0xfffffec11004af80
+		  lr: 0xfffffe002bd79734  fp: 0xfffffec11004b030
+		  lr: 0xfffffe002bd779c0  fp: 0xfffffec11004b0f0
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004b100
+		  lr: 0xfffffe002bd815f4  fp: 0xfffffec11004b5b0
+		  lr: 0xfffffe002bbec218  fp: 0xfffffec11004b650
+		  lr: 0xfffffe002bd798f0  fp: 0xfffffec11004b6c0
+		  lr: 0xfffffe002bd77714  fp: 0xfffffec11004b780
+		  lr: 0xfffffe002bb9b1f4  fp: 0xfffffec11004b790
+		  lr: 0xfffffe002bbec53c  fp: 0xfffffec11004bcb0
+		  lr: 0xfffffe002c51d9f0  fp: 0xfffffec11004bcd0
+		  lr: 0xfffffe002bc69bb8  fp: 0xfffffec11004bd50
+		  lr: 0xfffffe002bc6bc94  fp: 0xfffffec11004bdb0
+		  lr: 0xfffffe002bc0bc80  fp: 0xfffffec11004be00
+		  lr: 0xfffffe002bd7d2c4  fp: 0xfffffec11004be40
+		  lr: 0xfffffe002bd3a4b8  fp: 0xfffffec11004bea0
+		  lr: 0xfffffe002bc396f4  fp: 0xfffffec11004bf20
+		  lr: 0xfffffe002bb9be6c  fp: 0x0000000000000000
+Nested panic string:
+Kernel data abort. at pc 0xfffffe002bd815f4, lr 0xfffffe002bbec218 (saved state: 0xfffffec110049370)
+	  x0:  0xfffffe002706c32a x1:  0x0000000000000002  x2:  0x0000000000000000  x3:  0x0000000000000000
+	  x4:  0x0000000000000010 x5:  0x0000000000000001  x6:  0x0000000000000001  x7:  0xfffffe002c52d8d0
+	  x8:  0x0000000000000000 x9:  0xaa1fbb6606c000c0  x10: 0xfffffe0027e346f0  x11: 0x0000000000000000
+	  x12: 0x000000000000003b x13: 0x0000000000000000  x14: 0x0000000000000001  x15: 0xfffffe002704e5f7
+	  x16: 0xfffffe002c4d8ec8 x17: 0x000000000000d507  x18: 0x0000000000000000  x19: 0xfffffe002ca64228
+	  x20: 0x0000000000000000 x21: 0xfffffe002ca68000  x22: 0x0000000000000000  x23: 0xfffffe002c9db000
+	  x24: 0xfffffe002706c32a x25: 0xfffffe230ffcd180  x26: 0xfffffe002ca64000  x27: 0x0000000000000003
+	  x28: 0xfffffe002c99c0d8 fp:  0xfffffec110049810  lr:  0xfffffe002bbec218  sp:  0xfffffec1100496c0
+	  pc:  0xfffffe002bd815f4 cpsr: 0x204033c8         esr: 0x0000000096000045  far: 0x00000000000000b1
+
+<end nested panic string>
+panic(cpu 0 caller 0xfffffe002bc69bb8): thread already waiting on 0xfffffec1100338f8 @waitq.c:1535
+MACH Reboot

@@ -1,0 +1,679 @@
+Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:16 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8112
+pmap_startup() init/release time: 807596 microsec
+vm_page_bootstrap: 951470 free pages, 1669728 wired pages
+VM bootstrap: 73 maps, 256 entries and 64 nodes available
+ptr-packing max: compressor:0x<ptr> page:0x<ptr> vmn:0xfffffeffffffff00 vme:0x<ptr>
+zone_map_range: min:0x<ptr> max:0x0, vm-size:0x5cc000000 ro-size:0x29e000000, vm_min:0x<ptr> ro_min:0x<ptr>
+vm: "vm_compressor_mode" is 4
+VM bootstrap done: 71 maps, 224 entries and 59 nodes left
+standard timeslicing quantum is 10000 us
+standard background quantum is 2500 us
+OSLog stream configured: stream: 8192 bytes, cache: 2112 bytes
+Long logs support configured: size: 16384
+Firehose configured: 16 chunks, 8 io pages
+Log queues configured: slot count: 72, per-slot size: 32768, total size: 2359296
+[trap_telemetry] trap_telemetry_init
+mig_table_max_displ = 91 mach_kobj_count = 390
+debug_log_init: Error!! gPanicBase is still not initialized
+libTXM_KernelVersion: 12
+libTXM_Image4Version: 1
+TXM [Log]: setup logging: 32768 bytes (256 | 128)
+TXM [Log]: system supports DIT feature
+TXM [Log]: setup device tree range
+TXM [Log]: unable to find esdm-fuses property in /chosen
+TXM [Log]: resolved system platform identity: 0
+TXM [Log]: Code Signing Monitor Image4 Module Version 7.0.0: Sat Aug  8 12:39:48 PDT 2026; root:AppleImage4_txm-374~7020/libima
+TXM [Log]: libimage4: magazine[pdmg]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[cptx]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[dvdi]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1bt]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1ab]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1gn]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1sm]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[d1ma]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1ge]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1er]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1ai]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: magazine[c1al]: failed to read nonce slot data: 2
+TXM [Log]: libimage4: failed to read from boot manifest: p = love, name = love: 2
+TXM [Log]: libimage4: failed to read from boot manifest: p = vnum, name = love: 2
+TXM [Log]: libimage4: failed to query property: volume group uuid: 84
+TXM [Log]: libimage4: no boot uuid set
+TXM [Log]: Image4: darwin pseudo-expert: invalid VolumeUuid [Length]
+TXM [Log]: system is configured to not start the SEP at system boot
+TXM [Log]: unable to find sepfw-never-boot property in /chosen
+TXM [Log]: secure channel not supported on this platform
+TXM [Log]: unable to find research-enabled property in /chosen
+TXM [Log]: unable to find research ERM property in /chosen
+TXM [Log]: unable to find iboot-build-variant property in /chosen/iBoot
+TXM [Log]: loaded external trust cache modules: 1/1
+TXM [Log]: unable to find amfi-only-platform-code property in /chosen
+TXM [Log]: platform code only policy: 0
+TXM [Log]: restricted execution mode support: 0
+TXM [Log]: successfully queried the UniqueDeviceIDv2 from the device tree
+TXM [Log]: developer mode enabled due to system policy configuration
+TXM [Log]: build variant: txm.macosx.release.TrustedExecutionMonitor_Guarded-217.0.2
+TXM [Log]: fusing: 0x00000000
+TXM [Log]: virtualized: 1
+TXM [Log]: build type: 0
+TXM [Log]: device type: 0
+TXM [Log]: research configuration: 0
+TXM [Log]: extended research configuration: 0
+debug_log_init: Error!! gPanicBase is still not initialized
+Serial requested, consistent debug disabled or debug boot arg not present, configuring debugging over serial
+iBoot Stage 1 version: qemu-sptm
+iBoot version: qemu-sptm
+vm: creating swapout thread
+vm: creating swapfile creation thread
+vm: creating swapfile GC thread
+lockdown_mode: lockdown mode in nvram is off
+Darwin Image4 Extension Version 7.0.0: Tue Aug 11 20:39:39 PDT 2026; root:AppleImage4-374~13959/AppleImage4/RELEASE_ARM64E
+calling mpo_policy_init for AppleImage4
+Security policy loaded: AppleImage4 hooks (AppleImage4)
+AppleImage4: legacy nonce blob length insufficient: actual = 96, expected >= 368
+AppleImage4: magazine[pdmg]: failed to read nonce slot data: 2
+AppleImage4: magazine[cptx]: failed to read nonce slot data: 2
+AppleImage4: magazine[dvdi]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1bt]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1ab]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1gn]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1sm]: failed to read nonce slot data: 2
+AppleImage4: magazine[d1ma]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1ge]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1er]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1ai]: failed to read nonce slot data: 2
+AppleImage4: magazine[c1al]: failed to read nonce slot data: 2
+AppleImage4: failed to query property: volume group uuid: 84
+AppleImage4: root power domain not yet available: 19
+Image4: darwin pseudo-expert: invalid VolumeUuid [Length]
+AMFI: UDID support enabled: 2
+AMFI: queried model name from device tree: Mac14,3
+calling mpo_policy_init for AMFI
+Security policy loaded: Apple Mobile File Integrity (AMFI)
+AMFI: Booted in a VM
+calling mpo_policy_init for Sandbox
+Security policy loaded: Seatbelt sandbox policy (Sandbox)
+calling mpo_policy_init for Quarantine
+Security policy loaded: Quarantine policy (Quarantine)
+ASP: initializing bastion sandbox callback
+calling mpo_policy_init for EndpointSecurity
+Security policy loaded: Endpoint Security Kernel Extension (EndpointSecurity)
+initialized XNU provisioning profile data
+IOServicePH::kIOMessageSystemCapabilityChange: will 0xf->0xf
+IOServicePH::systemPowerChange to 0x30
+IOServicePH::kIOMessageSystemCapabilityChange: did 0xf->0xf
+IOG flags 0x3 (0x51)
+ACMTRM: initU32FromBootArg: acm_fastsim = 0xffffffff <--- not found.
+ACMTRM: initU32FromEDTProp: /defaults/insecure_hpr = 0x0 <--- not found.
+ACMTRM: isFastSimTarget: isFastSim = NO.
+AppleCredentialManager: init: inited KE[1] (ready=NO AVP=NO SIM=NO SIMT=NO USESEP=YES) -> true.
+AppleCredentialManager: probe: probed KE[1] (ready=NO) -> true (score=0).
+Warning: arc4random not implemented
+Warning: arc4random not implemented
+Warning: arc4random not implemented
+AppleARMBootPerf: Error: profile handoff region not found (2)
+AppleARMBootPerf: Error: failed to publish profile data (2)
+AppleARMSFRManifest: Starting
+AppleARMSFRManifest: Error: Failed to find property sfr-manifest-hash
+AppleARMSFRManifest: Found HASH property
+AppleARMSFRManifest: Found 0 matching hash entries
+AppleARMSFRManifest: Error: Invalid input
+AppleARMSFRManifest: Error: Failed to find manifest entry region
+AppleARMSFRManifest: Error: Failed to locate manifest information
+AppleARMSFRManifest: Successfully published sfr-manifest
+AppleCredentialManager: start: starting KE[1] (ready=NO) -> true.
+AppleCredentialManager: initImpl: called, KE[1].
+ACMFirstResponderKernelService: init: called, .
+ACM: init: called, .
+ACMTRM-S: init: called, starting PersistentStore service.
+ACMTRM-A: init: called, starting TRM Analytics service.
+ACMTRM-C: init: called, starting AccessoryCache service.
+ACMTRM: init: called, starting TRM service [BUILT: Aug 30 2026, 18:51:20].
+ACMTRM: initU32FromBootArg: trm_default = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_enabled = 0xffffffff <--- not found.
+ACMTRM: initU32FromEDTProp: /defaults/trm-enabled = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_unification = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_all_policy_modes = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_base_system = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: hidrm_default = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: hidrm_enabled = 0xffffffff <--- not found.
+ACMTRM: initU32FromEDTProp: /defaults/hidrm-enabled = 0xffffffff <--- not found.
+ACMTRM: initU32FromEDTProp: /options/stress-rack = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_change_policy_mode = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_profile = 0xffffffff <--- not found.
+ACMTRM: initU32FromEDTProp: /defaults/trm-profile = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_analytics_period = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_acc_cache_size = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_acc_cache_expiration = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_relaxed_period_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_unlocked_period_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: usb_standard_mode_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_policy_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: usb_standard_mode_lock_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_grace_period_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: trm_keep_enabled_during_apple_setup = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: itrm_hyst_period_timeout = 0xffffffff <--- not found.
+ACMTRM: initU32FromBootArg: itrm_grace_period_timeout = 0xffffffff <--- not found.
+ACMTRM: _disableBy: [TRM ENABLED=YES] (mask=0, DISABLED BY: Def=N* Arg=N HW=N DT=N Env=N Ext=N Dev=N SEP=N SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: _disableBy: [TRM ENABLED=YES] (mask=0, DISABLED BY: Def=N Arg=N* HW=N DT=N Env=N Ext=N Dev=N SEP=N SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: _disableBy: [TRM ENABLED=NO] (mask=10, DISABLED BY: Def=N Arg=N HW=N DT=Y* Env=N Ext=N Dev=N SEP=N SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: _loadDisabledByOSEnvironment: disabled by OSEnvironment: NO.
+ACMTRM: _disableBy: [TRM ENABLED=NO] (mask=10, DISABLED BY: Def=N Arg=N HW=N DT=Y Env=N* Ext=N Dev=N SEP=N SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: initU32FromEDTProp: /chosen/sepfw-load-at-boot = 0x0.
+ACMTRM: isSEPAvailable: isSEPAvailable = NO.
+ACMTRM: _disableBy: [TRM ENABLED=NO] (mask=110, DISABLED BY: Def=N Arg=N HW=N DT=Y Env=N Ext=N Dev=N SEP=Y* SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: _disableBy: [TRM ENABLED=NO] (mask=110, DISABLED BY: Def=N Arg=N HW=N DT=Y Env=N Ext=N Dev=N SEP=Y SR=N* | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: _disableBy: [TRM ENABLED=NO] (mask=110, DISABLED BY: Def=N Arg=N HW=N* DT=Y Env=N Ext=N Dev=N SEP=Y SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+AssertMacros: data (value: 0x0), 'external-boot' property not found, file: /AppleInternal/Library/BuildRoots/4~CXeGugDBZu_QyN2qJs4925QS0zR08yUWGH4s2FQ/Library/Caches/com.apple.xbs/TemporaryDirectory.Jkua5b/Sources/AppleCredentialManager/AppleCredentialManACMTRM: _loadDisabledByExternalBoot: disabled by ExternalBoot: NO.
+ACMTRM: _disableBy: [TRM ENABLED=NO] (mask=110, DISABLED BY: Def=N Arg=N HW=N DT=Y Env=N Ext=N* Dev=N SEP=Y SR=N | MC=N DW=N CB=N GS=N CP=N BS=N MB=N SC=N AS=N IB=N DM=N).
+ACMTRM: prop___set: TRM_PolicyTimeout = 604800.
+ACMTRM: prop___set: TRM_PolicyReason = Unrestricted(0).
+ACMTRM: prop___set: G/PolicyReason = Unrestricted(0).
+ACMTRM: prop___set: TRM_RelaxedPeriodTimeout = 259200.
+ACMTRM: prop___set: TRM_UnlockedPeriodTimeout = 86400.
+ACMTRM: prop___set: HIDRM_PolicyEnabled = No(0).
+ACMTRM: prop___set: I/PolicyReason = Unrestricted(0).
+ACMTRM: prop___set: TRMDomain_Generic = 1.
+ACMTRM: _mapAndPublish: ---> TRM state changed (4/1/0) while LOCKED(1), TRM: 604800/U(0) 4294967295/-(255) M=255/4294967295/4294967295 ---(255)/---(255) L=255 BS=255 R=255 RP=259200/255 UP=86400/255, RAW: U(0) -(255).
+ACMTRM: _mapAndPublish: ---> HIDRM state changed (1) while LOCKED(1), enabled=0 E=255/255.
+ACMLockdownModeKernelService: init: called, .
+ACMLockdownModeKernelService: init: returning, result = true.
+AppleCredentialManager: initImpl: KE[1] INITED.
+AppleCredentialManager: initImpl: returning, KE[1] -> true.
+AppleCredentialManager: startImpl: called, KE[1].
+ACM: TRMAccCache_SetupEmpty: called, cacheSize=48 expiration=2592000.
+ACMTRM: start: security.mac.acm.root_pivot_occurred sysctl registered.
+ACMLockdownModeKernelService: start: called, .
+ACMLockdownModeKernelService: start: returning, result = true.
+AppleCredentialManager: startImpl: initializing power management.
+AppleCredentialManager: startImpl: will join SEPManager's PM tree in getSEPEndpoint().
+AppleCredentialManager: startImpl: registering notifications.
+AppleCredentialManager: startImpl: KE[1] STARTED.
+AppleCredentialManager: startImpl: returning, KE[1] -> true.
+AppleCredentialManager: start: started KE[1] (ready=YES) -> true.
+[AppleLockdownMode - start] started
+[AppleLockdownMode - LDMShouldEnforceParity] restoreOS check passed
+12502153us IOThunderboltFamily (build 18:52:27 Aug 30 2026)
+"AppleSEPKeyStore":pid:0,:373: starting (BUILT: Aug 30 2026 18:51:23) ("normal" variant 🌽 , 2383.1.1)
+"AppleSEPKeyStore":pid:0,:492: _sep_enabled = 1
+"AppleSEPKeyStore":pid:0,:553: ioPerfControl is enabled: 1, 1
+virtual bool CoreAnalyticsHub::start(IOService *)::150:CoreAnalyticsHub start
+Registered CoreAnalyticsHub functions with xnu.
+virtual bool CoreAnalyticsHub::start(IOService *)::229:CoreAnalyticsHub start completed
+13255194us AppleThunderboltGenericHAL::probe
+13257464us AppleThunderboltGenericHAL(0)::start (build 18:51:42 Aug 30 2026)
+13601731us AppleThunderboltHALGenericACIO::poweredStart
+13603096us AppleThunderboltHALGenericACIO::poweredStart - fDartSIDPartitioning = 0x00000000
+AppleInterruptControllerV2::start: Num Shared Timestamps == 16
+15988398us AppleThunderboltGenericHAL::probe
+15989756us AppleThunderboltGenericHAL(0)::start (build 18:51:42 Aug 30 2026)
+15990929us AppleThunderboltHALGenericACIO::poweredStart
+16049044us AppleThunderboltHALGenericACIO::poweredStart - fDartSIDPartitioning = 0x00000000
+virtual bool AppleARMLightEmUp::start(IOService *): starting...
+AppleOLYHAL::probe: score = 1000
+AppleBCMWLANBusInterfacePCIe::isIOKitEnvironment() WLAN Active Driver mode DriverKit
+AppleBCMWLANBusInterfacePCIe::probe() IOKit configuration disabled
+AppleOLYHAL::start: entry with provider 0xa7bddbf87e70a03
+AppleOLYHAL::start: found wlan-olyhal-abort boot-arg, bailing
+Copyright (c) 1982, 1986, 1989, 1991, 1993
+	The Regents of the University of California. All rights reserved.
+
+MAC Framework successfully initialized
+using 16384 buffer headers and 10240 cluster IO buffer headers
+AMFI: developer mode is force enabled on this platform
+AMFI: finished: 1 1
+[uart] Started AppleSerialShim.
+ktriage_register_subsystem_strings: set subsystem 8 strings
+mbinit: done [512 MB total pool size, (341/170) split]
+New aio workqueue implementation selected
+dlil_init: Waiting for all the create dlil kernel threads to get scheduled at least once.
+dlil_init: All the created dlil kernel threads have been scheduled at least once. Proceeding.
+ifnet_attach: All kernel threads created for interface lo0 have been scheduled at least once. Proceeding.
+ifnet_attach: Waiting for all kernel threads created for interface gif0 to get scheduled at least once.
+ifnet_attach: All kernel threads created for interface gif0 have been scheduled at least once. Proceeding.
+skip attaching fsw to lo0 using legacy TX model
+ifnet_attach: Waiting for all kernel threads created for interface stf0 to get scheduled at least once.
+ifnet_attach: All kernel threads created for interface stf0 have been scheduled at least once. Proceeding.
+AMFI: disabling local signing due to no protected data access
+com.apple.AppleFSCompressionTypeDataless kmod start
+com.apple.AppleFSCompressionTypeZlib kmod start
+apfs_module_start:3381: load: com.apple.filesystems.apfs, v3288.1.3, apfs-3288.1.3, 2026/08/30
+ktriage_register_subsystem_strings: set subsystem 7 strings
+nfs_kext_start: successfully loaded NFS kext
+Couldn't alloc class "AFKResource"
+com.apple.AppleFSCompressionTypeDataless load succeeded
+com.apple.AppleFSCompressionTypeZlib load succeeded
+Setting up notifier for CoreAnalyticsHub
+calling mpo_policy_init for ASP
+calling mpo_policy_initbsd for ASP
+ASP: NVRAM pointer initialized
+ASP: No recovery key set
+Security policy loaded: Apple System Policy (ASP)
+apfs_sysctl_register:1328: done registering sysctls.
+com_apple_filesystems_nfs: successfully loaded NFS module
+L2TP domain init
+L2TP domain init complete
+Load request for com.apple.nke.pptp failed: -603946991
+Couldn't alloc class "AFKResource"
+rooting via boot-uuid from /chosen: A9037730-2821-4F3A-90DC-91BA521BB080
+Added memory device md0/rmd0 (03000000/16000000) at <ptr> for 000000064DC00000
+BSD root: md0, major 3, minor 0
+spec_open : si_devbsdunit initialized to (0), throttle_mask is (0x0), isssd is (0)
+apfs_vfsop_mountroot:3156: apfs: mountroot called!
+container_rootmount:2638: boot from ramdisk /dev/md0
+swcrypto_threadpool_init:1130: Starting ThreadPool
+swcrypto_threadpool_init:1152: 4 threads would be used for the ThreadPool
+specread_work_queue_init:155: number of threads used for specread work queue 3
+dev_init:296: md0 device accelerated crypto: 0 (compiled @ Aug 30 2026 18:52:12)
+dev_init:299: md0 device_handle block size 512 block count 52879360 features 0 internal 
+nx_mount:1157: md0 initializing cache w/hash_size 32768 and cache size 66560
+nx_mount:1482: md0 checkpoint search: largest xid 890, best xid 890 @ 128
+nx_mount:1484: md0 reloading after unclean unmount, checkpoint xid 890, superblock xid 886
+nx_mount:1509: md0 stable checkpoint indices: desc 127 data 3116
+er_state_obj_get_for_recovery:8442: md0s1 No ER state object for volume Macintosh HD - rolling is not happening, nothing to recover.
+fs_lookup_root_snapshot_name:375: md0s1 failed to get root-snapshot-name from DT
+apfs_find_named_root_snapshot_xid:2153: md0s1 failed to retrieve default root snapshot xid: No such file or directory (2)
+apfs_find_named_root_snapshot_xid:2191: md0s1 The global payload bytes pointer is NULL
+apfs_vfsop_mount:2914: md0s1 failed to find named root snapshot: Need authenticator (81)
+apfs_log_op_with_proc:3279: md0s1 mounting volume Macintosh HD, requested by: kernel_task (pid 0); parent: kernel_task (pid 0)
+apfs_vfsop_mount:3017: md0s1 fs iokit node was not found
+handle_mount:893: md0s1 vol-uuid: 20ED2DC7-B9F5-4DD3-8EE9-C6EF9AD3AD5A block size: 4096 block count: 6609920 (unencrypted; flags: 0x1; features: 1.0.12)
+handle_mount:906: md0s1 setting dev block size to 4096 from 512
+nx_volume_group_update:712: md0s1 Volume Macintosh HD is not in a volume group
+apfs_log_op_with_proc:3279: md0s1 mount-complete volume Macintosh HD, requested by: kernel_task (pid 0); parent: kernel_task (pid 0)
+BootCache: can't determine if root disk is an SSD
+BootCache: Not caching Apple Silicon Mac
+vm: initializing swap
+vm: starting swapout thread
+vm: starting swapfile creation thread
+vm: starting swapfile GC thread
+VM Swap Subsystem is ON
+Couldn't alloc class "AFKResource"
+AppleFileSystemDriver: using apfs-preboot-uuid
+AppleFileSystemDriver: Invalid UUID string ''
+AppleA7IOPNub: withRegistryEntry, 47: allocated nub <ptr>
+
+RTBuddy(ANS2): start(<ptr>) - (Aug 30 2026@18:51:59)
+virtual IOService *AppleANS2CGv2Controller::probe(IOService *, SInt32 *)::103:Found (ANS2) provider and coastguard, returning score 400000
+virtual IOService *AppleANS2NVMeController::probe(IOService *, SInt32 *)::251:Found (ANS2) provider, returning score 100000
+virtual IOService *AppleANS3CGv2Controller::probe(IOService *, SInt32 *)::97:Found (ANS2) provider and coastguard, returning score 500000
+virtual IOService *AppleANS3NVMeController::probe(IOService *, SInt32 *)::82:Found (ANS2) provider and linear-sq, returning score 300000
+load_init_program: attempting to load /sbin/launchd
+Couldn't alloc class "AFKResource"
+AppleFileSystemDriver: using apfs-preboot-uuid
+AppleFileSystemDriver: Invalid UUID string ''
+vm: shared_region: 0xc17b7534b935285d [1(launchd)] check_np(0x16f96b8c8) vm_shared_region_start_address() returned 0x1
+Darwin Ignition Sequence Version 1.0.0: Tue Aug 11 20:40:24 PDT 2026; root:libignition-64~19252/libignition_core/RELEASE_ARM64E
+libignition: 1: arguments           :
+libignition: 1:   ignition level    : 0x5
+libignition: 1:   force dylib root  : 0x0
+libignition: 1:   halt after stage  : n/a
+libignition: 1: configuration         :
+libignition: 1:   program             : launchd
+libignition: 1:   os environment      : n/a
+libignition: 1:   rd                  : md0
+libignition: 1:   arp0                : n/a
+libignition: 1:   rp                  : n/a
+libignition: 1:   pivot src           : n/a
+libignition: 1:   root ramdisk        : 0x0
+libignition: 1:   restore             : 0x0
+libignition: 1:   root device info    : 0x0
+libignition: 1:   can haz debugger    : 0x0
+libignition: 1:   rootfs mount flags  : 0x480d001
+libignition: 1:   ecid                : 0x0
+libignition: 1:   volume group uuid   : A9037730-2821-4F3A-90DC-91BA521BB080
+libignition: 1:   hardware target     : j473ap
+libignition: 1:   initproc            : 0x1
+libignition: 1:   single user         : 0x0
+libignition: 1:   userspace reboot    : 0x0
+libignition: 1:   secure boot level   : 0x0
+libignition: 1:   os version          : n/a
+libignition: 1: parameters          :
+libignition: 1:   version           : 0x1
+libignition: 1:   argc              : 0x1
+libignition: 1:   log fd            : 0xffffffffffffffff
+libignition: 1:   platform          : 0x1
+libignition: 1: boot spec           :
+libignition: 1:   name              : ramdisk
+libignition: 1:   stage count       : 0x2
+libignition: 1:        hello: commence primary ignition
+libignition: 1:        hello: hello from launchd.1
+libignition: 1:      goodbye: ignition sequence complete
+vm: shared_region: 0xc17b7534b935285d [1(launchd)] check_np(0x16f96af28) vm_shared_region_start_address() returned 0x1
+dyld[1]: result from check_np(): -1, errno 12
+ASP: AMFI pointer initialized
+dyld[1]: dyld cache mapped system-wide: development, auth GOTs: mapped
+dyld[1]: dyld: simulator status (/ rw: false; kernel: false, platform: false; pthread: false
+com.apple.xpc.launchd|1970-01-01 00:00:23.673074 <Notice>: hello, launchd UUID: D339377B-2AD6-3AED-8AF7-2A437F8C71FE
+com.apple.xpc.launchd|1970-01-01 00:00:23.958320 <Notice>: Darwin Bootstrapper Version 7.0.0: Sat Aug 22 16:52:45 PDT 2026; root:libxpc_executables-3298.1.1~67/launchd/RELEASE_ARM64E
+com.apple.xpc.launchd|1970-01-01 00:00:23.975625 <Notice>: boot-args = rd=md0 serial=3 -v -noprogress wdt=-1 wlan-olyhal-abort
+com.apple.xpc.launchd|1970-01-01 00:00:23.976733 <Notice>: Restore environment starting.
+com.apple.xpc.launchd|1970-01-01 00:00:23.977149 <Notice>: System Integrity Protection is engaged.
+com.apple.xpc.launchd|1970-01-01 00:00:24.074504 (system) <Notice>: entering ondemand mode
+com.apple.xpc.launchd|1970-01-01 00:00:24.080364 (system) <Notice>: created
+skip attaching fsw to lo0 using legacy TX model
+com.apple.xpc.launchd|1970-01-01 00:00:24.158012 (exclaves-boot) <Notice>: Doing boot task
+com.apple.xpc.launchd|1970-01-01 00:00:24.175638 (fsck) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.176963 (mount-phase-1) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.177757 (data-protection) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.178410 (detect-installed-roots) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.178931 (select-boot-mode) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.179388 (commit-boot-mode) <Notice>: Doing boot task
+com.apple.xpc.launchd|1970-01-01 00:00:24.180021 <Notice>: boot-mode committed: (null)
+com.apple.xpc.launchd|1970-01-01 00:00:24.180459 (auto-pivot-root) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.181850 (allow-non-platform-code) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.182848 (restore-datapartition) <Notice>: Doing boot task
+com.apple.xpc.launchd|1970-01-01 00:00:24.243952 (restore-datapartition) <Notice>: optional boot task not present
+com.apple.xpc.launchd|1970-01-01 00:00:24.245222 (mount-phase-2) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.245720 (enable-swap) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.246095 (sandbox-enable-root-translation) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.247258 (init-with-data-volume) <Notice>: Doing boot task
+[System Event] [26199509] [INFO] [Subsystem: launchd] [Event: exclaves-boot] Doing boot task
+[System Event] [26202100] [INFO] [Subsystem: launchd] [Event: fsck] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.970066 (deferred_install) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.971229 (MobileAssetEarlyBootTask) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.971686 (fips) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.972043 (keystore-init) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.972409 (cache-start) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.972760 (usermanagerd) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.973108 (dirs_cleaner) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.973453 (dirs_cleaner-usr) <Notice>: Skipping boot-task
+[System Event] [26204126] [INFO] [Subsystem: launchd] [Event: mount-phase-1] Skipping boot-task
+[System Event] [26223810] [INFO] [Subsystem: launchd] [Event: data-protection] Skipping boot-task
+[System Event] [26225558] [INFO] [Subsystem: launchd] [Event: detect-installed-roots] Skipping boot-task
+[System Event] [26227353] [INFO] [Subsystem: launchd] [Event: select-boot-mode] Skipping boot-task
+[System Event] [26229626] [INFO] [Subsystem: launchd] [Event: commit-boot-mode] Doing boot task
+[System Event] [26232347] [INFO] [Subsystem: launchd] [Event: auto-pivot-root] Skipping boot-task
+[System Event] [26234464] [INFO] [Subsystem: launchd] [Event: allow-non-platform-code] Skipping boot-task
+[System Event] [26236391] [INFO] [Subsystem: launchd] [Event: restore-datapartition] Doing boot task
+[System Event] [26238483] [INFO] [Subsystem: launchd] [Event: restore-datapartition] optional boot task not present
+[System Event] [26242112] [INFO] [Subsystem: launchd] [Event: mount-phase-2] Skipping boot-task
+[System Event] [26244061] [INFO] [Subsystem: launchd] [Event: enable-swap] Skipping boot-task
+[System Event] [26246160] [INFO] [Subsystem: launchd] [Event: sandbox-enable-root-translation] Skipping boot-task
+[System Event] [26248887] [INFO] [Subsystem: launchd] [Event: init-with-data-volume] Doing boot task
+[System Event] [26250831] [INFO] [Subsystem: launchd] [Event: deferred_install] Skipping boot-task
+[System Event] [26252546] [INFO] [Subsystem: launchd] [Event: MobileAssetEarlyBootTask] Skipping boot-task
+[System Event] [26255941] [INFO] [Subsystem: launchd] [Event: fips] Skipping boot-task
+[System Event] [26257693] [INFO] [Subsystem: launchd] [Event: keystore-init] Skipping boot-task
+[System Event] [26259342] [INFO] [Subsystem: launchd] [Event: cache-start] Skipping boot-task
+[System Event] [26262078] [INFO] [Subsystem: launchd] [Event: usermanagerd] Skipping boot-task
+[System Event] [26264238] [INFO] [Subsystem: launchd] [Event: dirs_cleaner] Skipping boot-task
+[System Event] [26267247] [INFO] [Subsystem: launchd] [Event: dirs_cleaner-usr] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:24.975666 <Notice>: launchd logging initialized. name: com.apple.xpc.launchd pid: 1
+com.apple.xpc.launchd|1970-01-01 00:00:25.052886 <Notice>: Flushed 32 logs [limit: 20]
+[System Event] [26537926] [INFO] [Subsystem: launchd] [Event: xpcroleaccountd] Skipping boot-task
+[System Event] [26539901] [INFO] [Subsystem: launchd] [Event: init_featureflags] Skipping boot-task
+[System Event] [26541753] [INFO] [Subsystem: launchd] [Event: auearlyboot] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057471 (xpcroleaccountd) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057630 (init_featureflags) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057826 (auearlyboot) <Notice>: Skipping boot-task
+[System Event] [26819684] [INFO] [Subsystem: launchd] [Event: aidearlyboot] Skipping boot-task
+[System Event] [26821758] [INFO] [Subsystem: launchd] [Event: EndpointSecurity] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057867 (aidearlyboot) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057910 (EndpointSecurity) <Notice>: Skipping boot-task
+[System Event] [27101175] [INFO] [Subsystem: launchd] [Event: rc.server] Skipping boot-task
+[System Event] [27103984] [INFO] [Subsystem: launchd] [Event: tzinit] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057950 (rc.server) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.057990 (tzinit) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.058029 (dirhelper) <Notice>: Skipping boot-task
+[System Event] [27363677] [INFO] [Subsystem: launchd] [Event: dirhelper] Skipping boot-task
+[System Event] [27504477] [INFO] [Subsystem: launchd] [Event: rootless-init] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.058066 (rootless-init) <Notice>: Skipping boot-task
+[System Event] [27793060] [INFO] [Subsystem: launchd] [Event: finish-demo-restore] Skipping boot-task
+[System Event] [27796668] [INFO] [Subsystem: launchd] [Event: systemstats] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.058106 (finish-demo-restore) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.061843 (systemstats) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.061972 (sysstatuscheck) <Notice>: Skipping boot-task
+[System Event] [27798530] [INFO] [Subsystem: launchd] [Event: sysstatuscheck] Skipping boot-task
+[System Event] [28078386] [INFO] [Subsystem: launchd] [Event: prng_seedctl] Skipping boot-task
+[System Event] [28080424] [INFO] [Subsystem: launchd] [Event: workload-properties-init] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.062832 (prng_seedctl) <Notice>: Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.062895 (workload-properties-init) <Notice>: Skipping boot-task
+[System Event] [28351718] [INFO] [Subsystem: launchd] [Event: init-exclavekit] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:25.062933 (init-exclavekit) <Notice>: Skipping boot-task
+[System Event] [33935545] [INFO] [Subsystem: launchd] [Event: boot] Early boot complete. Continuing system boot.
+com.apple.xpc.launchd|1970-01-01 00:00:32.119922 (trial-factors-v1) <Notice>: reading known trial factors from 4 paths
+com.apple.xpc.launchd|1970-01-01 00:00:32.120430 (trial-factors-v1) <Notice>:   [0] => /System/Library/Trial/AllowedFactorsAndDefaults/KnownFactors.ENHANCED_DEBUGGING_LIBSANITIZERS.plist
+com.apple.xpc.launchd|1970-01-01 00:00:32.120630 (trial-factors-v1) <Notice>:   [1] => /System/Library/Trial/AllowedFactorsAndDefaults/KnownFactors.PROBABILISTIC_GUARD_MALLOC_TARGETED_COVERAGE.plist
+com.apple.xpc.launchd|1970-01-01 00:00:32.120712 (trial-factors-v1) <Notice>:   [2] => /System/Library/Trial/AllowedFactorsAndDefaults/KnownFactors.COREOS_FAST_PREWARMING.plist
+com.apple.xpc.launchd|1970-01-01 00:00:32.120752 (trial-factors-v1) <Notice>:   [3] => /System/Library/Trial/AllowedFactorsAndDefaults/KnownFactors.KSS_CHECKED_ALLOCATIONS_PREFLIGHT.plist
+com.apple.xpc.launchd|1970-01-01 00:00:32.170624 (trial-factors-v1) <Notice>: reading active trial factors from /Library/Trial/NamespaceDescriptors/v2/activeLowLevelFactors.plist
+com.apple.xpc.launchd|1970-01-01 00:00:32.172683 (trial-factors-v1) <Warning>: failed to process path: /Library/Trial/NamespaceDescriptors/v2/activeLowLevelFactors.plist: No such file or directory: 2
+com.apple.xpc.launchd|1970-01-01 00:00:32.173611 (boot) <Notice>: Early boot complete. Continuing system boot.
+com.apple.xpc.launchd|1970-01-01 00:00:32.174238 (system) <Notice>: entering bootstrap mode
+com.apple.xpc.launchd|1970-01-01 00:00:32.539329 (com.openssh.sshd) <Error>: Unknown key for plist importer (key: SHAuthorizationRight type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:32.628298 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.mobile.softwareupdated
+com.apple.xpc.launchd|1970-01-01 00:00:32.646601 (system/com.apple.DumpPanicRecoveryOS) <Notice>: Did not import service from caller: path = /System/Library/LaunchDaemons/com.apple.DumpPanicRecoveryOS.plist, caller = launchd[1], error = 152: Service cannot load in current boot environment
+com.apple.xpc.launchd|1970-01-01 00:00:32.787466 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.notifyd
+com.apple.xpc.launchd|1970-01-01 00:00:32.822652 (com.apple.syslogd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:32.824234 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.syslogd
+com.apple.xpc.launchd|1970-01-01 00:00:32.911054 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.uarpd
+com.apple.xpc.launchd|1970-01-01 00:00:33.009353 (com.apple.opendirectoryd) <Error>: Unknown key for plist importer (key: BeginTransactionAtShutdown type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:33.010009 (system/com.apple.opendirectoryd) <Warning>: (lint): _PanicOnCrash key: InternalOnly not enabled in the current environment
+com.apple.xpc.launchd|1970-01-01 00:00:33.010359 (system/com.apple.opendirectoryd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:33.010519 (com.apple.opendirectoryd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:33.025765 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.opendirectoryd
+com.apple.xpc.launchd|1970-01-01 00:00:33.030213 (com.apple.mobile.keybagd) <Notice>: This key does not do anything: OnDemand
+com.apple.xpc.launchd|1970-01-01 00:00:33.032703 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.mobile.keybagd
+com.apple.xpc.launchd|1970-01-01 00:00:33.059893 (org.cups.cupsd) <Error>: Unknown key for plist importer (key: TransactionTimeLimitEnabled type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:33.060723 (org.cups.cupsd) <Warning>: Service has increased maximum shutdown time to 71 seconds. This will create a poor experience for the user.
+com.apple.xpc.launchd|1970-01-01 00:00:33.080137 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.InstallerProgress
+com.apple.xpc.launchd|1970-01-01 00:00:33.189946 (system/com.apple.SafeEjectGPUStartupDaemon) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.SafeEjectGPUStartupDaemon.plist, caller = launchd[1], error = 138: Service cannot be loaded on this hardware
+com.apple.xpc.launchd|1970-01-01 00:00:33.220544 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.apsd
+com.apple.xpc.launchd|1970-01-01 00:00:33.483001 (com.apple.logd) <Error>: Unknown key for plist importer (key: BeginTransactionAtShutdown type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:33.483517 (com.apple.logd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:33.484746 (system/com.apple.logd - BSDSystemLogger) <Warning>: System logger socket was not opened during early boot. (Proceeding anyway)
+com.apple.xpc.launchd|1970-01-01 00:00:33.486472 (system) <Notice>: pending spawn, service not yet activated: com.apple.logd
+com.apple.xpc.launchd|1970-01-01 00:00:33.692676 <Notice>: Last log repeated 2 times
+com.apple.xpc.launchd|1970-01-01 00:00:33.508595 (com.apple.colorsync.displayservices) <Error>: Unknown key for plist importer (key: RunLoopType type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:33.509753 (system) <Notice>: pending spawn, service not yet activated: com.apple.logd
+com.apple.xpc.launchd|1970-01-01 00:00:33.694422 <Notice>: Last log repeated 3 times
+com.apple.xpc.launchd|1970-01-01 00:00:33.611907 (system/com.apple.configd) <Error>: (lint): EnablePressuredExit is not compatible with KeepAlive=true. Ignoring EnablePressuredExit.
+com.apple.xpc.launchd|1970-01-01 00:00:33.625608 (com.apple.configd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:33.627368 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.configd
+com.apple.xpc.launchd|1970-01-01 00:00:33.627500 (system) <Notice>: pending spawn, service not yet activated: com.apple.logd
+com.apple.xpc.launchd|1970-01-01 00:00:33.632104 (com.apple.gssd) <Error>: Unknown key for plist importer (key: BeginTransactionAtShutdown type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:33.647167 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.logd
+com.apple.xpc.launchd|1970-01-01 00:00:33.727325 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.mediaremoted
+com.apple.xpc.launchd|1970-01-01 00:00:33.801360 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.peakpowermanagerd
+com.apple.xpc.launchd|1970-01-01 00:00:34.046301 (com.apple.KernelEventAgent) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.047050 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.KernelEventAgent
+com.apple.xpc.launchd|1970-01-01 00:00:34.284607 (com.apple.timed) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.287854 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.timed
+com.apple.xpc.launchd|1970-01-01 00:00:34.402920 (com.apple.suhelperd) <Notice>: This key does not do anything: OnDemand
+com.apple.xpc.launchd|1970-01-01 00:00:34.447383 (system/com.apple.audio.coreaudiod) <Warning>: The endpoint "com.apple.coremedia.systemcontroller.xpc" defined in plist already exists and is owned by: com.apple.audiomxd
+com.apple.xpc.launchd|1970-01-01 00:00:34.451831 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.CSCSupportd
+com.apple.xpc.launchd|1970-01-01 00:00:34.456771 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.UpdateSettings
+com.apple.xpc.launchd|1970-01-01 00:00:34.499526 (org.net-snmp.snmpd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.507525 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.scsid
+com.apple.xpc.launchd|1970-01-01 00:00:34.583552 (system/com.apple.screensharing) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:34.596966 (com.apple.screensharing) <Error>: Unknown key for plist importer (key: SHAuthorizationRight type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:34.600890 (com.apple.sntpd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.647856 (com.apple.metadata.mds) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.649030 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.metadata.mds
+com.apple.xpc.launchd|1970-01-01 00:00:34.811789 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.uarpassetmanagerd
+com.apple.xpc.launchd|1970-01-01 00:00:34.845095 (com.apple.revisiond) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.846271 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.revisiond
+com.apple.xpc.launchd|1970-01-01 00:00:34.850044 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.coreservices.launchservicesd
+com.apple.xpc.launchd|1970-01-01 00:00:34.896188 (com.apple.fseventsd) <Error>: The HopefullyExitsLast key is no longer respected. Please remove it.
+com.apple.xpc.launchd|1970-01-01 00:00:34.896360 (com.apple.fseventsd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.897718 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.fseventsd
+com.apple.xpc.launchd|1970-01-01 00:00:34.964490 (com.apple.getty) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:34.985645 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.cmio.registerassistantservice
+com.apple.xpc.launchd|1970-01-01 00:00:35.023333 (com.apple.aned) <Error>: Unknown key for plist importer (key: com.apple.ane.iokit-user-access type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:35.068639 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.corerepaird
+com.apple.xpc.launchd|1970-01-01 00:00:35.075953 (system/com.apple.centaurid) <Notice>: internal event: WILL_SPAWN, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:35.076642 (system/com.apple.centaurid) <Notice>: service state: spawn scheduled
+com.apple.xpc.launchd|1970-01-01 00:00:35.076744 (system/com.apple.centaurid) <Notice>: service state: spawning
+com.apple.xpc.launchd|1970-01-01 00:00:35.153457 (system/com.apple.centaurid) <Notice>: launching: system support
+com.apple.xpc.launchd|1970-01-01 00:00:35.297853 (system/com.apple.centaurid [3]) <Notice>: xpcproxy spawned with pid 3
+com.apple.xpc.launchd|1970-01-01 00:00:35.322454 (system/com.apple.centaurid [3]) <Notice>: internal event: SPAWNED, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:35.323355 (system/com.apple.centaurid [3]) <Notice>: service state: xpcproxy
+com.apple.xpc.launchd|1970-01-01 00:00:35.326355 (com.apple.BlueTool) <Error>: ThrottleInterval set to zero. You're not that important. Ignoring.
+com.apple.xpc.launchd|1970-01-01 00:00:35.365292 (com.apple.aneuserd) <Error>: Unknown key for plist importer (key: com.apple.ane.iokit-user-access type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:35.386303 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.thermalmonitord
+com.apple.xpc.launchd|1970-01-01 00:00:35.423375 (com.apple.rpcbind) <Error>: Unknown key for plist importer (key: BeginTransactionAtShutdown type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:35.559494 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.nfsconf
+com.apple.xpc.launchd|1970-01-01 00:00:35.676545 (system/com.apple.alf) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:35.697383 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.bluetoothd
+com.apple.xpc.launchd|1970-01-01 00:00:35.703437 (system/com.apple.kcgend) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.kcgend.plist, caller = launchd[1], error = 138: Service cannot be loaded on this hardware
+com.apple.xpc.launchd|1970-01-01 00:00:35.787111 (com.apple.swiftuitracingsupport.xpc) <Error>: Unknown key for plist importer (key: LimitLoadToDeveloperMode type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:35.848905 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.nesessionmanager
+com.apple.xpc.launchd|1970-01-01 00:00:35.878876 (com.apple.fairplayd) <Error>: Unknown key for plist importer (key: CFBundleDevelopmentRegion type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:35.879075 (com.apple.fairplayd) <Error>: Unknown key for plist importer (key: CFBundleName type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:35.879189 (com.apple.fairplayd) <Error>: Unknown key for plist importer (key: CFBundleInfoDictionaryVersion type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:36.131234 (system/com.apple.backupd-helper) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:36.150211 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.warmd
+com.apple.xpc.launchd|1970-01-01 00:00:36.197463 (com.apple.PerfPowerServices) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:36.198781 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.PerfPowerServices
+com.apple.xpc.launchd|1970-01-01 00:00:36.228106 (system/com.apple.xpc.smd) <Notice>: internal event: WILL_SPAWN, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:36.228206 (system/com.apple.xpc.smd) <Notice>: service state: spawn scheduled
+com.apple.xpc.launchd|1970-01-01 00:00:36.228265 (system/com.apple.xpc.smd) <Notice>: service state: spawning
+com.apple.xpc.launchd|1970-01-01 00:00:36.256757 (system/com.apple.xpc.smd) <Notice>: launching: system support
+com.apple.xpc.launchd|1970-01-01 00:00:36.402605 (system/com.apple.xpc.smd [4]) <Notice>: xpcproxy spawned with pid 4
+com.apple.xpc.launchd|1970-01-01 00:00:36.415844 (system/com.apple.xpc.smd [4]) <Notice>: internal event: SPAWNED, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:36.416297 (system/com.apple.xpc.smd [4]) <Notice>: service state: xpcproxy
+com.apple.xpc.launchd|1970-01-01 00:00:36.445407 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.coreduetd
+com.apple.xpc.launchd|1970-01-01 00:00:36.465464 (com.apple.GSSCred) <Error>: Unknown key for plist importer (key: RunLoopType type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:36.473130 (system/com.apple.centaurid [3]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:36.581136 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.accessoryupdaterd
+com.apple.xpc.launchd|1970-01-01 00:00:36.584614 (com.apple.diskarbitrationd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:36.585684 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.diskarbitrationd
+com.apple.xpc.launchd|1970-01-01 00:00:36.717624 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.ManagedClient.startup
+com.apple.xpc.launchd|1970-01-01 00:00:36.774563 (com.apple.security.xprotectd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:36.775322 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.security.xprotectd
+com.apple.xpc.launchd|1970-01-01 00:00:36.790997 (system/com.apple.ReportMemoryException) <Error>: (lint): Unrecognized MachService property: DrainMessagesOnCrash
+com.apple.xpc.launchd|1970-01-01 00:00:36.893323 (com.apple.AppSSODaemon) <Error>: Unknown key for plist importer (key: LSBackgroundOnly type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:36.985312 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.kernelmanagerd
+com.apple.xpc.launchd|1970-01-01 00:00:37.052800 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.ionodecache
+com.apple.xpc.launchd|1970-01-01 00:00:37.078360 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.contextstored
+com.apple.xpc.launchd|1970-01-01 00:00:37.946774 (system/com.apple.lightsoutmanagementd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:37.959060 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.watchdogd
+com.apple.xpc.launchd|1970-01-01 00:00:37.969798 (system/com.apple.sessionlogoutd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:37.992536 (system/com.apple.smbd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:38.006650 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.locationd
+com.apple.xpc.launchd|1970-01-01 00:00:38.046535 (com.apple.dhcp6d) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+AMFI: [non-fatal] unable to accelerate context: com.apple.Installer-Progress | 65285
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 36]: /System/Library/CoreServices/Installer Progress.apcom.apple.xpc.launchd|1970-01-01 00:00:38.061348 (system/com.apple.PasswordService) <Warning>: (lint): Assuming EnablePressuredExit=false given EnableTransactions=false.
+com.apple.xpc.launchd|1970-01-01 00:00:38.078120 (com.apple.powerd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:38.079071 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.powerd
+com.apple.xpc.launchd|1970-01-01 00:00:38.099513 (com.apple.xsan) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:38.099610 (com.apple.xsan) <Warning>: ExitTimeOut is larger than the maximum allowed. Changing it to 60.
+com.apple.xpc.launchd|1970-01-01 00:00:38.099781 (com.apple.xsan) <Error>: The IgnoreProcessGroupAtShutdown key is not yet implemented. If you rely on this key, please file a bug.
+com.apple.xpc.launchd|1970-01-01 00:00:38.151337 (system/com.apple.cameraispdarwinsimd) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.cameraispdarwinsimd.plist, caller = launchd[1], error = 158: Service cannot be loaded on current os variant
+com.apple.xpc.launchd|1970-01-01 00:00:38.337048 (system/com.apple.logind) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:38.337162 (com.apple.logind) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:38.338227 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.logind
+com.apple.xpc.launchd|1970-01-01 00:00:38.506504 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.AppleCredentialManagerDaemon
+com.apple.xpc.launchd|1970-01-01 00:00:38.507525 (system/com.apple.xpc.smd [4]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:38.529206 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.dynamic_pager
+com.apple.xpc.launchd|1970-01-01 00:00:38.601380 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.iomfb_fdr_loader
+com.apple.xpc.launchd|1970-01-01 00:00:38.690656 (system/org.cups.cupsd - Listeners) <Error>: Failed to mkdir() socket directory: path=/private/var/run, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.703537 (system/com.apple.msrpc.netlogon - ncalrpc) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncalrpc, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.704602 (system/com.apple.racoon - Listeners) <Error>: Failed to mkdir() socket directory: path=/var/run, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.706903 (system/com.apple.rpcbind - OnDemandTickler) <Error>: Failed to mkdir() socket directory: path=/var/run, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.708080 (system/com.apple.diagnosticd - com.apple.diagnosticd.reflect-listener) <Error>: Failed to mkdir() socket directory: path=/private/var/run, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.709044 (system/com.apple.systemkeychaiAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 67]: /usr/sbin/notifyd, launch type 1, failure proc [vcn - Listener) <Error>: Failed to mkdir() socket directory: path=/var/run, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.709754 (system/com.apple.mDNSResponder.reloaded - Listeners) <Error>: Failed to mkdir() socket directory: path=/var/run, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:38.715744 (com.apple.auditd) <Error>: The TimeOut key is no longer respected. It never did anything anyway.
+com.apple.xpc.launchd|1970-01-01 00:00:38.726337 (com.apple.FileCoordination) <Error>: Unknown key for plist importer (key: TransactionTimeLimitEnabled type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:38.756719 (com.apple.sysdiagnose_helper) <Error>: Unknown key for plist importer (key: EfficiencyMode type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:38.779620 (com.apple.efilogin-helper) <Error>: ThrottleInterval set to zero. You're not that important. Ignoring.
+com.apple.xpc.launchd|1970-01-01 00:00:38.784698 (system/com.apple.displaypolicyd) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.displaypolicyd.plist, caller = launchd[1], error = 138: Service cannot be loaded on this hardware
+com.apple.xpc.launchd|1970-01-01 00:00:38.788345 (system/com.apple.backupd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:39.271638 <Notice>: Last log repeated 1 times
+com.apple.xpc.launchd|1970-01-01 00:00:38.816700 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.IFCStart
+com.apple.xpc.launchd|1970-01-01 00:00:38.820160 (com.apple.colorsyncd) <Error>: Unknown key for plist importer (key: RunLoopType type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:38.919271 (system/com.apple.postupgraded) <Notice>: Did not import service from caller: path = /System/Library/LaunchDaemons/com.apple.postupgraded.plist, caller = launchd[1], error = 152: Service cannot load in current boot environment
+com.apple.xpc.launchd|1970-01-01 00:00:39.309292 <Notice>: Flushed 21 logs [limit: 20]
+com.apple.xpc.launchd|1970-01-01 00:00:38.952809 (com.apple.distnoted.xpc.daemon) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:38.953555 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.distnoted.xpc.daemon
+com.apple.xpc.launchd|1970-01-01 00:00:38.960200 (com.apple.corebrightnessd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:38.961339 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.corebrightnessd
+com.apple.xpc.launchd|1970-01-01 00:00:38.966149 (com.apple.usbctelemetryd) <Error>: Unknown key for plist importer (key: com.apple.usbcd type: dictionary)
+com.apple.xpc.launchd|1970-01-01 00:00:38.966609 (com.apple.usbctelemetryd) <Error>: Unknown key for plist importer (key: PressuredExit type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:38.990160 (system/com.apple.touchbarserver) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:39.008141 (com.apple.systemstats.analysis) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:39.009141 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.systemstats.analysis
+com.apple.xpc.launchd|1970-01-01 00:00:39.048815 (system/com.apple.remoted) <Warning>: (lint): _PanicOnCrash key: AutomationOnly not enabled in the current environment
+com.apple.xpc.launchd|1970-01-01 00:00:39.049060 (com.apple.remoted) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:39.049836 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.remoted
+com.apple.xpc.launchd|1970-01-01 00:00:39.076539 (system/com.apple.dasd) <Error>: (lint): EnablePressuredExit is not compatible with KeepAlive=true. Ignoring EnablePressuredExit.
+com.apple.xpc.launchd|1970-01-01 00:00:39.076890 (com.apple.dasd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:39.078338 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.dasd
+com.apple.xpc.launchd|1970-01-01 00:00:39.085553 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.wifiFirmwareLoader
+com.apple.xpc.launchd|1970-01-01 00:00:39.117472 (system/com.apple.WindowServer) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:39.599816 <Notice>: Last log repeated 6 times
+[System Event] [56397552] [INFO] [Subsystem: launchd] [Event: cache-tag] Skipping boot-task
+com.apple.xpc.launchd|1970-01-01 00:00:39.117889 (com.apple.WindowServer) <Error>: Unknown key for plist importer (key: com.apple.private.gain-map-access type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:39.127538 (com.apple.UserEventAgent-System) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:39.130366 (system/com.apple.UserEventAgent-System) <Notice>: internal event: WILL_SPAWN, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:39.130473 (system/com.apple.UserEventAgent-System) <Notice>: service state: spawn scheduled
+com.apple.xpc.launchd|1970-01-01 00:00:39.130534 (system/com.apple.UserEventAgent-System) <Notice>: service state: spawning
+com.apple.xpc.launchd|1970-01-01 00:00:39.132898 (system/com.apple.UserEventAgent-System) <Notice>: launching: system support
+com.apple.xpc.launchd|1970-01-01 00:00:39.163053 (system/com.apple.UserEventAgent-System [5]) <Notice>: xpcproxy spawned with pid 5
+com.apple.xpc.launchd|1970-01-01 00:00:39.163553 (system/com.apple.UserEventAgent-System [5]) <Notice>: internal event: SPAWNED, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:39.163648 (system/com.apple.UserEventAgent-System [5]) <Notice>: service state: xpcproxy
+com.apple.xpc.launchd|1970-01-01 00:00:39.188063 (com.apple.erasecontentsettingshelperd) <Notice>: This key does not do anything: OnDemand
+com.apple.xpc.launchd|1970-01-01 00:00:39.196498 (com.apple.smb.preferences) <Error>: The TimeOut keAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 3]: /usr/libexec/centaurid, launch type 1, failure procy is no longer respected. It never did anything anyway.
+com.apple.xpc.launchd|1970-01-01 00:00:39.197755 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.smb.preferences
+com.apple.xpc.launchd|1970-01-01 00:00:39.254326 (system/com.apple.msrpc.lsarpc - ncacn_np) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncacn_np, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:39.256380 (system/com.apple.msrpc.lsarpc AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 5]: /usr/libexec/UserEventAgent, launch type 1, failure- ncalrpc) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncalrpc, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:39.262236 (org.apache.httpd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:39.295989 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.iconservices.iconservicesd
+com.apple.xpc.launchd|1970-01-01 00:00:39.937770 <Notice>: Flushed 39 logs [limit: 20]
+com.apple.xpc.launchd|1970-01-01 00:00:39.317566 (system/com.apple.msrpc.mdssvc - ncacn_np) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncacn_np, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:39.322734 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.pfctl
+com.apple.xpc.launchd|1970-01-01 00:00:39.358577 (com.apple.cmio.VDCAssistant) <Error>: ThrottleInterval set to zero. You're not that important. Ignoring.
+com.apple.xpc.launchd|1970-01-01 00:00:39.370031 (system/com.apple.mobile.usermanagerd) <Warning>: (lint): _PanicOnCrash key: InternalOnly not enabled in the current environment
+com.apple.xpc.launchd|1970-01-01 00:00:39.370533 (com.apple.mobile.usermanagerd) <Notice>: This key does not do anything: OnDemand
+com.apple.xpc.launchd|1970-01-01 00:00:39.371150 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.mobile.usermanagerd
+com.apple.xpc.launchd|1970-01-01 00:00:39.391685 (system/com.apple.corespeechd_system) <Error>: (lint): EnablePressuredExit is not compatible with KeepAlive=true. Ignoring EnablePressuredExit.
+com.apple.xpc.launchd|1970-01-01 00:00:39.392286 (com.apple.corespeechd_system) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:39.392910 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.corespeechd_system
+com.apple.xpc.launchd|1970-01-01 00:00:39.398218 (system/com.apple.msrpc.wkssvc - ncacn_np) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncacn_np, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:39.399040 (system/com.apple.msrpc.wkssvc - ncalrpc) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncalrpc, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:39.404807 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.sandboxd
+com.apple.xpc.launchd|1970-01-01 00:00:39.408942 (system/com.apple.ReportCrash.Root) <Error>: (lint): Unrecognized MachService property: DrainMessagesOnCrash
+com.apple.xpc.launchd|1970-01-01 00:00:39.444663 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.DumpPanic
+com.apple.xpc.launchd|1970-01-01 00:00:39.490895 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.securityd
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 20]: /usr/libexec/amfid, launch type 1, failure proc [vAMFI: [non-fatal] unable to accelerate context: com.apple.dynamic_pager | 65285
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 60]: /System/Library/CoreServices/logind, launch type 1AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 44]: /bin/bash, launch type 1, failure proc [vc: 1 pid:AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 6]: /usr/libexec/wifiFirmwareLoader, launch type 1, faiAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 49]: /sbin/dynamic_pager, launch type 1, failure proc [AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 53]: /usr/libexec/autofsd, launch type 1, failure proc AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 29]: /usr/libexec/watchdogd, launch type 1, failure proAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 15]: /usr/libexec/configd, launch type 1, failure proc AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 12]: /usr/bin/IOMFB_FDR_Loader, launch type 1, failure AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 43]: /usr/libexec/xprotectd, launch type 1, failure proAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 69]: /usr/libexec/corebrightnessd, launch type 1, failuAMFI: [non-fatal] unable to accelerate context: com.apple.KernelEventAgent | 65285
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 65]: /usr/libexec/smb-sync-preferences, launch type 1, AMFI: [non-fatal] unable to accelerate context: com.apple.warmd | 65285
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 48]: /usr/sbin/securityd, launch type 1, failure proc [AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 17]: /System/Library/CoreServices/powerd.bundle/powerd,AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 10]: /bin/bash, launch type 1, failure proc [vc: 1 pid:AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 32]: /System/Library/Frameworks/CoreServices.framework/AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 7]: /System/Library/Frameworks/CoreServices.framework/VAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 52]: /usr/libexec/CSCSupportd, launch type 1, failure pAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 21]: /usr/libexec/DumpPanic, launch type 1, failure proAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 56]: /usr/libexec/scsid, launch type 1, failure proc [vAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 35]: /usr/libexec/diskarbitrationd, launch type 1, failAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 30]: /System/Library/CoreServices/ManagedClient.app/ConAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 31]: /usr/libexec/warmd, launch type 1, failure proc [vAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 28]: /usr/libexec/ifcstart, launch type 1, failure procAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 62]: /usr/sbin/KernelEventAgent, launch type 1, failureAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 45]: /System/Library/PrivateFrameworks/ApplePushServiceAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 68]: /usr/libexec/sandboxd, launch type 1, failure procAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 41]: /usr/libexec/thermalmonitord, launch type 1, failuAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 22]: /usr/libexec/remoted, launch type 1, failure proc AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 23]: /sbin/mount_nfs, launch type 1, failure proc [vc: AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 58]: /System/Library/PrivateFrameworks/AppleCredentialMAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 55]: /usr/libexec/corerepaird, launch type 1, failure pAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 24]: /usr/libexec/logd, launch type 1, failure proc [vcAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 25]: /usr/libexec/keybagd, launch type 1, failure proc AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 34]: /usr/libexec/kernelmanagerd, launch type 1, failurcom.apple.xpc.launchd|1970-01-01 00:00:39.519081 (com.jprx.goldengate-diag) <NotAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 66]: /usr/sbin/bluetoothd, launch type 1, failure proc AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 54]: /usr/libexec/dasd, launch type 1, failure proc [vcAMFI: Denying core dump for pid 24 (logd)vm: bash[10] triggered unnest of range 0x1e2000000->0x1e6000000 of DYLD shared region in VM map 0xeb479cc4ab72588b. While not abnormal for debuggers, this increases system memory footprint until the target exits.
+vm: bash[44] triggered unnest of range 0x1e2000000->0x1e6000000 of DYLD shared region in VM map 0x63cb03b2f728a935. While not abnormal for debuggers, this increases system memory footprint until the target exits.
+ice>: This service is defined to be constantly running and is inherently inefficient.
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 71]: /usr/libexec/logd, launch type 1, failure proc [vcAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 72]: /System/Library/PrivateFrameworks/TCC.framework/Sucom.apple.xpc.launchd|1970-01-01 00:00:39.520980 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.jprx.goldengate-diag
+com.apple.xpc.launchd|1970-01-01 00:00:39.524062 (system/com.apple.sysdiagnose) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.sysdiagnose.darwinos.plist, caller = launchd[1], error = 158: Service cannot be loaded on current os variant
+com.apple.xpc.launchd|1970-01-01 00:00:39.526305 (com.apple.autofsd) <Notice>: TAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 39]: /bin/bash, launch type 1, failure proc [vc: 1 pid:his service is defined to be constantly running and is inherently inefficient.
+vm: bash[39] triggered unnest of range 0x1e2000000->0x1e6000000 of DYLD shared region in VM map 0x11a740ddda6b7dd5. While not abnormal for debuggers, this increases system memory footprint until the target exits.
+com.apple.xpc.launchd|1970-01-01 00:00:39.526869 (system) <Notice>: pending spawAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 73]: /usr/libexec/dirhelper, launch type 1, failure proAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 74]: /System/Library/CoreServices/ReportCrash, launch tn, domain in on-demand-only mode: com.apple.autofsd
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 46]: /System/Library/CoreServices/launchservicesd, launAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 76]: /System/Library/CoreServices/loginwindow.app/Contevm: loginwindow[76] triggered unnest of range 0x1e2000000->0x1e6000000 of DYLD shared region in VM map 0x405ec2d30691292f. While not abnormal for debuggers, this increases system memory footprint until the target exits.
+Couldn't alloc class "AFKResource"
+AppleFileSystemDriver: using apfs-preboot-uuid
+AppleFileSystemDriver: Invalid UUID string ''
+com.apple.xpc.launchd|1970-01-01 00:00:39.543266 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.MobileFileIntegrity
+com.apple.xpc.launchd|1970-01-01 00:00:39.553130 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.iomfb_bics_daemon
+com.apple.xpc.launchd|1970-01-01 00:00:39.560152 (com.apple.lockd) <Error>: The HopefullyExitsLast key is no longer respected. Please remove it.
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 77]: /usr/libexec/runningboardd, launch type 1, failureAMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 75]: /usr/libexec/powerexperienced, launch type 1, failcom.apple.xpc.launchd|1970-01-01 00:00:39.569071 (com.apple.hidd) <Error>: Unknown key for plist importer (key: Group type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:39.612689 (system) <Notice>: pending spawn, domain in on-demand-only mode: com.apple.endpointsecurity.endpointsecurityd
+com.apple.xpc.launchd|1970-01-01 00:00:39.623473 (system/com.apple.msrpc.srvsvc - ncacn_np) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncacn_np, mode=755, error=No such file or directory (2)
+com.apple.xpc.launchd|1970-01-01 00:00:39.650363 (system/com.apple.msrpc.srvsvc - ncalrpc) <Error>: Failed to mkdir() socket directory: path=/var/rpc/ncalrpc, mode=755, error=No such file or directory (2)
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 78]: /usr/sbin/cfprefsd, launch type 1, failure proc [vcom.apple.xpc.launchd|1970-01-01 00:00:39.661079 (com.apple.AppSSOAgent.login) <Error>: Unknown key for plist importer (key: LSBackgroundOnly type: bool)
+com.apple.xpc.launchd|1970-01-01 00:00:39.702317 (system/com.apple.UserEventAgent-System [5]) <Notice>: internal event: SOURCE_ATTACH, code = 0
+com.apple.xpc.launchd|1970-01-01 00:00:39.838292 (com.openssh.sshd) <Error>: Unknown key for plist importer (key: SHAuthorizationRight type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:39.867286 (system/com.apple.DumpPanicRecoveryOS) <Notice>: Did not import service from caller: path = /System/Library/LaunchDaemons/com.apple.DumpPanicRecoveryOS.plist, caller = launchd[1], error = 152: Service cannot load in current boot environment
+AMFI: [non-fatal] unable to accelerate context: com.apple.digest-service | 65285
+AMFI: Launch Constraint Violation (not enforcing), error info: c[6]p[2]m[3]e[255], (Process was launched as a system service unexpectedly but met System Service constraints) launching proc[vc: 1 pid: 80]: /System/Library/PrivateFrameworks/Heimdal.frameworAMFI: [non-fatal] unable to accelerate context: com.apple.automount | 65285
+com.apple.xpc.launchd|1970-01-01 00:00:40.784495 <Notice>: Flushed 31 logs [limit: 20]
+com.apple.xpc.launchd|1970-01-01 00:00:40.122051 (system/com.apple.SafeEjectGPUStartupDaemon) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.SafeEjectGPUStartupDaemon.plist, caller = launchd[1], error = 138: Service cannot be loaded on this hardware
+com.apple.xpc.launchd|1970-01-01 00:00:40.493400 (org.net-snmp.snmpd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:40.530300 (system/com.apple.screensharing) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:40.530511 (com.apple.screensharing) <Error>: Unknown key for plist importer (key: SHAuthorizationRight type: string)
+com.apple.xpc.launchd|1970-01-01 00:00:40.546353 (com.apple.sntpd) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:40.678770 (com.apple.getty) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:40.887658 (system/com.apple.kcgend) <Error>: Could not import service from caller: path = /System/Library/LaunchDaemons/com.apple.kcgend.plist, caller = launchd[1], error = 138: Service cannot be loaded on this hardware
+com.apple.xpc.launchd|1970-01-01 00:00:42.007760 (system/com.apple.lightsoutmanagementd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:42.056483 (system/com.apple.smbd) <Warning>: (lint): The HideUntilCheckIn property is an architectural performance issue. Please transition away from it.
+com.apple.xpc.launchd|1970-01-01 00:00:42.066520 (com.apple.dhcp6d) <Notice>: This service is defined to be constantly running and is inherently inefficient.
+com.apple.xpc.launchd|1970-01-01 00:00:42.074108

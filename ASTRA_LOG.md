@@ -688,3 +688,76 @@ patching alone. Two real options going forward, in order of promise:
 The TXM kernel-stability fix from earlier tonight stands regardless of
 which of these paths is pursued next - it's required either way to get a
 long enough stable runtime to make progress on either option.
+
+## 2026-09-21 (continued, "option A"): definitively confirmed - IOKit personality matching is the wrong mechanism entirely
+
+User: "start A. do not stop." - continuing the disassembly investigation
+into whether `IOBootFramebuffer::start()` calls `registerService()`.
+
+### Methodology note: found and fixed a real bug in my own test tooling first
+
+Several confusing "regression" results earlier turned out to be a bug in
+my own interactive `ioreg` test scripts: `ioreg -c <ClassName> -l` (with
+`-l`) returns a huge (~224KB) dump that never actually contains the
+filtered class, while `ioreg -c <ClassName>` (without `-l`) correctly
+filters and shows it. This minimal on-device `ioreg` build apparently
+breaks when both flags are combined. **Always use `ioreg -c <ClassName>`
+without `-l` for future checks** - confirmed reliable across many repeat
+tests once this was found. Everything below uses the corrected format.
+
+### The real, now-proven mechanism
+
+Used `ipsw kernel cpp --methods -c IOBootFramebuffer` (discovered this
+session - a proper vtable dumper with resolved PAC metadata and real
+symbol names, far more reliable than manual disassembly guessing) to get
+`IOBootFramebuffer`'s exact vtable. It does **not** override `start()` -
+it inherits `IOFramebuffer::start(IOService*)` directly (static VA
+`0xfffffe000ac4f7cc`).
+
+**Confirmed via gdbstub that this inherited `start()` is called exactly
+once and returns `x0 = 1` (success)** - breakpoint at the runtime address,
+`thread step-out`, `register read x0` gave a clean, unambiguous `1`.
+
+**Then used the same `ipsw kernel cpp --methods` tool on
+`IOMobileFramebufferVeryLegacy`** (my synthetic personality's target
+class) and confirmed it *does* override `probe()`, `start()`, and
+`init(OSDictionary*)` - real, distinct implementations, not just inherited
+stubs. **Set a breakpoint directly on `IOMobileFramebufferVeryLegacy::probe()`
+and let a full boot run to completion (reached `bash-3.2#`) - the
+breakpoint never fired, not once.**
+
+This is the actual, definitive answer: **IOKit's driver-matching engine
+never attempts to probe *any* personality against `IOBootFramebuffer` as a
+provider, regardless of how the child personality is configured.**
+`IOBootFramebuffer`/`IOFramebuffer`'s `start()` succeeding does not trigger
+further downstream matching. This isn't a bug in the `mfblegacy` personality
+patch (which round-trips correctly through `plistlib` and causes zero
+regression) - it's how this class family is designed to work. Real Apple
+Silicon Macs' `IOMobileFramebuffer`-family drivers are almost certainly
+discovered by WindowServer through a **direct lookup** (e.g.
+`IOServiceGetMatchingService` with a specific provider name/class query, or
+a hardcoded service name like `AppleCLCD`) rather than automatic
+personality-driven matching chained off another IOKit nub. This is a
+structurally different discovery mechanism than the one this session's
+`mfblegacy` patch assumed.
+
+### What this means for next steps
+
+Chaining a new IOKit personality off `IOBootFramebuffer` as a provider is
+a dead end - confirmed, not guessed. The two real remaining paths:
+
+1. **Find WindowServer/SkyLight's actual real display-service lookup
+   call** (extracted binaries are already sitting at `/tmp/gg_extract/` on
+   the T480s - `WindowServer` and `SkyLight`) and see if it's a
+   name/class-based `IOServiceGetMatchingService` query that could be
+   satisfied by directly naming/renaming our `IOBootFramebuffer` instance
+   to match (e.g. via `IONameMatch`/`IOClassNameOverride`-style properties
+   on the existing personality, no new personality needed) rather than
+   trying to get something else to match *against* it.
+2. **Accept the DCP/AFKFirmwareService/AuxKC/KDK wall is unavoidable** for
+   a real IOMobileFramebuffer-backed desktop (PAHSE12's options: wait for
+   a KDK, do a real install inside this environment so the installer
+   builds its own AuxKC, or hand-write a replacement `AFKFirmwareService`).
+
+The TXM kernel-stability fix from earlier tonight remains required and
+independent of either path.

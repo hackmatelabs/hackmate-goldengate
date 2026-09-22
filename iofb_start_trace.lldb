@@ -1,0 +1,19 @@
+gdb-remote 127.0.0.1:1234
+breakpoint set --address 0xfffffe002ac4f7cc
+continue
+bt
+register read x0
+thread step-out
+register read x0
+continue
+bt
+register read x0
+thread step-out
+register read x0
+continue
+bt
+register read x0
+thread step-out
+register read x0
+detach
+quit

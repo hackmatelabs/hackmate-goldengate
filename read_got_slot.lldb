@@ -1,0 +1,4 @@
+gdb-remote 127.0.0.1:1234
+memory read --size 8 --count 1 --format x 0xfffffe002c247b20
+detach
+quit

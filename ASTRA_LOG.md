@@ -1290,3 +1290,70 @@ consistent with how this whole project was scoped from the start ("since
 nobody, we are the body"). The TXM fix and IOBootFramebuffer/`start()`
 success remain real, durable progress regardless of which of these paths
 is pursued next.
+
+## 2026-09-22 (continued further): checked whether the real endpoint personality already matches - it does, which independently re-confirms PHASE12's wall
+
+One more check before wrapping tonight's arc: does the real
+`DCPEndpoint24` personality chain (the one the emulator's own source
+documents) already match successfully? Checked `hw/arm/apple_dcp.c`
+directly - it already implements a real, working endpoint named exactly
+`"DCPEndpoint24"` (`apple_rtkit_add_endpoint(rtk, DCP_EP_MAIN,
+"DCPEndpoint24", ...)`), with a header comment documenting the real chain
+(sourced from Asahi Linux driver knowledge): `RTBuddy(DCP) ->
+RTBuddyEndpointService "DCPEndpoint24" -> AppleDCPLinkServiceSoC ->
+AppleCLCD2 on disp0 -> IOMobileFramebuffer`. Searched the kernelcache's
+plist for the matching personality and found it for real:
+`AppleDCPLinkServiceSoC` (from `com.apple.driver.AppleMobileDispH14G-DCP`),
+`IONameMatch: [DCPEndpoint24, DCPEXTEndpoint24]`,
+`IOProviderClass: RTBuddyEndpointService` - an exact match to what the
+emulator already provides. (The `DCPEndpointsV2`/`IONameMatch:
+DCPEndpoint1..23` personality found earlier tonight was a red herring -
+wrong endpoint range entirely, unrelated to this real top-level binding.)
+
+**This means personality-name matching was never actually the blocker,
+and no emulator/device-tree engineering is needed here** - contrary to
+how promising this specific lead first looked. This independently
+re-confirms PHASE12's original conclusion via yet another, completely
+different path: IOKit really does successfully match through several real
+steps of the DCP chain (as PHASE12 already established via live
+debugging), and the wall is specifically that some class further down
+that already-matching chain needs `AFKFirmwareService`'s implementation
+at runtime, past matching entirely - and that implementation is now
+confirmed, independently, several different ways tonight, to not exist
+anywhere obtainable.
+
+### Where this leaves the project, honestly
+
+Six genuinely different investigative methods across tonight's two
+sessions (donor kernelcache diff, kmutil KDK-bypass attempt, exact
+crash-site disassembly + slide-bug fix, live breakpoint non-determinism
+check, this endpoint-personality cross-check, plus the earlier
+compat-shim/personality-matching work) all independently converge on the
+conclusion PHASE12 already reached: **the wall is a missing AuxKC,
+blocked on a KDK for build 26A428 that Apple has not published.** This is
+now validated with much higher confidence than before - not because one
+attempt succeeded, but because every alternate theory tried tonight (DCP-
+specific hardware-emulation gap, ANS2-specific cause, personality-matching
+failure, cheap-spoof-bypassable KDK check) was individually tested and
+ruled out by name, and none of them turned out to be a shortcut around
+the real wall. Three real paths remain, same as PHASE12 already
+enumerated, in order of what's actually actionable right now:
+
+1. **A real KDK for build 26A428** - requires the user's own Apple
+   Developer account to check/download; credential-gated, not something
+   to attempt without them present.
+2. **A real macOS install inside this QEMU/SPTM environment**, letting
+   the actual installer generate its own AuxKC the way a genuine Mac
+   does. The one remaining fully-autonomous option (no external
+   credentials needed) - but a materially bigger undertaking than
+   anything done in this project so far, with real prerequisites
+   (installer boot environment, Setup Assistant flow, disk partitioning
+   inside the emulated environment) that no session has touched yet.
+   This is the clear next major task for a dedicated future session.
+3. **Hand-write a from-scratch `AFKFirmwareService` replacement** and
+   inject it via Mach-O surgery - PHASE12's own "largest, riskiest,
+   should be a last resort" option, now somewhat de-risked by tonight's
+   finding that the real AFKEPKextV2-family code (a working, modern,
+   related architecture) does exist and compile cleanly in this exact
+   kernelcache, giving a real reference implementation to study even
+   though it's not a drop-in replacement.

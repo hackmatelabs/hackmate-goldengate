@@ -85,8 +85,36 @@ cd ~/goldengate/qemu-sptm-cl4-native/build && \
 
 ## Current state as of hand-off (2026-09-21, desktop-Claude session, supersedes everything below)
 
-**Read `ASTRA_LOG.md` and `PHASE9_LOG.md`/`PHASE12_LOG.md` fully before
-doing anything else.** Absolute short version:
+**Read `ASTRA_LOG.md` (all the way to the end — it has several dated
+updates from this same session) and `PHASE9_LOG.md`/`PHASE12_LOG.md`
+before doing anything else.** Absolute short version:
+
+**Single most important finding of this session**: `com.apple.WindowServer`
+has been observed reaching `service state: running` repeatedly (3-5 times
+per run across several attempts, real PIDs, real launchd job state) — the
+deepest point ever reached in this entire project — but it always crashes
+shortly after (`EXC_CORPSE_NOTIFY`, caught cleanly by launchd, respawned)
+without ever drawing a single pixel (screendumps taken while it's actively
+`running` stay fully black every time). After enough of these crash/respawn
+cycles (~10-13 real minutes, 3-5 cycles observed), the boot eventually dies
+for good with one of several fatal panics (`VIOLATION_DOUBLE_NEST`,
+`cpu_root_table_tsd: INVALID_FRAME_TYPE`, or `TXM [Panic]: [code:
+0x00000063 | 0]` — all three observed across different runs of the
+*identical* boot config). **Working theory, not yet confirmed**: these
+three panics are downstream symptoms of the same resource leak — each
+WindowServer crash/respawn likely allocates and doesn't fully release some
+SPTM/TXM-tracked shared-region or ASID mapping, and enough cycles
+eventually exhausts it. The two highest-leverage next steps, in order:
+1. **Find out why WindowServer itself crashes** (get an interactive shell
+   via `-serial unix:...,server,nowait` the moment `bash-3.2#` appears,
+   watch `/private/var/db/diagnostics` or run `log stream` live) — this is
+   probably a bigger win than chasing the kernel panics directly, since
+   fixing it likely reduces/eliminates the panics too as a side effect,
+   in addition to being required for real pixels regardless.
+2. If you want to test the resource-leak theory directly first: count
+   WindowServer crash cycles vs. wall-clock time to death across a few
+   more runs — consistently-the-same-count-regardless-of-timing would
+   confirm it's leak-driven, not pure per-boot KASLR randomness.
 
 - **Real breakthrough this session**: Apple's own `IOBootFramebuffer`
   class (from `IOGraphicsFamily`, the early-boot/pre-GPU-driver fallback

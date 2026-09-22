@@ -479,3 +479,59 @@ one as a separate bug -- the highest-leverage fix is almost certainly
 something systemic (e.g. finding whatever shared state-tracking mechanism
 underlies all three panic families), not three-plus separate one-off
 patches.
+
+## 2026-09-21 (continued): two more attempts, refined understanding of the TXM 0x63 wall
+
+Retried the same `bootkc.netboot10.bootfb-probe` real-system-volume boot
+twice more. Both ran considerably longer than the very first success:
+WindowServer reached `service state: running` **3 times** in one run and
+**5 times** in the other (respawning after each crash, same
+`EXC_CORPSE_NOTIFY` pattern as before, launchd recovering it cleanly each
+time -- never a kernel panic during this phase). Screendumps taken while
+WindowServer was actively `running` in both runs stayed fully black (0
+non-zero bytes) -- confirms `IOBootFramebuffer` matching alone doesn't
+get WindowServer to actually draw; whatever it's crashing on happens
+before or instead of a real draw call.
+
+**Both runs eventually died the same way**: `TXM [Panic]: [code:
+0x00000063 | 0]`, roughly 10-13 real minutes into the boot, after several
+WindowServer crash/respawn cycles. This happened consistently across both
+attempts -- not the coin-flip randomness seen with `DOUBLE_NEST`/
+`INVALID_FRAME_TYPE` earlier in the session. **Working theory**: this
+isn't pure per-boot KASLR luck: it's plausibly resource exhaustion from
+WindowServer's own repeated crash-and-respawn cycle -- each cycle likely
+allocates and tears down shared regions / SPTM-tracked mappings for the
+new process instance, and if that teardown doesn't fully release whatever
+TXM is tracking (consistent with this session's earlier, unresolved
+`sptm_set_shared_region`/`shared_region_configure` disassembly work
+around the `DOUBLE_NEST` investigation), enough crash cycles eventually
+exhausts it and TXM panics. This would mean `DOUBLE_NEST`,
+`INVALID_FRAME_TYPE`, and `TXM 0x63` could all be downstream symptoms of
+the *same* underlying leak, just surfacing via different code paths
+depending on exact timing -- worth testing directly (see below) rather
+than treating as three unrelated bugs.
+
+### Concrete next step to actually confirm/refute this
+
+1. Find out **why WindowServer crashes in the first place** -- this is
+   now the highest-leverage next step (fixing it would likely also
+   reduce or eliminate the resource-exhaustion pressure that leads to
+   `TXM 0x63`, in addition to being required for real pixels regardless).
+   Best approach: relaunch with `-serial unix:...,server,nowait` (not
+   file-backed) so an interactive shell is reachable the moment `bash-3.2#`
+   appears (same technique proven earlier this session for the
+   `IOBootFramebuffer` `ioreg` query -- remember: send characters with
+   ~20ms delays and a bare `\r`, bursty writes get silently truncated),
+   then either watch `/private/var/db/diagnostics` for a live WindowServer
+   crash report the moment it crash-loops, or run `log stream` in a second
+   connection concurrently with the boot to catch the actual exception
+   type/backtrace in real time instead of just launchd's terse
+   "EXC_CORPSE_NOTIFY" notice.
+2. Separately, if the resource-exhaustion theory is right, a crude but
+   informative test: patch `com.apple.WindowServer`'s launchd job
+   definition (or use `launchctl` once a shell is reachable) to increase
+   its `ThrottleInterval`/reduce respawn frequency, or simply count how
+   many WindowServer crash cycles precede `TXM 0x63` across a few more
+   runs -- if it's consistently the same small number regardless of real
+   elapsed time (i.e. count-dependent, not time-dependent), that's strong
+   evidence for the leak theory over pure KASLR randomness.

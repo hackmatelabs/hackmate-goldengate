@@ -950,6 +950,36 @@ previously known - it's not just "DCP/storage won't fully come up," it's
 "the kernel can panic outright" once real base-system boot activity
 stresses whatever's left null from the failed `AFKResource` allocation.
 
+### Further correction - don't over-trust the ANS2 causal link either
+
+Cross-checked against `PHASE5_LOG.md`'s own earlier, more rigorous
+finding (search `## Correction: AFKFirmwareService is NOT relevant to the
+ANS/storage path`): an **exhaustive** search of every IOKit personality
+requiring `AFKFirmwareService`/`AFKResource` (via kexts.json/kextlog)
+found only `role: "DCP"` and `role: "DCPEXT"` reference it - explicitly
+**no** `role: "ANS2"` personality references it at all. That was
+established carefully in session 2 and should be trusted over tonight's
+looser log-proximity read.
+
+This means the "Couldn't alloc class AFKResource" line appearing right
+after `RTBuddy(ANS2): start()` in tonight's log is more likely a
+one-time, generic `com.apple.driver.AppleFirmwareKit` module-load-time
+event (it registers its whole OSMetaClass roster once, early, regardless
+of whether any DCP hardware/device-tree node is present) that just
+happens to sit near the ANS2 sequence in log order - not something the
+ANS2 driver itself triggers or depends on. **The exact causal chain from
+"AFKResource alloc fails at kext-load time" to "RTBuddy code
+null-derefs ~700 lines later near the daemon storm" is still not
+rigorously nailed down** - plausible (same missing-class root cause,
+something downstream stays null) but not proven the way the RTBuddy
+kext-range attribution was proven. Treat "it's the same AFKResource
+wall" as the leading hypothesis, not a closed fact, going into any future
+session - the next concrete step is a live breakpoint on
+`OSMetaClass::allocClassWithName` (a real technique PHASE5 already
+identified but didn't finish executing) to get an exact, noise-free
+capture of every failed class allocation and its caller, rather than
+inferring from log-line proximity.
+
 ### Honest state of the moonshot at this point
 
 Every angle attacked this session (personality matching, registry

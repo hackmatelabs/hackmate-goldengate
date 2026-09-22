@@ -1357,3 +1357,83 @@ enumerated, in order of what's actually actionable right now:
    related architecture) does exist and compile cleanly in this exact
    kernelcache, giving a real reference implementation to study even
    though it's not a drop-in replacement.
+
+## 2026-09-22 (continued further still): tested whether kmutil behaves differently self-hosted vs as a foreign host tool - inconclusive, real next step identified
+
+Before accepting PHASE12's wall as fully final, checked one more real
+possibility: every `kmutil create -n aux` attempt so far (PHASE12's and
+tonight's) ran kmutil FROM THE HOST macOS, examining the Golden Gate
+system volume as a foreign, externally-mounted target (`-R <mounted
+volume>`). Real Macs never have a KDK installed by default, yet complete
+first-boot/AuxKC-generation successfully every day - so kmutil's
+KDK-match requirement cannot be truly universal/unconditional, or no
+consumer Mac could ever finish setup. Searched `kmutil`'s strings for
+supporting evidence and found real conditional-check symbols:
+`_os_variant_is_basesystem`, `isInternalDisk`, `_isAppleInternal`,
+`VariantKind` - real signals that kmutil's behavior likely branches on
+whether it's running natively as the target environment itself
+(self-hosted, `-R /` implicitly) vs examining a foreign external volume.
+
+**Tested this directly**: booted the real system volume in single-user
+mode (`-s` boot-arg, reaches a shell fast without the full daemon storm),
+confirmed `/usr/bin/kmutil` exists there (2.1MB, real binary), and ran
+`kmutil create -n aux ... -B /System/Library/KernelCollections/
+BootKernelExtensions.kc -A /tmp/aux.kc` FROM WITHIN the guest itself
+(self-hosted, default `-R /`). Result: no `"Could not find a SDK or KDK"`
+error anywhere in ~340 lines of real `AppleImage4` diagnostic output
+(genuinely different behavior than every host-side attempt, which failed
+immediately with that exact error) - but the run ultimately still didn't
+produce an output file, and a second, more careful attempt confirmed why:
+**`/System/Library/KernelCollections/` doesn't exist anywhere in this raw
+imageboot environment at all** (`find / -iname "*.kc"` found zero `.kc`
+files on the mounted root volume). This makes sense structurally - our
+boot supplies the kernelcache directly via QEMU's `-bootkc` argument,
+loaded into guest memory before `/` is even mounted; it's never written
+to the guest's own filesystem as a discoverable file the way a normally-
+booted real Mac's sealed system volume would have it.
+
+**This means my `-B` argument was invalid**, and kmutil most likely
+failed on a missing-file error for its boot-path argument, never actually
+reaching (or bypassing) the KDK-match check at all. **Inconclusive, not
+a refutation** - the "self-hosted kmutil behaves differently" hypothesis
+remains untested, not ruled out. The real next step (not yet done): copy
+the actual bootkc file (`firmware/bootkc.netboot10.bootfb-probe` from the
+host) into the guest's own filesystem via some transfer mechanism (a
+second virtual disk, or writing it through the interactive serial shell
+in base64 chunks, or similar), THEN retry `-B <that real path>`
+self-hosted, to get a clean, valid test of whether self-hosted kmutil
+genuinely bypasses the KDK requirement PHASE12 hit from the host side.
+If it does, this could be the real way through to option 2 (a real
+install/AuxKC-generation) without needing full Setup Assistant automation
+at all - just a correctly-invoked self-hosted `kmutil create`.
+
+### Chased the writable-filesystem prerequisite - hit a real structural wall for this specific boot config
+
+Tried the cheaper variant first (skip `-B` entirely, use `--build 26A428`
+instead - no file transfer needed). Confirmed via `echo hello >
+/tmp/test.txt && cat /tmp/test.txt` that **basic file writes fail** in
+this single-user-mode boot - `/tmp` isn't writable. Tried the standard
+real-macOS fix, `/sbin/mount -uw /`: **explicitly rejected** -
+`apfs_mount_upgrade_checks: Updating mount to read/write mode is not
+allowed` - this specific ImageBoot/BaseSystem volume is APFS-sealed and
+cannot be remounted read-write, full stop, no flag around it. Checked
+`mount` directly: only `/` (sealed, read-only) and `/dev` are mounted in
+single-user mode - the writable `tmpfs` overlay on
+`/System/Volumes/Data` seen in every full (non-single-user) boot log only
+gets set up later by `launchd`'s own boot tasks, which single-user mode
+explicitly skips to get its fast, minimal shell.
+
+**Net result**: no writable filesystem is reachable from an interactive
+shell in any boot configuration tried so far - single-user mode is fast
+but read-only-only; the full multi-user boot does mount something
+writable, but has no interactive shell access point before the
+WindowServer daemon storm takes over. This is a real, well-defined gap
+for a future session, not a dead end: either (a) find/construct a
+boot-arg combination that reaches an interactive shell AFTER the
+writable Data volume mounts but before/without triggering the full
+daemon storm, or (b) build a small out-of-band file-transfer mechanism
+(e.g. a second QEMU block device the guest can read directly) to get a
+real bootkc path onto disk without needing `/tmp` writability at all.
+Either would unblock a genuine, clean test of whether self-hosted kmutil
+bypasses the host-side KDK-match wall - still an open, real, promising
+question, just not answerable with tonight's remaining time/tooling.

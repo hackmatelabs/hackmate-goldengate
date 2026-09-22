@@ -6,15 +6,15 @@ out = Path.home() / 'goldengate/evidence' / ('fastverify-' + time.strftime('%Y%m
 out.mkdir(parents=True)
 
 args = [str(root/'build/qemu-system-aarch64'), '-M', 'darwin',
-        '-bootkc', str(root/'firmware/bootkc.netboot10.bootfb-probe'),
-        '-dtree', str(root/'firmware/dtree.netboot10.bootfb-probe'),
+        '-bootkc', str(root/'firmware/bootkc.netboot10.bootfb-probe.mfblegacy'),
+        '-dtree', str(root/'firmware/dtree.netboot10.bootfb-probe.vramdims'),
         '-tc', str(root/'firmware/ramdisk.tc'),
         '-ramdisk', str(root/'firmware/ramdisk.dmg'),
         '-sptm', str(root/'firmware/sptm.asidfix5'),
         '-txm', str(root/'firmware/txm.slotfix4.stealslot'),
         '-icount', 'shift=auto',
         '-args', 'rd=md0 serial=3 -v -noprogress wdt=-1 wlan-olyhal-abort',
-        '-serial', 'file:' + str(out/'serial.log'),
+        '-serial', 'unix:/tmp/gg_fastverify_serial.sock,server,nowait',
         '-display', 'none',
         '-monitor', 'unix:/tmp/gg_fastverify.sock,server,nowait', '-m', '8G']
 env = {k: v for k, v in os.environ.items() if not k.startswith('DARWIN_')}

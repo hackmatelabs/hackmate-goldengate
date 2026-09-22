@@ -604,3 +604,87 @@ useful for attaching without disrupting an already-healthy boot in
 progress; would need one more expendable run dedicated to that, since
 attaching mid-flight to a run you want to keep healthy risks perturbing
 timing).
+
+## 2026-09-21 (continued): architectural finding - WindowServer may have no path to IOBootFramebuffer at all
+
+Extracted the real `WindowServer` binary and its `SkyLight` engine (the
+framework holding WindowServer's actual compositor logic) from the real
+system volume's dyld shared cache (`ipsw dyld extract
+/tmp/gg_sysvol/System/Library/dyld/dyld_shared_cache_arm64e SkyLight`) and
+searched their strings directly - no boot/wait cycle needed for this part.
+
+**`SkyLight` contains zero references to `IOBootFramebuffer` anywhere.**
+It does reference `IOMFB` (e.g. `"IOMFB AFT gain %f is out of range..."`,
+`"...from IOMFB"`), confirming WindowServer's real display path is built
+around `IOMobileFramebuffer` (the modern Apple Silicon DCP-backed
+architecture), not the legacy `IOFramebuffer`/`IOBootFramebuffer` family at
+all. `IOBootFramebuffer.cpp`'s own public source is explicitly guarded for
+`x86_64` (noted earlier this session) - it's an Intel-era fallback whose
+ARM64 code exists in this kernelcache but which WindowServer may have no
+code path to use as a real display target on this OS version.
+
+The kernelcache *does* contain `IOMobileFramebufferAP` (the real DCP-backed
+implementation), plus `IOMobileFramebufferShim`, `IOMobileFramebufferLegacy`,
+and `IOMobileFramebufferVeryLegacy` (compatibility variants - the "shim"
+name strongly suggested a legacy-to-modern bridge). **Checked and ruled
+out**: none of these classes have ANY IOKit personality defined anywhere in
+this kernelcache's `PRELINK_INFO` (confirmed by parsing the full
+`_PrelinkInfoDictionary` and searching every entry) - on real hardware
+these personalities come from the DCP/AuxKC kexts that PHASE12 already
+found are blocked (missing `AFKFirmwareService`, needs a KDK that doesn't
+exist for this build).
+
+**Attempted fix**: added a synthetic personality for
+`IOMobileFramebufferVeryLegacy` (`IOProviderClass: IOBootFramebuffer`,
+attached to the same `com.apple.iokit.IOGraphicsFamily` bundle, same proven
+XML-patching technique as the original `IOBootFramebuffer` personality) -
+`firmware/bootkc.netboot10.bootfb-probe.mfblegacy`. **Result: no
+regression** (verified clean boot to `bash-3.2#`, `IOBootFramebuffer`
+itself still matches correctly) **but the new personality never matches at
+all** - it doesn't even appear in `ioreg` as an unmatched candidate the way
+genuinely-attempted-but-rejected classes do elsewhere in the tree (e.g.
+`AppleARMCPU` instances show `!registered, !matched`). This is a different,
+more fundamental signal than "probe() rejected it" - it suggests IOKit's
+matching machinery never even considered this personality against our
+`IOBootFramebuffer` instance as a provider, most plausibly because
+`IOBootFramebuffer` itself never calls `registerService()` to advertise
+itself as a matching target for further personalities (consistent with it
+being designed as a terminal/leaf class that real callers reach via direct
+`IOServiceGetMatchingService`-style lookup, not automatic personality-driven
+matching against it as a provider).
+
+Also added real `width`/`height`/`depth`/`stride`/`rotation` properties
+directly to the `/vram` device-tree node (`dtree.netboot10.bootfb-probe.vramdims`,
+matching what real Apple device trees carry beyond the bare `reg` property)
+in case WindowServer reads these directly via `IODeviceTree` rather than
+through `IOBootFramebuffer`'s own exposed properties - not yet tested in
+isolation against the real boot (only combined with the personality
+attempt above, which never got far enough in a completed run to be
+conclusive either way).
+
+### Honest assessment
+
+This softens confidence that `IOBootFramebuffer` can be bridged to
+WindowServer's real display path with more device-tree/personality
+patching alone. Two real options going forward, in order of promise:
+
+1. **Investigate whether `registerService()` needs to be called ourselves**
+   - if `IOBootFramebuffer`'s own kernel code genuinely never registers
+   itself as a matching provider, this could be patched directly (find its
+   `start()` via the same disassembly technique used throughout this
+   session, check whether it calls `registerService()`, and if not, either
+   patch it to do so or find the real reason WindowServer would be expected
+   to find it some other way on real Intel-Mac hardware where this class
+   was actually used historically).
+2. **Accept that the DCP/IOMFB pipeline is the only real path** or getting
+   a real display, meaning the actual blocker remains PHASE12's
+   `AFKFirmwareService`/AuxKC/KDK wall - unblocking that (options already
+   enumerated in PHASE12: obtain a real KDK if one is ever published,
+   perform an actual macOS install inside this environment so the installer
+   builds its own AuxKC, or hand-write a replacement `AFKFirmwareService`
+   implementation) may be unavoidable for a real Aqua desktop, independent
+   of anything the `IOBootFramebuffer` work this session achieved.
+
+The TXM kernel-stability fix from earlier tonight stands regardless of
+which of these paths is pursued next - it's required either way to get a
+long enough stable runtime to make progress on either option.

@@ -980,6 +980,25 @@ identified but didn't finish executing) to get an exact, noise-free
 capture of every failed class allocation and its caller, rather than
 inferring from log-line proximity.
 
+Tried a cheaper static shortcut first: searched `bootkc` for the literal
+string `AFKResource` - confirmed it exists ONLY as PRELINK_INFO plist
+metadata (`<key>AFKResource</key>`, `<string>AFKResource</string>`), the
+same pattern PHASE5 already found for `AFKFirmwareService`. There is no
+runtime `__TEXT.__cstring` literal to xref-search for a caller - the
+"Couldn't alloc class \"%s\"" panic message is a generic, shared format
+string with the class name passed dynamically at runtime (matches
+PHASE5's watchpoint finding that this call site is generic/noisy, not
+per-class). **Static string analysis is confirmed to be a dead end for
+this specific question** - live breakpointing on the actual allocation
+function (once its address is found - current symbol map has zero
+coverage of `OSMetaClass` beyond the constructor/gMetaClass/vtable) is
+the only path forward here. Didn't find that address this session either
+- the symbol map's signature-based coverage doesn't reach it. Finding it
+(likely via disassembling around `OSMetaClass::OSMetaClass` at
+`0xfffffe000c334364` for nearby calls, or via the already-proven
+watchpoint-on-format-string technique refined to isolate the AFKResource
+call specifically) is the concrete open task for whoever resumes this.
+
 ### Honest state of the moonshot at this point
 
 Every angle attacked this session (personality matching, registry

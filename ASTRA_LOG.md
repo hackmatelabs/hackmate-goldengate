@@ -384,3 +384,98 @@ panic) is not safe without confirming the real trigger mechanism first.
   produces any visible pixels on the real system-volume boot *before* it
   hits `DOUBLE_NEST` — userspace may progress far enough pre-panic to
   exercise it even without a full desktop.
+
+## 2026-09-21 (same session, continued): confirmed `DOUBLE_NEST` is non-deterministic, and WindowServer runs with zero kernel panics — the deepest point ever reached
+
+Rather than keep chasing the exact `DOUBLE_NEST` instruction statically,
+retried the same real-system-volume boot config (unpatched
+`bootkc.md0size.uidfix.netboot10`, same DT/sptm/txm, `-icount shift=auto`)
+fresh. **This run never panicked at all** — it progressed cleanly through
+`opendirectoryd` fully initializing, `containermanagerd`, `distnoted`,
+`WiFiCloudAssetsXPCService`, `iconservicesd`, and eventually
+**`com.apple.WindowServer` itself reaching `service state: running` /
+`job state = running`** (PID 137), the deepest point ever reached in this
+entire project, with zero kernel panics anywhere in a 2600+-line boot log.
+This is decisive confirmation of PHASE9's suspicion: `DOUBLE_NEST` (and the
+sibling `INVALID_FRAME_TYPE` panic hit on other attempts) is genuinely
+**KASLR-seed-dependent, not deterministic** — the identical boot
+configuration panics on some runs and completes cleanly on others.
+
+Reran the *same* config but swapped in this session's `IOBootFramebuffer`-
+patched `bootkc.netboot10.bootfb-probe` + `dtree.netboot10.bootfb-probe`.
+First retry hit `INVALID_FRAME_TYPE` again (bad luck). **Second retry ran
+clean**: reached `IOMFB_bics_daemon` spawning, then
+**`com.apple.WindowServer` reaching `service state: running` twice** (PID
+98, then PID 129 after the first instance's own internal respawn — this
+first respawn is normal/expected WindowServer behavior, not a crash), with
+`pboard` (the pasteboard server — part of the real Aqua stack) also
+running successfully alongside it. Zero kernel panics the entire time.
+
+**WindowServer[129] then crashed** (`Failed to send exception
+EXC_CORPSE_NOTIFY. error code: 5 for pid 129`, launchd cleanly caught it,
+respawned as PID 142) — this is a **userspace WindowServer crash/respawn
+loop, not a kernel panic, not a deadlock, not SPTM/TXM involved at all**.
+launchd keeps recovering it exactly the way real macOS handles a crashing
+service. No crash report content is visible in the serial log itself
+(`ReportCrashService` is running and presumably writing a real `.ips`
+crash report to the guest's own disk, which would need either live guest
+shell access or a post-boot disk read to retrieve — not yet done).
+
+Screendumps taken both while WindowServer[129] was freshly running and
+right after — both fully black (0 non-zero bytes in the 640x1136 PPM
+body), same as the earlier headless-shell test. `IOBootFramebuffer` being
+matched is necessary but WindowServer clearly isn't successfully drawing
+through it yet (consistent with it crashing before completing whatever
+display setup it attempts).
+
+### Where this leaves things, honestly
+
+- This is unambiguously the deepest, most stable point ever reached in
+  this whole project: a real macOS system volume, real userspace, real
+  `opendirectoryd`/`launchd`/`WindowServer`/`pboard`, zero kernel panics,
+  with the first-ever successfully-matched real Apple graphics driver
+  present in the IORegistry.
+- The `DOUBLE_NEST`/`INVALID_FRAME_TYPE` KASLR-dependent panics are a real
+  reliability problem (roughly a coin-flip whether a given boot survives
+  to this depth) but are **not fundamentally blocking** — a clean run is
+  achievable and reproducible enough to keep working with by just
+  retrying. This deprioritizes the urgency of root-causing them via
+  static/gdbstub analysis (still worth doing eventually for reliability,
+  but not required to keep making forward progress toward pixels).
+- The real next blocker is now **why WindowServer itself crashes** once
+  running, not the kernel/SPTM layer at all. This needs either: (a) a way
+  to read WindowServer's own crash report off the guest disk after a
+  crash-looping run (mount the (now-modified, WindowServer-crash-log-
+  containing) system volume dmg read-only from the host and look under
+  `/Library/Logs/DiagnosticReports/` or `/private/var/db/diagnostics/`),
+  or (b) live-attaching to the WindowServer process inside the guest via
+  the project's existing gdbstub technique the moment it's observed
+  running (race against the ~1-minute crash-loop period), or (c) simply
+  keeping the interactive serial socket approach from the earlier
+  IOBootFramebuffer test and running `log show`/`crashlog` commands
+  directly in a guest shell if one becomes reachable alongside WindowServer
+  (this specific boot path uses a file-backed serial, not a socket one —
+  switch to `-serial unix:...,server,nowait` next time to keep this option
+  open without relaunching).
+
+**Update, same run**: it did eventually die too, ~1 minute after the
+WindowServer/pboard milestone above -- a third distinct panic type,
+`TXM [Panic]: [code: 0x00000063 | 0]`, repeating 3 times before hitting
+the nested-panic-count limit and resetting/spinning. This is a different
+code from both the old (now-superseded) `0x68` noted in a prior hand-off
+and the `DOUBLE_NEST`/`INVALID_FRAME_TYPE` panics seen on other runs this
+session. Pattern across all of today's deep-boot attempts: the exact
+failure mode (which subsystem, which code, how deep it gets first) varies
+run to run, but something fatal eventually happens on every single
+attempt so far -- none has survived to a stable idle desktop yet. The
+WindowServer-running milestone is real and reproducible-ish (2 of 3
+attempts with the framebuffer patch got at least one WindowServer
+`running` state before eventually dying), but "stays up" is not yet
+achieved. Whoever continues this should treat every one of these panic
+types as manifestations of the same underlying class of problem PHASE9
+already correctly diagnosed (QEMU/SPTM/TXM architectural-state emulation
+gaps that are sensitive to exact timing/KASLR), rather than chasing each
+one as a separate bug -- the highest-leverage fix is almost certainly
+something systemic (e.g. finding whatever shared state-tracking mechanism
+underlies all three panic families), not three-plus separate one-off
+patches.

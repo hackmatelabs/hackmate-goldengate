@@ -761,3 +761,207 @@ a dead end - confirmed, not guessed. The two real remaining paths:
 
 The TXM kernel-stability fix from earlier tonight remains required and
 independent of either path.
+
+## 2026-09-21 (continued, post-option-A): ruled out compat-shim lead; found the REAL blocker is a new kernel panic during launchd/WindowServer bring-up
+
+Per advisor review: the `IOKitRegistryCompatibility`/`IOFB` node
+(`IOCompatibilityProperties = {IOClass=IOFramebuffer,IOName=IOFB,ParentIndex=0}`)
+found late in the prior session was a dead end, not a lead. Confirmed by
+searching the raw bootkc binary for its constituent strings
+(`IOKitRegistryCompatibility`, `IOServiceCompatibility`, `ParentIndex`) -
+all three exist as static compiled-in data at fixed file offsets
+(0x4c50, 0xd36be, 0xae3ea5). This is a static legacy-lookup stub table
+baked into the kernelcache, not something dynamically generated from our
+synthetic `IOBootFramebuffer` instance. Ruled out - not pursuing further.
+(Also confirmed SkyLight itself references the same string cluster at
+offset 0x5d5654, but per advisor guidance did NOT attempt an xref hunt
+there - SkyLight is ARM64e with PAC'd GOT/stub indirect calls that this
+session already proved require live memory reads, not static analysis.)
+
+### The actual gap advisor identified
+
+Every finding this whole night has been *inferred* from vtables/strings/
+registry archaeology - never *measured* whether WindowServer fails to
+find a display service vs. finds one and fails to open it. Those are
+different bugs with different fixes.
+
+### Re-examined an existing (previously uninterpreted) boot log and found something big
+
+`boot_debug_windowserver.py` (boots the REAL base-system/installer
+environment, not the minimal netboot ramdisk, with
+`rtb_syslog_verbosity=7`) had already been run once this session
+(`evidence/wsdebug-20260921-223736/serial.log`) but its output was never
+read through. Reading it now:
+
+- launchd DOES reach and attempt to load `com.apple.WindowServer`'s
+  launchd plist (`(system/com.apple.WindowServer) <Warning>: (lint): The
+  HideUntilCheckIn property...`, `(com.apple.WindowServer) <Error>:
+  Unknown key for plist importer (key: com.apple.private.gain-map-access
+  type: bool)`) - further than any previously-documented result this
+  project has reached.
+- Immediately after, in the middle of a big daemon-spawn storm (dozens of
+  "Failed to bootstrap path ... error 37: Operation already in progress"
+  lines - itself likely a symptom of something already going wrong), and
+  right after `com.apple.iomfb_bics_daemon` (IOMFB-related!) shows
+  "pending spawn, domain in on-demand-only mode" - the kernel hits a
+  **new, previously-undocumented panic**, distinct from the already-fixed
+  TXM `code 0x63` panic:
+  ```
+  panic(cpu 0 caller 0xfffffe002c550010): cpu_root_table_tsd: Type
+  (INVALID_FRAME_TYPE) class of FTE (0xfffffdf0003531d0) does not match
+  the type class of the type-specific-data trying to be retrieved:
+  actual (117539793) != requested (1).
+  ```
+  with a NESTED panic underneath it (a kernel data abort at
+  `far: 0x0000000000000124` - i.e. a near-null pointer dereference,
+  offset 0x124 into a null-ish base) inside a call stack whose kext
+  dependencies are:
+  `com.apple.sptm`, `com.apple.driver.RTBuddy`,
+  `com.apple.driver.AppleA7IOP`, `com.apple.driver.AppleARMPlatform`,
+  `com.apple.driver.IOSlaveProcessor`,
+  `com.apple.iokit.CoreAnalyticsFamily`, `com.apple.iokit.IOReportFamily`,
+  `com.apple.kec.corecrypto`.
+- Tried resolving the backtrace `lr` addresses against the known symbol
+  map using this boot's own reported `Kernel text exec slide:
+  0x24b94000` (NOT the usual fixed `+0x20000000` bootfb-probe slide -
+  this is a different boot config/ramdisk, KASLR differs here) - all
+  addresses resolved to a generic `<unknown>_trap` nearest-symbol
+  placeholder, meaning the symbol map doesn't have coverage this deep
+  into kext text at this slide. Not resolved to an exact function yet.
+
+### What this means
+
+This is a REAL, concrete, previously-unknown blocker sitting between
+"kernel boots" and "WindowServer actually runs" - RTBuddy is the generic
+Apple IOP (coprocessor mailbox) base class used by many peers, not
+IOMFB/DCP specifically, so this is not proof the panic is literally
+*inside* IOMFB code, but the timing (right as `iomfb_bics_daemon` was
+pending spawn) is suggestive and worth chasing. This is a MORE productive
+target than the personality-matching investigation: it's an actual crash
+with an actual stack trace, not a design-mechanism question.
+
+### Next concrete step (not yet done)
+
+Get exact symbol resolution for this panic's backtrace - either extend
+the symbol map to cover kext text at this specific boot's slide, or
+attach gdbstub live (this exact panic should be reproducible - same
+bootkc, same real base-system ramdisk) and let it hit the panic under a
+live debugger to get a precise `bt`/disassembly at the actual crashing
+PC, not just raw `lr` values from the panic log. This directly answers
+"find vs open" by determining whether IOMFB-adjacent code is what's
+crashing.
+
+## 2026-09-21 (continued): confirmed - the crash is genuinely inside RTBuddy's own code, live-caught in the spin loop
+
+Reproduced this exact panic live: launched `boot_debug_windowserver.py`'s
+config with `-s` (gdbstub) but WITHOUT `-S` (not paused, runs freely),
+polled `serial.log` for "machine will reset or spin", then attached lldb
+via `gdb-remote 127.0.0.1:1234` the moment it appeared.
+
+**Confirmed the VM genuinely spins** (not a real MACH reboot despite that
+log line) - live PC frozen at `0xfffffe002bd7dce0`, disassembling to a
+literal `b 0xfffffe002bd7dce0` (unconditional branch to self) - this is
+the panic handler's terminal "give up" instruction after exceeding the
+nested-panic retry limit. `bt` from this frozen state shows a repeating
+cyclic pattern of ~13 frame addresses, consistent with the "Nested panic
+detected - entry count: N" recursion already seen in the raw log (the
+same fault re-triggering inside the panic path itself).
+
+Tried resolving these frozen-state addresses through the JSON symbol map
+(using the confirmed slide `0x24b94000`, which is IDENTICAL across two
+independent boots of this same config - KASLR is effectively fixed for
+this ramdisk/config, not random) - got `<unknown>_trap+offset` results
+implying that specific memory region has a real gap in the map's
+coverage. Went down a side-path trying `ipsw kernel cpp --methods -c
+AppleA7IOP` to manually locate real method addresses - that gave
+AppleA7IOP's actual methods in the `0xfffffe0008bXXXXX` range, nowhere
+near the crash addresses, which was a wasted step: **the answer was
+already sitting in the very first panic log we captured and just hadn't
+been cross-checked.**
+
+The panic banner itself prints each kext's actual runtime `__TEXT` range:
+```
+com.apple.driver.RTBuddy(1.0)[...]@0xfffffe002b645b60->0xfffffe002b68fad7
+```
+The ORIGINAL faulting PC (from the nested data-abort embedded in the
+first panic, before recursion muddies the backtrace) is
+`0xfffffe002b66f1f8` with `lr 0xfffffe002b66f954` - **both addresses fall
+squarely inside RTBuddy's own printed range**, not a dependency kext.
+**The crash is genuinely inside RTBuddy's own code**, not
+AppleA7IOP/AppleARMPlatform/etc (those are just its listed dependencies,
+included in the panic banner because they're linked, not because the
+fault is in them).
+
+### Correction: NOT DCP-specific - it's the already-known AFKResource wall causing a delayed panic
+
+Initially assumed the IOMFB-daemon timing correlation meant this was a
+DCP-specific coprocessor emulation gap. **Checked this directly and it's
+wrong**: grepped this exact boot's serial log for any `RTBuddy(DCP)`/
+`dcp0`/`iop-dcp` activity - **zero matches**. This boot's device tree
+(`dtree.netboot10.bootfb-probe`) doesn't even include DCP nodes at all.
+The ONLY RTBuddy instance that ever starts in this boot is
+`RTBuddy(ANS2)` - the NVMe storage coprocessor, completely unrelated to
+display.
+
+Reading the log immediately after `RTBuddy(ANS2): start()` and the
+storage-controller probe/scoring sequence, the very next relevant line
+is:
+```
+Couldn't alloc class "AFKResource"
+```
+**This is the exact same `AFKFirmwareService`/`AFKResource` missing-class
+wall already documented from session 2** (`AppleFirmwareKit`'s
+`AFKFirmwareService` class is genuinely absent from this kernelcache
+build). `AFKResource` is a shared "coastguard"/firmware-kit resource used
+generically across RTBuddy-backed coprocessor peers, not DCP-specific.
+Previously this was known to just silently block DCP/storage bring-up
+(a soft failure, logged and moved past). **New finding: it doesn't stay
+soft** - the failed allocation apparently leaves some shared RTBuddy-
+adjacent state null/uninitialized, and ~700 lines and many seconds later,
+during the heavy launchd daemon-spawn storm (coincident with, but not
+necessarily caused by, `iomfb_bics_daemon`'s pending-spawn - that
+correlation was likely a red herring), something dereferences that null
+state at a fixed offset (`far: 0x124`) and takes the whole kernel down.
+
+### What this means
+
+This isn't a new, separate DCP-hardware-emulation gap - it's the
+**already-known `AFKFirmwareService`/`AFKResource` wall from session 2**,
+now shown to have a second, worse consequence: given enough system
+activity (a real daemon storm, which only happens when booting the real
+base-system/installer environment, not the minimal netboot ramdisk this
+project mostly tested with), the missing class doesn't just block DCP/
+storage - it eventually **crashes the kernel outright**. This raises the
+stakes on the already-identified next step (binary-patching a working
+`AFKFirmwareService` implementation into the kernelcache) - it's not just
+needed for real pixels, it may be needed for basic boot stability once
+past this specific ramdisk/config into anything resembling a full
+real-environment boot.
+
+### Where this leaves the two-path fork
+
+Path 1 (find WindowServer's exact `IOServiceGetMatchingService` lookup
+and rename/bridge `IOBootFramebuffer` to satisfy it) is unaffected by
+this correction either way - still unexplored, still viable in principle,
+but moot if this AFKResource-triggered panic keeps killing the boot
+before WindowServer can even try. Path 2 (the `AFKFirmwareService`/
+AuxKC/KDK wall) is now confirmed to be an even harder blocker than
+previously known - it's not just "DCP/storage won't fully come up," it's
+"the kernel can panic outright" once real base-system boot activity
+stresses whatever's left null from the failed `AFKResource` allocation.
+
+### Honest state of the moonshot at this point
+
+Every angle attacked this session (personality matching, registry
+compatibility shims, direct binary/string analysis, and now live crash
+analysis) converges on the same conclusion: getting real pixels from
+Apple's own WindowServer on this QEMU/TCG setup requires either (a) real
+DCP coprocessor emulation support that does not currently exist in this
+QEMU fork, (b) a from-scratch reverse-engineered replacement for
+whichever RTBuddy peer is crashing, or (c) the previously-documented KDK/
+real-install path to get genuine AuxKC-signed replacement drivers. None
+of these are a quick patch - this is genuine, open-ended R&D territory,
+consistent with how this whole project was scoped from the start ("since
+nobody, we are the body"). The TXM fix and IOBootFramebuffer/`start()`
+success remain real, durable progress regardless of which of these paths
+is pursued next.

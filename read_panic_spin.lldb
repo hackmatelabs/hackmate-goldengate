@@ -1,0 +1,6 @@
+gdb-remote 127.0.0.1:1234
+register read pc lr sp fp
+bt
+register read x0 x1 x2 x3 x4 x5 x6 x7 x8
+detach
+quit

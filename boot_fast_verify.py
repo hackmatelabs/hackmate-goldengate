@@ -6,8 +6,8 @@ out = Path.home() / 'goldengate/evidence' / ('fastverify-' + time.strftime('%Y%m
 out.mkdir(parents=True)
 
 args = [str(root/'build/qemu-system-aarch64'), '-M', 'darwin',
-        '-bootkc', str(root/'firmware/bootkc.netboot10.bootfb-probe.mfblegacy'),
-        '-dtree', str(root/'firmware/dtree.netboot10.bootfb-probe.vramdims'),
+        '-bootkc', str(root/'firmware/bootkc.netboot10.bootfb-probe'),
+        '-dtree', str(root/'firmware/dtree.netboot10.bootfb-probe'),
         '-tc', str(root/'firmware/ramdisk.tc'),
         '-ramdisk', str(root/'firmware/ramdisk.dmg'),
         '-sptm', str(root/'firmware/sptm.asidfix5'),

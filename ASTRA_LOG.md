@@ -999,6 +999,124 @@ the only path forward here. Didn't find that address this session either
 watchpoint-on-format-string technique refined to isolate the AFKResource
 call specifically) is the concrete open task for whoever resumes this.
 
+## 2026-09-22: user pushed back hard on stopping - three genuinely new methods tried, real findings from each
+
+User's exact words: "you try one thing, and it fails, so you just quit. NO,
+keep going with another method. until the goal is met. do not stop." Saved
+this correction to `[[feedback_autonomous_build_mode]]` memory. Tried three
+substantively different new angles this round, not more of the same:
+
+### Method 1: donor kernelcache comparison (ruled something out cleanly)
+
+Downloaded a kernelcache-only extract from a REAL Mac14,2 IPSW via `ipsw
+download ipsw --device Mac14,2 --macos --latest --kernel` (same 26A428/27.0
+build - Golden Gate is brand new, it's the latest for every supported
+device right now). Compared its `com.apple.driver.AppleFirmwareKit` class
+roster against ours via `ipsw kernel cpp -e com.apple.driver.AppleFirmwareKit`
+(the `-e` bundle-scope flag is much faster than a full scan) - **byte-for-
+byte identical, same 45 classes, same addresses**. Confirms our kernelcache
+isn't a uniquely-stripped/dev-seed variant - `AFKFirmwareService`/
+`AFKResource` are absent from literally every 26A428 kernelcache, real
+hardware included. Also confirms `AppleFirmwareKit` ships a real, fully
+compiled modern class family (`AFKEPKextV2`, `AFKEPInterfaceKextV2`,
+`AFKAsyncRequestV2`, etc.) - genuinely present, genuinely functional code,
+just a different architecture than the older `AFKFirmwareService` name
+PHASE5/PHASE12 were searching for. Confirmed via plist search that real,
+active personalities DO reference this V2 family (e.g.
+`com.apple.driver.AppleSCDriver` uses `IOClass: AFKEPKextV2`), and that
+`AppleDCP`'s own personality plist has a whole real, modern endpoint chain
+(`AppleDCPExpert` -> `AFKACIPCEndpoint`/`DCPEndpointV2`, `IONameMatch:
+bora-dcplEndpoint1..N` / `DCPEndpoint1..15`, provider `RTBuddyEndpointService`)
+that no device-tree config in this project has ever attempted to populate
+node names for. **This is a real, unexplored lead for a future session**,
+though see the last section below for why it's likely NOT the actual
+current blocker.
+
+### Method 2: kmutil KDK-check bypass (tried for real, empirically exhausted)
+
+PHASE12 hit `kmutil create -n aux`'s hard KDK-version-match requirement and
+called it a wall needing a real Apple KDK. Instead of accepting that,
+reverse-engineered kmutil's actual mechanism this round: it's a Swift
+binary (`/usr/bin/kmutil`, universal x86_64+arm64e) that scans for a
+`<name>.kdk` bundle and checks
+`<bundle>/System/Library/CoreServices/SystemVersion.plist`'s
+`ProductBuildVersion` against the target. Found the real `--kdk <path>` CLI
+flag (bypasses needing root/`/Library/Developer/KDKs/` entirely - PHASE12
+didn't know about this, only tried the default search-path-based flow).
+Constructed a spoofed `/tmp/fake_kdk/KDK_27.0_26A428.kdk/System/Library/
+CoreServices/SystemVersion.plist` claiming build 26A428, mounted the real
+decrypted system volume (`hdiutil attach` on
+`system_volume/26A428__MacOS/decrypted/043-70867-635.dmg`, confirmed its
+own `SystemVersion.plist` genuinely reports `26A428`/`27.0` correctly -
+ruling out a target-side mismatch), and ran the full `kmutil create -n aux
+--kdk /tmp/fake_kdk/... --build 26A428 ...` command for real.
+
+**Result: identical failure.** `DeveloperTools Error: Could not find a SDK
+or KDK installed that matches system's build version 26A428` - even with
+an explicit `--kdk` path and explicit `--build` override. **Confirms
+empirically (not just theorized) that kmutil's KDK validation is deeper
+than a plist-presence check** - likely validates real KDK-internal
+structure/manifest/signature content that a bare directory+plist can't
+satisfy. This closes off the "cheap spoof" idea for good; a genuine KDK
+(or binary-patching kmutil's Swift internals directly, a real but much
+higher-effort next option, not attempted this round) remains the only way
+through this specific tool.
+
+### Method 3: disassembled the exact known failing call site (new, best finding of the round)
+
+PHASE12 already had a real static address for the failing allocation call
+(`0xfffffe000c3cc2e4`, live-confirmed via gdbstub memory read). Used
+`ipsw macho disass --fileset-entry com.apple.kernel --vaddr <addr>` (which
+loads the kernelcache's own `.a2s` symbol cache and resolves REAL function
+names - notably better than the generic JSON symbol-map lookups tried
+earlier tonight, which kept returning `<unknown>_trap` placeholders for
+this same class of code) and got a clean disassembly:
+
+```
+bl __ZN11OSMetaClass18allocClassWithNameEPK8OSSymbol   ; OSMetaClass::allocClassWithName
+cbz x0, loc_fffffe000c3cc2bc   ; null? -> log-and-continue, NOT a panic
+...
+loc_fffffe000c3cc2bc:
+  ; (walks a candidate/provider list, calls a virtual method,
+  ;  checks cbz again, continues the loop on failure)
+  adrp x0, ...; add x0, x0, #0x3d0  ; "Couldn't alloc class \"%s\"\n"
+  bl _IOLog
+  ; falls through, x22 (the failed class ptr) stays null, execution continues normally
+```
+
+**This is NOT the crash.** `allocClassWithName` returning null here is
+handled gracefully - it's logged via `IOLog` (not `panic`), and the
+surrounding code is a generic personality-matching/candidate loop (traced
+the continuation at `0xfffffe000c3cc0d4` - it's a loop over multiple
+providers/candidates with repeated `cbz x0, ...` null-checks that correctly
+skip a failed candidate and move to the next one, exactly as IOKit
+personality matching is supposed to behave when one candidate doesn't
+exist). This is correctly-written, generic Apple kernel code doing exactly
+what it should when a personality's implementing class is missing: log it,
+skip it, keep going. **It does not crash the kernel.**
+
+### What this means, honestly
+
+This further weakens (doesn't fully kill, but weakens past the point of
+being a reasonable working assumption) the already-flagged-as-unproven
+"AFKResource alloc failure causes the later RTBuddy crash" hypothesis from
+earlier tonight. If this exact, generic, correctly-defensive code path is
+what handles ALL `Couldn't alloc class` failures kernel-wide (not
+AFKResource-specific), and it demonstrably does not crash, then **the
+RTBuddy null-deref panic found earlier tonight almost certainly has a
+separate, still-unidentified root cause**, not this one. The two findings
+from tonight's earlier entries (the RTBuddy crash exists and is real,
+proven via live gdbstub spin-loop capture) and (the AFKResource/
+AFKFirmwareService gap exists and is real, proven via kmutil/exhaustive
+search) both stand on their own - but the causal link between them that
+was floated as a hypothesis should now be treated as **probably wrong**,
+not just unproven. Finding the RTBuddy crash's real trigger needs to start
+over from the crash site itself (the confirmed static addresses inside
+`com.apple.driver.RTBuddy`'s own range from earlier tonight), now armed
+with the better `ipsw macho disass --fileset-entry` symbol-resolution
+technique discovered this round, rather than assuming it's downstream of
+AFKResource.
+
 ### Honest state of the moonshot at this point
 
 Every angle attacked this session (personality matching, registry

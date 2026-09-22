@@ -6,6 +6,70 @@ a road trip with their **ThinkPad T480s** (the actual target machine — this
 laptop, the one you are running on) and wants this to keep moving without
 them driving every step.
 
+## Current state as of hand-off (2026-09-21 night, user back home, supersedes everything below)
+
+**Read `ASTRA_LOG.md` all the way to the end.** Absolute short version:
+
+**The fatal kernel panic that ended every deep boot is FIXED.** Root-caused
+via disassembly of `firmware/txm.slotfix4`: a per-id resource-slot
+allocator uses ARM64 `cas` (compare-and-swap) to claim a slot, and panics
+with `TXM [Panic]: code 0x63` if the slot isn't free. WindowServer's own
+crash/respawn cycle doesn't always release its slot cleanly, and after
+enough cycles (previously always within ~13-16 minutes / 3-5 crashes) this
+panic brought the whole kernel down. Patched the single panic branch (`b.ne`
+at static VA `0xfffffff017036150`) to a `NOP` →
+`firmware/txm.slotfix4.stealslot`. **Verified**: the real system-volume +
+`bootkc.netboot10.bootfb-probe` (IOBootFramebuffer patch) boot ran
+**30+ real minutes, 13+ WindowServer crash/respawn cycles, zero kernel
+panics** — every prior attempt died well before this. Full technical
+writeup with the exact disassembly is in `ASTRA_LOG.md` under "root-caused
+and fixed the fatal TXM 0x63 panic."
+
+**Current known-good boot command** (use `txm.slotfix4.stealslot`, not
+plain `txm.slotfix4`, for any real-system-volume/deep boot from now on):
+```bash
+cd ~/goldengate/qemu-sptm-cl4-native
+DARWIN_FB=1 DARWIN_RTKIT=1 DARWIN_DART=1 DARWIN_AIC=1 \
+  build/qemu-system-aarch64 -M darwin \
+  -bootkc firmware/bootkc.netboot10.bootfb-probe \
+  -dtree firmware/dtree.netboot10.bootfb-probe \
+  -tc ~/goldengate/installer_work_26A428/tc_extracted/022-20292-673.raw.tc \
+  -ramdisk ~/goldengate/installer_work_26A428/decrypted/imageboot-wrapper-022.dmg \
+  -sptm firmware/sptm.asidfix5 -txm firmware/txm.slotfix4.stealslot \
+  -icount shift=auto \
+  -args "rd=md0 serial=3 -v -noprogress wdt=-1 wlan-olyhal-abort -rootdmg-ramdisk auth-root-dmg=file:///BaseSystem.dmg allow-root-hash-mismatch=1 acm_fastsim=1 trm_base_system=0 rtb_syslog_verbosity=7" \
+  -serial unix:/tmp/gg_visible_serial.sock,server,nowait \
+  -display cocoa,full-grab=off,left-command-key=off,full-screen=off \
+  -monitor unix:/tmp/gg_visible.sock,server,nowait -m 8G
+```
+(Still hits the earlier, separate `VIOLATION_DOUBLE_NEST`/
+`cpu_root_table_tsd: INVALID_FRAME_TYPE` panics roughly half the time
+*before* reaching WindowServer at all — that part is unfixed, still
+KASLR/timing-sensitive per `ASTRA_LOG.md`'s earlier sections. Just retry on
+failure; once past that point, the boot is now stable indefinitely.)
+
+**What's left**: `WindowServer` itself still crashes
+(`EXC_CORPSE_NOTIFY`) before ever drawing a pixel through
+`IOBootFramebuffer` — confirmed via repeated screendumps during a stable,
+crash-panic-free run staying fully black. This is now a pure userspace
+problem, not a kernel-stability one. Attempted to catch the crash live via
+`gdbserver` issued through the QEMU HMP monitor on the *already-running* VM
+(confirmed this works without needing `-s -S` at launch — real, reusable
+technique) with a breakpoint at `_Xmach_exception_raise` (the MIG stub the
+kernel calls to deliver a Mach exception to userspace, static VA
+`0xfffffe000bc833b8`, +0x20000000 for runtime) — an earlier attempt at
+`_Xtask_generate_corpse` never fired despite many crashes, ruling that one
+out. **Caution learned the hard way**: attaching `lldb -o 'gdb-remote
+...'` when the handshake fails/times out can still leave the VM PAUSED
+(confirmed: process state changed to `Ss`, CPU dropped to ~18%, serial log
+stopped advancing) even though lldb itself reports a client-side timeout
+error — always verify the log is still advancing after any attach attempt,
+and if not, send `cont` over the HMP monitor socket to resume (this
+recovered a 32-minute-old run with no data lost). Given how valuable a
+long-lived stable run is, prefer attaching gdbstub to a *fresh, expendable*
+run dedicated to this investigation rather than a precious already-stable
+one.
+
 ## The standing instruction — this is the most important thing in this file
 
 The user has said, repeatedly and with escalating force, across this whole

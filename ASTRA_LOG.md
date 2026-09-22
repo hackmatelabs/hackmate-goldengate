@@ -1117,6 +1117,116 @@ with the better `ipsw macho disass --fileset-entry` symbol-resolution
 technique discovered this round, rather than assuming it's downstream of
 AFKResource.
 
+## 2026-09-22 (continued): found the EXACT RTBuddy crashing instruction - and the methodology bug that blocked this all night
+
+User pushed back again mid-session ("YOU STOPPED AGAIN") when a
+`ScheduleWakeup`-based background wait read as quitting. Corrected by
+polling actively in-turn instead of yielding the turn on a timer.
+
+### Root-caused why 3 earlier static-translation attempts all failed tonight
+
+Reproduced the panic live again (fresh boot, same config, `-s` gdbstub
+without `-S`), attached lldb the moment it hit the terminal spin loop. This
+time inspected the attach output properly: `Load Address:
+0xfffffe002700c000`, and lldb explicitly warned `Unable to locate kernel
+binary on the debugger system` - **the gdbstub attach never actually loads
+symbols**, which is why `image list`/`image lookup` come back empty
+("target has no associated executable images"). This explains why nothing
+resolved cleanly through the live session either - there was never a
+loaded image to resolve against.
+
+Compared `Load Address` (`...002700c000`) against the kernelcache's own
+static `__TEXT` segment end from `ipsw macho info`
+(`addr=0xfffffe0007004000-0xfffffe000700c000`) - **identical low bits**,
+differing only by one nibble in the upper bits. This proves the real,
+simple, correct slide is **`+0x20000000`** - the same fixed slide already
+established and used successfully earlier in this whole project's history
+(see the "Runtime address = static symbol address + 0x20000000" note in
+memory) - NOT the `Kernel text exec slide: 0x24b94000` value printed in
+the panic log, which evidently measures something else entirely (possibly
+a separate kext-text-only randomization layer, distinct from the base
+kernelcache slide). **All three of tonight's earlier static-translation
+attempts used the wrong slide value and landed in garbage (string/data
+regions, or nonsense-offset symbol matches)** - this wasn't a tooling
+limitation, it was a wrong constant used consistently. Future sessions:
+always use `+0x20000000` for this bootkc, verified two independent ways
+now (live gdbstub Load Address AND the original project history).
+
+### The actual crash, precisely located
+
+Recomputed the original fault PC with the correct slide:
+`0xfffffe002b66f1f8 - 0x20000000 = 0xfffffe000b66f1f8`. Confirmed this
+lands inside the kernelcache's real `__TEXT_EXEC` segment
+(`0xfffffe0008adc000-0xfffffe000c54c000` per `ipsw macho info`) - a
+legitimate code address, unlike every earlier attempt. Disassembled
+around it (`ipsw macho disass --fileset-entry com.apple.driver.RTBuddy
+--vaddr ... --force --quiet`):
+
+```
+0xfffffe000b66f1d4:  bti c              ; <- real function entry
+0xfffffe000b66f1d8:  pacibsp
+0xfffffe000b66f1dc:  sub sp, sp, #0x60
+0xfffffe000b66f1e0:  stp x22, x21, [sp, #0x30]
+0xfffffe000b66f1e4:  stp x20, x19, [sp, #0x40]
+0xfffffe000b66f1e8:  stp fp, lr, [sp, #0x50]
+0xfffffe000b66f1ec:  add fp, sp, #0x50
+0xfffffe000b66f1f0:  mov w19, #0x2bc    ; (loading a constant, unrelated)
+0xfffffe000b66f1f4:  movk w19, #0xe000, lsl #0x10
+0xfffffe000b66f1f8:  ldr w8, [x0, #0x124]   ; <<< THE CRASH
+0xfffffe000b66f1fc:  sub w9, w8, #0x3
+0xfffffe000b66f200:  cmp w9, #0x2
+0xfffffe000b66f204:  b.lo 0xfffffe000b66f3d0
+0xfffffe000b66f208:  cbnz w8, 0xfffffe000b66f3bc
+0xfffffe000b66f20c:  mov x20, x0
+0xfffffe000b66f210:  ldr x0, [x0, #0xa8]
+...
+```
+
+**This is a textbook null-`this` bug.** `x0` is the implicit `this` for a
+C++ method (first ARM64 ABI argument) - the function's very first real
+action, right after its prologue, is `ldr w8, [x0, #0x124]`, reading what
+is almost certainly a state/status enum field, with **zero null-check on
+x0 first**. The panic's own `far: 0x0000000000000124` is an EXACT match
+for offset `0x124` from a null base - this is definitively the crashing
+instruction, not a guess. The state value read then feeds a
+range-check/dispatch (`sub w9,w8,#3; cmp w9,#2; b.lo ...; cbnz w8,...`) -
+classic state-machine dispatcher code, consistent with RTBuddy/AFK
+mailbox-peer state tracking.
+
+Traced backward from this function's entry to its caller context (the
+preceding ~0x60 bytes, still inside the calling function): the caller
+loads a pointer from `[x20, #0xf8]`, correctly null-checks it (`cbz x0,
+.... skip`), does ONE virtual call (`blraa`) on it if non-null, THEN
+separately does the virtual call that lands us in our crashing function -
+meaning **the object passed as `this` into the crashing function is a
+*different* object than the one that was null-checked**, and that
+different object was never checked before being dispatched into.
+
+**Could not get a demangled name for the crashing function** - neither
+the JSON symbol map nor the `.a2s` cache `ipsw macho disass` uses has
+coverage this deep into RTBuddy's unlabeled internals (same gap already
+hit earlier tonight for `OSMetaClass::allocClassWithName`'s neighbors).
+Not blocking - the crash is fully characterized structurally even without
+a name: a virtual method on an RTBuddy-family peer/state object, called
+with a null `this`, at a point in RTBuddy's flow reached specifically
+during the real-base-system daemon storm.
+
+### Honest assessment
+
+This is the deepest, most precise characterization of this specific crash
+achieved this project. It does NOT yet answer *why* this particular
+object is null at this specific call site (that needs either finding the
+caller's own name/context, or a live breakpoint at
+`0xfffffe002b66f1d4` - runtime, +0x20000000 slide - with `bt`/`po $x20`
+style inspection next time this boot config runs), but it fully retires
+the earlier guesswork (DCP-specific theory, ANS2-specific theory,
+AFKResource-causal theory) with a real, address-exact finding. Next
+concrete step for a future session: breakpoint the crashing function's
+entry directly (now that the address and correct slide are known) and
+read `x20` (the object the caller correctly null-checked) vs whatever's
+actually in `x0` at the crash, to identify what's supposed to initialize
+the null object and why it didn't.
+
 ### Honest state of the moonshot at this point
 
 Every angle attacked this session (personality matching, registry

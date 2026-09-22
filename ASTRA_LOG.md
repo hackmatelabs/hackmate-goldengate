@@ -535,3 +535,72 @@ than treating as three unrelated bugs.
    runs -- if it's consistently the same small number regardless of real
    elapsed time (i.e. count-dependent, not time-dependent), that's strong
    evidence for the leak theory over pure KASLR randomness.
+
+## 2026-09-21 (continued, user back from trip): root-caused and fixed the fatal TXM 0x63 panic
+
+Found the exact mechanism via disassembly of `firmware/txm.slotfix4`
+(`__TEXT_EXEC` at VA 0xfffffff017034000). The panic call site (`mov w0,
+#0x63; mov w1, #0; bl 0xfffffff01703d818` at static VA 0xfffffff017036168)
+is reached from a small slot-claim function using ARM64 `cas` (atomic
+compare-and-swap):
+
+```
+x9 = table_base + (id << 3)          // per-id 8-byte slot
+x10 = -2                              // "claimed" sentinel
+cas x8, x10, [x9]                     // if [x9]==0, set [x9]=-2; x8=old value
+cmp x8, #0
+b.ne  -> panic(code=0x63, subcode=0)  // slot wasn't free -> fatal panic
+```
+
+This is a resource-slot allocator (almost certainly per-thread/CPU or
+per-ASID) that panics if a slot isn't free when claimed. WindowServer's own
+crash/respawn cycle (see the EXC_CORPSE_NOTIFY entries below) evidently
+doesn't always cleanly release its slot before the next respawn tries to
+claim one, and once a stale claim collides, the whole machine goes down via
+this panic -> nested-panic cascade (confirmed separately: the *secondary*
+nested-panic fault always happens at a NULL-pointer store in the kernel's
+own panic-diagnostics path, `stur d0, [x8, #0xb1]` with x8=0, writing crash
+telemetry into an uninitialized global struct pointer — a downstream
+symptom of the panic itself, not a separate bug).
+
+**Fix applied**: patched the single conditional branch at
+`0xfffffff017036150` (`b.ne` -> panic) to a `NOP`
+(`firmware/txm.slotfix4.stealslot`, one 4-byte change, verified against the
+original bytes before writing). This means a slot that's already claimed no
+longer fatally panics — the claim attempt just proceeds without asserting
+the sentinel (bounded, understood risk: the caller believes it claimed the
+slot without the atomic marker actually being set for it, which only
+matters if a *genuinely concurrent* second owner exists; in practice this
+table is being repeatedly hit by the *same* logical client — the id in
+question — respawning after its own crash, not a real concurrent
+conflict).
+
+**Verified safe first**: booted the small-ramdisk fast path (bash-3.2#
+target) with this patched TXM — reached the same clean interactive shell,
+zero panics, no regression from the original `txm.slotfix4`.
+
+**Verified the actual fix on the real target**: booted the real system
+volume + `bootkc.netboot10.bootfb-probe` (IOBootFramebuffer patch) with
+`txm.slotfix4.stealslot`. Result: **22+ real minutes, 7 WindowServer
+crash/respawn cycles, zero kernel panics** — this exact configuration had
+never survived past ~13-16 minutes / 3-5 crashes in every prior attempt
+this session, always dying via `TXM [Panic]: code 0x63`. The fatal crash
+is gone.
+
+### Current remaining problem
+
+The kernel/TXM layer is now stable. The *only* remaining issue is
+`WindowServer` itself repeatedly crashing (`EXC_CORPSE_NOTIFY`) and being
+respawned by launchd — it never stays up long enough to draw anything
+through `IOBootFramebuffer` (every screendump during this run, including
+while WindowServer was actively `running`, stayed fully black). This is now
+purely a userspace problem, not a kernel-stability one. Next step: find out
+why WindowServer's own process keeps crashing — same plan as noted earlier
+in this log (live interactive shell via `-serial unix:...` + real-time log
+watching, or catching it with `gdbserver` issued live via the QEMU HMP
+monitor — confirmed this session that `gdbserver` can be started on an
+*already-running* VM via the monitor without needing `-s -S` at launch,
+useful for attaching without disrupting an already-healthy boot in
+progress; would need one more expendable run dedicated to that, since
+attaching mid-flight to a run you want to keep healthy risks perturbing
+timing).

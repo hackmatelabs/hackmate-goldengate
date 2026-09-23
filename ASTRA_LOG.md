@@ -2257,3 +2257,35 @@ run. Every piece needed to do it (both addresses, the exact PAC
 diversifier, the vtable-copy safety argument, the precise reason
 registration currently stalls) is now documented and verified, not
 guessed.
+
+### Correction found while starting to implement this - the real fix is one level deeper
+
+Started actually building the above plan and caught a flaw in it before
+writing any bytes: the "patch the instance's vtable slot 190" idea
+assumes there's a point where *our own code* touches the instance being
+created - but there isn't. Our boot-time stub only constructs the
+`OSMetaClass` *descriptor* once, at `mod_init_func` time. The actual
+`AFKFirmwareService` *instance* doesn't exist yet at that point - it
+only gets created much later, whenever IOKit's matching engine calls
+`allocClassWithName` + the descriptor's own `alloc()` slot, during real
+device matching. Our stub code never runs again at that moment, so
+there's no place left to intercept and patch *that specific instance's*
+vtable after the fact without also fixing every other IOResources
+instance system-wide (which would be a different, much riskier kind of
+bug).
+
+**The fix therefore has to happen one level up**: override the
+*descriptor's own* `alloc()` vtable slot (not the instance's `start()`
+slot) with a custom implementation that (1) calls the real, existing
+`IOResources::MetaClass::alloc()` to get a properly-constructed
+`IOResources` instance exactly as before, then (2) patches *that
+specific returned instance's* vtable pointer to point at a custom
+vtable (with the patched `start()`) before returning it to the caller.
+This is the same "runtime vtable construction" idea as before, but
+wired in one level higher up the chain than originally planned - still
+fully addressable with the same tools and techniques proven tonight
+(direct real-function calls via `bl`, `pacda`/`pacia` for the two
+different signing schemes already characterized), just a more involved
+implementation than a single vtable copy. Correcting the plan here
+rather than building on a flawed premise - this is the accurate,
+verified next step for a future session.

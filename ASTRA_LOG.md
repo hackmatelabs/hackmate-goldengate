@@ -2075,3 +2075,30 @@ Tonight closed out, with live proof rather than assumption:
    AFK/DCP RPC protocol enough to implement working methods, not just a
    class descriptor) - but it now starts from a stable, panic-free
    kernel instead of one that crashes before WindowServer can even try.
+
+### Tried combining the fix with the real (non-defanged) DCP device tree - new checkpoint reached, new unrelated blocker found
+
+Booted `.afkstub7` with `dtree.dcp8.bigdram2.realdcp` (the real-DCP-
+enabled device tree from PHASE12, previously only tested defanged/
+disabled in this project's real-system-volume flow) instead of the
+usual `dtree.netboot10.bootfb-probe`. Result: **`RTBuddy(DCP):
+start(<ptr>)` fires** - a genuine, new checkpoint, the real DCP driver
+actually starting for the first time alongside a working
+`AFKFirmwareService` registration. But the boot then panics on a
+different, unrelated issue: `"Failed to extract root-hash for BS dmg
+from /chosen - error No such file or directory(2)" @apfs_vfsops.c:2007`.
+
+This is a **boot-configuration mismatch, not a DCP/AFKFirmwareService
+problem** - this specific combination (real-DCP device tree + the
+`-rootdmg-ramdisk auth-root-dmg=file:///BaseSystem.dmg` real-system-
+volume boot-args) has never been tested together before; PHASE12 only
+tested real-DCP bring-up in a different boot flow. Checked whether it's
+a simple missing `/chosen` property (`root-hash`, `apfs-preboot-uuid`,
+`boot-manifest-hash`, `root-live-fs`) - all are present in both device
+trees identically, so the actual mismatch is something more specific to
+how this ramdisk/manifest combination interacts with the real-DCP
+device tree's other differences. **Not resolved tonight** - this needs
+its own dedicated device-tree merge work (likely copying the working
+device tree's exact `/chosen` subtree wholesale onto the real-DCP one,
+rather than diffing individual properties) as a distinct next step,
+separate from tonight's two confirmed fixes.

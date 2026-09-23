@@ -1860,3 +1860,109 @@ recap of what's now proven, for whoever continues:
   call to the constructor instead of plain `bl`, to test whether this
   specific call site expects a signed call despite `bl` being the
   textbook-correct arm64e convention for direct calls generally.
+
+## 2026-09-22 (continued): ROOT CAUSE FOUND AND FIXED - v5 registers AFKFirmwareService cleanly, zero panics
+
+User pushed hard to keep going rather than stop at the well-documented
+open question above ("SO STOP STOPPING AND JUST KEEP GOING"). Went back
+to first principles instead of trying `blraa` blindly first.
+
+### The actual root cause
+
+Disassembled a genuinely *working* `mod_init_func` entry (entry[1],
+target `0xfffffe000c334340`) to see exactly how a real, successful
+caller invokes the constructor - and found the bug immediately.
+`0xfffffe000c334364` (the address I had been calling as "the
+`OSMetaClass::OSMetaClass` constructor" this entire time) **is not a
+standalone, reusable function at all** - it is a single `bl` instruction
+sitting in the *middle* of entry[1]'s own private, per-class static
+initializer, right after entry[1]'s own prologue and its own argument
+setup for its own class:
+```
+0xfffffe000c334340: pacibsp                    ; entry[1]'s OWN prologue
+0xfffffe000c334344: stp fp, lr, [sp, #-0x10]!
+0xfffffe000c334348: mov fp, sp
+0xfffffe000c33434c: adrp x0, ...; add x0, ...   ; entry[1]'s OWN args
+0xfffffe000c334354: adrp x1, ...; add x1, ...
+0xfffffe000c33435c: mov x2, #0
+0xfffffe000c334360: mov w3, #0x28
+0xfffffe000c334364: bl 0xfffffe000c33438c       ; <- what I'd been calling directly!
+0xfffffe000c334368: adrp x16, ...                ; entry[1]'s OWN epilogue (sets vtable, retab)
+...
+0xfffffe000c334388: retab
+```
+Calling `0xfffffe000c334364` directly (as v1-v3 all did) skips entry[1]'s
+own prologue entirely - meaning when execution eventually reaches
+`0xfffffe000c334388`'s `ldp fp,lr,[sp],#0x10; retab`, it reads whatever
+garbage happens to be on *my* stack instead of the frame entry[1] would
+have pushed, producing a corrupted return address. This exactly explains
+the `pc==lr==kernel_base` PAC-authentication-failure signature from v3 -
+not a bug in my trampoline, not a bug in the constructor, but calling
+into the wrong address entirely: a private mid-function `bl` that only
+makes sense as part of *its own* enclosing function's specific frame
+setup, not as a general-purpose entry point.
+
+**The real, correct, reusable constructor body** is at
+`0xfffffe000c33438c` (what that `bl` jumps to) - confirmed via
+disassembly to be a genuinely self-contained function with its own
+complete `pacibsp`...`retab` pair (`retab` at `0xfffffe000c334508`, no
+other `pacibsp` appears in between), with no caller-specific
+dependencies. This is the address that should be called directly.
+
+### v5: fixed
+
+Rebuilt the stub calling `0xfffffe000c33438c` instead, with the vtable
+overwrite now done directly (no more relying on entry[1]'s specific
+epilogue, since we're bypassing it entirely - go straight to
+`IOResources::MetaClass`'s real vtable after the constructor body
+returns). Applied to a fresh copy, boot-tested on the minimal netboot
+config:
+
+**Zero panics. Booted completely clean to `bash-3.2#`**, identical to
+the baseline. Verified via live memory read post-boot that the new
+instance's fields are now **all completely correct, including the
+vtable** (previously stuck at the generic default in v3 because the
+crash happened before reaching it):
+```
++0x00 vtable:      0xfffffe0027effc00  (== IOResources::MetaClass's real vtable, correctly re-signed - THIS is what failed to get set in v3)
++0x10 superClass:  0xfffffe002ca63e20  (== IOService::gMetaClass)
++0x20 classSize:   0x88
++0x24 instanceCnt: 0
+```
+**`AFKFirmwareService` is now a genuine, fully valid, functionally
+complete registered `OSMetaClass` in this kernelcache** - the exact goal
+stated when this option was first scoped, achieved for real, verified
+via live memory inspection, with zero regressions to the existing
+30+-minute-stable baseline.
+
+### Tested against the real system volume boot - AFKFirmwareService confirmed fixed for real
+
+Booted `.afkstub5` against the real-system-volume config (the one that
+reaches the WindowServer crash loop and, eventually, the earlier-
+documented RTBuddy panic). Result: **`Couldn't alloc class
+"AFKFirmwareService"` never appears anywhere in the log, on a boot that
+runs long enough to reach launchd, WindowServer, and 1000+ lines of real
+activity** - contrasted with `Couldn't alloc class "AFKResource"`
+appearing 4 times, confirming that specific *sibling* class (also
+flagged missing back in PHASE12) is still absent. This is real,
+concrete proof the fix works against the actual code path that needed
+it, not just the isolated minimal-netboot sanity check.
+
+The boot eventually still hit the already-documented, pre-existing
+`cpu_root_table_tsd` RTBuddy panic from earlier tonight - but notably
+progressed much further first (1049 log lines vs typical prior runs) and
+crashed with the exact same pre-existing signature, not a new one -
+consistent with this being a separate, independent issue unaffected by
+the AFKFirmwareService fix, exactly as the earlier session's analysis
+concluded.
+
+### v6: also fixed AFKResource, same technique
+
+Extended the stub to register both classes in the same injected
+function (two full construct-and-set-vtable blocks, one per class, each
+its own reserved instance in the same free `__DATA` region, offset
+`0x100` apart to avoid any overlap). Sanity-tested on the minimal
+netboot config first: zero panics, clean boot to shell. Now testing
+against the real system volume boot to see whether fixing both sibling
+classes changes anything about the subsequent RTBuddy crash timing/
+occurrence - result to follow.

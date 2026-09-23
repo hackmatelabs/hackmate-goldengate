@@ -2597,3 +2597,43 @@ go back to the actual original goal: check whether this unblocks
 other next-stage personality actually matching and starting — that's the
 real signal of forward progress in the DCP boot chain, independent of
 whatever `ioreg`'s display quirk is.
+
+### Checked the actual downstream goal: not yet — and now understand why
+
+Re-ran v12 against the real-DCP config with a saved serial log and
+searched for `DCPEndpoint24`, `AppleDCPLinkService`, and related strings.
+**None appear.** Boot reaches the exact same stable shell as v10/v11/the
+baseline — no new kext-load or matching activity visible beyond what
+`.afkstub7` already reached.
+
+This is the honest next-level finding: proving `alloc()`/`start()`/
+`registerService()` execute (v12's markers) is necessary but not
+sufficient for downstream progress. `registerService()` on our object
+publishes *our own* node for matching, but the real `AppleDCPLinkServiceSoC`
+personality needs `IONameMatch: DCPEndpoint24` — i.e. it's looking for a
+**named child nub** that a real `AFKFirmwareService::start()` would
+create and publish (representing an actual AFK protocol endpoint), not
+just for `AFKFirmwareService` itself to exist and start cleanly. Our
+`custom_start()` only calls the generic `IOService::start()`, which
+registers the object itself — it has no reason to spawn a
+`DCPEndpoint24`-named child, because it doesn't know anything about the
+real AFK protocol.
+
+### Where this actually leaves the project
+
+The metaclass-override architecture (v9's correction through v12's proof)
+is now a fully verified, working mechanism: a completely fake class can be
+constructed, safely allocated, safely started, and safely registered,
+with zero regressions, confirmed by direct memory-level proof of
+execution. That was the real, hard, uncertain part, and it's solved.
+
+What's left to reach the next real personality in the DCP chain is a
+different, bigger kind of work: `custom_start()` needs to actually *do*
+something AFKFirmwareService-specific — create and `registerService()` a
+child `IOService` node named/matched as `DCPEndpoint24` (or whatever the
+real AFK protocol's endpoint-publishing logic actually does, which would
+need to be found via further disassembly of a real AFK-capable
+kernelcache/reference, since this one doesn't have a working
+implementation to borrow from at all — that's the entire reason this
+class had to be faked in the first place). That's a real implementation
+task, not another vtable-slot-swap fix.

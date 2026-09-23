@@ -1536,3 +1536,103 @@ point for whoever picks up option 3 next - the hard reverse-engineering
 (finding the real ABI, ruling out needing AFKFirmwareService-specific
 behavior, locating the exact constructor to call) is done; what's left is
 careful, methodical binary construction and testing on a copy.
+
+## 2026-09-22 (continued, user said "go, back it up first"): built and tested the real stub - crashed, real root cause identified, refining approach
+
+User explicitly authorized attempting the actual Mach-O surgery: "u can
+go. jus back ts up first js in case." Backed up the known-good
+`bootkc.netboot10.bootfb-probe` to `.backup-preafkstub` first, and did
+all work on a separate `.afkstub` working copy - the original file and
+the currently-running known-good VM were never touched.
+
+### Built the real thing, end to end
+
+1. **Decoded `__DATA_CONST.__mod_init_func`'s real pointer encoding**:
+   found via `ipsw macho info --fileset-entry com.apple.kernel` that
+   `com.apple.kernel` has its own 91-entry static-initializer function
+   pointer array (this is the REAL, standard C++ static-init mechanism -
+   exactly how every existing class's `OSDefineMetaClassAndStructors`
+   registration already runs today). Raw stored values looked nothing
+   like real addresses (`0x100000054a254c` etc) - `ipsw macho info
+   --fixups` reported none for this entry, but `ipsw macho dump ... -v`
+   correctly resolved them, letting me empirically derive the exact
+   transform by comparing raw vs decoded pairs: `decoded = raw +
+   0xffeffe0007004000` (a simple, constant, verified-twice additive
+   offset - not a complex per-pointer chained-fixup format as first
+   feared).
+2. **Found real, safe free space**: a 16KB zero-run in `__DATA.__data`
+   (on-disk, confirmed genuinely unused - read back as all-zero before
+   writing) for a new `OSMetaClass` instance, and a 10KB zero-run in
+   `__TEXT_EXEC` for new code + the `"AFKFirmwareService"` string.
+3. **Wrote and correctly assembled/linked the actual stub** (`afk_stub.s`
+   + `afk_stub_syms.s` in the repo) using the host's own `clang`/`ld`
+   cross-targeting `arm64e`, linked at the exact intended load address so
+   `adrp`/`bl` PC-relative encodings resolved correctly (verified every
+   single one against the intended target via `otool -tvV` before
+   extracting bytes - all matched exactly: my new instance address,
+   `IOService::gMetaClass`, `IOResources::MetaClass`'s real vtable, the
+   embedded name string, and the two `bl` targets).
+4. **Chose the last (90th) `mod_init_func` slot to chain onto** (so my
+   code runs after every other kernel static, including `IOResources`'
+   own registration) - saved the slot's original value, overwrote it with
+   my new function's encoded pointer using the exact verified transform,
+   wrote the 123 bytes of real assembled code+string into the free
+   `__TEXT_EXEC` space. Verified every write by reading it back
+   immediately after.
+5. **Design of the stub itself**: calls the original slot-90 function
+   first (preserving all existing behavior exactly), then calls the real,
+   existing `OSMetaClass::OSMetaClass` constructor (found and disassembled
+   earlier this session) with `name="AFKFirmwareService"`,
+   `superClass=IOService::gMetaClass`, `classSize=0x88` (matching
+   `IOResources`'), then overwrites the new instance's vtable pointer with
+   `IOResources::MetaClass`'s real, already-working vtable - re-signed for
+   the new instance's own address using the exact same `pacda`
+   modifier scheme (`this` combined with the constant `0xcda1`) the real
+   constructor itself uses, copied directly from its disassembly. This
+   makes `allocClassWithName("AFKFirmwareService")` return what is
+   functionally a real, working `IOResources` instance under a different
+   registered name - satisfying the earlier-established requirement (the
+   caller only checks eventual `IOService` ancestry) without needing any
+   AFKFirmwareService-specific behavior at all.
+
+### Result: crashed, very early, before any guest print at all
+
+Boot-tested on a fresh, isolated boot (different gdb port to avoid
+clashing with the already-running known-good VM's leftover gdbserver -
+a real methodology snag hit and fixed along the way). The VM ended up
+frozen in a `b <self>` spin loop (the same terminal panic-handler pattern
+seen for the earlier RTBuddy crash, but at a **different** address,
+confirming this is a **new, distinct** panic, not a recurrence) - and
+critically, `serial.log` had **zero bytes** - the crash happened before
+the guest kernel printed anything at all, earlier than any previously
+observed failure in this whole project.
+
+**Root cause assessment (informed reasoning, not yet proven)**: this
+project has already successfully patched `bootkc`'s `PRELINK_INFO`
+plist/XML data many times (the `IOBootFramebuffer` synthetic personality,
+the `IOMobileFramebufferVeryLegacy` bridge, etc.) with zero integrity
+issues - so a blanket "any change to bootkc gets rejected" theory is
+already disproven by this project's own history. But `__DATA_CONST` is
+different: it's the well-documented real Apple Silicon hardening feature
+that specifically protects function-pointer tables and C++ vtables
+against exactly this class of tampering (overwriting init-function
+arrays is a classic kernel-exploitation technique `__DATA_CONST`
+hardening exists to prevent). The crash happening before any print at
+all - earlier than every previous failure mode this project has hit - is
+consistent with an SPTM/TXM-level integrity fault on the modified
+`__DATA_CONST` page, not a logic bug in the injected code itself.
+
+**Not yet proven** - the alternative (a genuine bug in the stub itself,
+e.g. a wrong PAC signature or bad constructor argument) hasn't been ruled
+out with certainty. But the evidence points toward `__DATA_CONST` being
+the wrong kind of region to modify, and the fix is straightforward: this
+project's own proven-working TXM fix patched **executable instructions**
+directly (a `b.ne`→NOP edit in real `__TEXT_EXEC` code), not a
+function-pointer table - the next iteration should use the same
+instruction-trampoline style (overwrite one instruction at the start of
+a real, definitely-executed early function with a branch to the new
+code, preserving and re-executing the overwritten instruction) instead
+of touching `__DATA_CONST` at all. All the hard parts (address encoding,
+correct assembly/linking, the constructor call sequence, the vtable
+reuse trick) remain valid and reusable - only the hook mechanism needs to
+change.

@@ -2542,3 +2542,58 @@ key, which shows `"AFKFirmwareService"=0` — expected, since construction
 still bumps IOResources' own compiled-in instance counter, not one keyed
 by our borrowed name) — in progress, next message has the line-by-line
 breakdown.
+
+## 2026-09-23 (continued) — v12: definitive proof custom_alloc()/custom_start() execute
+
+The `ioreg` investigation couldn't find a live `AFKFirmwareService` tree
+node in v11 (only the static personality-dict property and an
+`IOKitDiagnostics` class-count entry showing `=0`), which cast real doubt
+on whether `custom_alloc()`/`custom_start()` were ever actually invoked
+by IOKit matching at all, versus the v9 regression/v10 fix pattern having
+some other, unrelated explanation.
+
+Resolved this with direct, unambiguous instrumentation instead of more
+indirect inference: added a marker write to each function — `custom_alloc`
+writes `0xdeada110` to a fixed free `__DATA` scratch address
+(`0xfffffe000c999000`), `custom_start` writes `0xdeada27a` to a second one
+right after it (`0xfffffe000c999008`) — values that can only ever land
+there if that exact code path actually runs. Built as `.afkstub12` (same
+placements as v11, both functions ~20 bytes larger).
+
+Boot-tested clean (zero panics, reaches the shell, same as v10/v11), then
+read the two addresses back from **live guest memory** via the QEMU
+monitor's `x/2xg` command. Had to remember to apply the KASLR runtime
+slide (`+0x20000000`, static → runtime — confirmed via `[darwin] bkc
+slide` in QEMU's own boot log) to the address, since the monitor's `x`
+command walks the guest's live virtual address space, not the static
+file layout; `xp` (physical) and the unslid virtual address both failed
+with "Cannot access memory" before that.
+
+**Result: `x/2xg 0xfffffe002c999000` → `0x00000000deada110
+0x00000000deada27a`.** Both markers present. This is definitive,
+unambiguous proof that:
+- `custom_alloc()` really is invoked as this metaclass's `alloc()`
+  (real IOKit matching calling `allocClassWithName("AFKFirmwareService")`
+  or equivalent, dispatching through our patched slot 21).
+- `custom_start()` really is invoked as the resulting instance's
+  `start()`, meaning the real `IOService::start()` and
+  `IOService::registerService()` calls inside it genuinely execute.
+
+This confirms the whole v9→v10→v11 diagnosis chain was chasing something
+real, not a false correlation: the code path this project has been
+building since v5 finally, verifiably runs end-to-end for the first time.
+
+The `ioreg` non-finding is now understood as a separate, secondary
+puzzle (likely something about how the minimal ramdisk's `ioreg` build
+walks/filters the tree, or object lifecycle timing relative to when the
+query runs) rather than evidence the fix doesn't work — worth returning
+to, but no longer blocks confidence in the core result.
+
+### Next step
+
+Now that `alloc()`/`start()`/`registerService()` are confirmed to fire,
+go back to the actual original goal: check whether this unblocks
+`AppleDCPLinkServiceSoC` (needs `IONameMatch: DCPEndpoint24`) or any
+other next-stage personality actually matching and starting — that's the
+real signal of forward progress in the DCP boot chain, independent of
+whatever `ioreg`'s display quirk is.

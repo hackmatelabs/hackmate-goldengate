@@ -8,6 +8,7 @@
 
 .extern _REAL_IOSERVICE_START
 .extern _REAL_REGISTERSERVICE
+.extern _START_MARKER_ADDR
 
 .text
 .align 2
@@ -21,6 +22,13 @@ _custom_start:
 
     mov  x19, x0                   // save this
     mov  x20, x1                   // save provider
+
+    // unambiguous proof-of-execution marker
+    adrp x8, _START_MARKER_ADDR@PAGE
+    add  x8, x8, _START_MARKER_ADDR@PAGEOFF
+    mov  w9, #0xa27a
+    movk w9, #0xdead, lsl #16
+    str  x9, [x8]
 
     bl   _REAL_IOSERVICE_START     // x0=this, x1=provider already in place
     mov  w21, w0                   // save real start()'s bool result

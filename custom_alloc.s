@@ -11,6 +11,7 @@
 
 .extern _REAL_IORESOURCES_ALLOC
 .extern _NEW_INSTANCE_VTABLE_ADDR
+.extern _ALLOC_MARKER_ADDR
 
 .text
 .align 2
@@ -19,6 +20,14 @@ _custom_alloc:
     pacibsp
     stp  fp, lr, [sp, #-0x10]!
     mov  fp, sp
+
+    // unambiguous proof-of-execution marker: real IOKit matching calling
+    // this slot is the only thing that can ever write this value here
+    adrp x8, _ALLOC_MARKER_ADDR@PAGE
+    add  x8, x8, _ALLOC_MARKER_ADDR@PAGEOFF
+    mov  w9, #0xa110
+    movk w9, #0xdead, lsl #16
+    str  x9, [x8]
 
     bl   _REAL_IORESOURCES_ALLOC   // x0 = newly allocated+constructed instance
 

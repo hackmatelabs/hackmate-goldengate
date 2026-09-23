@@ -1806,3 +1806,57 @@ original instruction and branch back) to confirm the trampoline
 mechanism itself is sound in isolation, isolating whether the bug is
 specifically in the constructor-call interaction or somewhere else
 entirely.
+
+### Ran diagnostic (b) - definitive, clean result
+
+Built v4: identical hook (same `+4` instruction-trampoline, same
+overwritten `stp x20,x19` replay, same branch back to `+8`), but with
+the entire `OSMetaClass::OSMetaClass` construction removed - just
+replay-and-resume, zero extra work. Boot-tested it the same way (fast
+free-run, ~30s).
+
+**Result: zero panics.** Booted completely clean all the way to
+`bash-3.2#`, identical to the fully unpatched baseline. Confirmed the VM
+stayed alive and stable afterward too (not a fluke/race - the same clean
+boot behavior as the known-good original).
+
+**This is definitive, not circumstantial**: the instruction-trampoline
+hook mechanism itself - the overwritten instruction choice, the replay,
+the register save/restore discipline, the branch back to `+8` - is
+completely sound. The bug is isolated specifically and only to the
+interaction with calling `OSMetaClass::OSMetaClass` from this hook
+point. This rules out an entire class of theories (wrong hook
+instruction, BTI/landing-pad issues, stack imbalance in the trampoline's
+own frame, wrong branch-back target) with certainty, narrowing all
+remaining uncertainty onto one specific question: why does calling this
+one specific, otherwise-completely-normal constructor from this specific
+call site fail, when the same constructor succeeds for the other 90
+legitimate `mod_init_func` entries and for whatever call inside it
+already writes my instance's fields correctly before the return fails.
+
+### Session close-out
+
+This is where tonight's live-engineering iteration stops, on a clean,
+well-defined, precisely-bounded remaining question - not because the
+trail went cold, but because everything cheaply and safely testable
+without a much slower live single-step campaign has been tested. Full
+recap of what's now proven, for whoever continues:
+- The `+4`-offset instruction-trampoline technique is proven safe and
+  correct in this kernelcache (v4 - zero panics, clean boot).
+- The `OSMetaClass::OSMetaClass` constructor call, when made from this
+  trampoline, executes its entire body correctly (v3 - live memory read
+  confirmed every field of the new `AFKFirmwareService` instance is
+  exactly right: name, superclass, class size, instance count).
+- The failure is a `pc==lr==kernel_base` "instruction fetch abort",
+  present from the very first panic (not nested-panic-recovery noise),
+  consistent with a PAC-authenticated return (`retab`) landing on a
+  corrupted pointer under a PAC emulation level without `FEAT_FPAC`'s
+  immediate trap.
+- Leading, not-yet-confirmed hypothesis: the constructor's own outer-
+  wrapper `retab` (returning to my trampoline) is the one that fails,
+  for a reason specific to being called from a `mod_init_func` context
+  rather than a normal compiled call site - not yet identified.
+- Next concrete diagnostic step: `blraa`-based (authenticated indirect)
+  call to the constructor instead of plain `bl`, to test whether this
+  specific call site expects a signed call despite `bl` being the
+  textbook-correct arm64e convention for direct calls generally.

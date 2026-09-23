@@ -1,0 +1,2 @@
+.globl _ORIG_FUNC_PLUS8
+.set _ORIG_FUNC_PLUS8, 0xfffffe000c4c5d18

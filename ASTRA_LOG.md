@@ -1485,3 +1485,54 @@ needs zero external Apple-gated assets (no KDK, no dev kernelcache, no
 developer account) - pure engineering, doable entirely with tooling
 already proven working in this project (the same `patch_kc()`-style
 binary-patch pattern used for the TXM/SPTM fixes).
+
+### Decoded the real OSMetaClass instance layout - concrete prep for building the stub
+
+Disassembled `OSMetaClass::OSMetaClass`'s real constructor
+(`0xfffffe000c334364`) instruction-by-instruction to get the actual field
+layout a new instance needs (standard ARM64 ABI: `x0`=this, `x1`=name,
+`x2`=superClass, `w3`=classSize):
+
+```
++0x00: vtable pointer (PAC-signed with a per-instance-address-derived key)
++0x08: OSSymbol* - the interned class name (computed from the raw C
+       string via a helper call, not stored directly)
++0x10: superClass (OSMetaClass*) - stored directly from x2
++0x18: className (const char*) - the raw string pointer, stored directly
+       from x1 as well (kept alongside the interned OSSymbol)
++0x20: classSize (uint32) - from w3
++0x24: instanceCount (uint32) - initialized to 0
+```
+
+Past this point the constructor does real, non-trivial work: it looks up
+a global registration table (`adrp x22, ...; ldr x8, [x22, #0xfd8]` - the
+real "all known classes" list `allocClassWithName` searches), checks its
+current size against capacity, and grows/inserts into it dynamically (a
+real array-growth routine, not a fixed-size table) before returning.
+
+**What this means for actually building the stub**: this can't be a
+static data blob dropped into `__DATA` - the REAL registration only
+happens by *executing* this constructor (or faithfully replicating its
+exact logic) at kext-load time, the same way a normal compiled
+`OSDefineMetaClassAndStructors(AFKFirmwareService, IOService)` macro
+would generate code to do. The correct approach is: write a small new
+function that calls this *already-existing, already-correct* constructor
+at `0xfffffe000c334364` with `("AFKFirmwareService", IOService::gMetaClass,
+sizeof(stub))`, wire it into a kext's static-initializer array (a
+`__mod_init_func`-style section) so it actually runs during boot, and
+give the new class a minimal but real vtable satisfying `IOService`'s
+interface (inheriting real `IOService` methods is enough per the earlier
+finding - no AFKFirmwareService-specific behavior is required).
+
+**Deliberately not attempting this Mach-O surgery against the live,
+known-good `bootkc.netboot10.bootfb-probe` file tonight** - this is
+correct, valuable prep work (the exact information needed is now
+documented), but actually injecting new code/data into the one
+kernelcache this entire project depends on booting reliably needs to be
+done on a throwaway copy first, verified carefully (free-space location,
+PAC signing of the new vtable/function pointers, TXM/SPTM integrity
+acceptance), not rushed. This is the concrete, fully-scoped starting
+point for whoever picks up option 3 next - the hard reverse-engineering
+(finding the real ABI, ruling out needing AFKFirmwareService-specific
+behavior, locating the exact constructor to call) is done; what's left is
+careful, methodical binary construction and testing on a copy.

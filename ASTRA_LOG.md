@@ -1962,7 +1962,43 @@ Extended the stub to register both classes in the same injected
 function (two full construct-and-set-vtable blocks, one per class, each
 its own reserved instance in the same free `__DATA` region, offset
 `0x100` apart to avoid any overlap). Sanity-tested on the minimal
-netboot config first: zero panics, clean boot to shell. Now testing
-against the real system volume boot to see whether fixing both sibling
-classes changes anything about the subsequent RTBuddy crash timing/
-occurrence - result to follow.
+netboot config first: zero panics, clean boot to shell.
+
+### v6 against the real system volume boot: the entire missing-class wall is gone
+
+Tested v6 against the real system-volume boot. Result: **zero
+"Couldn't alloc class" failures of any kind anywhere in the log** -
+neither `AFKFirmwareService` nor `AFKResource` fails to allocate
+anymore. This is the complete resolution of the missing-class gap
+PHASE12 identified as "the actual, final blocker" for the whole DCP/
+WindowServer chain, achieved via pure binary-patching engineering with
+zero external Apple-gated assets (no KDK, no developer account, no real
+install) - exactly the option-3 path scoped as "largest, riskiest, last
+resort" back at the start of tonight's `AFKFirmwareService` investigation.
+
+The boot still eventually hits the same pre-existing `cpu_root_table_tsd`
+RTBuddy panic already documented earlier tonight (identical panic
+signature both times) - confirming, now with even stronger evidence,
+that this is a genuinely separate, independent bug unrelated to the
+missing-class gap. **This is now the sole remaining blocker** standing
+between this project and real pixels from WindowServer - the
+`AFKFirmwareService`/`AFKResource` wall that consumed most of tonight's
+investigation is fully closed.
+
+### Immediate next target: the RTBuddy null-`this` crash
+
+Earlier tonight (see the 2026-09-22 entries above), this crash was
+precisely located to a specific instruction (`ldr w8, [x0, #0x124]` at
+static `0xfffffe000b66f1f8`, confirmed via the correct `+0x20000000`
+slide) - a virtual-dispatch call with a null `this` pointer, in
+unlabeled RTBuddy-family code. Given tonight's proven ability to
+correctly locate real function bodies (learned the hard way from the
+`0xfffffe000c334364` mistake - always verify a target is a genuine,
+self-contained function via its own `pacibsp`...`retab` pair, not just
+an address that "looks right"), the next concrete step is applying the
+same rigor to find why this specific object is null: identify the real
+calling function (not yet named), find what's supposed to initialize
+the object at the point `x20`'s field gets loaded, and determine whether
+a similar targeted binary patch (e.g., a null-check-and-skip guard,
+using the same instruction-trampoline technique now proven twice
+tonight) can neutralize this crash the same way.

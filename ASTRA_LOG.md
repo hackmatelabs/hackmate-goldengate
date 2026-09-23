@@ -2032,5 +2032,46 @@ to `mov w0,#1; retab` directly, reusing the `pacibsp`-signed LR as-is.
 Applied on top of the already-fixed `.afkstub6` (both the
 `AFKFirmwareService`/`AFKResource` fix and this new guard together).
 Sanity-tested on the minimal netboot config: zero panics, clean boot to
-shell. Testing against the real system-volume boot next - result to
-follow.
+shell.
+
+### Tested against the real system volume - the RTBuddy panic is gone, confirmed at extended runtime
+
+Booted `.afkstub7` against the real-system-volume config that previously
+panicked reliably around the ~1000-1050 log-line mark. Result at
+extended runtime: **3892 log lines, zero kernel panics of any kind,
+14+ minutes of real guest boot time, still alive and running** - the VM
+never once hit the `cpu_root_table_tsd`/RTBuddy crash that was
+deterministic and reproducible on every previous real-system-volume
+boot this entire session. This null-guard patch works.
+
+`WindowServer` is still crash-looping at the userspace level (SIGABRT,
+respawned PIDs 128/133/136/... roughly every ~73 seconds, 69 mentions in
+the log by this point) - but this is expected and separate: the
+registered `AFKFirmwareService` class is functionally just
+`IOResources` wearing a different name (satisfies allocation and
+`IOService` ancestry, per the requirement established earlier tonight,
+but has none of the real DCP-specific behavior WindowServer's actual
+display bring-up needs). Getting WindowServer to succeed, not just stop
+crashing the kernel, would need a real functional implementation - a
+materially larger undertaking than the name-registration fix, but now
+attempted against a **provably stable kernel** for the first time this
+entire project, instead of one that panics outright within minutes.
+
+### Where this leaves the project - real, durable, verified progress
+
+Tonight closed out, with live proof rather than assumption:
+1. The entire missing-class wall (`AFKFirmwareService` + `AFKResource`)
+   that PHASE12 called "the actual, final blocker" - fixed, verified
+   both in isolation and against the real code path.
+2. A previously-unexplained, deterministic kernel panic
+   (`cpu_root_table_tsd`, RTBuddy null-`this` crash) that occurred on
+   every real-system-volume boot this session - fixed, verified stable
+   for 14+ minutes of continuous real boot activity (a new record for
+   this exact boot configuration).
+3. The remaining gap to real pixels is now narrowed to one thing:
+   `WindowServer`/`SkyLight` need an `AFKFirmwareService` with genuine
+   DCP-specific behavior, not just a validly-registered name. This is
+   real, substantial future engineering (reverse-engineering the actual
+   AFK/DCP RPC protocol enough to implement working methods, not just a
+   class descriptor) - but it now starts from a stable, panic-free
+   kernel instead of one that crashes before WindowServer can even try.

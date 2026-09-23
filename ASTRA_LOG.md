@@ -2002,3 +2002,35 @@ the object at the point `x20`'s field gets loaded, and determine whether
 a similar targeted binary patch (e.g., a null-check-and-skip guard,
 using the same instruction-trampoline technique now proven twice
 tonight) can neutralize this crash the same way.
+
+### Built and tested the null-guard patch
+
+Traced the caller (via the `lr` value from the panic, `0xfffffe000b66f954`
+static) and found it's a **plain direct `bl`** (not indirect dispatch) at
+`0xfffffe000b66f950` - the calling function receives `x0` (its own
+`this`) at *its own* entry and passes it through completely unchanged to
+the crashing function, without ever checking it. This means the real
+null-object bug is even further up the call chain than the crash site
+itself. Rather than continuing to trace it back (real, but slower ROI),
+checked the caller's own two exit paths first: a non-zero return from
+the crashed function routes to `0xfffffe000b66f988`, a completely clean,
+safe early-exit (`mov x0,x19; ldp fp,lr; ldp x20,x19; retab`) - not the
+"continue processing" path that does more dereferencing. This makes a
+surgical null-guard at the crash site itself both safe and sufficient,
+without needing the full upstream root cause.
+
+Patched the crashing function's **third** instruction (`sub sp, sp,
+#0x60`) - not the first two (`bti c`, `pacibsp`), applying the exact
+lesson learned from the `AFKFirmwareService` BTI mistake earlier
+tonight: never overwrite a required landing pad, even for a caller that
+happens to use a direct `bl` - other unknown callers might reach the
+same function indirectly. Since this hook point is reached with `sp`
+still exactly at its function-entry value (nothing adjusted yet), the
+null case needs zero register/stack unwinding - it can `cbz x0` straight
+to `mov w0,#1; retab` directly, reusing the `pacibsp`-signed LR as-is.
+
+Applied on top of the already-fixed `.afkstub6` (both the
+`AFKFirmwareService`/`AFKResource` fix and this new guard together).
+Sanity-tested on the minimal netboot config: zero panics, clean boot to
+shell. Testing against the real system-volume boot next - result to
+follow.

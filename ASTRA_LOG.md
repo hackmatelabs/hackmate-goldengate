@@ -2389,3 +2389,64 @@ that boot reaches further (check `kern_newsysctl.c` registration table
 structure to resolve slot 121 to a symbol/kext; check whether
 `AppleDCPLinkServiceSoC` or another newly-reachable personality is
 double-loading a kext as a side effect of the AFKFirmwareService fix).
+
+### Root cause confirmed, and the real architectural lesson
+
+Re-ran the exact same real-DCP + simple-netboot-ramdisk boot against the
+UNMODIFIED `.afkstub7` (identical config, identical args) as a control:
+reaches the stable `bash-3.2#` shell, `apfs_sysctl_register` fires exactly
+once, zero fatal panics. This rules out "pre-existing bug just now
+exposed" — the sysctl-slot-121 collision is a real regression introduced
+by v9, isolated to one specific behavioral change.
+
+The only genuinely new *execution* v9 introduces (not just new code, but
+code that actually RUNS during boot) is: `custom_start()` firing for the
+first time ever — v5/v6/v7 built a descriptor whose `alloc()` was never
+overridden, so `start()`/`registerService()` for the fake instance never
+ran in any prior version. v9's `custom_alloc()`/`custom_start()` finally
+let them run.
+
+The instance `custom_alloc()` returns is not a lightweight stand-in — it
+IS a real `IOResources` object: real constructor (`IOResources::
+IOResources()` via `REAL_IORESOURCES_ALLOC`), real instance vtable (copied
+wholesale, only `start()`'s slot swapped). `IOResources` is meant to be a
+**singleton** — the one canonical registry of published system resources.
+Calling `registerService()` on a *second* one makes IOKit's real resource-
+publishing machinery treat it as another `IOResources` publisher,
+re-publishing whatever the real singleton already published — and if one
+of those published resources is backed by a sysctl node, republishing it
+collides with the slot the real instance already claimed. That's slot 121.
+
+**This invalidates the "borrow IOResources' entire real body" strategy
+the moment any of its virtual methods with real side effects actually
+execute.** It was safe through v5-v7 purely because `start()` never ran.
+Now that the actual goal (getting `start()`/`registerService()` to run) is
+achieved, the same trick that made construction easy makes execution
+unsafe.
+
+### Redirected plan for v10
+
+Stop reusing `IOResources`' real constructor/vtable/start() wholesale.
+Build a genuinely minimal, purpose-built C++ object instead:
+- A hand-written vtable with only the slots IOKit's matching engine
+  actually calls during probe/attach/start/free (getMetaClass, retain/
+  release/free, init, probe, attach, start, registerService, and whatever
+  else real disassembly of the matching engine shows gets called on a
+  freshly-matched nub) — pointing generic ones at IOService's real
+  (safe, generic, non-singleton) implementations, and only `start()` at
+  custom code that does the minimal real registerService() call.
+- A hand-written, minimal constructor (proper OSObject retain-count
+  field init, proper metaclass-instance-count bookkeeping via the same
+  global atomic counter observed in `IOResources::MetaClass::alloc()`,
+  but no IOResources-specific singleton behavior).
+- Skip `alloc()`-overriding via IOResources at all — allocate raw memory
+  of the right size from the same allocator IOResources' alloc() calls
+  (`0xfffffe000bbfd8f4`, confirmed generic/zone-tag driven by immediate
+  args, not tied to any specific class), then placement-construct our own
+  object into it directly, with our own vtable from the start — no
+  "construct as IOResources then swap the vtable" indirection needed at
+  all now that this is understood.
+
+This is a real scope increase (a real minimal-class implementation, not a
+borrowed one) — starting fresh next session/continuation with this
+corrected design.

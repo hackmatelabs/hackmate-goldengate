@@ -1636,3 +1636,107 @@ of touching `__DATA_CONST` at all. All the hard parts (address encoding,
 correct assembly/linking, the constructor call sequence, the vtable
 reuse trick) remain valid and reusable - only the hook mechanism needs to
 change.
+
+## 2026-09-22 (continued, v2/v3): instruction-trampoline works structurally - real, verified progress, one remaining mystery
+
+Built v2 (instruction trampoline overwriting the target function's FIRST
+instruction) and hit an immediately, precisely diagnosable failure:
+`panic(...): Kernel BTI failure (BTYPE=0x0002) at pc
+0xfffffe002c4c5d10` - the EXACT hook address. Root cause, confirmed not
+guessed: the overwritten instruction was `pacibsp`, a required BTI
+landing pad, since this function is reached via an *indirect* branch
+from the mod_init_func processing loop. Overwriting it with a plain `b`
+broke the landing pad ARM's BTI hardware requires for indirect-branch
+targets.
+
+**v3 fix**: hook the function's *second* instruction (`+4`) instead,
+leaving the real `pacibsp` landing pad completely untouched - `+4` is
+only ever reached by straight-line fall-through, never as an indirect
+target, so no landing pad is required there. Rebuilt the trampoline to
+replay the *actual* overwritten instruction (`stp x20, x19, [sp,
+#-0x20]!`) instead of `pacibsp`, carefully re-derived which registers
+genuinely need saving (only `x29/x30/x0-x3` - `x19/x20` don't, since the
+replayed `stp` already commits the caller's values to the stack before
+the original function ever reads them back), and branches back to `+8`
+after finishing. Verified every single instruction's final encoding
+against the actual patched file via `ipsw macho disass` (not just the
+pre-link test object) - byte-for-byte exactly as intended, no surprises.
+
+**Result: the BTI failure is gone.** New crash: `Kernel instruction
+fetch abort at pc 0xfffffe002700c000` - the exact kernel image base
+address, both `pc` and `lr`. Deterministic and reproducible (confirmed
+across multiple fresh boots, always the same address).
+
+### What's been proven definitively correct via live memory inspection
+
+Let the VM crash naturally (fast, ~30s free-running) and read memory at
+the reserved instance address post-crash via gdbstub attach to the
+frozen spin loop - **every single field of the new OSMetaClass instance
+is exactly correct**:
+```
++0x00 vtable:      0xfffffe0027ef7ba0  (generic OSMetaClass::MetaClass - not yet overwritten, expected)
++0x08 OSSymbol*:   0xfffffe2420014b00  (real heap pointer, looks legitimate)
++0x10 superClass:  0xfffffe002ca63e20  (== IOService::gMetaClass, exactly as intended)
++0x18 name cstr:   0xfffffe002bb95ba0  (== our own embedded "AFKFirmwareService" string, exactly as intended)
++0x20 classSize:   0x88                (exactly as intended)
++0x24 instanceCnt: 0                   (correctly zero-initialized)
+```
+This proves the `OSMetaClass::OSMetaClass` constructor call itself
+executed **completely and correctly** - real class registration with
+the right name, right superclass, right size. Also independently
+verified the true struct size is exactly `0x28` bytes (measured the
+constant gap between several consecutive real `gMetaClass` globals in
+the symbol map: `IOConfigThread`→`IOServiceJob`→`IOResources`→
+`IOUserResources`, all exactly `0x28` apart) - ruling out a struct-size/
+overflow theory for the new crash, since my reservation was exactly
+right.
+
+**The vtable field is still the generic one** (not yet overwritten with
+`IOResources::MetaClass`'s), which precisely brackets the crash: it
+happens somewhere in the last handful of instructions - between the
+`bl`'s return and the `str` that would overwrite the vtable - or in
+whatever the *resumed original function* does with its own remaining
+work after branching back to `+8` (that original function almost
+certainly makes its own, different `OSMetaClass::OSMetaClass` call for
+whatever class it originally existed to register - my code doesn't
+prevent that, it's supposed to still happen exactly as before).
+
+### Live single-stepping to find the exact instruction - hit a real tooling constraint, not a dead end
+
+Tried to single-step through the narrow window to catch the exact
+faulting instruction. Found the shared `OSMetaClass::OSMetaClass`
+constructor is called dozens of times throughout normal boot (for every
+real class) - a breakpoint on its own address alone isn't unique enough
+without a value-based condition; confirmed this by hitting an unrelated,
+different class's construction first. More importantly: gdbstub-attached
+`continue`-based execution in this specific QEMU fork is dramatically
+slower than free-running even without single-stepping (a boot that
+crashes in ~30 seconds free-running took 10-20+ minutes under gdbstub
+`continue` without even reaching the point where the crash naturally
+occurs) - several long waits never caught the transition live. This is a
+real, practical tooling constraint for next time, not evidence of a
+different bug: **use the fast free-run-then-inspect-post-crash technique
+demonstrated above** (which successfully extracted the full, correct
+instance state) rather than trying to catch it live mid-execution,
+which is prohibitively slow here.
+
+### Honest state
+
+Real, durable, well-verified progress: the BTI issue is genuinely fixed,
+the class-registration mechanism is proven structurally and functionally
+correct (not a guess - confirmed via live memory read matching every
+intended field exactly), and the crash is now narrowed to a small,
+specific window. The exact remaining cause is not yet identified -
+leading candidates for a future session: (a) something in the final six
+instructions (`adrp`/`add`/`mov`/`movk`/`pacda`/`str`) that only manifests
+under real hardware/TCG PAC-emulation timing, not visible from static
+review; (b) an interaction with whatever the *resumed original function*
+does with its own remaining work after `+8`, if slowing it down (my
+extra ~15 instructions of work) shifts some unrelated timing-sensitive
+behavior elsewhere in boot. Concrete next step: use the fast free-run
+crash + post-crash memory inspection technique (proven above) to check
+what's on the stack/in registers at the frozen spin PC immediately after
+one more boot, specifically checking whether the resumed original
+function's own second `OSMetaClass::OSMetaClass` call (for whatever its
+real intended class is) ever happens at all, to determine whether the
+bug is in my code specifically or in what happens afterward.

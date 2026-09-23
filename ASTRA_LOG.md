@@ -2102,3 +2102,46 @@ its own dedicated device-tree merge work (likely copying the working
 device tree's exact `/chosen` subtree wholesale onto the real-DCP one,
 rather than diffing individual properties) as a distinct next step,
 separate from tonight's two confirmed fixes.
+
+### Chased the root-hash fix further - ruled out the simple theory, found the real one is bigger
+
+Used this project's own ADT parser (`dt_fixup.py`'s `decode_node`/
+`encode_node`, already used successfully elsewhere in this project) to
+properly diff the working device tree's `/chosen` node against the
+broken (real-DCP) one - found `boot-uuid` entirely absent from the
+broken tree (present in the working one). A promising, well-targeted
+lead, not a guess.
+
+**Tried the fix and it made things worse**: adding `boot-uuid` (whether
+via a full wholesale `/chosen` copy or just that one key) caused the VM
+to genuinely hang - confirmed via `ps` showing sustained **0.0% CPU**
+for 8+ minutes (a qualitatively different, worse failure mode than the
+clean panic-and-spin behavior seen everywhere else tonight). Verified
+this wasn't a fluke or resource contention by re-running the *original,
+unmodified* device tree immediately after in the same environment - it
+worked normally (99.7% CPU, real progress, same reproducible panic as
+before). This conclusively isolates the hang to the `boot-uuid` addition
+specifically, not environmental flakiness.
+
+**Root-caused why the missing-property theory was wrong**: searched the
+kernelcache for the literal string `"root-hash"` - the only two matches
+are the `allow-root-hash-mismatch` boot-arg name and the panic message
+itself. There is no literal device-tree property name being referenced
+directly in the surrounding code (confirmed by disassembling around the
+exact panic caller address). This means the "root-hash for BS dmg"
+lookup most likely reads from the **ramdisk/manifest's own embedded
+metadata** (an AEA/im4p-style trailer on `imageboot-wrapper-022.dmg`
+itself), not a simple `/chosen` key-value pair at all - explaining why a
+device-tree-only fix couldn't work regardless of which property was
+chosen.
+
+**Conclusion**: getting the real (non-defanged) DCP device tree working
+together with the real-system-volume boot flow is a genuinely separate,
+larger task - likely requiring either a proper matching ramdisk/manifest
+pairing (not just borrowing `imageboot-wrapper-022.dmg` as-is) or a
+deeper dive into `apfs_vfsops.c`'s actual root-hash-source logic, not a
+quick device-tree patch. Reverted to the proven-stable `.afkstub7` +
+`dtree.netboot10.bootfb-probe` combination (the one confirmed stable for
+14+ minutes with zero panics) as the current best-known-good state - the
+real-DCP exploration is a real, valuable, but separately-scoped avenue
+for a future session, not something to keep guessing at tonight.

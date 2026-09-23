@@ -2501,3 +2501,44 @@ matched` in the registry, and whether `AppleDCPLinkServiceSoC` (needing
 reliable way to query the live IORegistry from this ramdisk shell (maybe
 write a tiny C helper instead of relying on the minimal `ioreg` build, or
 find why `-c` isn't filtering) and re-check.
+
+## 2026-09-23 — v11: fixed getMetaClass() identity, real instance now visible
+
+v10's fix left one thing wrong: it copied IOService's entire real instance
+vtable including slot 0 (`getMetaClass`, offset `0x0`), which returns
+IOService's own real metaclass pointer as a fixed immediate. That meant
+our fake AFKFirmwareService instance was self-reporting its runtime class
+as `IOService` to anything calling `getMetaClass()`/`getClassName()` on
+it — including `ioreg`'s tree display — even though the class registry
+lookup (`allocClassWithName`) correctly found and constructed it.
+
+Found the real diversifier for slot 0 via `ipsw kernel cpp --methods -c
+IOService` (`pac=0x3771`, labeled `IOService::fn_0x0()` — the trivial
+getMetaClass pattern). Added `custom_getmetaclass.s` (4 instructions:
+`bti c; adrp/add NEW_INSTANCE_ADDR; ret`) at `0xfffffe000bb977e8`, and
+`afk_stub11.s` patches slot 0 with it (PACIA-signed, diversifier 0x3771)
+alongside the existing slot 190 (`start`) and metaclass slot 21 (`alloc`)
+patches.
+
+Built, deployed as `.afkstub11`, boot-tested against the same real-DCP +
+simple-netboot-ramdisk config: **zero panics, reaches the stable shell**
+(same clean result as v10 — the identity fix doesn't regress anything).
+
+Solved the earlier interactive-serial verification problem too: `-serial
+file:` is write-only from the guest's side (can't send input), so
+switched to a bidirectional `-serial unix:...,server,nowait` socket for
+these checks, with input paced byte-by-byte (~30ms gaps) since sending a
+full line in one `send()` silently dropped its first ~17 characters — a
+buffering quirk of this console. Also learned each new socket connection
+to the chardev gets nothing buffered from before it connected, so a
+command's output must be captured on the SAME connection that sent it,
+in one continuous read loop.
+
+**Confirmed via `ioreg -l | grep -c AFKFirmwareService`: 2 hits, up from
+1 in the v10 test** (the extra one being the pre-existing static
+personality-dict property, unchanged). Pinning down exactly what the new
+hit is (real registered node vs. IOKitDiagnostics class-instance-count
+key, which shows `"AFKFirmwareService"=0` — expected, since construction
+still bumps IOResources' own compiled-in instance counter, not one keyed
+by our borrowed name) — in progress, next message has the line-by-line
+breakdown.

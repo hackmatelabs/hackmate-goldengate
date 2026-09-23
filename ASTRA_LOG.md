@@ -2192,3 +2192,68 @@ bounded next step (not "implement the whole DCP protocol"): make the
 stub set its own `IOName` to `"DCPEndpoint24"` and call
 `registerService()` after construction, so IOKit's matching engine gets
 a real chance to try `AppleDCPLinkServiceSoC` against it next.
+
+### Traced this further: it's not driver code calling us, it's IOKit's own generic matching engine
+
+Re-examined where `"AFKFirmwareService"` actually appears in the
+kernelcache and found only two hits, both `IOClass` values inside real
+personality plist entries (`AppleDCP`'s and `IOMobileGraphicsFamily-
+DCP`'s) - **no direct C++ code reference anywhere**. This means the
+earlier picture was slightly off: it isn't hand-written driver code
+calling `allocClassWithName` and doing something custom with the
+result - it's IOKit's own generic personality-matching engine doing its
+completely standard job: match a personality, allocate an instance of
+its declared `IOClass`, `init()` it with the personality's properties,
+`attach()` it to the provider - exactly what was observed in the live
+registry. `registerService()` specifically is **not** called
+automatically by this generic matching machinery - by IOKit convention,
+that's the job of the instantiated object's own `start()` method, called
+after a successful `probe()`.
+
+Found `IOResources`' own vtable slot 190 (`+0x5f0`) is `IOService::
+start(IOService*)` - the **generic base implementation**, not an
+`IOResources`-specific override. This is exactly why nothing gets
+registered: the generic `IOService::start()` does its own bookkeeping
+and returns `true`, but has no reason to call `registerService()` -
+that's specific to subclasses that want to expose further matchable
+children, which `IOResources` was never designed to be. Also found
+`IOService::registerService(unsigned int)` at vtable slot 188 - a real,
+already-compiled, directly-callable function.
+
+**The fix is precisely scoped, but bigger than a simple byte patch**: it
+needs a genuinely custom `start()` - call the real `IOService::start()`
+first (preserving its behavior), then call the real
+`IOService::registerService()` if that succeeded, then return. This
+requires **building a whole new vtable in memory at boot time**, not
+just writing static bytes: PAC-signed vtable *function pointers* are
+signed using per-slot diversifier constants that don't depend on the
+vtable's storage address (confirmed - `IOResources`' vtable could be
+safely read/reused as raw bytes for that reason), but the signature
+itself can only be *computed* by executing a real `pacia` instruction at
+runtime, using key material that's never available to static analysis.
+There's no way to precompute a valid signed pointer offline and just
+write it into the file.
+
+**Concrete plan for the next session**: reserve a fresh 2176-byte
+(`272 * 8`) block of `__DATA` for a new vtable, have the stub's own
+runtime code copy `IOResources`' real vtable's 271 unrelated slots
+verbatim (safe, as established above), compute a validly-signed pointer
+for a new custom `start()` function using `pacia` with modifier `0x3c68`
+(the exact diversifier `IOResources`' own slot 190 already uses - found,
+not guessed) and write that into the new vtable's slot 190, then point
+the object's own vtable field at this new table instead of borrowing
+`IOResources`' directly. The custom `start()` itself is simple - call
+the real `IOService::start()` (static address already known,
+`0xfffffe000c3ca46c`) via a plain direct `bl` (no signing needed for a
+direct call to a known address), and if it returns success, also call
+the real `IOService::registerService()` (`0xfffffe000c3ca550`) the same
+way.
+
+This is real, substantial, well-scoped next-session work - genuinely
+larger and riskier than tonight's fixes (a new class of implementation,
+runtime vtable construction, not just a static patch), which is why it
+wasn't attempted live tonight given how far this session had already
+run. Every piece needed to do it (both addresses, the exact PAC
+diversifier, the vtable-copy safety argument, the precise reason
+registration currently stalls) is now documented and verified, not
+guessed.

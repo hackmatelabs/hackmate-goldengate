@@ -2289,3 +2289,103 @@ different signing schemes already characterized), just a more involved
 implementation than a single vtable copy. Correcting the plan here
 rather than building on a flawed premise - this is the accurate,
 verified next step for a future session.
+
+## 2026-09-22 (continued, late night) — v9: alloc()-override built, deployed, and tested for real — new downstream bug found
+
+### Build/patch pipeline fully re-validated end-to-end
+
+Before writing any new code, re-derived and validated the whole assemble→
+link→extract→patch toolchain from scratch (no saved build script existed
+from earlier sessions — it had all been done ad hoc over SSH and never
+persisted). Wrote a reusable `build_stub.sh` and proved it byte-for-byte
+against the known-good, already-deployed `.afkstub7`: linked `afk_stub6.s`
+at the same static address with `-segalign 0x4 -image_base X -segaddr
+__TEXT X`, extracted `__text`, and diffed against the real bytes at the
+correct file offset (computed from `.afkstub7`'s own real `__TEXT_EXEC`
+segment: vmaddr `0xfffffe0008adc000`, fileoff `0x1ad8000` — read directly
+from the Mach-O load commands, not assumed) — **exact match, every byte**.
+This confirms both the toolchain and the existing v6/v7 deployment are
+real and correctly understood, not just recalled from memory.
+
+Also discovered/confirmed the "+0x2e8 linker header offset" behavior is
+deterministic: with `-segalign 0x4`, `__text` always lands at
+`chosen_segaddr + 0x2e8` regardless of alignment, letting new code be
+placed at an exact intended VA by just subtracting 0x2e8 from the target
+before linking.
+
+### v9 implementation
+
+Confirmed `0xfffffe000c3d556c` (`IOResources::MetaClass::alloc()`) is safe
+to call unconditionally — its disassembly shows it reads its size/zone
+tag from **fixed immediates baked into its own code**, not from `this`, so
+calling it directly (regardless of which metaclass object is "this")
+correctly allocates+constructs a real, correctly-vtabled IOResources
+instance every time.
+
+Built three components, each independently linked at its exact free-space
+address and cross-checked with `otool -tvV` before extraction:
+- `afk_stub9.s` (main, `0xfffffe000bb96c00`, 251 bytes) — chains onto the
+  same mod_init_func-reached hook site as v5/v6/v7. Builds a custom
+  272-entry instance vtable and a custom 30-entry metaclass vtable (fresh
+  copies of IOResources' real ones in unused `__DATA.__data` space at
+  `0xc998400`/`0xc998300`), patches slot 190 (`start`, off `0x5f0`) and
+  slot 21 (`alloc`, off `0xa8`) respectively with PACIA-signed pointers to
+  the two new functions below, constructs the `AFKFirmwareService`
+  descriptor as before, but points its vtable at the **custom** metaclass
+  vtable instead of directly at IOResources' real one.
+- `custom_alloc.s` (`0xfffffe000bb972e8`, 56 bytes) — calls the real
+  `IOResources::MetaClass::alloc()`, then repoints the returned instance's
+  vtable pointer at the custom instance vtable (PACDA re-signed for that
+  instance's own address).
+- `custom_start.s` (`0xfffffe000bb973e8`, 72 bytes) — calls the real
+  `IOService::start()` (confirmed via disassembly to be generic — virtual
+  dispatch to `attach()` etc, nothing IOResources-specific), and on
+  success also calls the real `IOService::registerService()`, which the
+  inherited generic `start()` never does on its own.
+
+All three regions verified genuinely free (all-zero) in `.afkstub7` before
+writing, all writes read back and verified immediately after, and the
+mod_init hook's trampoline branch (`b` at `0xfffffe000c4c5d14`) repatched
+to jump to the new `afk_stub9` entry instead of the old v6/v7 one (compued
+and verified via the standard ARM64 `B` imm26 encoding, read back after
+write). Result: `.afkstub9`.
+
+### Real boot test result: genuine forward progress, then a NEW real bug
+
+Tested against the exact same real-DCP + simple-netboot-ramdisk config
+that previously reached a stable, zero-panic shell with `.afkstub7`
+(`dtree.dcp8.bigdram2.realdcp` + `ramdisk.tc`/`ramdisk.dmg`, `rd=md0`).
+
+- `RTBuddy(ANS2)` and `RTBuddy(DCP)` both still start — **no regression**.
+- Boot now proceeds further than `.afkstub7` ever did, reaching
+  `apfs_sysctl_register:1328: done registering sysctls.` (APFS kext
+  static init), immediately followed by a **new** panic:
+  `attempting to register a sysctl at previously registered slot : 121
+  @kern_newsysctl.c:225`, which cascades into a nested-panic loop and a
+  machine reset.
+
+This is a **new, previously-unreached** failure — `.afkstub7` never got
+this far in identical boots (AFKFirmwareService's `registerService()`
+never fired, so whatever downstream matching/kext-load chain leads here
+was never triggered). Read as: v9's actual fix worked (unblocked real
+forward progress in the matching chain), and boot now advances into a
+*different*, previously-hidden bug — the established pattern for this
+entire project (fix a wall, hit the next one).
+
+Root cause not yet found. Ruled out likely explanaions already: the new
+custom code's own constructor call path (verified via disassembly) only
+does a harmless atomic global instance-counter increment, not a sysctl
+registration. `custom_start`'s call to the real `IOService::start()` is
+generic, not IOResources-specific. Leading hypothesis: two competing loads
+of `apfs.kext` (or of whatever kext owns sysctl slot 121), possibly
+triggered by the AFKFirmwareService/DCP chain now unblocking a second real
+personality match that duplicately re-triggers kext static init — not yet
+confirmed.
+
+### Next step
+
+Find what actually owns sysctl slot 121 and why it registers twice now
+that boot reaches further (check `kern_newsysctl.c` registration table
+structure to resolve slot 121 to a symbol/kext; check whether
+`AppleDCPLinkServiceSoC` or another newly-reachable personality is
+double-loading a kext as a side effect of the AFKFirmwareService fix).

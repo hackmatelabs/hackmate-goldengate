@@ -1733,10 +1733,76 @@ under real hardware/TCG PAC-emulation timing, not visible from static
 review; (b) an interaction with whatever the *resumed original function*
 does with its own remaining work after `+8`, if slowing it down (my
 extra ~15 instructions of work) shifts some unrelated timing-sensitive
-behavior elsewhere in boot. Concrete next step: use the fast free-run
-crash + post-crash memory inspection technique (proven above) to check
-what's on the stack/in registers at the frozen spin PC immediately after
-one more boot, specifically checking whether the resumed original
-function's own second `OSMetaClass::OSMetaClass` call (for whatever its
-real intended class is) ever happens at all, to determine whether the
-bug is in my code specifically or in what happens afterward.
+behavior elsewhere in boot. ### Follow-up: confirmed this is the genuine first fault, and its exact signature
+
+Checked the serial log from the very beginning (not just the tail) -
+`grep -n panic` shows the identical message
+(`Kernel instruction fetch abort at pc 0xfffffe002700c000, lr
+0xfffffe002700c000`) at every nested-panic level, starting from the very
+first one. This rules out "nested-panic-recovery generic fallback
+noise" as an explanation - `pc == lr == kernel_base` exactly is the
+genuine, original fault signature, not an artifact of exceeding the
+nested-panic retry limit.
+
+**`pc == lr` exactly is a specific, meaningful pattern**: a plain
+`ret`/`retab` reads the return address from `lr` and jumps to it; `lr`
+itself is left unchanged by the jump. Landing with both registers equal
+means some function's return address, at the moment it returned, held
+exactly `0xfffffe002700c000` (the kernel image base) - a suspiciously
+clean, non-random value. This is consistent with a **PAC authentication
+failure**: on this QEMU/TCG PAC emulation level (which appears to lack
+`FEAT_FPAC`'s immediate synchronous fault), a failed `retab` produces a
+corrupted-but-still-dereferenceable pointer rather than trapping
+immediately, and only faults later when that bad address is actually
+used as `pc` - exactly matching a generic "instruction fetch abort"
+rather than a dedicated PAC-failure panic message.
+
+Combined with the confirmed-correct instance construction (proving the
+constructor's inner body executed and returned successfully, since its
+writes all landed correctly) and the confirmed-correct vtable-set-to-
+generic-default step (also part of the constructor's outer wrapper,
+also already visible in the written instance), **the leading hypothesis
+is that the outer `OSMetaClass::OSMetaClass` wrapper's own final
+`retab` - returning control back to my trampoline at
+`0xfffffe002bb95b70` - is the one that fails authentication**, rather
+than anything inside my own code (which never uses `pacibsp`/`retab` at
+all - my trampoline exits via a plain unconditional `b`, no
+authentication involved). Static review of the outer wrapper's own
+prologue/epilogue balance (`sub sp,#0x10` / `stp fp,lr` / ... /
+`ldp fp,lr` / `retab`) shows nothing that should behave differently for
+my caller versus any of the other 90 legitimate callers - the *reason*
+this specific `retab` would fail for my call specifically is not yet
+identified.
+
+One more live check was attempted (reading stack memory for corroborating
+evidence) but was invalidated by a methodology mistake - live `sp` was
+read as `0xfffffe002cac3bb0` (the frozen spin loop's own current stack),
+but the subsequent `memory read` used a stale address copied from an
+earlier panic register dump instead of that live value, so the `0x41414141...`
+pattern it returned is unrelated noise, not a real clue about the
+original fault. Flagging this explicitly so a future session doesn't
+treat it as evidence.
+
+### Where this leaves things, honestly
+
+This is genuine, substantial, multi-layered progress: a real BTI bug
+was found and fixed with a precise diagnosis; the entire class-
+registration mechanism (constructor call, argument marshalling, field
+values, struct sizing) is now proven correct via live memory inspection,
+not assumption; and the remaining bug has a specific, well-reasoned
+leading hypothesis (a PAC-authenticated return failing for reasons not
+yet identified) rather than being a total mystery. The live-debugging
+technique available in this project (gdbstub `continue`/single-step) is
+confirmed to be extremely slow for catching a fast, ~30-second crash
+mid-flight - the fast free-run-then-inspect-post-crash technique is the
+right tool going forward, not step-tracing. Concrete next steps for
+whoever continues this: (a) try calling the constructor via `blraa`
+(an authenticated indirect call) instead of a plain `bl`, in case this
+kernel's ABI expects call-site signing that a plain `bl` doesn't provide
+even though the callee's own `pacibsp`/`retab` pair is nominally
+self-contained; (b) as a diagnostic-only test, try REMOVING the final
+`bl _OSMETACLASS_CTOR` call entirely (construct nothing, just replay the
+original instruction and branch back) to confirm the trampoline
+mechanism itself is sound in isolation, isolating whether the bug is
+specifically in the constructor-call interaction or somewhere else
+entirely.

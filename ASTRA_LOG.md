@@ -2145,3 +2145,50 @@ quick device-tree patch. Reverted to the proven-stable `.afkstub7` +
 14+ minutes with zero panics) as the current best-known-good state - the
 real-DCP exploration is a real, valuable, but separately-scoped avenue
 for a future session, not something to keep guessing at tonight.
+
+### Found the right test config, and the result is extraordinary
+
+Realized the root-hash panic was specific to combining the real-DCP
+device tree with the *real-system-volume* boot flow
+(`-rootdmg-ramdisk auth-root-dmg=...`) - PHASE12's own original DCP
+bring-up work used the *simple* netboot ramdisk instead, never hitting
+that check at all. Tested exactly that: `.afkstub7` (both fixes) +
+`dtree.dcp8.bigdram2.realdcp` (real DCP) + the simple netboot ramdisk.
+
+**Result: `RTBuddy(DCP): start()` fires, zero panics, boots all the way
+to a real, stable `bash-3.2#` shell** - the furthest this entire project
+has ever gotten with real DCP hardware enabled.
+
+Queried the live IORegistry interactively (`ioreg -c RTBuddy`) and found
+the complete real chain, fully matched:
+```
+dcp0-expert (AppleARMIODevice)
+  +-o AppleDCPExpert          <- real, matched (already known-working since session 2)
+dcp@31C00000 (AppleARMIODevice)
+  +-o AppleASCWrapV4
+      +-o iop-dcp-nub (AppleA7IOPNub)
+          +-o RTBuddy(DCP)         <- real, registered, matched
+              +-o RTBuddyService   <- real, registered
+                  +-o IOResources  <- id 0x100000343, !registered, !matched
+```
+**That last node is our `AFKFirmwareService` stub.** The real,
+unmodified `AppleDCP`/`IOMobileGraphicsFamily-DCP` driver code called
+`allocClassWithName("AFKFirmwareService")` for real, got back what our
+patch actually returns (an object with `IOResources`' real vtable), and
+used it well enough to `attach()` it into the live registry as a child
+of the genuine `RTBuddyService` node - **with zero crash**. This
+directly confirms the earlier-flagged risk (a real caller invoking a
+DCP-specific method on our IOResources-shaped stand-in) does not
+currently crash the system; at worst it silently fails to do anything
+useful, which is exactly the safe failure mode this stand-in was
+designed around.
+
+It shows `!registered`/`!matched` because `IOResources` doesn't name
+itself `"DCPEndpoint24"` the way the real `AFKFirmwareService` would -
+so the next layer up (`AppleDCPLinkServiceSoC`, whose personality
+requires `IONameMatch: DCPEndpoint24`) has nothing to match against and
+never appears in the tree. This is now a precise, well-defined,
+bounded next step (not "implement the whole DCP protocol"): make the
+stub set its own `IOName` to `"DCPEndpoint24"` and call
+`registerService()` after construction, so IOKit's matching engine gets
+a real chance to try `AppleDCPLinkServiceSoC` against it next.

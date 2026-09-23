@@ -1437,3 +1437,51 @@ real bootkc path onto disk without needing `/tmp` writability at all.
 Either would unblock a genuine, clean test of whether self-hosted kmutil
 bypasses the host-side KDK-match wall - still an open, real, promising
 question, just not answerable with tonight's remaining time/tooling.
+
+### Chased the read-write remount restriction one level deeper - same category of wall, plus a major clarifying find for option 3
+
+Kept pulling the thread on why `mount -uw /` was flatly refused on the
+sealed BaseSystem volume. The rejection message
+(`apfs_mount_upgrade_checks: Updating mount to read/write mode is not
+allowed`) turns out to be **kernel-side** (found in `bootkc` itself, not
+in userspace `mount_apfs`), and its surrounding string context reveals
+it's gated by real entitlements
+(`com.apple.rootless.internal-installer-equivalent`,
+`com.apple.private.apfs.root-mount-update`) - confirming this needs a
+specially-privileged/entitled caller, not something a plain shell command
+can do. More importantly, a neighboring string makes the real condition
+explicit: `"Failed to find the root snapshot. Rooting from the live fs
+of a sealed volume is not allowed on a RELEASE build"` - **this is
+another release-vs-development kernel-variant gate**, the same category
+of "needs an Apple-internal asset we don't have" as the missing KDK, not
+a new independent wall. Our kernelcache is confirmed to be a `release`
+build (`kernelcache.release.Mac14,2`, same for the donor and ours) -
+matching a development-variant kernelcache is exactly the kind of asset
+that isn't publicly available, same as the KDK. Not pursuing this
+specific angle further - it converges back to the same external-asset
+dependency already identified, just reached through a different door.
+
+**The genuinely valuable find from this detour**: while searching for
+`AFKFirmwareService` symbol references to scope out option 3 (hand-write
+a replacement), found **zero direct static/mangled symbol references to
+it anywhere** in the kernelcache - only the bare string, used exclusively
+via the dynamic `OSMetaClass::allocClassWithName("AFKFirmwareService")`
+lookup already found earlier tonight. Combined with that same
+disassembly's finding (the caller only walks the returned object's
+superclass chain checking for eventual `IOService` ancestry, nothing
+AFKFirmwareService-specific, before proceeding) - **this means option 3
+is a much smaller task than PHASE12 originally scoped it as**. A minimal
+stub doesn't need to reimplement any real DCP/firmware-kit behavor at
+all - it only needs to be a validly-registered `OSMetaClass` named
+exactly `"AFKFirmwareService"` that inherits (directly or indirectly)
+from `IOService`. This is real, meaningful de-risking of PHASE12's
+"largest, riskiest, last resort" characterization - still genuine Mach-O
+surgery (new OSMetaClass instance, correct ABI layout, working
+constructor registration, PAC-signed function pointers, must survive
+SPTM/TXM integrity checks), but a much narrower, better-bounded target
+than reimplementing real firmware-kit functionality. This is the most
+promising concrete next step identified all session for a path that
+needs zero external Apple-gated assets (no KDK, no dev kernelcache, no
+developer account) - pure engineering, doable entirely with tooling
+already proven working in this project (the same `patch_kc()`-style
+binary-patch pattern used for the TXM/SPTM fixes).

@@ -2450,3 +2450,54 @@ Build a genuinely minimal, purpose-built C++ object instead:
 This is a real scope increase (a real minimal-class implementation, not a
 borrowed one) — starting fresh next session/continuation with this
 corrected design.
+
+## 2026-09-22 (continued) — v10: fixed the sysctl regression, boots clean
+
+Built `.afkstub10`: identical to v9 except the custom instance vtable is
+now copied from **IOService's own real instance vtable**
+(`0xfffffe0007f504b8`) instead of IOResources'. Confirmed this is safe by
+diffing IOResources' real 272-slot vtable against IOService's real one
+(both objects are `Size=136`/`0x88`, same layout) — only 8 slots actually
+differ (indices 0, 1, 7, 77, 100, 206, 215, 244; NOT slot 190/`start`,
+confirming IOResources doesn't even override `start()` itself — it was
+always calling the shared generic `IOService::start()`, which is exactly
+what `custom_start()` already called). Using IOService's generic versions
+for those 8 slots removes whatever IOResources-specific singleton
+behavior one of them carried, without needing to hand-verify each one.
+
+Rebuilt only the main stub (`afk_stub10.s`/`afk_stub10_syms.s` — one
+symbol changed); `custom_alloc`/`custom_start` binaries reused unchanged
+from v9 since neither references the instance-vtable source, only its
+destination address.
+
+**Real boot test result**: identical real-DCP + simple-netboot-ramdisk
+config as the v9 test and the `.afkstub7` control run.
+`apfs_sysctl_register` fires exactly **once** (matches the clean control,
+not the v9 regression), only the 2 benign "panic"-substring log lines seen
+in the control also appear (no fatal panics), and boot reaches the same
+stable `bash-3.2#` shell. **The regression is fixed.**
+
+Attempted to confirm `AFKFirmwareService` shows as a live, matched
+instance via `ioreg -c AFKFirmwareService -l` over the interactive serial
+console (had to switch from `-serial file:` to a bidirectional unix
+socket, and pace input byte-by-byte with ~30ms gaps — sending a full line
+at once silently dropped its first ~17 characters, a buffering quirk of
+this console). The `-c` class filter doesn't appear to actually filter in
+this environment's `ioreg` (got the full ~228KB unfiltered tree either
+way); found exactly one textual hit for "AFKFirmwareService" in the whole
+dump, and it's a static personality-dictionary property
+(`"IOClass" = "AFKFirmwareService"`, `IOMatchedAtBoot = Yes` — this is a
+declared personality another driver can match against, not proof of a
+live instance node) — not conclusive either way on live registration.
+
+### Net result so far
+
+The architectural fix is real and verified not to regress anything;
+`start()`/`registerService()` now genuinely execute on the fake instance
+without side effects on other subsystems. What's NOT yet independently
+confirmed: whether `AFKFirmwareService` itself now shows `registered,
+matched` in the registry, and whether `AppleDCPLinkServiceSoC` (needing
+`IONameMatch: DCPEndpoint24`) appears as a result. Next step: get a
+reliable way to query the live IORegistry from this ramdisk shell (maybe
+write a tiny C helper instead of relying on the minimal `ioreg` build, or
+find why `-c` isn't filtering) and re-check.

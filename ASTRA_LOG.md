@@ -2728,3 +2728,80 @@ likely in how `BaseSystem.dmg` itself is being referenced/authenticated
 (a properly sealed/signed APFS image with real embedded root-hash
 metadata) rather than in any kernel boot-arg or device-tree property.
 Next session should verify this theory before attempting another fix.
+
+## 2026-09-23 (continued) — traced the root-hash panic to its real source, and reconfirmed the DCP-endpoint boundary
+
+### BaseSystem.dmg's real lineage, and why its seal is gone
+
+Mounted `imageboot-wrapper-022.dmg` (the ramdisk used by the real-system-
+volume boot flow) directly on the T480s host (`hdiutil attach`) and found
+it's a real GPT+APFS disk image containing exactly one file of interest:
+`/BaseSystem.dmg` (2,264,958,464 bytes, matches `BaseSystem.clean.udrw.dmg`
+byte-for-byte and by timestamp). No `.root_hash` or similar companion file
+exists anywhere on that ramdisk.
+
+Cross-referenced against the original IPSW manifest
+(`ipsw_manifest/26A428__MacOS/{Restore,BuildManifest}.plist`) and found
+the real, Apple-shipped root-hash file already present in this project's
+own downloaded IPSW tree:
+`26A428__MacOS/Firmware/022-20292-673.dmg.aea.root_hash`. `022-20292-673`
+is confirmed (via `Restore.plist`'s `SystemRestoreImageFileSystems`) to be
+one of only two APFS-tagged system images in this build (the other,
+`043-70867-635`, is the much larger 11GB+ full system volume from
+PHASE4's separate, still-unfinished NVMe-emulation effort) — i.e.
+`022-20292-673` really is BaseSystem's source content.
+
+`decrypted/022-20292-673.dmg` (the real decrypted form, 1,826,560,512
+bytes, with a real Apple-issued root hash sitting right next to its
+encrypted `.aea` form in the IPSW) is a **different, smaller container
+format** than `BaseSystem.clean.udrw.dmg` (2,264,958,464 bytes) — the
+latter is `hdiutil convert -format UDRW`'s output, which decompresses the
+sealed image into a raw, directly block-addressable form for QEMU but
+does not preserve or carry forward the original seal/root-hash metadata.
+**This fully confirms and gives hard evidence for last session's
+already-correct conclusion** (searched the kernelcache, found no literal
+`/chosen` property reference near the panic, theorized the root-hash
+must come from ramdisk/manifest-embedded metadata) — the seal really was
+destroyed by this specific conversion step, not missing due to a
+device-tree oversight.
+
+This does not change the scope: fixing it for real means either
+re-deriving a valid root-hash/seal for the UDRW-converted content (if the
+block layout is preserved bit-for-bit through the conversion, the
+original `022-20292-673.dmg.aea.root_hash` value might still validate
+against it — untested) or finding/using a properly-sealed raw form of
+BaseSystem in the first place. Confirmed as genuinely separate, harder
+work from tonight's fixes; not attempted further this session.
+
+### Reconfirmed the DCP-endpoint boundary holds even with tonight's fixes
+
+Retested the project's own "furthest ever" configuration (`.afkstub7`'s
+successor `.afkstub12`, real-DCP device tree, **simple** netboot ramdisk)
+— now for the first time with the correct `DARWIN_RTKIT=1` environment
+that was missing all of tonight's earlier testing of this exact combo.
+Result: zero panics (same clean boot as before), host-side DCP model
+confirmed active (`[rtkit:dcp] mailbox ...` present in QEMU's own log),
+but still **no** `DCPEndpoint`/`AFK transport up` activity anywhere in
+guest serial or host stdout. `apple_dcp_attach()`'s endpoint registration
+happening (confirmed via its own unconditional tail print, `"[dcp] serial
+renderer disabled..."`) is necessary but not sufficient — the guest's
+`RTBuddy(DCP)` driver has to affirmatively open/use the endpoint itself,
+and it doesn't, even now. This matches and reconfirms an earlier
+session's own conclusion ("reached the DCP MMIO setup... zero serial
+bytes... narrows the blocker to early DCP/RTBuddy bring-up") — still
+true after tonight's fixes. Not a config problem this session solved;
+genuinely the next real unknown.
+
+### Where this leaves things
+
+Tonight's two real fixes (the `AFKFirmwareService` alloc/start
+architecture, and the `DARWIN_RTKIT` environment variable) are both
+verified correct and real, but neither one was ever going to be
+sufficient on its own for visible UI — there are at least two more
+separately-scoped, harder problems standing between here and a real
+desktop: (1) BaseSystem's stripped seal on the real-system-volume path,
+and (2) whatever makes `RTBuddy(DCP)`'s kernel driver actually initiate
+its AFK handshake on the simple-ramdisk path. Both are legitimate targets
+for focused, dedicated future sessions — this session's honest
+contribution is ruling out several plausible-looking shortcuts and
+pinning down exactly where the real remaining unknowns are.

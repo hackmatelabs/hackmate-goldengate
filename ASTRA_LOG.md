@@ -2637,3 +2637,71 @@ kernelcache/reference, since this one doesn't have a working
 implementation to borrow from at all — that's the entire reason this
 class had to be faked in the first place). That's a real implementation
 task, not another vtable-slot-swap fix.
+
+## 2026-09-23 (continued) — found the real DCPEndpoint24 blocker, and a process mistake
+
+Traced why `DCPEndpoint24` never appears despite `RTBuddy(DCP)` starting
+cleanly. `AppleDCPLinkServiceSoC`'s real personality
+(`IOProviderClass = RTBuddyEndpointService`, `IONameMatch =
+["DCPEndpoint24", "DCPEXTEndpoint24"]`) has nothing to do with
+`AFKFirmwareService` at all — confirmed `RTBuddyEndpointService` is a
+fully real, non-fake class already in this kernelcache
+(`com.apple.driver.RTBuddy` bundle, same as the already-working
+`RTBuddy`). The `AFKFirmwareService` fix (v9-v12) was solving a real,
+separate problem; it was never going to unblock this one.
+
+Found the actual cause: `hw/arm/darwin.c` in this QEMU fork implements a
+**real host-side DCP coprocessor model** (`hw/arm/apple_dcp.c`) that
+genuinely creates AFK endpoints including one literally named
+`"DCPEndpoint24"` (`apple_rtkit_add_endpoint(rtk, DCP_EP_MAIN,
+"DCPEndpoint24", ...)`), and answers the AFK handshake — but which of
+three DCP models gets wired up (`init_rtkit_dcp` — the real one with
+endpoints; `init_asc_mailbox` — a simple stub with none; or nothing at
+all) is selected entirely by **environment variables**
+(`DARWIN_RTKIT=1` / `DARWIN_ASC` / neither), not anything in the
+kernelcache, device tree, or command-line flags.
+
+**Every boot this entire session — v9 through v12, all the "real DCP"
+tests — was launched without `DARWIN_RTKIT=1` (or `DARWIN_FB`/
+`DARWIN_DART`/`DARWIN_AIC`)**, meaning the host-side DCP coprocessor
+model was never actually active despite using the "real DCP" device
+tree. `RTBuddy(DCP): start(<ptr>)` was real kernel code running with
+nothing on the other end of the mailbox — fully explains the silent
+stall observed all night. This project's own `CODEX_HANDOFF*.md`/
+`FORCLAUDE.md` files already documented the correct invocation
+(`DARWIN_FB=1 DARWIN_RTKIT=1 DARWIN_DART=1 DARWIN_AIC=1`) — should have
+been checked and used from the start of tonight's testing.
+
+### Re-tested with it fixed
+
+- Minimal netboot ramdisk config + `.afkstub12` + correct env vars: host
+  log confirms the real DCP model now activates (`[rtkit:dcp] mailbox
+  0x231c00000 + 0x6c000`, DART wired). Guest boot is unchanged (same
+  ramdisk shell, no DCP-endpoint activity visible) — expected, since a
+  bare `rd=md0` ramdisk shell has no display-stack consumer that would
+  ever ask to open `DCPEndpoint24` in the first place. This config was
+  never going to show the effect either way.
+- Real system-volume boot (the actual config that would exercise the
+  display stack, `-rootdmg-ramdisk auth-root-dmg=file:///BaseSystem.dmg`)
+  + `.afkstub12` + correct env vars: hits the **same, already-documented,
+  separate** "Failed to extract root-hash for BS dmg from /chosen"
+  panic from earlier tonight's dead-end investigation. `DARWIN_RTKIT`
+  doesn't touch this path — it's an APFS/AuthAPFS root-hash validation
+  failure that happens before driver matching gets anywhere near DCP,
+  and it happens *despite* `allow-root-hash-mismatch=1` already being
+  passed, meaning that boot-arg either isn't honored by this exact
+  validation path or isn't reaching it correctly. Not yet re-investigated
+  today; was previously explored (via `/chosen` `boot-uuid` injection)
+  and abandoned as a dead end, but that was before this session's env-var
+  fix and before the AFKFirmwareService work — worth another look with a
+  clear head, since the earlier abandonment may itself have been on an
+  incomplete boot configuration.
+
+### Net picture
+
+Two independent real fixes exist now (AFKFirmwareService's alloc/start,
+and the DARWIN_RTKIT env var), verified correct on their own, but the
+path to real WindowServer/UI is blocked by a third, separate,
+still-unsolved problem: the real-system-volume root-hash validation
+failure. That's the actual next blocker to solve — not another
+metaclass/vtable fix.

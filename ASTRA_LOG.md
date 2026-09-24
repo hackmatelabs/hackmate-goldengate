@@ -2705,3 +2705,26 @@ path to real WindowServer/UI is blocked by a third, separate,
 still-unsolved problem: the real-system-volume root-hash validation
 failure. That's the actual next blocker to solve — not another
 metaclass/vtable fix.
+
+### Reconfirmed the chosenfix2 dead end independently of tonight's fixes
+
+Retested the `/chosen` `boot-uuid`-injection device tree
+(`dtree.dcp8.bigdram2.realdcp.chosenfix2`) with `.afkstub12` AND the
+corrected `DARWIN_RTKIT` env vars, to rule out "the earlier hang was
+actually caused by the missing env var, not the /chosen patch." It
+wasn't: genuine hang reproduced again (0.1% CPU after 60s, zero serial
+output at all, not even early boot lines) — confirms this specific
+`/chosen` modification breaks something very early and independently of
+tonight's other fixes. Not worth revisiting again without a different
+approach.
+
+One real clue on the actual root-hash panic: the message is "Failed to
+extract root-hash ... error **No such file or directory (2)**" — i.e.
+`ENOENT`, not a hash *mismatch*. `allow-root-hash-mismatch=1` (already
+being passed) plausibly only tolerates a hash that doesn't match, not a
+hash that's entirely absent — meaning that boot-arg was likely never
+going to help here regardless of `/chosen` state. The real fix is more
+likely in how `BaseSystem.dmg` itself is being referenced/authenticated
+(a properly sealed/signed APFS image with real embedded root-hash
+metadata) rather than in any kernel boot-arg or device-tree property.
+Next session should verify this theory before attempting another fix.

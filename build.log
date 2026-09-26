@@ -1,4 +1,0 @@
-/c/GoldenGate/darwin-vm/qemu-sptm/tests/vm/Makefile.include:103: *** mixed implicit and normal rules: deprecated syntax
-/usr/bin/bash: line 2: /mingw64/bin/ninja: No such file or directory
-make: Nothing to be done for 'all'.
-EXIT: 0

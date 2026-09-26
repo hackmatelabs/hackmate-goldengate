@@ -29,3 +29,20 @@ Thumbs.db
 # darwin_live.c, etc. - those are genuinely useful reference snapshots).
 bootkc*.bin
 bootkc.audit*
+
+# Handoff docs, session logs, debug dumps, and firmware snapshots - these
+# stay local only (T480s + desktop), not in the repo.
+ASTRA_LOG.md
+FORCLAUDE.md
+CLAUDE_MEMORY_NOTES.md
+CODEX_HANDOFF*.md
+PHASE*_LOG.md
+PHASE1B_SUCCESS.md
+*.log
+gg_gdb*.txt
+gg_sample.txt
+sptm_bootstrap_props.txt
+sptm_dart_strings.txt
+forcodexfromopencode*.txt
+dtree.mac14_3.*
+libbootpolicy_text.bin

@@ -2805,3 +2805,83 @@ its AFK handshake on the simple-ramdisk path. Both are legitimate targets
 for focused, dedicated future sessions — this session's honest
 contribution is ruling out several plausible-looking shortcuts and
 pinning down exactly where the real remaining unknowns are.
+
+## 2026-09-25 — stole a real technique from another project (orchard), applied it, found the actual /chosen blocker's real shape
+
+The user linked yaelliethy/orchard (a separate macOS-on-QEMU/TCG project,
+targeting Apple's `vmapple` VM abstraction on Linux, not real Apple
+Silicon hardware — an easier target, no transferable shortcut for our
+real-SoC-emulation goal). One real, applicable technique from it: their
+AVPBooter fix doesn't forge a valid signature — it finds the exact
+routine that decides pass/fail and neuters its first two instructions to
+force success, rather than trying to satisfy the check with real data.
+
+### Applied it to the root-hash panic
+
+Found the real gatekeeping check in the kernel: a `tbz w8, #0x5, ...`
+branch at `0xfffffe000b8a6188` that jumps straight to the panic path
+when a flag bit is clear. Built `.afkstub13` (on top of `.afkstub12`)
+by overwriting that one instruction with a `nop`, verified the write,
+and boot-tested against the real-system-volume config.
+
+**Result: real, new information, not a full fix.** The NOP let execution
+reach further, into the actual extraction routine
+(`apfs_extract_root_hash_arm`), which now logs precisely what's missing:
+```
+apfs_extract_root_hash_arm:13780: could not retrieve system-volume-auth-blob from device tree
+apfs_extract_root_hash_arm:13780: could not retrieve base-system-volume-auth-blob from device tree
+```
+This confirms the earlier session's guess (`/chosen/secure-boot-hashes/
+{base-system-volume-auth-blob, csys, system-volume-auth-blob}`) was
+exactly the right target all along — the missing piece was never a
+device-tree oversight to guess at, it's a real, named, documented gap.
+
+### Found the real data, found the real fix point, still hangs — and proved why
+
+`secure-boot-hashes` already exists as a child of `/chosen` in our device
+tree (a decode-time inspection bug earlier made it look absent — it's
+there, just empty: only `name` and `AAPL,phandle`, no blob properties at
+all). Found the real, Apple-issued hash for BaseSystem's real source
+content already sitting in this project's own IPSW download
+(`root_hash_extracted/022-20292-673.raw.root_hash`, 208 bytes: a small
+header plus the real SHA256 digest, byte-identical to the hash embedded
+in the original `.aea.root_hash` companion file Apple shipped).
+
+Added `base-system-volume-auth-blob` = that real 208-byte value directly
+to the existing (already-present) `secure-boot-hashes` node via
+`dt_fixup.py`'s own decode/encode (the project's own standard, trusted
+ADT toolchain — not a hand-rolled parser). **Hung**: 0.1% CPU, zero guest
+serial output, for 90+ seconds — the identical failure signature as the
+earlier `boot-uuid` attempt.
+
+**Isolated the actual cause precisely, ruling out content/re-encoding
+fidelity as the explanation** (an open question from last session): built
+a second test tree that adds nothing but one throwaway 4-byte `u32`
+property to the same node (44 bytes of total file growth, the smallest
+possible change). **Also hung, identically.** Two structurally
+unrelated edits, of very different sizes (44 bytes vs. ~250 bytes),
+both hang the exact same way, while the untouched original boots
+cleanly every time. This rules out "wrong data" and "dt_fixup.py's
+encode/decode isn't faithful" (it's the same trusted mechanism that
+built the working tree in the first place) as explanations. **The real
+constraint is almost certainly a fixed-size or measured/hashed device
+tree somewhere upstream of the kernel** — this project's own SPTM/TXM
+verification model already measures other boot objects (BootKC,
+TrustCache) against fixed layouts; the device tree is very likely
+checked the same way, and any size change at all — regardless of
+content — breaks that check silently, before any UART output exists
+(hence zero serial bytes rather than a diagnosable panic message).
+
+### Where this leaves it
+
+This is now a well-characterized, distinct, and genuinely separate
+problem from the XNU-level root-hash check: **how to add data to the
+device tree without changing its total size** (or find/patch whatever
+SPTM/TXM-level check enforces that, the same "patch the check, not the
+data" idea, but at a much earlier, harder-to-diagnose boot stage with no
+panic message to work from). Concrete next step: either (a) find spare,
+already-allocated-but-unused space within the existing device tree to
+overwrite in place (true zero net size change) as a cheap test of this
+theory, or (b) disassemble SPTM/TXM's own device-tree handling to find
+the actual size/hash check and neuter it directly, mirroring tonight's
+own technique one level down the boot chain.
